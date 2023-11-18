@@ -1,0 +1,6 @@
+@use "scss-reset/reset";
+@import "../styles/theme.scss";
+
+body {
+	background-color: $lightGray;
+}
