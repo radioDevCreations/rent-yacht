@@ -1,4 +1,4 @@
-import "./RegisterPage.scss";
+import "./register.scss";
 import SingleFormLayout from "../layouts/SingleFormLayout/SingleFormLayout";
 
 const RegisterPage = ({ data }) => {

@@ -1,4 +1,4 @@
-import styles from "./contact.module.scss";
+import "./contact.scss";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 
 const ContactPage = () => {

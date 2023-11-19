@@ -1,4 +1,4 @@
-import "./WorkspacePage.scss";
+import "./workspace.scss";
 import WorkspaceLayout from "../layouts/WorkspaceLayout/WorkspaceLayout";
 
 const WorkspacePage = ({ data }) => {

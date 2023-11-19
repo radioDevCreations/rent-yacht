@@ -1,4 +1,5 @@
 from flask import Flask
+import random
 
 app = Flask(__name__)
 
@@ -6,7 +7,7 @@ app = Flask(__name__)
 @app.route('/test')
 def get_test():
     return {
-        "test1": "test2"
+        "test1": str(random.random())
     }
 
 
