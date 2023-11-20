@@ -5,10 +5,15 @@ import { openMenu, closeMenu } from "@/redux/slices/applicationSlice";
 import HeaderNavigation from "./HeaderNavigation";
 import Link from "next/link";
 import { HiMenu } from "react-icons/hi";
+import { IoMdCloseCircleOutline } from "react-icons/io";
 
 const Header = () => {
+	const dispatch = useDispatch();
 	const applicationState = useSelector((state) => state.application);
-
+	const toggleMenuOpen = () => {
+		if (applicationState.isMenuOpen) dispatch(closeMenu());
+		else dispatch(openMenu());
+	};
 	return (
 		<header className="header">
 			<div className="logo">
@@ -18,9 +23,13 @@ const Header = () => {
 				</Link>
 			</div>
 			<div className="navigation-wrapper">
-				{isMenuOpen && <HeaderNavigation />}
+				<HeaderNavigation isMenuOpen={applicationState.isMenuOpen} />
 				<button className="navigation-switch" onClick={toggleMenuOpen}>
-					<HiMenu />
+					{applicationState.isMenuOpen ? (
+						<IoMdCloseCircleOutline />
+					) : (
+						<HiMenu />
+					)}
 				</button>
 			</div>
 		</header>

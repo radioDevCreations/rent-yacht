@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialStatae = {
+const initialState = {
 	isMenuOpen: false,
 };
 

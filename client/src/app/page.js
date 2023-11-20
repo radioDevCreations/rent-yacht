@@ -1,12 +1,13 @@
 import style from "./page.module.scss";
 import MainLayout from "@/layouts/MainLayout/MainLayout";
 
-async function getData() {
+const getData = async () => {
 	const res = await fetch("http://localhost:5000/test", {
 		next: { revalidate: 10 },
 	});
 	return res.json();
-}
+};
+
 const Home = async () => {
 	const data = await getData();
 	return (
