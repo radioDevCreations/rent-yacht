@@ -2,7 +2,7 @@
 import "./Header.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { openMenu, closeMenu } from "@/redux/slices/applicationSlice";
-import HeaderNavigation from "./HeaderNavigation";
+import HeaderNavigation from "../HeaderNavigation/HeaderNavigation";
 import Link from "next/link";
 import { HiMenu } from "react-icons/hi";
 import { IoMdCloseCircleOutline } from "react-icons/io";

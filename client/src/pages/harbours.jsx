@@ -1,6 +1,6 @@
 import "./harbours.scss";
 import MainLayout from "@/layouts/MainLayout/MainLayout";
-import HarboursMap from "@/components/HarboursMap";
+import HarboursMap from "@/components/HarboursMap/HarboursMap";
 
 const HarboursPage = () => {
 	return (
