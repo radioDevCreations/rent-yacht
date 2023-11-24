@@ -13,7 +13,9 @@ const RootLayout = ({ children }) => {
 				<link rel="icon" href="/sail-boat.svg" sizes="any" />
 			</head>
 			<body>
-				<Provider>{children}</Provider>
+				<Provider>
+					<main>{children}</main>
+				</Provider>
 			</body>
 		</html>
 	);

@@ -14,25 +14,29 @@
 .header-navigation__item--in {
 	-webkit-transform: translateY(0px);
 	transform: translateY(0px);
-	-webkit-transition: -webkit-transform 0.5s ease-out;
-	transition: -webkit-transform 0.5s ease-out;
-	transition: transform 0.5s ease-out;
-	transition: transform 0.5s ease-out, -webkit-transform 0.5s ease-out;
+	-webkit-transition: -webkit-transform 0.3s ease-out;
+	transition: -webkit-transform 0.3s ease-out;
+	transition: transform 0.3s ease-out;
+	transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out;
 }
 
 .header-navigation__item--out {
 	-webkit-transform: translateY(-100px);
 	transform: translateY(-100px);
-	-webkit-transition: -webkit-transform 0.5s ease-in;
-	transition: -webkit-transform 0.5s ease-in;
-	transition: transform 0.5s ease-in;
-	transition: transform 0.5s ease-in, -webkit-transform 0.5s ease-in;
+	-webkit-transition: -webkit-transform 0.3s ease-in;
+	transition: -webkit-transform 0.3s ease-in;
+	transition: transform 0.3s ease-in;
+	transition: transform 0.3s ease-in, -webkit-transform 0.3s ease-in;
 }
 
 .header-navigation__item-link {
 	display: block;
 	color: black;
 	text-decoration: none;
+}
+
+.header-navigation__item-link--inactive {
+	pointer-events: none;
 }
 
 .transition-delay1 {

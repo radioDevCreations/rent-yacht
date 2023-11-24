@@ -4,7 +4,7 @@ import Provider from "@/redux/Provider";
 const SingleFormLayout = ({ children }) => {
 	return (
 		<Provider>
-			<div className="single-form-layout">{children}</div>
+			<main className="single-form-layout">{children}</main>
 		</Provider>
 	);
 };

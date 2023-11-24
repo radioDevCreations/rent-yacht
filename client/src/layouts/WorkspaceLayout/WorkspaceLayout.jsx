@@ -4,7 +4,7 @@ import Provider from "@/redux/Provider";
 const WorkspaceLayout = ({ children }) => {
 	return (
 		<Provider>
-			<div className="workspace-layout">{children}</div>
+			<main className="workspace-layout">{children}</main>
 		</Provider>
 	);
 };

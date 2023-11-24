@@ -1,10 +1,11 @@
 import "./harbours.scss";
 import MainLayout from "@/layouts/MainLayout/MainLayout";
+import HarboursMap from "@/components/HarboursMap";
 
 const HarboursPage = () => {
 	return (
 		<MainLayout>
-			<h1>login page</h1>
+			<HarboursMap />
 		</MainLayout>
 	);
 };

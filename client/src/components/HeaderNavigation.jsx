@@ -1,38 +1,37 @@
 import "./HeaderNavigation.scss";
 import Link from "next/link";
 
+const NAVIGATION_ITEMS = [
+	{ name: "Harbours", href: "/harbours", customClassName: "" },
+	{ name: "Boats", href: "/boats", customClassName: "transition-delay1" },
+	{
+		name: "Last Minute",
+		href: "/last-minute",
+		customClassName: "transition-delay2",
+	},
+	{ name: "Shop", href: "/shop", customClassName: "transition-delay3" },
+	{ name: "Contact", href: "/contact", customClassName: "transition-delay4" },
+];
+
 const HeaderNavigation = ({ isMenuOpen }) => {
 	const itemClass = isMenuOpen
 		? "header-navigation__item header-navigation__item--in"
 		: "header-navigation__item header-navigation__item--out";
+	const linkClass = isMenuOpen
+		? "header-navigation__item-link"
+		: "header-navigation__item-link header-navigation__item-link--inactive";
 	return (
 		<nav>
 			<ul className="header-navigation">
-				<li className={itemClass}>
-					<Link href="/harbours" className="header-navigation__item-link">
-						Harbours
-					</Link>
-				</li>
-				<li className={`transition-delay1 ${itemClass}`}>
-					<Link href="/boats" className="header-navigation__item-link">
-						Boats
-					</Link>
-				</li>
-				<li className={`transition-delay2 ${itemClass}`}>
-					<Link href="/last-minute" className="header-navigation__item-link">
-						Last Minute
-					</Link>
-				</li>
-				<li className={`transition-delay3 ${itemClass}`}>
-					<Link href="/shop" className="header-navigation__item-link">
-						Shop
-					</Link>
-				</li>
-				<li className={`transition-delay4 ${itemClass}`}>
-					<Link href="/contact" className="header-navigation__item-link">
-						Contact
-					</Link>
-				</li>
+				{NAVIGATION_ITEMS.map((item) => {
+					return (
+						<li className={`${item.customClassName} ${itemClass}`}>
+							<Link href={item.href} className={linkClass}>
+								{item.name}
+							</Link>
+						</li>
+					);
+				})}
 			</ul>
 		</nav>
 	);

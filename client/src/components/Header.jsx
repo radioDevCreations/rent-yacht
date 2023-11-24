@@ -24,13 +24,24 @@ const Header = () => {
 			</div>
 			<div className="navigation-wrapper">
 				<HeaderNavigation isMenuOpen={applicationState.isMenuOpen} />
-				<button className="navigation-switch" onClick={toggleMenuOpen}>
-					{applicationState.isMenuOpen ? (
+
+				{applicationState.isMenuOpen ? (
+					<button
+						className="navigation-switch"
+						onClick={toggleMenuOpen}
+						disabled={!applicationState.isMenuOpen}
+					>
 						<IoMdCloseCircleOutline />
-					) : (
+					</button>
+				) : (
+					<button
+						className="navigation-switch"
+						onClick={toggleMenuOpen}
+						disabled={applicationState.isMenuOpen}
+					>
 						<HiMenu />
-					)}
-				</button>
+					</button>
+				)}
 			</div>
 		</header>
 	);
