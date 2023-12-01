@@ -1,5 +1,8 @@
+"use client";
+import "./HarboursMap.scss";
 import React from "react";
 import { GoogleMap, LoadScript } from "@react-google-maps/api";
+import { useEffect } from "react";
 
 const MapComponent = () => {
 	const mapContainerStyle = {
@@ -13,18 +16,21 @@ const MapComponent = () => {
 	};
 
 	return (
-		<LoadScript
-			googleMapsApiKey="YOUR_GOOGLE_MAPS_API_KEY"
-			libraries={["places"]}
-		>
-			<GoogleMap
-				mapContainerStyle={mapContainerStyle}
-				center={center}
-				zoom={10}
+		<section className="map">
+			<aside className="map__legend">Harbours</aside>
+			<LoadScript
+				googleMapsApiKey={process.env.NEXT_PUBLIC_API_KEY}
+				libraries={["places"]}
 			>
-				{/* You can add markers, polygons, and other components here */}
-			</GoogleMap>
-		</LoadScript>
+				<GoogleMap
+					mapContainerStyle={mapContainerStyle}
+					center={center}
+					zoom={8}
+				>
+					{/* You can add markers, polygons, and other components here */}
+				</GoogleMap>
+			</LoadScript>
+		</section>
 	);
 };
 

@@ -25,7 +25,10 @@ const HeaderNavigation = ({ isMenuOpen }) => {
 			<ul className="header-navigation">
 				{NAVIGATION_ITEMS.map((item) => {
 					return (
-						<li className={`${item.customClassName} ${itemClass}`}>
+						<li
+							key={item.name}
+							className={`${item.customClassName} ${itemClass}`}
+						>
 							<Link href={item.href} className={linkClass}>
 								{item.name}
 							</Link>
