@@ -1,14 +1,13 @@
 from flask import Flask
 import random
+from dbconnection import getHarbours
 
 app = Flask(__name__)
 
 
-@app.route('/test')
+@app.route('/harbours')
 def get_test():
-    return {
-        "test1": str(random.random())
-    }
+    return getHarbours()
 
 
 if __name__ == "__main__":
