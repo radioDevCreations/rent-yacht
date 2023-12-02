@@ -17,9 +17,9 @@ def getHarbours():
     db = client["Boatify"]
     harbours = db.harbours
     harboursDictionary = create_dict()
-    i = 1
+    harboursArray = []
     for y in harbours.find():
-        harboursDictionary.add(i, ({"name":y['name'],"localization":y['localization']}))
-        i = i+1
+        harboursArray.append({"name":y['name'],"localization":y['localization']})
+    harboursDictionary.add("harbours", harboursArray)
     harboursJson = json.dumps(harboursDictionary, indent=2, sort_keys=True)
     return harboursJson

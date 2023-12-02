@@ -1,11 +1,19 @@
 import "./harbours.scss";
 import MainLayout from "@/layouts/MainLayout/MainLayout";
 import HarboursMap from "@/components/HarboursMap/HarboursMap";
+import DataLoader from "@/dataLoaders/DataLoader";
 
-const HarboursPage = () => {
+export const getStaticProps = async () => {
+	const data = await DataLoader.getAllHarbours();
+	return {
+		props: { harbours: data },
+	};
+};
+
+const HarboursPage = ({ harbours }) => {
 	return (
 		<MainLayout>
-			<HarboursMap />
+			<HarboursMap data={harbours} />
 		</MainLayout>
 	);
 };
