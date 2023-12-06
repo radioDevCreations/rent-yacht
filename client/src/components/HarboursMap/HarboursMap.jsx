@@ -1,6 +1,7 @@
 import "./HarboursMap.scss";
 import React from "react";
 import { GoogleMap, LoadScript } from "@react-google-maps/api";
+import HarboursMapAside from "../HarboursMapAside/HarboursMapAside";
 
 const MapComponent = ({ data }) => {
 	const mapContainerStyle = {
@@ -15,11 +16,7 @@ const MapComponent = ({ data }) => {
 
 	return (
 		<section className="map">
-			<aside className="map__legend">
-				{data.harbours.map((harbour) => {
-					return <span key={harbour.name}>{harbour.name}</span>;
-				})}
-			</aside>
+			<HarboursMapAside data={data} />
 			<LoadScript
 				googleMapsApiKey={process.env.NEXT_PUBLIC_API_KEY}
 				libraries={["places"]}
