@@ -1,10 +1,13 @@
 import "./login.scss";
 import SingleFormLayout from "../layouts/SingleFormLayout/SingleFormLayout";
+import LoginForm from "../components/LoginForm/LoginForm";
 
 const LoginPage = ({ data }) => {
 	return (
 		<SingleFormLayout>
-			<h1>login page</h1>
+			<section className="login-page">
+				<LoginForm />
+			</section>
 		</SingleFormLayout>
 	);
 };

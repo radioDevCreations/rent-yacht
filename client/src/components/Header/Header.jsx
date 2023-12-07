@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { openMenu, closeMenu } from "@/redux/slices/applicationSlice";
 import HeaderNavigation from "../HeaderNavigation/HeaderNavigation";
 import Link from "next/link";
+import Image from "next/image";
 import { HiMenu } from "react-icons/hi";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 
@@ -18,7 +19,13 @@ const Header = () => {
 		<header className="header">
 			<div className="logo">
 				<Link href="/" className="logo__link">
-					<img src="/sail-boat.svg" alt="logo" className="logo__image" />
+					<Image
+						src="/sail-boat.svg"
+						alt="logo"
+						className="logo__image"
+						width={48}
+						height={48}
+					/>
 					<span className="logo__text">Boatify</span>
 				</Link>
 			</div>
