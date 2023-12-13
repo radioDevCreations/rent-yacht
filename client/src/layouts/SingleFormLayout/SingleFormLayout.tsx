@@ -3,8 +3,14 @@ import "./SingleFormLayout.scss";
 import Provider from "@/redux/Provider";
 import HeaderLogin from "../../components/HeaderSingleForm/HeaderSingleForm";
 import FooterSingleForm from "../../components/FooterSingleForm/FooterSingleForm";
+import { ReactNode } from "react";
 
-const SingleFormLayout = ({ children, problem }) => {
+interface SingleFormLayoutProps {
+	children: ReactNode;
+	problem?: string;
+}
+
+const SingleFormLayout = ({ children, problem }: SingleFormLayoutProps) => {
 	return (
 		<Provider>
 			<div className="single-form-layout">

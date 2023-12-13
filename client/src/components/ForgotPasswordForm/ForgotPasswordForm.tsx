@@ -12,11 +12,10 @@ const ForgotPasswordForm = () => {
 					You should receive message up to 5 minutes. If you can't find it try
 					again or contact our support.
 				</span> */}
-				<input
-					className="forgot-password__input"
-					type="text"
-					placeholder="E-mail..."
-				/>
+
+				<div className="input">
+					<input className="input__field" type="text" placeholder="E-mail" />
+				</div>
 				<button className="forgot-password__button">Send E-mail</button>
 			</div>
 		</form>

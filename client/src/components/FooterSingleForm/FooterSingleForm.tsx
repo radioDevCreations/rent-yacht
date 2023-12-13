@@ -5,13 +5,15 @@ const FooterSingleForm = ({ problem }) => {
 	return (
 		<footer className="footer">
 			<button className="footer-button"></button>
-			<div className="footer-label">
-				{problem} Contact{" "}
-				<Link href="/email" className="footer-link">
-					support
-				</Link>
-				.
-			</div>
+			{problem && (
+				<div className="footer-label">
+					{problem} Contact{" "}
+					<Link href="/email" className="footer-link">
+						support
+					</Link>
+					.
+				</div>
+			)}
 		</footer>
 	);
 };
