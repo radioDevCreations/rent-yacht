@@ -1,14 +1,17 @@
+import "../../styles/styles.scss";
 import "./SingleFormLayout.scss";
 import Provider from "@/redux/Provider";
 import HeaderLogin from "../../components/HeaderSingleForm/HeaderSingleForm";
-import FooterLogin from "../../components/FooterSingleForm/FooterSingleForm";
+import FooterSingleForm from "../../components/FooterSingleForm/FooterSingleForm";
 
-const SingleFormLayout = ({ children }) => {
+const SingleFormLayout = ({ children, problem }) => {
 	return (
 		<Provider>
-			<HeaderLogin />
-			<main className="single-form-layout">{children}</main>
-			<FooterLogin />
+			<div className="single-form-layout">
+				<HeaderLogin />
+				<main className="single-form-layout">{children}</main>
+				<FooterSingleForm problem={problem} />
+			</div>
 		</Provider>
 	);
 };

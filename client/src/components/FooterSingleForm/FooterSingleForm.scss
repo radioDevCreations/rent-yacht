@@ -2,8 +2,20 @@
 @import "../../styles/theme.scss";
 
 .footer {
-	display: block;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
 	min-width: 100%;
 	font-family: "Lato";
-	font-size: $fontSize14px;
+	font-size: $fontSize16px;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+}
+
+.footer-link {
+	@include app-link;
 }

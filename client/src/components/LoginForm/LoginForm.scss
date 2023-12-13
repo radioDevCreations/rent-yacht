@@ -1,3 +1,5 @@
+@import "../../styles/theme.scss";
+
 .login {
 	display: -webkit-box;
 	display: -ms-flexbox;
@@ -6,17 +8,76 @@
 	-webkit-box-direction: normal;
 	-ms-flex-direction: column;
 	flex-direction: column;
-	width: 320px;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	width: 280px;
+	padding: 10px 10px 24px 10px;
+	border-radius: 16px;
+	-webkit-box-shadow: 0px 0px 6px -2px rgba(16, 25, 53, 1);
+	box-shadow: 0px 0px 6px -2px rgba(16, 25, 53, 1);
 }
 
 // .profile {
 // }
 
-// .profile__picture {
-// }
+.profile__picture {
+	border-radius: 200px;
+	margin: 32px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
 
 // .profile__label {
 // }
 
-// .login__input {
-// }
+.input {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
+	flex-direction: column;
+}
+
+.input__label {
+	font-weight: 700;
+	margin-bottom: 6px;
+	margin-left: 10px;
+}
+
+.input__field {
+	color: $black;
+	margin-bottom: 16px;
+	padding: 10px 18px;
+	border: 1px solid $gray;
+	border-radius: 12px;
+	-webkit-box-shadow: 0px 0px 4px -2px rgba(16, 25, 53, 1);
+	box-shadow: 0px 0px 4px -2px rgba(16, 25, 53, 1);
+	&:active,
+	&:focus {
+		border: 1px solid $royalBlue;
+	}
+	&::-webkit-input-placeholder {
+		color: $gray;
+	}
+	&::-moz-placeholder {
+		color: $gray;
+	}
+	&:-ms-input-placeholder {
+		color: $gray;
+	}
+	&::-ms-input-placeholder {
+		color: $gray;
+	}
+	&::placeholder {
+		color: $gray;
+	}
+}
+
+.login__forgot-password {
+	@include app-link;
+}
