@@ -1,9 +1,12 @@
 // COLORS
+$black: #000;
 $UTOrange: #ff8600;
 $oxfordBlue: #101935;
 $uranianBlue: #a3d9ff;
-$dimGray: #736b60;
+$gray: #7c7c7c;
 $lightGray: #f5f5f5;
+$royalBlue: #122c78;
+$russianViolet: #260b45;
 //font sizes
 $fontSize12px: 12px;
 $fontSize14px: 14px;
@@ -17,3 +20,90 @@ $marginSize32px: 32px;
 //paddings
 $paddingSize24px: 24px;
 $paddingSize32px: 32px;
+
+@mixin app-link {
+	color: $royalBlue;
+	text-decoration: none;
+	background: -webkit-gradient(
+			linear,
+			left top, right top,
+			from(rgba(100, 200, 200, 0)),
+			to(rgba(100, 200, 200, 0))
+		),
+		-webkit-gradient(linear, left top, right top, from($uranianBlue), to($oxfordBlue));
+	background: linear-gradient(
+			to right,
+			rgba(100, 200, 200, 0),
+			rgba(100, 200, 200, 0)
+		),
+		linear-gradient(to right, $uranianBlue, $oxfordBlue);
+	background-size: 100% 2px, 0 2px;
+	background-position: 100% 100%, 0 100%;
+	background-repeat: no-repeat;
+	-webkit-transition: background-size 0.3s;
+	transition: background-size 0.3s;
+	padding-bottom: 5px;
+	&:hover {
+		background-size: 0 3px, 100% 3px;
+	}
+}
+
+@mixin app-button {
+	color: $lightGray;
+	font-weight: 700;
+	background-color: $royalBlue;
+	padding: 10px 18px;
+	border-radius: 16px;
+	border: 1px solid $oxfordBlue;
+	&:active {
+		background-color: $russianViolet;
+	}
+	&:focus {
+		padding: 9px 18px;
+		border: 2px solid $uranianBlue;
+	}
+}
+
+@mixin app-input {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	.input__label {
+		font-weight: 700;
+		margin-bottom: 6px;
+		margin-left: 10px;
+	}
+	.input__field {
+		color: $black;
+		margin-bottom: 16px;
+		padding: 10px 18px;
+		border: 1px solid $gray;
+		border-radius: 12px;
+		-webkit-box-shadow: 0px 0px 4px -2px rgba(16, 25, 53, 1);
+		box-shadow: 0px 0px 4px -2px rgba(16, 25, 53, 1);
+		&:active,
+		&:focus {
+			border: 2px solid $royalBlue;
+			padding: 9px 18px;
+		}
+		&::-webkit-input-placeholder {
+			color: $gray;
+		}
+		&::-moz-placeholder {
+			color: $gray;
+		}
+		&:-ms-input-placeholder {
+			color: $gray;
+		}
+		&::-ms-input-placeholder {
+			color: $gray;
+		}
+		&::placeholder {
+			color: $gray;
+		}
+	}
+}

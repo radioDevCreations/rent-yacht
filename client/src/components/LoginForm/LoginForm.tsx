@@ -1,5 +1,6 @@
 import "./LoginForm.scss";
 import Image from "next/image";
+import Link from "next/link";
 
 const LoginForm = () => {
 	return (
@@ -9,13 +10,22 @@ const LoginForm = () => {
 					className="profile__picture"
 					src="/profile.jpg"
 					alt="Profile Picture"
-					width={64}
-					height={64}
+					width={80}
+					height={80}
 				/>
 				<figcaption className="profile__label"></figcaption>
 			</figure>
-			<input className="login__input" type="text" />
-			<input className="login__input" type="text" />
+			<div className="input">
+				<span className="input__label">Login</span>
+				<input className="input__field" type="text" placeholder="Login..." />
+			</div>
+			<div className="input">
+				<span className="input__label">Password</span>
+				<input className="input__field" type="text" placeholder="Password..." />
+			</div>
+			<Link className="login__forgot-password" href="/forgot-password">
+				Forgot password?
+			</Link>
 		</form>
 	);
 };

@@ -1,5 +1,6 @@
+@import url("https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Indie+Flower&family=Lato:ital,wght@0,100;0,300;0,400;0,700;1,100;1,300;1,400;1,700&display=swap");
-@import "../../styles/theme.scss";
+@import "src/styles/theme.scss";
 
 .header {
 	display: -webkit-box;
@@ -13,10 +14,36 @@
 	-ms-user-select: none;
 	user-select: none;
 	padding: 10px;
-	border-bottom: 1px solid $UTOrange;
 	-webkit-box-pack: justify;
 	-ms-flex-pack: justify;
 	justify-content: space-between;
 	font-family: "Lato";
 	font-size: $fontSize14px;
+}
+
+.logo {
+	margin-right: 12px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+}
+
+.logo__link {
+	text-decoration: none;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+}
+
+.logo__text {
+	font-family: "Indie Flower", cursive;
+	font-size: 32px;
+	color: $oxfordBlue;
+	text-decoration: none;
 }
