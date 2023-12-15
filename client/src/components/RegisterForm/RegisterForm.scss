@@ -1,6 +1,6 @@
 @import "../../styles/theme.scss";
 
-.login {
+.register {
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
@@ -38,6 +38,6 @@
 	width: 200px;
 }
 
-.login__forgot-password {
-	@include app-link;
+.register__button {
+	@include app-button;
 }

@@ -16,12 +16,12 @@ const LoginForm = () => {
 				<figcaption className="profile__label"></figcaption>
 			</figure>
 			<div className="input">
-				<span className="input__label">Login</span>
-				<input className="input__field" type="text" placeholder="Login..." />
+				<span className="input__label">Email</span>
+				<input className="input__field" type="email" placeholder="Login" />
 			</div>
 			<div className="input">
 				<span className="input__label">Password</span>
-				<input className="input__field" type="text" placeholder="Password..." />
+				<input className="input__field" type="text" placeholder="Password" />
 			</div>
 			<Link className="login__forgot-password" href="/forgot-password">
 				Forgot password?

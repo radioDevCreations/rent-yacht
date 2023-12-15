@@ -14,7 +14,7 @@ const ForgotPasswordForm = () => {
 				</span> */}
 
 				<div className="input">
-					<input className="input__field" type="text" placeholder="E-mail" />
+					<input className="input__field" type="email" placeholder="E-mail" />
 				</div>
 				<button className="forgot-password__button">Send E-mail</button>
 			</div>
