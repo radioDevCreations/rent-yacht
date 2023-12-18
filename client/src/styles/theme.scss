@@ -7,6 +7,7 @@ $gray: #7c7c7c;
 $lightGray: #f5f5f5;
 $royalBlue: #122c78;
 $russianViolet: #260b45;
+$white: #fff;
 //font sizes
 $fontSize12px: 12px;
 $fontSize14px: 14px;
@@ -61,6 +62,68 @@ $paddingSize32px: 32px;
 	&:focus {
 		padding: 9px 18px;
 		border: 2px solid $uranianBlue;
+	}
+}
+
+@mixin app-file {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	width: 200px;
+	position: relative;
+	::file-selector-button {
+		display: none;
+	}
+	.input__icon {
+		position: absolute;
+		top: 35px;
+		left: 12px;
+	}
+	.input__label {
+		font-weight: 700;
+		margin-bottom: 6px;
+		margin-left: 10px;
+	}
+	.input__field {
+		display: none;
+		cursor: pointer;
+	}
+	.input__text {
+		height: 39px;
+		color: $black;
+		margin-bottom: 16px;
+		padding: 9px 16px 9px 32px;
+		border: 1px solid $gray;
+		border-radius: 12px;
+		-webkit-box-shadow: 0px 0px 4px -2px rgba(16, 25, 53, 1);
+		box-shadow: 0px 0px 4px -2px rgba(16, 25, 53, 1);
+		overflow: hidden;
+		text-wrap: nowrap;
+		text-overflow: ellipsis;
+		&:active,
+		&:focus {
+			border: 2px solid $royalBlue;
+			padding: 9px 16px 9px 32px;
+		}
+		&::-webkit-input-placeholder {
+			color: $gray;
+		}
+		&::-moz-placeholder {
+			color: $gray;
+		}
+		&:-ms-input-placeholder {
+			color: $gray;
+		}
+		&::-ms-input-placeholder {
+			color: $gray;
+		}
+		&::placeholder {
+			color: $gray;
+		}
 	}
 }
 

@@ -27,7 +27,8 @@
 		".next/types/**/*.ts",
 		"**/*.ts",
 		"**/*.tsx",
-		"src/pages/harbours.jsx"
+		"src/pages/harbours.tsx",
+		"src/pages/404.js"
 	],
 	"exclude": ["node_modules"]
 }

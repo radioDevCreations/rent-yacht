@@ -1,4 +1,7 @@
-interface BoatifyPagination {
+import "./BoatifyPagination.scss";
+import Image from "next/image";
+
+interface BoatifyPaginationProps {
 	numberOfPages: number;
 	currentPage: number;
 	prevPage: () => void;
@@ -10,20 +13,50 @@ const BoatifyPagination = ({
 	currentPage,
 	prevPage,
 	nextPage,
-}: BoatifyPagination) => {
+}: BoatifyPaginationProps) => {
+	const prevButtonActive = currentPage > 1;
+	const nextButtonActive = currentPage < numberOfPages;
 	return (
 		<div className="pagination">
-			<button className="pagination__button" onClick={prevPage}>
-				prev
-			</button>
-			<div className="pagination__numeration">
-				<span className="pagination__current-number">{currentPage}</span>
-				<span className="pagination__slash"> / </span>
-				<span className="pagination__number-of-pages">{numberOfPages}</span>
+			<div className="pagination__button-wrapper">
+				<button
+					className="pagination__button"
+					type="button"
+					disabled={!prevButtonActive}
+					onClick={prevPage}
+				>
+					<Image
+						className="button-image"
+						src="/back-arrow.svg"
+						alt="Previous Page"
+						width={20}
+						height={20}
+					/>
+				</button>
 			</div>
-			<button className="pagination__button" onClick={nextPage}>
-				next
-			</button>
+			<div className="pagination__spacing"></div>
+			<div className="pagination__numeration">
+				<span className="pagination__number">{currentPage}</span>
+				<span className="pagination__slash"> / </span>
+				<span className="pagination__number">{numberOfPages}</span>
+			</div>
+			<div className="pagination__spacing"></div>
+			<div className="pagination__button-wrapper">
+				<button
+					className="pagination__button"
+					type="button"
+					disabled={!nextButtonActive}
+					onClick={nextPage}
+				>
+					<Image
+						className="button-image"
+						src="/next-arrow.svg"
+						alt="Next Page"
+						width={20}
+						height={20}
+					/>
+				</button>
+			</div>
 		</div>
 	);
 };

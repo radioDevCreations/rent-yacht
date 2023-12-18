@@ -1,0 +1,43 @@
+@import "../../styles/theme.scss";
+
+.pagination {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	width: 200px;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+}
+.pagination__button-wrapper {
+	width: 20px;
+}
+.pagination__spacing {
+	width: 10px;
+}
+.pagination__numeration {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	font-size: $fontSize16px;
+}
+.pagination__button {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-transition: all 0.6s ease-out;
+	transition: all 0.6s ease-out;
+	&:disabled {
+		-webkit-transform: translateY(6px);
+		transform: translateY(6px);
+		opacity: 0;
+	}
+}
+
+.button-image {
+	margin: 0;
+	padding: 0;
+	width: 20px;
+}

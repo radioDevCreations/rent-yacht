@@ -18,8 +18,10 @@
 	box-shadow: 0px 0px 6px -2px rgba(16, 25, 53, 1);
 }
 
-// .profile {
-// }
+.register__inputs {
+	z-index: 1;
+	background-color: $white;
+}
 
 .profile__picture {
 	border-radius: 200px;
@@ -32,12 +34,37 @@
 
 // .profile__label {
 // }
+.input-file {
+	@include app-file;
+}
 
 .input {
 	@include app-input;
 	width: 200px;
 }
 
+.register__button-section {
+	z-index: 2;
+	-webkit-transition: transform 0.6s ease-out;
+	-webkit-transition: -webkit-transform 0.6s ease-out;
+	transition: -webkit-transform 0.6s ease-out;
+	transition: transform 0.6s ease-out;
+	transition: transform 0.6s ease-out, -webkit-transform 0.6s ease-out;
+	overflow: visible;
+}
+.register__button-section--hidden {
+	-webkit-transform: scale(0, 0);
+	transform: scale(0, 1);
+}
+
 .register__button {
 	@include app-button;
+	padding-left: 50px;
+	padding-right: 50px;
+	margin-bottom: 16px;
+	&:active,
+	&:focus {
+		padding-left: 50px;
+		padding-right: 50px;
+	}
 }
