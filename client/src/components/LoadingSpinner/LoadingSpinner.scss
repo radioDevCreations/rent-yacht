@@ -1,0 +1,102 @@
+@import "../../styles/theme.scss";
+
+body {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	height: 100%;
+}
+
+#__next {
+	height: 100%;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+}
+
+.spinner {
+	margin-right: 12px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	position: relative;
+}
+
+.spinner__image {
+	-webkit-animation-name: sail;
+	animation-name: sail;
+	-webkit-animation-iteration-count: infinite;
+	animation-iteration-count: infinite;
+	-webkit-animation-duration: 3s;
+	animation-duration: 3s;
+	position: absolute;
+}
+
+.spinner__label {
+	font-family: "Indie Flower", cursive;
+	font-size: 32px;
+	color: $oxfordBlue;
+	text-decoration: none;
+	padding: 18px 0 18px 56px;
+}
+
+@-webkit-keyframes sail {
+	0% {
+		-webkit-transform: rotate(0);
+		transform: rotate(0);
+	}
+	25% {
+		-webkit-transform: rotate(15deg);
+		transform: rotate(15deg);
+	}
+	50% {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+	75% {
+		-webkit-transform: rotate(-15deg);
+		transform: rotate(-15deg);
+	}
+	100% {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+}
+
+@keyframes sail {
+	0% {
+		-webkit-transform: rotate(0);
+		transform: rotate(0);
+	}
+	25% {
+		-webkit-transform: rotate(15deg);
+		transform: rotate(15deg);
+	}
+	50% {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+	75% {
+		-webkit-transform: rotate(-15deg);
+		transform: rotate(-15deg);
+	}
+	100% {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+}
