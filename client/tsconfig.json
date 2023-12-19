@@ -28,7 +28,7 @@
 		"**/*.ts",
 		"**/*.tsx",
 		"src/pages/harbours.tsx",
-		"src/pages/404.js"
+		"src/pages/404.tsx"
 	],
 	"exclude": ["node_modules"]
 }
