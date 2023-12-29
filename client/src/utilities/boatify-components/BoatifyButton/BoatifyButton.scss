@@ -4,7 +4,8 @@
 	@include app-button;
 }
 
-.boatify-button--register {
+.boatify-button--register,
+.boatify-button--login {
 	padding-left: 50px;
 	padding-right: 50px;
 	margin-bottom: 16px;
