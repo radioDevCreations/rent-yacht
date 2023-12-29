@@ -1,12 +1,14 @@
 "use client";
 import "./RegisterForm.scss";
 import Image from "next/image";
-import BoatifyPagination from "../BoatifyPagination/BoatifyPagination";
-import BoatifyInputsCarousel from "../BoatifyInputsCarousel/BoatifyInputsCarousel";
+import BoatifyPagination from "../../utilities/boatify-components/BoatifyPagination/BoatifyPagination";
+import BoatifyInputsCarousel from "../../utilities/boatify-components/BoatifyInputsCarousel/BoatifyInputsCarousel";
+import BoatifyButton from "../../utilities/boatify-components/BoatifyButton/BoatifyButton";
 import { useDispatch, useSelector } from "react-redux";
 import { setRegisterPage, setFileName } from "@/redux/slices/registerSlice";
 import { FaRegFileImage } from "react-icons/fa";
 import { ChangeEvent } from "react";
+import ButtonType from "@/utilities/ButtonType";
 
 const REGISTER_PAGES_NUMBER = 3;
 const NODES_PER_PAGE = 2;
@@ -27,6 +29,10 @@ const RegisterForm = () => {
 	const handleFileInputChange = (event: ChangeEvent<HTMLInputElement>) => {
 		dispatch(setFileName(event?.target?.value));
 	};
+	const handleSubmit = (event: React.SyntheticEvent) => {
+		event.preventDefault();
+		console.log(registerState);
+	};
 	const inputs = [
 		{ name: "First Name", type: "text", placeholder: "First Name" },
 		{ name: "Surname", type: "text", placeholder: "Surname" },
@@ -40,7 +46,7 @@ const RegisterForm = () => {
 			? "register__button-section"
 			: "register__button-section register__button-section--hidden";
 	return (
-		<form className="register">
+		<form className="register" onSubmit={handleSubmit}>
 			<figure className="profile">
 				<Image
 					className="profile__picture"
@@ -90,13 +96,12 @@ const RegisterForm = () => {
 				/>
 			</section>
 			<section className={buttonSectionClass}>
-				<button
-					type="submit"
-					className="register__button"
+				<BoatifyButton
+					value="Register"
+					type={ButtonType.submit}
+					classModifier="boatify-button--register"
 					disabled={registerState.registerPageNumber !== 3}
-				>
-					Register
-				</button>
+				/>
 			</section>
 			<BoatifyPagination
 				currentPage={registerState.registerPageNumber}

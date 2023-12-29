@@ -1,0 +1,16 @@
+@import "../../../styles/theme.scss";
+
+.boatify-button {
+	@include app-button;
+}
+
+.boatify-button--register {
+	padding-left: 50px;
+	padding-right: 50px;
+	margin-bottom: 16px;
+	&:active,
+	&:focus {
+		padding-left: 50px;
+		padding-right: 50px;
+	}
+}

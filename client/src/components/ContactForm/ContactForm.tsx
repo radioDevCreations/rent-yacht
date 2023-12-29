@@ -1,28 +1,16 @@
 "use client";
-import "./RegisterForm.scss";
-import Image from "next/image";
-import BoatifyPagination from "../BoatifyPagination/BoatifyPagination";
-import BoatifyInputsCarousel from "../BoatifyInputsCarousel/BoatifyInputsCarousel";
+import "./ContactForm.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { setRegisterPage, setFileName } from "@/redux/slices/registerSlice";
-import { FaRegFileImage } from "react-icons/fa";
+import { setEmail } from "@/redux/slices/contactSlice";
 import { ChangeEvent } from "react";
-
-const REGISTER_PAGES_NUMBER = 3;
-const NODES_PER_PAGE = 2;
+import BoatifyInputsCarousel from "../../utilities/boatify-components/BoatifyInputsCarousel/BoatifyInputsCarousel";
+import { FaRegFileImage } from "react-icons/fa";
 
 const ContactForm = () => {
 	const dispatch = useDispatch();
-	const registerState = useSelector((state: any) => state.contact);
-	const handlePrevPage = () => {
-		if (registerState.registerPageNumber > 1) {
-			dispatch(setRegisterPage(registerState.registerPageNumber - 1));
-		}
-	};
-	const handleNextPage = () => {
-		if (registerState.registerPageNumber < REGISTER_PAGES_NUMBER) {
-			dispatch(setRegisterPage(registerState.registerPageNumber + 1));
-		}
+	const contactState = useSelector((state: any) => state.contact);
+	const handleEmailInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+		dispatch(setEmail(event?.target?.value));
 	};
 	const handleFileInputChange = (event: ChangeEvent<HTMLInputElement>) => {
 		dispatch(setFileName(event?.target?.value));
@@ -31,27 +19,17 @@ const ContactForm = () => {
 		{ name: "First Name", type: "text", placeholder: "First Name" },
 		{ name: "Surname", type: "text", placeholder: "Surname" },
 		{ name: "E-mail", type: "email", placeholder: "E-mail" },
-		{ name: "Address 1", type: "text", placeholder: "Address 1" },
-		{ name: "Address 2", type: "text", placeholder: "Address 2" },
-		{ name: "Photo", type: "file", placeholder: "Photo" },
+		{
+			name: "Message",
+			type: "text",
+			placeholder: "Describe your problem here",
+		},
+		{ name: "Attachment", type: "file", placeholder: "Attach" },
 	];
-	const buttonSectionClass =
-		registerState.registerPageNumber === REGISTER_PAGES_NUMBER
-			? "register__button-section"
-			: "register__button-section register__button-section--hidden";
+	const NODES_PER_PAGE = inputs.length;
 	return (
-		<form className="register">
-			<figure className="profile">
-				<Image
-					className="profile__picture"
-					src="/profile.jpg"
-					alt="Profile Picture"
-					width={80}
-					height={80}
-				/>
-				<figcaption className="profile__label"></figcaption>
-			</figure>
-			<section className="register__inputs">
+		<form className="contact">
+			<section className="contact__inputs">
 				<BoatifyInputsCarousel
 					nodes={inputs.map((input) => {
 						return (
@@ -66,8 +44,8 @@ const ContactForm = () => {
 										onChange={handleFileInputChange}
 									/>
 									<label className="input__text" htmlFor="photo">
-										{registerState.registerFileName
-											? registerState.registerFileName
+										{contactState.registerFileName
+											? contactState.registerFileName
 											: "Select file"}
 									</label>
 									<FaRegFileImage className="input__icon" />
@@ -85,25 +63,19 @@ const ContactForm = () => {
 							))
 						);
 					})}
-					currentPage={registerState.registerPageNumber}
+					currentPage={contactState.registerPageNumber}
 					nodesPerPage={NODES_PER_PAGE}
 				/>
 			</section>
-			<section className={buttonSectionClass}>
+			<section className="contact__button-section">
 				<button
 					type="submit"
-					className="register__button"
-					disabled={registerState.registerPageNumber !== 3}
+					className="contact__button"
+					disabled={contactState.registerPageNumber !== 3}
 				>
-					Register
+					Send Message
 				</button>
 			</section>
-			<BoatifyPagination
-				currentPage={registerState.registerPageNumber}
-				numberOfPages={REGISTER_PAGES_NUMBER}
-				prevPage={handlePrevPage}
-				nextPage={handleNextPage}
-			/>
 		</form>
 	);
 };

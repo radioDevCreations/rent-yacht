@@ -56,15 +56,3 @@
 	-webkit-transform: scale(0, 0);
 	transform: scale(0, 1);
 }
-
-.register__button {
-	@include app-button;
-	padding-left: 50px;
-	padding-right: 50px;
-	margin-bottom: 16px;
-	&:active,
-	&:focus {
-		padding-left: 50px;
-		padding-right: 50px;
-	}
-}
