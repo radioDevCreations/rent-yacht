@@ -4,7 +4,9 @@ import MainLayout from "../layouts/MainLayout/MainLayout";
 const ContactPage = () => {
 	return (
 		<MainLayout>
-			<h1>contact page</h1>
+			<section className="contact-page">
+				<ContactForm />
+			</section>
 		</MainLayout>
 	);
 };
