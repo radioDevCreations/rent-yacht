@@ -1,10 +1,21 @@
 import "./LoginForm.scss";
+import { ChangeEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import ButtonType from "@/utilities/ButtonType";
 import BoatifyButton from "@/utilities/boatify-components/BoatifyButton/BoatifyButton";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoginEmail, setLoginPassword } from "@/redux/slices/loginSlice";
 
 const LoginForm = () => {
+	const dispatch = useDispatch();
+	const loginState = useSelector((state: any) => state.login);
+	const handleLoginEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
+		dispatch(setLoginEmail(event?.target?.value));
+	};
+	const handleLoginPasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
+		dispatch(setLoginPassword(event?.target?.value));
+	};
 	const handleSubmit = (event: React.SyntheticEvent) => {
 		event.preventDefault();
 		console.log(loginState);
@@ -23,11 +34,21 @@ const LoginForm = () => {
 			</figure>
 			<div className="input">
 				<span className="input__label">Email</span>
-				<input className="input__field" type="email" placeholder="Login" />
+				<input
+					className="input__field"
+					type="email"
+					placeholder="Login"
+					onChange={handleLoginEmailChange}
+				/>
 			</div>
 			<div className="input">
 				<span className="input__label">Password</span>
-				<input className="input__field" type="text" placeholder="Password" />
+				<input
+					className="input__field"
+					type="text"
+					placeholder="Password"
+					onChange={handleLoginPasswordChange}
+				/>
 			</div>
 			<section className="login__button-section">
 				<BoatifyButton
