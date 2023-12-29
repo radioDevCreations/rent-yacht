@@ -5,11 +5,11 @@ import Link from "next/link";
 import ButtonType from "@/utilities/ButtonType";
 import BoatifyButton from "@/utilities/boatify-components/BoatifyButton/BoatifyButton";
 import { useDispatch, useSelector } from "react-redux";
-import { setLoginEmail, setLoginPassword } from "@/redux/slices/loginSlice";
+import { setLoginEmail, setLoginPassword } from "@/redux/slices/formsSlice";
 
 const LoginForm = () => {
 	const dispatch = useDispatch();
-	const loginState = useSelector((state: any) => state.login);
+	const loginState = useSelector((state: any) => state.forms.login);
 	const handleLoginEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
 		dispatch(setLoginEmail(event?.target?.value));
 	};
@@ -45,7 +45,7 @@ const LoginForm = () => {
 				<span className="input__label">Password</span>
 				<input
 					className="input__field"
-					type="text"
+					type="password"
 					placeholder="Password"
 					onChange={handleLoginPasswordChange}
 				/>

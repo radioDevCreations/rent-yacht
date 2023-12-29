@@ -5,7 +5,10 @@ import BoatifyPagination from "../../utilities/boatify-components/BoatifyPaginat
 import BoatifyInputsCarousel from "../../utilities/boatify-components/BoatifyInputsCarousel/BoatifyInputsCarousel";
 import BoatifyButton from "../../utilities/boatify-components/BoatifyButton/BoatifyButton";
 import { useDispatch, useSelector } from "react-redux";
-import { setRegisterPage, setFileName } from "@/redux/slices/registerSlice";
+import {
+	setRegisterPage,
+	setRegisterFileName,
+} from "@/redux/slices/formsSlice";
 import { FaRegFileImage } from "react-icons/fa";
 import { ChangeEvent } from "react";
 import ButtonType from "@/utilities/ButtonType";
@@ -15,19 +18,19 @@ const NODES_PER_PAGE = 2;
 
 const RegisterForm = () => {
 	const dispatch = useDispatch();
-	const registerState = useSelector((state: any) => state.register);
+	const registerState = useSelector((state: any) => state.forms.register);
 	const handlePrevPage = () => {
-		if (registerState.registerPageNumber > 1) {
-			dispatch(setRegisterPage(registerState.registerPageNumber - 1));
+		if (registerState.pageNumber > 1) {
+			dispatch(setRegisterPage(registerState.pageNumber - 1));
 		}
 	};
 	const handleNextPage = () => {
-		if (registerState.registerPageNumber < REGISTER_PAGES_NUMBER) {
-			dispatch(setRegisterPage(registerState.registerPageNumber + 1));
+		if (registerState.pageNumber < REGISTER_PAGES_NUMBER) {
+			dispatch(setRegisterPage(registerState.pageNumber + 1));
 		}
 	};
 	const handleFileInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-		dispatch(setFileName(event?.target?.value));
+		dispatch(setRegisterFileName(event?.target?.value));
 	};
 	const handleSubmit = (event: React.SyntheticEvent) => {
 		event.preventDefault();
@@ -42,7 +45,7 @@ const RegisterForm = () => {
 		{ name: "Photo", type: "file", placeholder: "Photo" },
 	];
 	const buttonSectionClass =
-		registerState.registerPageNumber === REGISTER_PAGES_NUMBER
+		registerState.pageNumber === REGISTER_PAGES_NUMBER
 			? "register__button-section"
 			: "register__button-section register__button-section--hidden";
 	return (
@@ -72,8 +75,8 @@ const RegisterForm = () => {
 										onChange={handleFileInputChange}
 									/>
 									<label className="input__text" htmlFor="photo">
-										{registerState.registerFileName
-											? registerState.registerFileName
+										{registerState.fileName
+											? registerState.fileName
 											: "Select file"}
 									</label>
 									<FaRegFileImage className="input__icon" />
@@ -91,7 +94,7 @@ const RegisterForm = () => {
 							))
 						);
 					})}
-					currentPage={registerState.registerPageNumber}
+					currentPage={registerState.pageNumber}
 					nodesPerPage={NODES_PER_PAGE}
 				/>
 			</section>
@@ -100,11 +103,11 @@ const RegisterForm = () => {
 					value="Register"
 					type={ButtonType.submit}
 					classModifier="boatify-button--register"
-					disabled={registerState.registerPageNumber !== 3}
+					disabled={registerState.pageNumber !== 3}
 				/>
 			</section>
 			<BoatifyPagination
-				currentPage={registerState.registerPageNumber}
+				currentPage={registerState.pageNumber}
 				numberOfPages={REGISTER_PAGES_NUMBER}
 				prevPage={handlePrevPage}
 				nextPage={handleNextPage}

@@ -8,13 +8,13 @@ import { FaRegFileImage } from "react-icons/fa";
 
 const ContactForm = () => {
 	const dispatch = useDispatch();
-	const contactState = useSelector((state: any) => state.contact);
-	const handleEmailInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-		dispatch(setEmail(event?.target?.value));
-	};
-	const handleFileInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-		dispatch(setFileName(event?.target?.value));
-	};
+	const contactState = useSelector((state: any) => state.forms.contact);
+	// const handleEmailInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+	// 	dispatch(setEmail(event?.target?.value));
+	// };
+	// const handleFileInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+	// 	dispatch(setFileName(event?.target?.value));
+	// };
 	const inputs = [
 		{ name: "First Name", type: "text", placeholder: "First Name" },
 		{ name: "Surname", type: "text", placeholder: "Surname" },
