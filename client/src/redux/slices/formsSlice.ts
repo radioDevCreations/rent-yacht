@@ -6,14 +6,26 @@ const initialState = {
 		password: "",
 	},
 	register: {
-		pageNumber: 1,
-		fileName: "",
-	},
-	contact: {
+		firstname: "",
+		surname: "",
 		email: "",
+		newPassword: "",
+		confirmPassword: "",
+		pageNumber: 1,
 	},
 	forgotPassword: {
 		email: "",
+	},
+	resetPassword: {
+		newPassword: "",
+		confirmPassword: "",
+	},
+	contact: {
+		email: "",
+		firstName: "",
+		surname: "",
+		message: "",
+		fileName: "",
 	},
 };
 
@@ -39,21 +51,57 @@ const formsSlice = createSlice({
 				},
 			};
 		},
+		setRegisterFirstName: (state, action: PayloadAction<string>) => {
+			return {
+				...state,
+				register: {
+					...state.register,
+					firstname: action.payload,
+				},
+			};
+		},
+		setRegisterSurname: (state, action: PayloadAction<string>) => {
+			return {
+				...state,
+				register: {
+					...state.register,
+					surname: action.payload,
+				},
+			};
+		},
+		setRegisterEmail: (state, action: PayloadAction<string>) => {
+			return {
+				...state,
+				register: {
+					...state.register,
+					email: action.payload,
+				},
+			};
+		},
+		setRegisterNewPassword: (state, action: PayloadAction<string>) => {
+			return {
+				...state,
+				register: {
+					...state.register,
+					newPassword: action.payload,
+				},
+			};
+		},
+		setRegisterConfirmPassword: (state, action: PayloadAction<string>) => {
+			return {
+				...state,
+				register: {
+					...state.register,
+					confirmPassword: action.payload,
+				},
+			};
+		},
 		setRegisterPage: (state, action: PayloadAction<number>) => {
 			return {
 				...state,
 				register: {
 					...state.register,
 					pageNumber: action.payload,
-				},
-			};
-		},
-		setRegisterFileName: (state, action: PayloadAction<string>) => {
-			return {
-				...state,
-				register: {
-					...state.register,
-					fileName: action.payload,
 				},
 			};
 		},
@@ -66,6 +114,69 @@ const formsSlice = createSlice({
 				},
 			};
 		},
+		setResetPasswordNewPassword: (state, action: PayloadAction<string>) => {
+			return {
+				...state,
+				resetPassword: {
+					...state.resetPassword,
+					newPassword: action.payload,
+				},
+			};
+		},
+		setResetPasswordConfirmPassword: (state, action: PayloadAction<string>) => {
+			return {
+				...state,
+				resetPassword: {
+					...state.resetPassword,
+					confirmPassword: action.payload,
+				},
+			};
+		},
+		setContactEmail: (state, action: PayloadAction<string>) => {
+			return {
+				...state,
+				contact: {
+					...state.contact,
+					email: action.payload,
+				},
+			};
+		},
+		setContactFirstName: (state, action: PayloadAction<string>) => {
+			return {
+				...state,
+				contact: {
+					...state.contact,
+					firstName: action.payload,
+				},
+			};
+		},
+		setContactSurname: (state, action: PayloadAction<string>) => {
+			return {
+				...state,
+				contact: {
+					...state.contact,
+					surname: action.payload,
+				},
+			};
+		},
+		setContactMessage: (state, action: PayloadAction<string>) => {
+			return {
+				...state,
+				contact: {
+					...state.contact,
+					message: action.payload,
+				},
+			};
+		},
+		setContactFileName: (state, action: PayloadAction<string>) => {
+			return {
+				...state,
+				contact: {
+					...state.contact,
+					fileName: action.payload,
+				},
+			};
+		},
 	},
 });
 
@@ -73,7 +184,11 @@ export const {
 	setLoginEmail,
 	setLoginPassword,
 	setRegisterPage,
-	setRegisterFileName,
+	setRegisterFirstName,
+	setRegisterSurname,
+	setRegisterEmail,
+	setRegisterNewPassword,
+	setRegisterConfirmPassword,
 	setForgotPasswordEmail,
 } = formsSlice.actions;
 export default formsSlice.reducer;

@@ -1,7 +1,7 @@
 "use client";
 import "./ContactForm.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { setEmail } from "@/redux/slices/contactSlice";
+import { setContactEmail } from "@/redux/slices/formsSlice";
 import { ChangeEvent } from "react";
 import BoatifyInputsCarousel from "../../utilities/boatify-components/BoatifyInputsCarousel/BoatifyInputsCarousel";
 import { FaRegFileImage } from "react-icons/fa";
@@ -9,12 +9,12 @@ import { FaRegFileImage } from "react-icons/fa";
 const ContactForm = () => {
 	const dispatch = useDispatch();
 	const contactState = useSelector((state: any) => state.forms.contact);
-	// const handleEmailInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-	// 	dispatch(setEmail(event?.target?.value));
-	// };
-	// const handleFileInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-	// 	dispatch(setFileName(event?.target?.value));
-	// };
+	const handleEmailInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+		dispatch(setEmail(event?.target?.value));
+	};
+	const handleFileInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+		dispatch(setFileName(event?.target?.value));
+	};
 	const inputs = [
 		{ name: "First Name", type: "text", placeholder: "First Name" },
 		{ name: "Surname", type: "text", placeholder: "Surname" },
@@ -73,7 +73,7 @@ const ContactForm = () => {
 					className="contact__button"
 					disabled={contactState.registerPageNumber !== 3}
 				>
-					Send Message
+					Send Message marta rozmus
 				</button>
 			</section>
 		</form>

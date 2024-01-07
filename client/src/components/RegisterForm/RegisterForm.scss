@@ -11,11 +11,15 @@
 	-webkit-box-align: center;
 	-ms-flex-align: center;
 	align-items: center;
+	-webkit-box-pack: justify;
+	-ms-flex-pack: justify;
+	justify-content: space-between;
 	width: 280px;
 	padding: 10px 10px 24px 10px;
 	border-radius: 16px;
 	-webkit-box-shadow: 0px 0px 6px -2px rgba(16, 25, 53, 1);
 	box-shadow: 0px 0px 6px -2px rgba(16, 25, 53, 1);
+	height: 405px;
 }
 
 .register__inputs {
@@ -32,20 +36,9 @@
 	user-select: none;
 }
 
-// .profile__label {
-// }
-.input-file {
-	@include app-file;
-}
-
-.input {
-	@include app-input;
-	width: 200px;
-}
-
 .register__button-section {
 	@include form-button-section;
-	&.register__button-section--hidden {
+	:disabled {
 		@include form-button-section--hidden;
 	}
 }
