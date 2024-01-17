@@ -1,6 +1,5 @@
 import "./BoatifyButton.scss";
 import ButtonType from "@/utilities/ButtonType";
-import { ChangeEvent, CSSProperties } from "react";
 
 interface BoatifyButtonProps {
 	value: string;

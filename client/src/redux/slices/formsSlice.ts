@@ -190,5 +190,10 @@ export const {
 	setRegisterNewPassword,
 	setRegisterConfirmPassword,
 	setForgotPasswordEmail,
+	setContactFirstName,
+	setContactSurname,
+	setContactEmail,
+	setContactMessage,
+	setContactFileName,
 } = formsSlice.actions;
 export default formsSlice.reducer;

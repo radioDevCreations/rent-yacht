@@ -5,7 +5,7 @@ import BoatifyLinkProps from "@/utilities/BoatifyLinkProps";
 
 const ForgotPassword = ({ data }) => {
 	const problem = "Still can't log in? Contact ";
-	const linkProps: BoatifyLinkProps = { href: "/email", linkText: "support" };
+	const linkProps: BoatifyLinkProps = { href: "/contact", linkText: "support" };
 	return (
 		<SingleFormLayout problem={problem} link={linkProps}>
 			<section className="forgot-password-page">

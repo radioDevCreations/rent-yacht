@@ -1,71 +1,108 @@
 "use client";
 import "./ContactForm.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { setContactEmail } from "@/redux/slices/formsSlice";
+import {
+	setContactFirstName,
+	setContactSurname,
+	setContactEmail,
+	setContactMessage,
+} from "@/redux/slices/formsSlice";
 import { ChangeEvent } from "react";
-import BoatifyInputsCarousel from "../../utilities/boatify-components/BoatifyInputsCarousel/BoatifyInputsCarousel";
-import { FaRegFileImage } from "react-icons/fa";
+import BoatifyInput from "@/utilities/boatify-components/BoatifyInput/BoatifyInput";
+import BoatifyInputProps from "@/utilities/BoatifyInputProps";
+import InputType from "@/utilities/InputType";
 
 const ContactForm = () => {
 	const dispatch = useDispatch();
 	const contactState = useSelector((state: any) => state.forms.contact);
-	const handleEmailInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-		dispatch(setEmail(event?.target?.value));
-	};
-	const handleFileInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-		dispatch(setFileName(event?.target?.value));
-	};
-	const inputs = [
-		{ name: "First Name", type: "text", placeholder: "First Name" },
-		{ name: "Surname", type: "text", placeholder: "Surname" },
-		{ name: "E-mail", type: "email", placeholder: "E-mail" },
+	const firstColumn: Array<BoatifyInputProps> = [
+		{
+			name: "First Name",
+			type: InputType.text,
+			placeholder: "First Name",
+			action: (event: ChangeEvent<HTMLInputElement>) =>
+				dispatch(setContactFirstName(event?.target?.value)),
+		},
+		{
+			name: "E-mail",
+			type: InputType.email,
+			placeholder: "E-mail",
+			action: (event: ChangeEvent<HTMLInputElement>) =>
+				dispatch(setContactEmail(event?.target?.value)),
+		},
+	];
+	const secondColumn: Array<BoatifyInputProps> = [
+		{
+			name: "Surname",
+			type: InputType.text,
+			placeholder: "Surname",
+			action: (event: ChangeEvent<HTMLInputElement>) =>
+				dispatch(setContactSurname(event?.target?.value)),
+		},
+	];
+	const thirdColumn: Array<BoatifyInputProps> = [
 		{
 			name: "Message",
-			type: "text",
-			placeholder: "Describe your problem here",
+			type: InputType.text,
+			placeholder: "Message",
+			action: (event: ChangeEvent<HTMLInputElement>) =>
+				dispatch(setContactMessage(event?.target?.value)),
 		},
-		{ name: "Attachment", type: "file", placeholder: "Attach" },
 	];
-	const NODES_PER_PAGE = inputs.length;
+
 	return (
 		<form className="contact">
 			<section className="contact__inputs">
-				<BoatifyInputsCarousel
-					nodes={inputs.map((input) => {
+				<div className="contact__inputs-column contact__inputs-column--first">
+					{firstColumn.map((input) => {
 						return (
-							(input.type === "file" && (
-								<div className="input-file" key={input.name}>
-									<span className="input__label">{input.name}</span>
-									<input
-										className="input__field"
-										id="photo"
-										type={input.type}
-										placeholder={input.placeholder}
-										onChange={handleFileInputChange}
-									/>
-									<label className="input__text" htmlFor="photo">
-										{contactState.registerFileName
-											? contactState.registerFileName
-											: "Select file"}
-									</label>
-									<FaRegFileImage className="input__icon" />
-								</div>
-							)) ||
-							(input.type !== "file" && (
-								<div className="input" key={input.name}>
-									<span className="input__label">{input.name}</span>
-									<input
-										className="input__field"
-										type={input.type}
-										placeholder={input.placeholder}
-									/>
-								</div>
+							(!input.type?.length && <div></div>) ||
+							(input.type?.length && (
+								<BoatifyInput
+									label={input.name}
+									key={input.name}
+									placeholder={input.placeholder}
+									type={input.type}
+									onChange={input.action}
+								/>
 							))
 						);
 					})}
-					currentPage={contactState.registerPageNumber}
-					nodesPerPage={NODES_PER_PAGE}
-				/>
+				</div>
+				<div className="contact__inputs-column">
+					{secondColumn.map((input) => {
+						return (
+							(!input.type?.length && <div></div>) ||
+							(input.type?.length && (
+								<BoatifyInput
+									label={input.name}
+									key={input.name}
+									placeholder={input.placeholder}
+									type={input.type}
+									onChange={input.action}
+								/>
+							))
+						);
+					})}
+				</div>
+			</section>
+			<section className="contact__inputs">
+				<div className="contact__inputs-column contact__inputs-column--last">
+					{thirdColumn.map((input) => {
+						return (
+							(!input.type?.length && <div></div>) ||
+							(input.type?.length && (
+								<BoatifyInput
+									label={input.name}
+									key={input.name}
+									placeholder={input.placeholder}
+									type={input.type}
+									onChange={input.action}
+								/>
+							))
+						);
+					})}
+				</div>
 			</section>
 			<section className="contact__button-section">
 				<button
@@ -73,7 +110,7 @@ const ContactForm = () => {
 					className="contact__button"
 					disabled={contactState.registerPageNumber !== 3}
 				>
-					Send Message marta rozmus
+					Send Message
 				</button>
 			</section>
 		</form>
