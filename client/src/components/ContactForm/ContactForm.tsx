@@ -10,7 +10,9 @@ import {
 import { ChangeEvent } from "react";
 import BoatifyInput from "@/utilities/boatify-components/BoatifyInput/BoatifyInput";
 import BoatifyInputProps from "@/utilities/BoatifyInputProps";
+import BoatifyTextareaProps from "@/utilities/BoatifyTextareaProps";
 import InputType from "@/utilities/InputType";
+import BoatifyTextarea from "@/utilities/boatify-components/BoatifyTextarea/BoatifyTextarea";
 
 const ContactForm = () => {
 	const dispatch = useDispatch();
@@ -40,12 +42,11 @@ const ContactForm = () => {
 				dispatch(setContactSurname(event?.target?.value)),
 		},
 	];
-	const thirdColumn: Array<BoatifyInputProps> = [
+	const thirdColumn: Array<BoatifyTextareaProps> = [
 		{
 			name: "Message",
-			type: InputType.text,
 			placeholder: "Message",
-			action: (event: ChangeEvent<HTMLInputElement>) =>
+			action: (event: ChangeEvent<HTMLTextAreaElement>) =>
 				dispatch(setContactMessage(event?.target?.value)),
 		},
 	];
@@ -90,16 +91,12 @@ const ContactForm = () => {
 				<div className="contact__inputs-column contact__inputs-column--last">
 					{thirdColumn.map((input) => {
 						return (
-							(!input.type?.length && <div></div>) ||
-							(input.type?.length && (
-								<BoatifyInput
-									label={input.name}
-									key={input.name}
-									placeholder={input.placeholder}
-									type={input.type}
-									onChange={input.action}
-								/>
-							))
+							<BoatifyTextarea
+								label={input.name}
+								key={input.name}
+								placeholder={input.placeholder}
+								onChange={input.action}
+							/>
 						);
 					})}
 				</div>

@@ -1,10 +1,10 @@
 import { ChangeEventHandler } from "react";
-import "./BoatifyInput.scss";
+import "./BoatifyTextarea.scss";
 
 interface BoatifyTextareaProps {
 	label?: string;
 	placeholder?: string;
-	onChange?: ChangeEventHandler<HTMLInputElement>;
+	onChange?: ChangeEventHandler<HTMLTextAreaElement>;
 }
 
 const BoatifyTextarea = ({
@@ -13,10 +13,10 @@ const BoatifyTextarea = ({
 	onChange,
 }: BoatifyTextareaProps) => {
 	return (
-		<div className="input">
-			<span className="input__label">{label}</span>
-			<input
-				className="input__field"
+		<div className="textarea">
+			<span className="textarea__label">{label}</span>
+			<textarea
+				className="textarea__field"
 				placeholder={placeholder}
 				onChange={onChange}
 			/>
