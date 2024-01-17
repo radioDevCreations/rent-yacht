@@ -1,4 +1,9 @@
-.contact__inputs {
+.contact {
+	margin: 100px 0 200px;
+}
+
+.contact__inputs,
+.contact__button-section {
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
@@ -7,6 +12,10 @@
 	justify-content: center;
 	-webkit-box-align: center;
 	-ms-flex-align: center;
+}
+
+.contact__button-section {
+	margin: 20px 0 0;
 }
 
 .contact__inputs-column--first {

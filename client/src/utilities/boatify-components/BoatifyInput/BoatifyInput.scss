@@ -5,3 +5,7 @@
 	@include app-input;
 	width: 200px;
 }
+
+.input-long {
+	@include app-input;
+}

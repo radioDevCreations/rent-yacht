@@ -6,6 +6,7 @@ interface BoatifyInputProps {
 	label?: string;
 	type?: InputType;
 	placeholder?: string;
+	isLongInput?: boolean;
 	onChange?: ChangeEventHandler<HTMLInputElement>;
 }
 
@@ -13,10 +14,12 @@ const BoatifyInput = ({
 	label,
 	type,
 	placeholder,
+	isLongInput = false,
 	onChange,
 }: BoatifyInputProps) => {
+	const inputClass = isLongInput ? "input-long" : "input";
 	return (
-		<div className="input">
+		<div className={inputClass}>
 			<span className="input__label">{label}</span>
 			<input
 				className="input__field"

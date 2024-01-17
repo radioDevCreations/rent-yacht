@@ -13,6 +13,8 @@ import BoatifyInputProps from "@/utilities/BoatifyInputProps";
 import BoatifyTextareaProps from "@/utilities/BoatifyTextareaProps";
 import InputType from "@/utilities/InputType";
 import BoatifyTextarea from "@/utilities/boatify-components/BoatifyTextarea/BoatifyTextarea";
+import ButtonType from "@/utilities/ButtonType";
+import BoatifyButton from "@/utilities/boatify-components/BoatifyButton/BoatifyButton";
 
 const ContactForm = () => {
 	const dispatch = useDispatch();
@@ -26,15 +28,6 @@ const ContactForm = () => {
 				dispatch(setContactFirstName(event?.target?.value)),
 		},
 		{
-			name: "E-mail",
-			type: InputType.email,
-			placeholder: "E-mail",
-			action: (event: ChangeEvent<HTMLInputElement>) =>
-				dispatch(setContactEmail(event?.target?.value)),
-		},
-	];
-	const secondColumn: Array<BoatifyInputProps> = [
-		{
 			name: "Surname",
 			type: InputType.text,
 			placeholder: "Surname",
@@ -42,10 +35,19 @@ const ContactForm = () => {
 				dispatch(setContactSurname(event?.target?.value)),
 		},
 	];
+	const secondColumn: Array<BoatifyInputProps> = [
+		{
+			name: "E-mail",
+			type: InputType.email,
+			placeholder: "E-mail",
+			action: (event: ChangeEvent<HTMLInputElement>) =>
+				dispatch(setContactEmail(event?.target?.value)),
+		},
+	];
 	const thirdColumn: Array<BoatifyTextareaProps> = [
 		{
 			name: "Message",
-			placeholder: "Message",
+			placeholder: "Type here",
 			action: (event: ChangeEvent<HTMLTextAreaElement>) =>
 				dispatch(setContactMessage(event?.target?.value)),
 		},
@@ -102,13 +104,11 @@ const ContactForm = () => {
 				</div>
 			</section>
 			<section className="contact__button-section">
-				<button
-					type="submit"
-					className="contact__button"
-					disabled={contactState.registerPageNumber !== 3}
-				>
-					Send Message
-				</button>
+				<BoatifyButton
+					value="Send Message"
+					type={ButtonType.submit}
+					classModifier="boatify-button--login"
+				/>
 			</section>
 		</form>
 	);
