@@ -1,18 +1,13 @@
-from flask import Flask, request, abort, jsonify
+from flask import Flask, request, jsonify
 from flask_bcrypt import Bcrypt
 from config import ApplicationConfig
-# from dbconnection import getHarbours
-from models import db, User
-
+from models import db, User, Harbour
 
 # app instance
 app = Flask(__name__)
 app.config.from_object(ApplicationConfig)
 
 bcrypt = Bcrypt(app)
-#@app.route('/api/harbours')
-#def get_test():
-#   return getHarbours()
 
 db.init_app(app)
 with app.app_context():
@@ -55,6 +50,33 @@ def login_user():
        "id": user.id,
        "email": user.email
     })
+    
+@app.route("/api/harbours", methods=["POST", "GET"])
+def add_get_harbour():
+    if request.method == "POST":
+        name = request.json["name"]
+        localization = request.json["localization"]
+        harbour_exists = Harbour.query.filter_by(name=name, localization=localization).first() is not None
+
+        if harbour_exists:
+            return jsonify({
+        "error": "Harbour already exists"
+        }), 409
+        
+        new_harbour = Harbour(name=name, localization=localization)
+        db.session.add(new_harbour)
+        db.session.commit()
+        return jsonify({
+        "id": new_harbour.id,
+        "name": new_harbour.name,
+        "localization": new_harbour.localization
+        })
+    elif request.method == "GET":
+        harbours = []
+        for harbour in Harbour.query.all():
+            harbours.append({ "id": harbour.id, "name": harbour.name, "localization": harbour.localization})
+        return jsonify({ "harbours": harbours })
+        
 
 if __name__ == "__main__":
     app.run(debug=True)
