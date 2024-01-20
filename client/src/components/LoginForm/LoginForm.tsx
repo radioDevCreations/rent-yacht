@@ -3,7 +3,7 @@ import { ChangeEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import ButtonType from "@/utilities/ButtonType";
-import BoatifyButton from "@/utilities/boatify-components/BoatifyButton/BoatifyButton";
+import BoatifyButton from "@/boatify-components/BoatifyButton/BoatifyButton";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoginEmail, setLoginPassword } from "@/redux/slices/formsSlice";
 

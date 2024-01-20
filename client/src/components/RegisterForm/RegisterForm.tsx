@@ -1,9 +1,9 @@
 "use client";
 import "./RegisterForm.scss";
 import Image from "next/image";
-import BoatifyPagination from "../../utilities/boatify-components/BoatifyPagination/BoatifyPagination";
-import BoatifyInputsCarousel from "../../utilities/boatify-components/BoatifyInputsCarousel/BoatifyInputsCarousel";
-import BoatifyButton from "../../utilities/boatify-components/BoatifyButton/BoatifyButton";
+import BoatifyPagination from "../../boatify-components/BoatifyPagination/BoatifyPagination";
+import BoatifyInputsCarousel from "../../boatify-components/BoatifyInputsCarousel/BoatifyInputsCarousel";
+import BoatifyButton from "../../boatify-components/BoatifyButton/BoatifyButton";
 import { useDispatch, useSelector } from "react-redux";
 import {
 	setRegisterPage,
@@ -15,7 +15,7 @@ import {
 } from "@/redux/slices/formsSlice";
 import { ChangeEvent } from "react";
 import ButtonType from "@/utilities/ButtonType";
-import BoatifyInput from "@/utilities/boatify-components/BoatifyInput/BoatifyInput";
+import BoatifyInput from "@/boatify-components/BoatifyInput/BoatifyInput";
 import BoatifyInputProps from "@/utilities/BoatifyInputProps";
 import InputType from "@/utilities/InputType";
 

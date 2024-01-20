@@ -1,5 +1,5 @@
 import "./ForgotPasswordForm.scss";
-import BoatifyButton from "@/utilities/boatify-components/BoatifyButton/BoatifyButton";
+import BoatifyButton from "@/boatify-components/BoatifyButton/BoatifyButton";
 import { useDispatch, useSelector } from "react-redux";
 import { setForgotPasswordEmail } from "@/redux/slices/formsSlice";
 import { ChangeEvent } from "react";

@@ -8,13 +8,13 @@ import {
 	setContactMessage,
 } from "@/redux/slices/formsSlice";
 import { ChangeEvent } from "react";
-import BoatifyInput from "@/utilities/boatify-components/BoatifyInput/BoatifyInput";
+import BoatifyInput from "@/boatify-components/BoatifyInput/BoatifyInput";
 import BoatifyInputProps from "@/utilities/BoatifyInputProps";
 import BoatifyTextareaProps from "@/utilities/BoatifyTextareaProps";
 import InputType from "@/utilities/InputType";
-import BoatifyTextarea from "@/utilities/boatify-components/BoatifyTextarea/BoatifyTextarea";
+import BoatifyTextarea from "@/boatify-components/BoatifyTextarea/BoatifyTextarea";
 import ButtonType from "@/utilities/ButtonType";
-import BoatifyButton from "@/utilities/boatify-components/BoatifyButton/BoatifyButton";
+import BoatifyButton from "@/boatify-components/BoatifyButton/BoatifyButton";
 
 const ContactForm = () => {
 	const dispatch = useDispatch();

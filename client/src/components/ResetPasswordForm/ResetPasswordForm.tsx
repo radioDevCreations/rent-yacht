@@ -1,4 +1,4 @@
-import BoatifyButton from "@/utilities/boatify-components/BoatifyButton/BoatifyButton";
+import BoatifyButton from "@/boatify-components/BoatifyButton/BoatifyButton";
 import ButtonType from "@/utilities/ButtonType";
 import "./ResetPasswordForm.scss";
 
