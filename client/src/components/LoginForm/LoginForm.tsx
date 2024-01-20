@@ -2,6 +2,7 @@ import "./LoginForm.scss";
 import { ChangeEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import httpClient from "@/axios/httpClient";
 import ButtonType from "@/utilities/ButtonType";
 import BoatifyButton from "@/boatify-components/BoatifyButton/BoatifyButton";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,9 +17,12 @@ const LoginForm = () => {
 	const handleLoginPasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
 		dispatch(setLoginPassword(event?.target?.value));
 	};
-	const handleSubmit = (event: React.SyntheticEvent) => {
+	const handleSubmit = async (event: React.SyntheticEvent) => {
 		event.preventDefault();
-		console.log(loginState);
+		const response = httpClient.post("//localhost:5000/login", {
+			email: loginState.loginEmail,
+			password: loginState.loginPassword,
+		});
 	};
 	return (
 		<form className="login" onSubmit={handleSubmit}>
@@ -38,6 +42,7 @@ const LoginForm = () => {
 					className="input__field"
 					type="email"
 					placeholder="Login"
+					value={loginState.loginEmail}
 					onChange={handleLoginEmailChange}
 				/>
 			</div>
@@ -47,6 +52,7 @@ const LoginForm = () => {
 					className="input__field"
 					type="password"
 					placeholder="Password"
+					value={loginState.loginPassword}
 					onChange={handleLoginPasswordChange}
 				/>
 			</div>
