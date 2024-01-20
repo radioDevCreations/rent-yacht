@@ -61,8 +61,8 @@ def login_user():
     if not bcrypt.check_password_hash(user.password, password):
         return jsonify({ "error": "Unauthorized" }), 401
     
-    if 'session_id' not in session:
-        session['session_id'] = str(user.id)
+    if 'user_id' not in session:
+        session['user_id'] = user.id
     
     return jsonify({
        "id": user.id,
