@@ -3,12 +3,14 @@ from flask_bcrypt import Bcrypt
 from flask_session import Session
 from config import ApplicationConfig
 from models import db, User, Harbour
+from flask_cors import CORS
 
 # app instance
 app = Flask(__name__)
 app.config.from_object(ApplicationConfig)
 
 bcrypt = Bcrypt(app)
+cors = CORS(app, supports_credentials=True)
 server_session = Session(app)
 db.init_app(app)
 
@@ -47,7 +49,7 @@ def register_user():
        "id": new_user.id,
        "email": new_user.email
     })
-    
+ 
 @app.route("/login", methods=["POST"])
 def login_user():
     email = request.json["email"]
@@ -67,7 +69,7 @@ def login_user():
        "id": user.id,
        "email": user.email
     })
-    
+
 @app.route("/api/harbours", methods=["POST", "GET"])
 def add_get_harbour():
     if request.method == "POST":

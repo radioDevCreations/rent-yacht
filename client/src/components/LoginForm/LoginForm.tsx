@@ -19,10 +19,11 @@ const LoginForm = () => {
 	};
 	const handleSubmit = async (event: React.SyntheticEvent) => {
 		event.preventDefault();
-		const response = httpClient.post("//localhost:5000/login", {
-			email: loginState.loginEmail,
-			password: loginState.loginPassword,
+		const response = await httpClient.post("//localhost:5000/login", {
+			email: loginState.email,
+			password: loginState.password,
 		});
+		console.log(response.data);
 	};
 	return (
 		<form className="login" onSubmit={handleSubmit}>
