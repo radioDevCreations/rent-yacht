@@ -5,7 +5,10 @@ import BoatifyLinkProps from "@/utilities/BoatifyLinkProps";
 
 const LoginPage = ({ data }) => {
 	const problem = "Don't have an account yet? ";
-	const linkProps: BoatifyLinkProps = { href: "/email", linkText: "Register" };
+	const linkProps: BoatifyLinkProps = {
+		href: "/register",
+		linkText: "Register",
+	};
 	return (
 		<SingleFormLayout problem={problem} link={linkProps}>
 			<section className="login-page">

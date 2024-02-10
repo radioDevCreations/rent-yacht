@@ -34,6 +34,9 @@ def get_current_user():
 def register_user():
     email = request.json["email"]
     password = request.json["password"]
+    first_name = request.json["firstName"]
+    surname = request.json["surname"]
+    
     user_exists = User.query.filter_by(email=email).first() is not None
 
     if user_exists:
@@ -41,12 +44,15 @@ def register_user():
        "error": "User already exists"
     }), 409
     hashed_password = bcrypt.generate_password_hash(password)
-    
-    new_user = User(email=email, password=hashed_password)
+
+
+    new_user = User(email=email, password=hashed_password, first_name=first_name, surname=surname)
     db.session.add(new_user)
     db.session.commit()
     return jsonify({
        "id": new_user.id,
+       "firstName": new_user.first_name,
+       "surname": new_user.surname,
        "email": new_user.email
     })
  

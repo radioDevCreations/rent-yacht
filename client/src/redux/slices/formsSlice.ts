@@ -6,12 +6,13 @@ const initialState = {
 		password: "",
 	},
 	register: {
-		firstname: "",
+		firstName: "",
 		surname: "",
 		email: "",
 		newPassword: "",
 		confirmPassword: "",
 		pageNumber: 1,
+		isLoading: false,
 	},
 	forgotPassword: {
 		email: "",
@@ -56,7 +57,7 @@ const formsSlice = createSlice({
 				...state,
 				register: {
 					...state.register,
-					firstname: action.payload,
+					firstName: action.payload,
 				},
 			};
 		},
@@ -102,6 +103,15 @@ const formsSlice = createSlice({
 				register: {
 					...state.register,
 					pageNumber: action.payload,
+				},
+			};
+		},
+		setRegisterIsLoading: (state, action: PayloadAction<boolean>) => {
+			return {
+				...state,
+				register: {
+					...state.register,
+					isLoading: action.payload,
 				},
 			};
 		},
@@ -189,6 +199,7 @@ export const {
 	setRegisterEmail,
 	setRegisterNewPassword,
 	setRegisterConfirmPassword,
+	setRegisterIsLoading,
 	setForgotPasswordEmail,
 	setContactFirstName,
 	setContactSurname,

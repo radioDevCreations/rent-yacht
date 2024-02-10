@@ -12,12 +12,14 @@ import {
 	setRegisterEmail,
 	setRegisterNewPassword,
 	setRegisterConfirmPassword,
+	setRegisterIsLoading,
 } from "@/redux/slices/formsSlice";
 import { ChangeEvent } from "react";
 import ButtonType from "@/utilities/ButtonType";
 import BoatifyInput from "@/boatify-components/BoatifyInput/BoatifyInput";
 import BoatifyInputProps from "@/utilities/BoatifyInputProps";
 import InputType from "@/utilities/InputType";
+import httpClient from "@/axios/httpClient";
 
 const REGISTER_PAGES_NUMBER = 3;
 const NODES_PER_PAGE = 2;
@@ -35,9 +37,18 @@ const RegisterForm = () => {
 			dispatch(setRegisterPage(registerState.pageNumber + 1));
 		}
 	};
-	const handleSubmit = (event: React.SyntheticEvent) => {
+	const handleSubmit = async (event: React.SyntheticEvent) => {
 		event.preventDefault();
-		console.log(registerState);
+		setRegisterIsLoading(true);
+		const response = await httpClient.post("//localhost:5000/register", {
+			email: registerState.email,
+			password: registerState.newPassword,
+			firstName: registerState.firstName,
+			surname: registerState.surname,
+		});
+		setRegisterIsLoading(false);
+		if ("id" in response?.data) console.log("registered");
+		else console.log("err");
 	};
 	const inputs: Array<BoatifyInputProps> = [
 		{
@@ -97,7 +108,7 @@ const RegisterForm = () => {
 				<BoatifyInputsCarousel
 					nodes={inputs.map((input) => {
 						return (
-							(!input.type?.length && <div></div>) ||
+							(!input.type?.length && <div key={input.name}></div>) ||
 							(input.type?.length && (
 								<BoatifyInput
 									label={input.name}
