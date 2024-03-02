@@ -1,4 +1,4 @@
-#!/Users/radekrozmus/Projekty/rent-gym/flask-server/venv/bin/python3.12
+#!/Users/radekrozmus/Projekty/rent-yacht/flask-server/venv/bin/python3.12
 # -*- coding: utf-8 -*-
 import re
 import sys
