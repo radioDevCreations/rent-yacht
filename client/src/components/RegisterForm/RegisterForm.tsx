@@ -40,7 +40,7 @@ const RegisterForm = () => {
 	const handleSubmit = async (event: React.SyntheticEvent) => {
 		event.preventDefault();
 		setRegisterIsLoading(true);
-		const response = await httpClient.post("//localhost:5000/register", {
+		const response = await httpClient.post("//127.0.0.1:5000/register", {
 			email: registerState.email,
 			password: registerState.newPassword,
 			firstName: registerState.firstName,

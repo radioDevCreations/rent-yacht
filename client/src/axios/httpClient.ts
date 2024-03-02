@@ -1,24 +1,20 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost";
+const BASE_URL = "http://127.0.0.1";
 
 const axiosInstance = axios.create({
+	withCredentials: true,
 	baseURL: BASE_URL,
 });
 
-axiosInstance.interceptors.request.use(
-	async (config) => {
-		config.headers.crossDomain = true;
-		config.headers.withCredentias = true;
-		config.headers["Access-Control-Allow-Origin"] = "*";
-		config.headers["Access-Control-Allow-Headers"] =
-			"Origin, X-Requested-With, Content-Type, Accept";
-		return config;
-	},
-	(error) => {
-		console.log("Request has failed", error);
-		Promise.reject(error);
-	}
-);
+// axiosInstance.interceptors.request.use(
+// 	async (config) => {
+// 		return config;
+// 	},
+// 	(error) => {
+// 		console.log("Request has failed", error);
+// 		Promise.reject(error);
+// 	}
+// );
 
 export default axiosInstance;
