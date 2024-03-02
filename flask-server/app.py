@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, session
+from flask import Flask, request, jsonify, session, Response
 from flask_bcrypt import Bcrypt
 from flask_session import Session
 from config import ApplicationConfig
@@ -10,12 +10,22 @@ app = Flask(__name__)
 app.config.from_object(ApplicationConfig)
 
 bcrypt = Bcrypt(app)
-cors = CORS(app, supports_credentials=True)
+
+CORS(app, supports_credentials=True)
 server_session = Session(app)
 db.init_app(app)
 
+
 with app.app_context():
     db.create_all()
+
+@app.before_request
+def handle_preflight():
+    if request.method == "OPTIONS":
+        res = Response()
+        res.headers['Access-Control-Allow-Origin'] = 'http://localhost:3000'
+        return res
+
 
 @app.route("/@me")
 def get_current_user():
@@ -56,25 +66,27 @@ def register_user():
        "email": new_user.email
     })
  
-@app.route("/login", methods=["POST"])
+
+@app.route("/login", methods=["POST", "OPTIONS"])
 def login_user():
-    email = request.json["email"]
-    password = request.json["password"]
-    
-    user = User.query.filter_by(email=email).first()
+    if request.method == "POST":
+        email = request.json["email"]
+        password = request.json["password"]
+        
+        user = User.query.filter_by(email=email).first()
 
-    if user is None:
-        return jsonify({ "error": "Unauthorized" }), 401
+        if user is None:
+            return jsonify({ "error": "Unauthorized" }), 401
 
-    if not bcrypt.check_password_hash(user.password, password):
-        return jsonify({ "error": "Unauthorized" }), 401
-    
-    session['user_id'] = user.id
-    
-    return jsonify({
-       "id": user.id,
-       "email": user.email
-    })
+        if not bcrypt.check_password_hash(user.password, password):
+            return jsonify({ "error": "Unauthorized" }), 401
+        
+        session['user_id'] = user.id
+        
+        return jsonify({
+        "id": user.id,
+        "email": user.email
+        })
 
 @app.route("/api/harbours", methods=["POST", "GET"])
 def add_get_harbour():
