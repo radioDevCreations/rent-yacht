@@ -1,6 +1,7 @@
 import BoatifySearch from "@/boatify-components/BoatifySearch/BoatifySearch";
 import React, { FC } from "react";
 import BoatItem from "../BoatItem/BoatItem";
+import BoatsBoard from "../BoatsBoard/BoatsBoard";
 import BoatsFilter from "../BoatsFilter/BoatsFilter";
 import "./BoatsBrowser.scss";
 
@@ -13,9 +14,7 @@ const BoatsBrowser = () => {
 					<BoatsFilter />
 				</aside>
 				<section className="boats">
-					<BoatItem />
-					<BoatItem />
-					<BoatItem />
+					<BoatsBoard />
 				</section>
 			</div>
 		</div>

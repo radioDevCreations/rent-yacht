@@ -1,30 +1,25 @@
+import ButtonType from "@/utilities/ButtonType";
+import BoatifyButton from "../BoatifyButton/BoatifyButton";
+import "./BoatifySearch.scss";
+
 const BoatifySearch = () => {
 	return (
 		<>
-			<div className="search__field">
-				<label
-					className="search__icon-label"
-					htmlFor="header-search-input"
-				></label>
+			<div className="input search">
+				<label className="search__icon-label" htmlFor="search-input"></label>
 				<input
 					type="text"
-					id="header-search-input"
-					name="src"
-					className="search__input js-search-input js-header-search-input tt-input"
-					placeholder="What are you looking for?"
-					dir="auto"
-					aria-owns="header-search-input_listbox"
-					role="combobox"
-					aria-autocomplete="list"
-					aria-expanded="false"
-					data-last-active-input=""
+					id="search-input"
+					className="search__input input__field"
+					placeholder="Search..."
 				/>
-				<button
-					type="submit"
-					className="search__button button button--primary js-search-action"
-				>
+				<button type="submit" className="search__button">
 					<span className="icon icon--search"></span>
-					<span className="search__button-text">Search</span>
+					<BoatifyButton
+						value="Search"
+						type={ButtonType.button}
+						classModifier="boatify-button--search"
+					/>
 				</button>
 			</div>
 		</>
