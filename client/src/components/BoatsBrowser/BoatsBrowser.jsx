@@ -6,16 +6,18 @@ import "./BoatsBrowser.scss";
 
 const BoatsBrowser = () => {
 	return (
-		<div className="browser">
-			<aside className="aside">
-				<BoatifySearch />
-				<BoatsFilter />
-			</aside>
-			<section className="boats">
-				<BoatItem />
-				<BoatItem />
-				<BoatItem />
-			</section>
+		<div className="browser-container">
+			<div className="browser">
+				<aside className="aside">
+					<BoatifySearch />
+					<BoatsFilter />
+				</aside>
+				<section className="boats">
+					<BoatItem />
+					<BoatItem />
+					<BoatItem />
+				</section>
+			</div>
 		</div>
 	);
 };
