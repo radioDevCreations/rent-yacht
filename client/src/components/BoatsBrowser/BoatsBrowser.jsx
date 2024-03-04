@@ -1,14 +1,22 @@
+import BoatifySearch from "@/boatify-components/BoatifySearch/BoatifySearch";
+import React, { FC } from "react";
+import BoatItem from "../BoatItem/BoatItem";
+import BoatsFilter from "../BoatsFilter/BoatsFilter";
+import "./BoatsBrowser.scss";
+
 const BoatsBrowser = () => {
 	return (
-		<section className="browser">
+		<div className="browser">
 			<aside className="aside">
-				<div className="search"></div>
-				<div className="filter"></div>
+				<BoatifySearch />
+				<BoatsFilter />
 			</aside>
-			<div className="boats">
-				<article className="boats__item"></article>
-			</div>
-		</section>
+			<section className="boats">
+				<BoatItem />
+				<BoatItem />
+				<BoatItem />
+			</section>
+		</div>
 	);
 };
 

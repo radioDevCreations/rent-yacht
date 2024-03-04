@@ -1,10 +1,11 @@
 import "./boats.scss";
 import MainLayout from "@/layouts/MainLayout/MainLayout";
+import BoatsBrowser from "@/components/BoatsBrowser/BoatsBrowser";
 
 const BoatsPage = () => {
 	return (
 		<MainLayout>
-			<h1>boats page</h1>
+			<BoatsBrowser />
 		</MainLayout>
 	);
 };
