@@ -3,7 +3,6 @@ import "./SingleFormLayout.scss";
 import Provider from "@/redux/Provider";
 import HeaderLogin from "../../components/HeaderSingleForm/HeaderSingleForm";
 import FooterSingleForm from "../../components/FooterSingleForm/FooterSingleForm";
-import { ReactNode } from "react";
 import BoatifyLinkProps from "@/utilities/BoatifyLinkProps";
 import Children from "@/utilities/Children";
 
