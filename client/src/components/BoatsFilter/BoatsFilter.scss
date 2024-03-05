@@ -1,0 +1,38 @@
+@import "../../styles/theme.scss";
+
+.filter {
+	padding: 8px;
+}
+.filter__section {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
+	flex-direction: row;
+	-ms-flex-pack: distribute;
+	justify-content: space-around;
+	padding: 8px 0;
+}
+.filter__type-option {
+	border: 1px solid $royalBlue;
+	width: 80px;
+	height: 80px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	justify-content: center;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	font-weight: 700;
+	font-size: $fontSize18px;
+	color: $royalBlue;
+}
+.filter__type-icon {
+	font-size: $fontSize26px;
+}

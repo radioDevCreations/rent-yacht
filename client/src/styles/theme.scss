@@ -12,6 +12,7 @@ $white: #fff;
 $fontSize12px: 12px;
 $fontSize14px: 14px;
 $fontSize16px: 16px;
+$fontSize18px: 18px;
 $fontSize22px: 22px;
 $fontSize24px: 24px;
 $fontSize26px: 26px;
@@ -50,6 +51,7 @@ $paddingSize32px: 32px;
 }
 
 @mixin app-button {
+	height: 37px;
 	color: $lightGray;
 	font-weight: 700;
 	background-color: $royalBlue;
@@ -188,7 +190,7 @@ $paddingSize32px: 32px;
 	.input__field {
 		color: $black;
 		margin-bottom: 16px;
-		padding: 10px 18px;
+		padding: 9px 18px;
 		border: 1px solid $gray;
 		border-radius: 12px;
 		-webkit-box-shadow: 0px 0px 4px -2px rgba(16, 25, 53, 1);
