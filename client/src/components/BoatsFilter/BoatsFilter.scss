@@ -11,13 +11,14 @@
 	-webkit-box-direction: normal;
 	-ms-flex-direction: row;
 	flex-direction: row;
-	-ms-flex-pack: distribute;
-	justify-content: space-around;
+	-webkit-box-pack: justify;
+	-ms-flex-pack: justify;
+	justify-content: space-between;
 	padding: 8px 0;
 }
 .filter__type-option {
-	width: 80px;
-	height: 80px;
+	width: 76px;
+	height: 76px;
 	border: 1px solid $royalBlue;
 	border-radius: 8px;
 	display: -webkit-box;
