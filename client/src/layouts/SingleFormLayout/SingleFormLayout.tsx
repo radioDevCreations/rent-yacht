@@ -5,9 +5,9 @@ import HeaderLogin from "../../components/HeaderSingleForm/HeaderSingleForm";
 import FooterSingleForm from "../../components/FooterSingleForm/FooterSingleForm";
 import { ReactNode } from "react";
 import BoatifyLinkProps from "@/utilities/BoatifyLinkProps";
+import Children from "@/utilities/Children";
 
-interface SingleFormLayoutProps {
-	children: ReactNode;
+interface SingleFormLayoutProps extends Children {
 	problem?: string;
 	link?: BoatifyLinkProps;
 }

@@ -4,8 +4,9 @@ import "./MainLayout.scss";
 import Footer from "../../components/Footer/Footer";
 import Header from "@/components/Header/Header";
 import Provider from "@/redux/Provider";
+import Children from "@/utilities/Children";
 
-const MainLayout = ({ children }) => {
+const MainLayout = ({ children }: Children) => {
 	return (
 		<Provider>
 			<Header />
