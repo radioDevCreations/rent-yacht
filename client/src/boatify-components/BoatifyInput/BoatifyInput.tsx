@@ -3,6 +3,9 @@ import { ChangeEventHandler } from "react";
 import "./BoatifyInput.scss";
 
 interface BoatifyInputProps {
+	id?: string;
+	value?: string;
+	name?: string;
 	label?: string;
 	type?: InputType;
 	placeholder?: string;
@@ -11,6 +14,9 @@ interface BoatifyInputProps {
 }
 
 const BoatifyInput = ({
+	id,
+	value,
+	name,
 	label,
 	type,
 	placeholder,
@@ -19,9 +25,18 @@ const BoatifyInput = ({
 }: BoatifyInputProps) => {
 	const inputClass = isLongInput ? "input-long" : "input";
 	return (
-		<div className={inputClass}>
-			<span className="input__label">{label}</span>
+		<div className={type === "radio" ? `${inputClass} ` : inputClass}>
+			{id ? (
+				<label htmlFor={id} className="input__label">
+					{label}
+				</label>
+			) : (
+				<span className="input__label">{label}</span>
+			)}
 			<input
+				id={id}
+				value={value}
+				name={name}
 				className="input__field"
 				type={type}
 				placeholder={placeholder}

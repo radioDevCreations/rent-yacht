@@ -12,6 +12,7 @@ import {
 } from "@/redux/slices/filterSlice";
 import BoatifyTag from "@/boatify-components/BoatifyTag/BoatifyTag";
 import TagType from "@/utilities/TagType";
+import { SystemBoolean } from "@/utilities/System";
 
 const BoatsFilter = () => {
 	const dispatch = useDispatch();
@@ -28,6 +29,10 @@ const BoatsFilter = () => {
 	};
 	const handleEndDateChange = (event: ChangeEvent<HTMLInputElement>) => {
 		dispatch(setEndDateFilter(+event?.target?.value));
+		console.log(filterState.startDate);
+		console.log(filterState.endDate);
+	};
+	const handleHarbourChange = (event: ChangeEvent<HTMLInputElement>) => {
 		console.log(filterState.startDate);
 		console.log(filterState.endDate);
 	};
@@ -56,6 +61,15 @@ const BoatsFilter = () => {
 					placeholder="2"
 					type={InputType.number}
 					onChange={handlePassengersNumberChange}
+					isLongInput={SystemBoolean.True}
+				/>
+				<BoatifyInput
+					label="Harbour"
+					key="harbour"
+					placeholder="Harbour name or city"
+					type={InputType.text}
+					onChange={handleHarbourChange}
+					isLongInput={SystemBoolean.True}
 				/>
 			</div>
 			<div className="filter__section filter__section--vertical">
@@ -69,6 +83,7 @@ const BoatsFilter = () => {
 					placeholder="2"
 					type={InputType.date}
 					onChange={handleStartDateChange}
+					isLongInput={SystemBoolean.True}
 				/>
 				<BoatifyInput
 					label="End Date"
@@ -76,14 +91,58 @@ const BoatsFilter = () => {
 					placeholder="2"
 					type={InputType.date}
 					onChange={handleEndDateChange}
+					isLongInput={SystemBoolean.True}
 				/>
 				<BoatifyTag
 					type={TagType.days}
 					label={`${filterState.endDate - filterState.startDate}`}
 				/>
 			</div>
-			<div className="filter__section"></div>
-			<div className="filter__section"></div>
+			<div className="filter__section filter__section--vertical">
+				<h3 className="filter__section-title">
+					<span>Price</span>
+				</h3>
+				<span className="spacer"></span>
+				<BoatifyInput
+					value="Per Day"
+					name="priceper"
+					label="Per Day"
+					id="perday"
+					type={InputType.radio}
+					onChange={handleStartDateChange}
+					isLongInput={SystemBoolean.True}
+				/>
+				<BoatifyInput
+					value="Per Hour"
+					name="priceper"
+					label="Per Hour"
+					id="perhour"
+					type={InputType.radio}
+					onChange={handleEndDateChange}
+					isLongInput={SystemBoolean.True}
+				/>
+				<BoatifyInput
+					label="Start Date"
+					key="startdate"
+					placeholder="2"
+					type={InputType.date}
+					onChange={handleStartDateChange}
+					isLongInput={SystemBoolean.True}
+				/>
+				<BoatifyInput
+					label="End Date"
+					key="enddate"
+					placeholder="2"
+					type={InputType.date}
+					onChange={handleEndDateChange}
+					isLongInput={SystemBoolean.True}
+				/>
+				<BoatifyTag
+					type={TagType.days}
+					label={`${filterState.endDate - filterState.startDate}`}
+				/>
+			</div>
+			<div className="filter__section filter__section--vertical"></div>
 		</section>
 	);
 };
