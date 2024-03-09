@@ -16,6 +16,12 @@
 	justify-content: space-between;
 	padding: 8px 0;
 }
+.filter__section--vertical {
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
+	flex-direction: column;
+}
 .filter__type-option {
 	width: 76px;
 	height: 76px;
@@ -37,4 +43,14 @@
 }
 .filter__type-icon {
 	font-size: $fontSize26px;
+}
+.filter__section-title {
+	font-size: $fontSize16px;
+	font-weight: 600;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	border-bottom: 1px solid $royalBlue;
+}
+.spacer {
+	padding-top: 10px;
 }

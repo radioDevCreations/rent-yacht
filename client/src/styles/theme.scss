@@ -62,7 +62,7 @@ $paddingSize32px: 32px;
 		background-color: $russianViolet;
 	}
 	&:focus {
-		padding: 9px 18px;
+		padding: 9px 17px;
 		border: 2px solid $uranianBlue;
 	}
 }
@@ -154,7 +154,7 @@ $paddingSize32px: 32px;
 		&:active,
 		&:focus {
 			border: 2px solid $royalBlue;
-			padding: 9px 18px;
+			padding: 9px 17px;
 		}
 		&::-webkit-input-placeholder {
 			color: $gray;
@@ -198,7 +198,7 @@ $paddingSize32px: 32px;
 		&:active,
 		&:focus {
 			border: 2px solid $royalBlue;
-			padding: 9px 18px;
+			padding: 8px 17px;
 		}
 		&::-webkit-input-placeholder {
 			color: $gray;

@@ -5,15 +5,31 @@ import BoatifyInput from "@/boatify-components/BoatifyInput/BoatifyInput";
 import InputType from "@/utilities/InputType";
 import { useDispatch, useSelector } from "react-redux";
 import { ChangeEvent } from "react";
-import { setPassengersFilter } from "@/redux/slices/filterSlice";
+import {
+	setPassengersFilter,
+	setStartDateFilter,
+	setEndDateFilter,
+} from "@/redux/slices/filterSlice";
+import BoatifyTag from "@/boatify-components/BoatifyTag/BoatifyTag";
+import TagType from "@/utilities/TagType";
 
 const BoatsFilter = () => {
 	const dispatch = useDispatch();
-	const boatsState = useSelector((state: any) => state.filters);
+	const filterState = useSelector((state: any) => state.filters);
 	const handlePassengersNumberChange = (
 		event: ChangeEvent<HTMLInputElement>
 	) => {
 		dispatch(setPassengersFilter(+event?.target?.value));
+	};
+	const handleStartDateChange = (event: ChangeEvent<HTMLInputElement>) => {
+		dispatch(setStartDateFilter(+event?.target?.value));
+		console.log(filterState.startDate);
+		console.log(filterState.endDate);
+	};
+	const handleEndDateChange = (event: ChangeEvent<HTMLInputElement>) => {
+		dispatch(setEndDateFilter(+event?.target?.value));
+		console.log(filterState.startDate);
+		console.log(filterState.endDate);
 	};
 
 	return (
@@ -33,7 +49,7 @@ const BoatsFilter = () => {
 					</span>
 				</div>
 			</div>
-			<div className="filter__section">
+			<div className="filter__section filter__section--vertical">
 				<BoatifyInput
 					label="Passengers"
 					key="passengers"
@@ -42,7 +58,30 @@ const BoatsFilter = () => {
 					onChange={handlePassengersNumberChange}
 				/>
 			</div>
-			<div className="filter__section"></div>
+			<div className="filter__section filter__section--vertical">
+				<h3 className="filter__section-title">
+					<span>Period of Rent</span>
+				</h3>
+				<span className="spacer"></span>
+				<BoatifyInput
+					label="Start Date"
+					key="startdate"
+					placeholder="2"
+					type={InputType.date}
+					onChange={handleStartDateChange}
+				/>
+				<BoatifyInput
+					label="End Date"
+					key="enddate"
+					placeholder="2"
+					type={InputType.date}
+					onChange={handleEndDateChange}
+				/>
+				<BoatifyTag
+					type={TagType.days}
+					label={`${filterState.endDate - filterState.startDate}`}
+				/>
+			</div>
 			<div className="filter__section"></div>
 			<div className="filter__section"></div>
 		</section>
