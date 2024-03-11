@@ -1,3 +1,5 @@
+import "./BoatItem.scss";
+
 const BoatItem = () => {
 	return (
 		<div className="boat-item">

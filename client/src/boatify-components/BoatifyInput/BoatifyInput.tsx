@@ -25,7 +25,7 @@ const BoatifyInput = ({
 }: BoatifyInputProps) => {
 	const inputClass = isLongInput ? "input-long" : "input";
 	return (
-		<div className={type === "radio" ? `${inputClass} ` : inputClass}>
+		<div className={type === "radio" ? `${inputClass} radio` : inputClass}>
 			{id ? (
 				<label htmlFor={id} className="input__label">
 					{label}

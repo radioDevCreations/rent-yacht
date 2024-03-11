@@ -21,6 +21,7 @@ enum InputType {
 	time = "time",
 	url = "url",
 	week = "week",
+	currency = "input",
 }
 
 export default InputType;

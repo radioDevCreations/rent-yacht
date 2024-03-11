@@ -1,3 +1,5 @@
+@import "../../styles/theme.scss";
+
 .browser-container {
 	display: -webkit-box;
 	display: -ms-flexbox;
@@ -14,6 +16,7 @@
 	display: flex;
 	-webkit-box-pack: center;
 	-ms-flex-pack: center;
+	border-bottom: 1px solid $royalBlue;
 	justify-content: center;
 }
 .aside {

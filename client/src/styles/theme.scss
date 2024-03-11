@@ -231,3 +231,24 @@ $paddingSize32px: 32px;
 @mixin form-button-section--hidden {
 	visibility: hidden;
 }
+
+@mixin boatify-scroll {
+	&::-webkit-scrollbar {
+		width: 10px;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background: $royalBlue;
+		border-radius: 200px;
+	}
+
+	&::-webkit-scrollbar-track {
+		background: $lightGray;
+		border-radius: 200px;
+	}
+
+	& {
+		scrollbar-face-color: $royalBlue;
+		scrollbar-track-color: $lightGray;
+	}
+}

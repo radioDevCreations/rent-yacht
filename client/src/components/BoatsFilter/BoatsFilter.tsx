@@ -121,19 +121,20 @@ const BoatsFilter = () => {
 					onChange={handleEndDateChange}
 					isLongInput={SystemBoolean.True}
 				/>
+				<span className="spacer"></span>
 				<BoatifyInput
-					label="Start Date"
-					key="startdate"
+					label="Price From"
+					key="pricefrom"
 					placeholder="2"
-					type={InputType.date}
+					type={InputType.currency}
 					onChange={handleStartDateChange}
 					isLongInput={SystemBoolean.True}
 				/>
 				<BoatifyInput
-					label="End Date"
-					key="enddate"
+					label="Price To"
+					key="priceto"
 					placeholder="2"
-					type={InputType.date}
+					type={InputType.currency}
 					onChange={handleEndDateChange}
 					isLongInput={SystemBoolean.True}
 				/>
