@@ -1,3 +1,5 @@
+import BoatifyButton from "@/boatify-components/BoatifyButton/BoatifyButton";
+import ButtonType from "@/utilities/ButtonType";
 import "./BoatItem.scss";
 
 const BoatItem = () => {
@@ -6,8 +8,16 @@ const BoatItem = () => {
 			<div className="boat-item__picture"></div>
 			<div className="boat-item__featured-details"></div>
 			<div className="boat-item__button-section">
-				<button className="boat-item__details-button">Details</button>
-				<button className="boat-item__rent-button">Rent</button>
+				<BoatifyButton
+					value="Details"
+					type={ButtonType.button}
+					classModifier="boatify-button--boat-item"
+				/>
+				<BoatifyButton
+					value="Rent"
+					type={ButtonType.button}
+					classModifier="boatify-button--boat-item"
+				/>
 			</div>
 		</div>
 	);
