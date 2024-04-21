@@ -18,7 +18,5 @@
 	-webkit-box-direction: reverse;
 	-ms-flex-direction: row-reverse;
 	flex-direction: row-reverse;
-	-webkit-box-pack: start;
-	-ms-flex-pack: start;
-	justify-content: start;
+	justify-content: flex-start;
 }
