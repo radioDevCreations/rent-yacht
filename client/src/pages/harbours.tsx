@@ -3,17 +3,18 @@ import MainLayout from "@/layouts/MainLayout/MainLayout";
 import HarboursMap from "@/components/HarboursMap/HarboursMap";
 import DataLoader from "@/dataLoaders/DataLoader";
 
-export const getStaticProps = async () => {
-	const data = await DataLoader.selectHarbours();
-	return {
-		props: { harbours: data },
-	};
-};
+// export const getStaticProps = async () => {
+// 	const data = await DataLoader.selectHarbours();
+// 	return {
+// 		props: { harbours: data },
+// 	};
+// };
 
-const HarboursPage = ({ harbours }) => {
+const HarboursPage = ({ harbours }: any) => {
 	return (
 		<MainLayout>
-			<HarboursMap data={harbours} />
+			das
+			{/* <HarboursMap data={harbours} /> */}
 		</MainLayout>
 	);
 };

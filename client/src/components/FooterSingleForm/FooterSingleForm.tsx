@@ -1,7 +1,7 @@
 import Link from "next/link";
 import "./FooterSingleForm.scss";
 
-const FooterSingleForm = ({ problem, link }) => {
+const FooterSingleForm = ({ problem, link } : any) => {
 	return (
 		<footer className="footer">
 			<button className="footer-button"></button>

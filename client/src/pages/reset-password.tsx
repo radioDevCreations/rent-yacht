@@ -3,7 +3,7 @@ import SingleFormLayout from "../layouts/SingleFormLayout/SingleFormLayout";
 import ResetPasswordForm from "../components/ResetPasswordForm/ResetPasswordForm";
 import BoatifyLinkProps from "@/utilities/BoatifyLinkProps";
 
-const ResetPassword = ({ data }) => {
+const ResetPassword = ({ data }: any) => {
 	const problem = "Or contact ";
 	const linkProps: BoatifyLinkProps = { href: "/email", linkText: "support" };
 	return (

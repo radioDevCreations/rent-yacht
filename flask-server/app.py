@@ -89,31 +89,31 @@ def login_user():
         "email": user.email
         })
 
-# @app.route("/api/harbours", methods=["POST", "GET"])
-# def add_get_harbour():
-#     if request.method == "POST":
-#         name = request.json["name"]
-#         localization = request.json["localization"]
-#         harbour_exists = Harbour.query.filter_by(name=name, localization=localization).first() is not None
+@app.route("/api/harbours", methods=["POST", "GET"])
+def add_get_harbour():
+    if request.method == "POST":
+        name = request.json["name"]
+        localization = request.json["localization"]
+        harbour_exists = Harbour.query.filter_by(name=name, localization=localization).first() is not None
 
-#         if harbour_exists:
-#             return jsonify({
-#         "error": "Harbour already exists"
-#         }), 409
+        if harbour_exists:
+            return jsonify({
+        "error": "Harbour already exists"
+        }), 409
         
-#         new_harbour = Harbour(name=name, localization=localization)
-#         db.session.add(new_harbour)
-#         db.session.commit()
-#         return jsonify({
-#         "id": new_harbour.id,
-#         "name": new_harbour.name,
-#         "localization": new_harbour.localization
-#         })
-#     elif request.method == "GET":
-#         harbours = []
-#         for harbour in Harbour.query.all():
-#             harbours.append({ "id": harbour.id, "name": harbour.name, "localization": harbour.localization})
-#         return jsonify({ "harbours": harbours })
+        new_harbour = Harbour(name=name, localization=localization)
+        db.session.add(new_harbour)
+        db.session.commit()
+        return jsonify({
+        "id": new_harbour.id,
+        "name": new_harbour.name,
+        "localization": new_harbour.localization
+        })
+    elif request.method == "GET":
+        harbours = []
+        for harbour in Harbour.query.all():
+            harbours.append({ "id": harbour.id, "name": harbour.name, "localization": harbour.localization})
+        return jsonify({ "harbours": harbours })
         
 
 if __name__ == "__main__":
