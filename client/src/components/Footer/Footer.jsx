@@ -16,18 +16,18 @@ const FOOTER_ITEMS = {
 		},
 	],
 	column2: [
-		{ name: "Harbours", type: "link" },
-		{ name: "Boats", type: "link" },
-		{ name: "Last Minute", type: "link" },
-		{ name: "Shop", type: "link" },
-		{ name: "Contact", type: "link" },
+		{ name: "Harbours", type: "link", href: "" },
+		{ name: "Boats", type: "link", href: "" },
+		{ name: "Last Minute", type: "link", href: "" },
+		{ name: "Shop", type: "link", href: "" },
+		{ name: "Contact", type: "link", href: "" },
 	],
 	column3: [
-		{ name: "Footer Item 11", type: "link" },
-		{ name: "Footer Item 12", type: "link" },
-		{ name: "Footer Item 13", type: "link" },
-		{ name: "Footer Item 14", type: "link" },
-		{ name: "Footer Item 15", type: "link" },
+		{ name: "My Account", type: "link", href: "" },
+		{ name: "My Rentals", type: "link", href: "" },
+		{ name: "Favourites", type: "link", href: "" },
+		{ name: "Footer Item 14", type: "link", href: "" },
+		{ name: "Footer Item 15", type: "link", href: "" },
 	],
 };
 
