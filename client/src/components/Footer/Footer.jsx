@@ -1,33 +1,34 @@
+import LinkType from "@/utilities/LinkType";
 import "./Footer.scss";
 
 const FOOTER_ITEMS = {
 	column1: [
 		{
 			name: "Footer Item 1",
-			type: "image",
+			type: LinkType.image,
 			src: "/sail-boat.svg",
 			alt: "Sailboat Logo",
 		},
 		{
 			name: "Footer Item 2",
-			type: "image",
+			type: LinkType.image,
 			src: "/sail-boat.svg",
 			alt: "Sailboat Logo",
 		},
 	],
 	column2: [
-		{ name: "Harbours", type: "link", href: "" },
-		{ name: "Boats", type: "link", href: "" },
-		{ name: "Last Minute", type: "link", href: "" },
-		{ name: "Shop", type: "link", href: "" },
-		{ name: "Contact", type: "link", href: "" },
+		{ name: "Harbours", type: LinkType.link, href: "" },
+		{ name: "Boats", type: LinkType.link, href: "" },
+		{ name: "Last Minute", type: LinkType.link, href: "" },
+		{ name: "Shop", type: LinkType.link, href: "" },
+		{ name: "Contact", type: LinkType.link, href: "" },
 	],
 	column3: [
-		{ name: "My Account", type: "link", href: "" },
-		{ name: "My Rentals", type: "link", href: "" },
-		{ name: "Favourites", type: "link", href: "" },
-		{ name: "Footer Item 14", type: "link", href: "" },
-		{ name: "Footer Item 15", type: "link", href: "" },
+		{ name: "My Account", type: LinkType.link, href: "" },
+		{ name: "My Rentals", type: LinkType.link, href: "" },
+		{ name: "Favourites", type: LinkType.link, href: "" },
+		{ name: "Footer Item 14", type: LinkType.link, href: "" },
+		{ name: "Footer Item 15", type: LinkType.link, href: "" },
 	],
 };
 
