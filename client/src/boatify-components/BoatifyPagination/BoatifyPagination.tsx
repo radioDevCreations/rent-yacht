@@ -1,5 +1,6 @@
 import "./BoatifyPagination.scss";
 import Image from "next/image";
+import IMAGE from "../../../public/links";
 
 interface BoatifyPaginationProps {
 	numberOfPages: number;
@@ -27,7 +28,7 @@ const BoatifyPagination = ({
 				>
 					<Image
 						className="button-image"
-						src="/back-arrow.svg"
+						src={IMAGE.svg.backArrow}
 						alt="Previous Page"
 						width={20}
 						height={20}
@@ -50,7 +51,7 @@ const BoatifyPagination = ({
 				>
 					<Image
 						className="button-image"
-						src="/next-arrow.svg"
+						src={IMAGE.svg.nextArrow}
 						alt="Next Page"
 						width={20}
 						height={20}

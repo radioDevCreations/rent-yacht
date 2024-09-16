@@ -2,6 +2,7 @@
 import "./HeaderSingleForm.scss";
 import Link from "next/link";
 import Image from "next/image";
+import IMAGE from "../../../public/links";
 
 const HeaderSingleForm = () => {
 	return (
@@ -9,7 +10,7 @@ const HeaderSingleForm = () => {
 			<div className="logo">
 				<Link href="/" className="logo__link">
 					<Image
-						src="/sail-boat.svg"
+						src={IMAGE.svg.sailBoat}
 						alt="logo"
 						className="logo__image"
 						width={48}

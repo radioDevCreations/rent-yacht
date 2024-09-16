@@ -7,6 +7,7 @@ import ButtonType from "@/utilities/ButtonType";
 import BoatifyButton from "@/boatify-components/BoatifyButton/BoatifyButton";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoginEmail, setLoginPassword } from "@/redux/slices/formsSlice";
+import IMAGE from "../../../public/links";
 
 const LoginForm = () => {
 	const dispatch = useDispatch();
@@ -30,7 +31,7 @@ const LoginForm = () => {
 			<figure className="profile">
 				<Image
 					className="profile__picture"
-					src="/profile.jpg"
+					src={IMAGE.jpg.profile}
 					alt="Profile Picture"
 					width={80}
 					height={80}

@@ -1,18 +1,19 @@
 import LinkType from "@/utilities/LinkType";
 import "./Footer.scss";
+import IMAGE from "../../../public/links";
 
 const FOOTER_ITEMS = {
 	column1: [
 		{
 			name: "Footer Item 1",
 			type: LinkType.image,
-			src: "/sail-boat.svg",
+			src: IMAGE.svg.sailBoat,
 			alt: "Sailboat Logo",
 		},
 		{
 			name: "Footer Item 2",
 			type: LinkType.image,
-			src: "/sail-boat.svg",
+			src: IMAGE.svg.sailBoat,
 			alt: "Sailboat Logo",
 		},
 	],
@@ -27,8 +28,8 @@ const FOOTER_ITEMS = {
 		{ name: "My Account", type: LinkType.link, href: "" },
 		{ name: "My Rentals", type: LinkType.link, href: "" },
 		{ name: "Favourites", type: LinkType.link, href: "" },
-		{ name: "Footer Item 14", type: LinkType.link, href: "" },
-		{ name: "Footer Item 15", type: LinkType.link, href: "" },
+		{ name: "Compare Boats", type: LinkType.link, href: "" },
+		{ name: "My Documents", type: LinkType.link, href: "" },
 	],
 };
 

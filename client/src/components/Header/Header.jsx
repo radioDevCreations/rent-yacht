@@ -7,6 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { HiMenu } from "react-icons/hi";
 import { IoMdCloseCircleOutline } from "react-icons/io";
+import IMAGE from "../../../public/links";
 
 const Header = () => {
 	const dispatch = useDispatch();
@@ -20,7 +21,7 @@ const Header = () => {
 			<div className="logo">
 				<Link href="/" className="logo__link">
 					<Image
-						src="/sail-boat.svg"
+						src={IMAGE.svg.sailBoat}
 						alt="logo"
 						className="logo__image"
 						width={48}

@@ -20,6 +20,7 @@ import BoatifyInput from "@/boatify-components/BoatifyInput/BoatifyInput";
 import BoatifyInputProps from "@/utilities/BoatifyInputProps";
 import InputType from "@/utilities/InputType";
 import httpClient from "@/axios/httpClient";
+import IMAGE from "../../../public/links";
 
 const REGISTER_PAGES_NUMBER = 3;
 const NODES_PER_PAGE = 2;
@@ -97,7 +98,7 @@ const RegisterForm = () => {
 			<figure className="profile">
 				<Image
 					className="profile__picture"
-					src="/profile.jpg"
+					src={IMAGE.jpg.profile}
 					alt="Profile Picture"
 					width={80}
 					height={80}

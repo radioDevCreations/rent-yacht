@@ -1,11 +1,12 @@
 import "./LoadingSpinner.scss";
 import Image from "next/image";
+import IMAGE from "../../../public/links";
 
 const LoadingSpinner = () => {
 	return (
 		<main className="spinner">
 			<Image
-				src="/sail-boat.svg"
+				src={IMAGE.svg.sailBoat}
 				alt="Boat"
 				className="spinner__image"
 				width={48}

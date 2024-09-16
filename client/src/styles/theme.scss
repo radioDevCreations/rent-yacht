@@ -16,6 +16,13 @@ $fontSize18px: 18px;
 $fontSize22px: 22px;
 $fontSize24px: 24px;
 $fontSize26px: 26px;
+$fontSize64px: 64px;
+
+//font weights
+$fontWeightLight: 300;
+$fontWeightRegular: 400;
+$fontWeightMedium: 500;
+$fontWeightBold: 700;
 //margins
 $marginSize24px: 24px;
 $marginSize32px: 32px;
@@ -240,6 +247,7 @@ $paddingSize32px: 32px;
 	&::-webkit-scrollbar-thumb {
 		background: $royalBlue;
 		border-radius: 200px;
+		border: 2px solid $lightGray;
 	}
 
 	&::-webkit-scrollbar-track {

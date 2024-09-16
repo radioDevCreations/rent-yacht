@@ -1,4 +1,5 @@
 import Provider from "@/redux/Provider";
+import IMAGE from "../../public/links";
 import "./layout.scss";
 
 export const metadata = {
@@ -10,7 +11,7 @@ const RootLayout = ({ children }) => {
 	return (
 		<html>
 			<head>
-				<link rel="icon" href="/sail-boat.svg" sizes="any" />
+				<link rel="icon" href={IMAGE.svg.sailBoat} sizes="any" />
 			</head>
 			<body>
 				<Provider>
