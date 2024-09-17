@@ -1,0 +1,50 @@
+@import "../../styles/theme.scss";
+
+.featured-card {
+	width: 292px;
+	height: 329px;
+	background-color: $white;
+	border-radius: 20px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	padding-bottom: 31px;
+	padding-top: 133px;
+	-webkit-box-pack: justify;
+	-ms-flex-pack: justify;
+	justify-content: space-between;
+	-webkit-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 1);
+	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 1);
+	border-radius: 20px;
+	-webkit-transform: translateY(0);
+	transform: translateY(0);
+	-webkit-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+}
+
+.featured-card__title {
+	font-family: "Ubuntu", sans-serif;
+	font-size: $fontSize32px;
+	font-weight: $fontWeightMedium;
+}
+
+.featured-card__link {
+	text-decoration: none;
+	color: $black;
+	margin-right: 30px;
+	&:hover > .featured-card {
+		-webkit-transform: translateY(10px);
+		transform: translateY(-10px);
+	}
+}
+
+.featured-card__link:last-child {
+	margin-right: 0;
+}

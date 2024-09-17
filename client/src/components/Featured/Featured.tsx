@@ -1,21 +1,47 @@
-import "./Hero.scss";
+import "./Featured.scss";
 import Image from "next/image";
 import IMAGE from "../../../public/links";
+import FeaturedCard from "../FeaturedCard/FeaturedCard";
+import FeaturedCardsProps from "../FeaturedCard/FeaturedCardsProps";
+
+const FEATURED_CARDS: FeaturedCardsProps[] = [
+	{
+		name: "Login",
+		icon: {
+			alt: "Login",
+			src: IMAGE.svg.login,
+		},
+		href: "/login",
+	},
+	{
+		name: "Register",
+		icon: {
+			alt: "Register",
+			src: IMAGE.svg.register,
+		},
+		href: "/register",
+	},
+	{
+		name: "Browse",
+		icon: {
+			alt: "Browse",
+			src: IMAGE.svg.browse,
+		},
+		href: "/boats",
+	},
+];
 
 const Featured = () => {
 	return (
-		<article className="hero">
-			<Image
-				src={IMAGE.svg.ship}
-				alt="ship"
-				className="hero__image"
-				width={448}
-				height={48}
-			/>
-			<div className="hero__captions">
-				<h1 className="hero__title">Żegluj z nami</h1>
-				<p className="hero__text1">Znajdź wymarzoną łódź na swój rejs</p>
-			</div>
+		<article className="featured">
+			{FEATURED_CARDS.map((featuredItem: FeaturedCardsProps) => (
+				<FeaturedCard
+					key={featuredItem.name}
+					name={featuredItem.name}
+					icon={featuredItem.icon}
+					href={featuredItem.href}
+				/>
+			))}
 		</article>
 	);
 };

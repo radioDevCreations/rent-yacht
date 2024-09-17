@@ -1,22 +1,22 @@
-import "./Hero.scss";
+import "./FeaturedCard.scss";
 import Image from "next/image";
 import IMAGE from "../../../public/links";
+import FeaturedCardsProps from "./FeaturedCardsProps";
 
-const FeaturedCard = () => {
+const FeaturedCard = ({ name, icon, href }: FeaturedCardsProps) => {
 	return (
-		<article className="hero">
-			<Image
-				src={IMAGE.svg.ship}
-				alt="ship"
-				className="hero__image"
-				width={448}
-				height={48}
-			/>
-			<div className="hero__captions">
-				<h1 className="hero__title">Żegluj z nami</h1>
-				<p className="hero__text1">Znajdź wymarzoną łódź na swój rejs</p>
+		<a className="featured-card__link" href={href}>
+			<div className="featured-card">
+				<Image
+					src={icon.src}
+					alt={icon.alt}
+					className="featured-card__image"
+					height={64}
+					width={64}
+				/>
+				<p className="featured-card__title">{name}</p>
 			</div>
-		</article>
+		</a>
 	);
 };
 

@@ -1,4 +1,4 @@
-const IMAGE = {
+const IMAGE: IMAGE_PATHS = {
 	svg: {
 		anchor: "/anchor.svg",
 		backArrow: "/back-arrow.svg",
@@ -18,4 +18,25 @@ const IMAGE = {
 	webp: {},
 };
 
+interface IMAGE_PATHS {
+	svg: {
+		anchor: string;
+		backArrow: string;
+		browse: string;
+		contract: string;
+		login: string;
+		map: string;
+		nextArrow: string;
+		register: string;
+		sailBoat: string;
+		ship: string;
+	};
+	jpg: {
+		profile: string;
+	};
+	png: Record<string, never>; // Empty object in PNG category
+	webp: Record<string, never>; // Empty object in WebP category
+}
+
 export default IMAGE;
+export type { IMAGE_PATHS };

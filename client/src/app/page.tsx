@@ -3,6 +3,8 @@ import MainLayout from "@/layouts/MainLayout/MainLayout";
 import PageSection from "@/pages/PageSection/PageSection";
 import PageVariant from "@/pages/PageSection/PageVariant";
 import Hero from "@/components/Hero/Hero";
+import Featured from "@/components/Featured/Featured";
+import MapLink from "@/components/MapLink/MapLink";
 
 const Home = async () => {
 	return (
@@ -11,10 +13,10 @@ const Home = async () => {
 				<Hero />
 			</PageSection>
 			<PageSection variant={PageVariant.dark}>
-				<h1 className={style.main}>home page</h1>
+				<Featured />
 			</PageSection>
 			<PageSection variant={PageVariant.light}>
-				<h1 className={style.main}>home page</h1>
+				<MapLink />
 			</PageSection>
 			<PageSection variant={PageVariant.dark}>
 				<h1 className={style.main}>home page</h1>
