@@ -5,6 +5,7 @@ import PageVariant from "@/pages/PageSection/PageVariant";
 import Hero from "@/components/Hero/Hero";
 import Featured from "@/components/Featured/Featured";
 import MapLink from "@/components/MapLink/MapLink";
+import PocketContactForm from "@/components/PocketContactForm/PocketContactForm";
 
 const Home = async () => {
 	return (
@@ -19,7 +20,7 @@ const Home = async () => {
 				<MapLink />
 			</PageSection>
 			<PageSection variant={PageVariant.dark}>
-				<h1 className={style.main}>home page</h1>
+				<PocketContactForm />
 			</PageSection>
 		</MainLayout>
 	);
