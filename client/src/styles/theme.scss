@@ -37,8 +37,7 @@ $paddingSize32px: 32px;
 	text-decoration: none;
 	background: -webkit-gradient(
 			linear,
-			left top,
-			right top,
+			left top, right top,
 			from(rgba(100, 200, 200, 0)),
 			to(rgba(100, 200, 200, 0))
 		),
@@ -74,6 +73,9 @@ $paddingSize32px: 32px;
 	&:focus {
 		padding: 9px 17px;
 		border: 2px solid $uranianBlue;
+	}
+	&.boatify-button--orange {
+		background-color: $UTOrange;
 	}
 }
 
