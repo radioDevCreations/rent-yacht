@@ -18,6 +18,7 @@ import InputType from "@/utilities/InputType";
 import BoatifyTextarea from "@/boatify-components/BoatifyTextarea/BoatifyTextarea";
 import ButtonType from "@/utilities/ButtonType";
 import BoatifyButton from "@/boatify-components/BoatifyButton/BoatifyButton";
+import BoatifyInputVariant from "@/boatify-components/BoatifyInput/BoatifyInputVariant";
 
 const PocketContactForm = () => {
 	const dispatch = useDispatch();
@@ -70,6 +71,7 @@ const PocketContactForm = () => {
 									placeholder={input.placeholder}
 									type={input.type}
 									onChange={input.action}
+									variant={BoatifyInputVariant.dark}
 								/>
 							))
 						);
@@ -86,6 +88,7 @@ const PocketContactForm = () => {
 									placeholder={input.placeholder}
 									type={input.type}
 									onChange={input.action}
+									variant={BoatifyInputVariant.dark}
 								/>
 							))
 						);
@@ -101,6 +104,7 @@ const PocketContactForm = () => {
 								key={input.name}
 								placeholder={input.placeholder}
 								onChange={input.action}
+								variant={BoatifyInputVariant.dark}
 							/>
 						);
 					})}

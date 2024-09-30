@@ -37,7 +37,8 @@ $paddingSize32px: 32px;
 	text-decoration: none;
 	background: -webkit-gradient(
 			linear,
-			left top, right top,
+			left top,
+			right top,
 			from(rgba(100, 200, 200, 0)),
 			to(rgba(100, 200, 200, 0))
 		),
@@ -151,6 +152,9 @@ $paddingSize32px: 32px;
 		margin-bottom: 6px;
 		margin-left: 10px;
 	}
+	.textarea__label--dark {
+		color: $white;
+	}
 	.textarea__field {
 		min-height: 200px;
 		color: $black;
@@ -181,6 +185,9 @@ $paddingSize32px: 32px;
 			color: $gray;
 		}
 	}
+	.textarea__field--dark {
+		min-height: 136px;
+	}
 }
 
 @mixin app-input {
@@ -195,6 +202,9 @@ $paddingSize32px: 32px;
 		font-weight: 700;
 		margin-bottom: 6px;
 		margin-left: 10px;
+	}
+	.input__label--dark {
+		color: $white;
 	}
 	.input__field {
 		color: $black;
