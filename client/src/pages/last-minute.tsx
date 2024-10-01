@@ -1,10 +1,11 @@
 import "./last-minute.scss";
 import MainLayout from "@/layouts/MainLayout/MainLayout";
+import LastMinuteBoard from "@/components/LastMinuteBoard/LastMinuteBoard";
 
 const LastMinutePage = () => {
 	return (
 		<MainLayout>
-			<h1>login page</h1>
+			<LastMinuteBoard />
 		</MainLayout>
 	);
 };
