@@ -21,6 +21,7 @@ import BoatifyInputProps from "@/utilities/BoatifyInputProps";
 import InputType from "@/utilities/InputType";
 import httpClient from "@/axios/httpClient";
 import IMAGE from "../../../public/links";
+import BoatifyStepIndicator from "@/boatify-components/BoatifyStepIndicator/BoatifyStepIndicator";
 
 const Details = () => {
 	const dispatch = useDispatch();
@@ -76,9 +77,12 @@ const Details = () => {
 				dispatch(setRegisterConfirmPassword(event?.target?.value)),
 		},
 	];
+	const labels = ["Warunki", "Daty", "Order", "Summary", "Payment"];
 	return (
 		<form className="details" onSubmit={handleSubmit}>
-			<section className="details__board">DETAILS PAGE</section>
+			<section className="details__board">
+				<BoatifyStepIndicator labels={labels} currentPosition={0} />
+			</section>
 		</form>
 	);
 };
