@@ -1,7 +1,8 @@
 @import "src/styles/theme.scss";
 
-.last-minute {
+.details {
 	min-height: calc(100vh - 353px);
+	padding-top: 27px;
 	width: 100%;
 	display: -webkit-box;
 	display: -ms-flexbox;
@@ -18,7 +19,9 @@
 	align-items: center;
 }
 
-.last-minute__board {
+.details__board {
+	width: 1000px;
+	height: 980px;
 	padding: 48px 128px;
 	display: -webkit-box;
 	display: -ms-flexbox;

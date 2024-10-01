@@ -77,8 +77,8 @@ const Details = () => {
 		},
 	];
 	return (
-		<form className="last-minute" onSubmit={handleSubmit}>
-			<section className="last-minute__board">DETAILS PAGE</section>
+		<form className="details" onSubmit={handleSubmit}>
+			<section className="details__board">DETAILS PAGE</section>
 		</form>
 	);
 };
