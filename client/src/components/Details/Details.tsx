@@ -81,7 +81,8 @@ const Details = () => {
 	return (
 		<form className="details" onSubmit={handleSubmit}>
 			<section className="details__board">
-				<BoatifyStepIndicator labels={labels} currentPosition={0} />
+				DETAIL
+				{/* <BoatifyStepIndicator labels={labels} currentPosition={0} /> */}
 			</section>
 		</form>
 	);

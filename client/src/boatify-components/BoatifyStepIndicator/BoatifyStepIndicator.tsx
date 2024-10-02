@@ -1,4 +1,4 @@
-import StepIndicator from "react-native-step-indicator";
+// import StepIndicator from "react-native-step-indicator";
 import "./BoatifyStepIndicator.scss";
 
 interface BoatifyStepIndicatorProps {
@@ -35,11 +35,11 @@ const BoatifyStepIndicator = ({
 	};
 	return (
 		<div className="boatify-step-indicator">
-			<StepIndicator
+			{/* <StepIndicator
 				customStyles={customStyles}
 				currentPosition={currentPosition}
 				labels={labels}
-			/>
+			/> */}
 		</div>
 	);
 };
