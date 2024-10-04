@@ -3,5 +3,5 @@
 }
 
 .boatify-stepper__step::before {
-	@apply content-[''] bg-slate-200 absolute w-full h-[3px] #{!important};
+	@apply content-[''] bg-slate-200 absolute w-full h-[3px];
 }
