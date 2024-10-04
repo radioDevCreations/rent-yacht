@@ -1,4 +1,4 @@
-import style from "./page.module.scss";
+import "./page.scss";
 import MainLayout from "@/layouts/MainLayout/MainLayout";
 import PageSection from "@/pages/PageSection/PageSection";
 import PageVariant from "@/pages/PageSection/PageVariant";
