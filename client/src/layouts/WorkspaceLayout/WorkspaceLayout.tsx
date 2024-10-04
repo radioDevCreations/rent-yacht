@@ -1,3 +1,4 @@
+import "../../styles/globals.css";
 import "../../styles/styles.scss";
 import "./WorkspaceLayout.scss";
 import Provider from "@/redux/Provider";

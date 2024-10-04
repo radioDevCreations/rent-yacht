@@ -11,7 +11,7 @@ const BoatifyStepper = ({ steps, currentPosition }: BoatifyStepperProps) => {
 		<div className="boatify-stepper flex">
 			{steps.map((step, index) => {
 				return (
-					<div key={index} className="boatify-stepper__step">
+					<div key={index} className="flex boatify-stepper__step">
 						<span className="boatify-stepper__step-number">{index + 1}</span>
 						<p className="boatify-stepper__step-text text-gray-500">{step}</p>
 					</div>

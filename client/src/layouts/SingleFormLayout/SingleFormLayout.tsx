@@ -1,3 +1,4 @@
+import "../../styles/globals.css";
 import "../../styles/styles.scss";
 import "./SingleFormLayout.scss";
 import Provider from "@/redux/Provider";
