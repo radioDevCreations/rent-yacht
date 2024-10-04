@@ -1,7 +1,7 @@
 import "./page.scss";
 import MainLayout from "@/layouts/MainLayout/MainLayout";
-import PageSection from "@/pages/PageSection/PageSection";
-import PageVariant from "@/pages/PageSection/PageVariant";
+import PageSection from "@/components/PageSection/PageSection";
+import PageVariant from "@/components/PageSection/PageVariant";
 import Hero from "@/components/Hero/Hero";
 import Featured from "@/components/Featured/Featured";
 import MapLink from "@/components/MapLink/MapLink";
