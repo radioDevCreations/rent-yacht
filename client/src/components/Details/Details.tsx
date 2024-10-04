@@ -5,6 +5,7 @@ import BoatifyPagination from "../../boatify-components/BoatifyPagination/Boatif
 import BoatifyInputsCarousel from "../../boatify-components/BoatifyInputsCarousel/BoatifyInputsCarousel";
 import BoatifyButton from "../../boatify-components/BoatifyButton/BoatifyButton";
 import { useDispatch, useSelector } from "react-redux";
+import Steps, { Step } from "rc-steps";
 import {
 	setRegisterPage,
 	setRegisterFirstName,
@@ -21,7 +22,8 @@ import BoatifyInputProps from "@/utilities/BoatifyInputProps";
 import InputType from "@/utilities/InputType";
 import httpClient from "@/axios/httpClient";
 import IMAGE from "../../../public/links";
-import BoatifyStepIndicator from "@/boatify-components/BoatifyStepIndicator/BoatifyStepIndicator";
+import BoatifyStepIndicator from "@/boatify-components/BoatifyStepper/BoatifyStepper";
+import BoatifyStepper from "@/boatify-components/BoatifyStepper/BoatifyStepper";
 
 const Details = () => {
 	const dispatch = useDispatch();
@@ -77,12 +79,11 @@ const Details = () => {
 				dispatch(setRegisterConfirmPassword(event?.target?.value)),
 		},
 	];
-	const labels = ["Warunki", "Daty", "Order", "Summary", "Payment"];
+	const steps = ["Warunki", "Daty", "Order", "Summary", "Payment"];
 	return (
 		<form className="details" onSubmit={handleSubmit}>
 			<section className="details__board">
-				DETAIL
-				{/* <BoatifyStepIndicator labels={labels} currentPosition={0} /> */}
+				<BoatifyStepper steps={steps} currentPosition={0} />
 			</section>
 		</form>
 	);

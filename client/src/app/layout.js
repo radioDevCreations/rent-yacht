@@ -1,3 +1,4 @@
+import "../styles/globals.css";
 import Provider from "@/redux/Provider";
 import IMAGE from "../../public/links";
 import "./layout.scss";
