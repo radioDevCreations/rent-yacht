@@ -8,10 +8,10 @@ interface BoatifyStepperProps {
 
 const BoatifyStepper = ({ steps, currentPosition }: BoatifyStepperProps) => {
 	return (
-		<div className="boatify-stepper flex">
+		<div className="boatify-stepper flex justify-between">
 			{steps.map((step, index) => {
 				return (
-					<div key={index} className="flex boatify-stepper__step">
+					<div key={index} className="boatify-stepper__step">
 						<span className="boatify-stepper__step-number">{index + 1}</span>
 						<p className="boatify-stepper__step-text text-gray-500">{step}</p>
 					</div>

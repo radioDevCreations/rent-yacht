@@ -1,0 +1,7 @@
+.boatify-stepper__step {
+	@apply relative flex flex-col justify-center items-center w-36;
+}
+
+.boatify-stepper__step::before {
+	@apply content-[''] bg-slate-200 absolute w-full h-[3px] #{!important};
+}
