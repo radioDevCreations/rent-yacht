@@ -4,6 +4,7 @@ $UTOrange: #ff8600;
 $oxfordBlue: #101935;
 $uranianBlue: #a3d9ff;
 $gray: #7c7c7c;
+$darkGray: #303030;
 $lightGray: #f5f5f5;
 $royalBlue: #122c78;
 $russianViolet: #260b45;
@@ -37,7 +38,8 @@ $paddingSize32px: 32px;
 	text-decoration: none;
 	background: -webkit-gradient(
 			linear,
-			left top, right top,
+			left top,
+			right top,
 			from(rgba(100, 200, 200, 0)),
 			to(rgba(100, 200, 200, 0))
 		),
@@ -67,6 +69,7 @@ $paddingSize32px: 32px;
 	padding: 10px 18px;
 	border-radius: 16px;
 	border: 1px solid $oxfordBlue;
+	user-select: none;
 	&:active {
 		background-color: $russianViolet;
 	}
@@ -76,6 +79,11 @@ $paddingSize32px: 32px;
 	}
 	&.boatify-button--orange {
 		background-color: $UTOrange;
+	}
+	&:disabled {
+		background-color: $gray;
+		color: $darkGray;
+		border: none;
 	}
 }
 

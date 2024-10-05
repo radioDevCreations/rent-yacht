@@ -45,12 +45,14 @@ const BoatifyStepper = ({ steps, currentPosition }: BoatifyStepperProps) => {
 					type={ButtonType.button}
 					classModifier="boatify-button--stepper-prev"
 					onClick={handlePreviousOrderPage}
+					disabled={currentPosition <= 1}
 				/>
 				<BoatifyButton
 					value="Next"
 					type={ButtonType.button}
 					classModifier="boatify-button--stepper-next"
 					onClick={handleNextOrderPage}
+					disabled={currentPosition >= steps.length}
 				/>
 			</div>
 		</div>
