@@ -1,13 +1,7 @@
 "use client";
 import "./Details.scss";
-import Image from "next/image";
-import BoatifyPagination from "../../boatify-components/BoatifyPagination/BoatifyPagination";
-import BoatifyInputsCarousel from "../../boatify-components/BoatifyInputsCarousel/BoatifyInputsCarousel";
-import BoatifyButton from "../../boatify-components/BoatifyButton/BoatifyButton";
 import { useDispatch, useSelector } from "react-redux";
-import Steps, { Step } from "rc-steps";
 import {
-	setRegisterPage,
 	setRegisterFirstName,
 	setRegisterSurname,
 	setRegisterEmail,
@@ -16,18 +10,15 @@ import {
 	setRegisterIsLoading,
 } from "@/redux/slices/formsSlice";
 import { ChangeEvent } from "react";
-import ButtonType from "@/utilities/ButtonType";
-import BoatifyInput from "@/boatify-components/BoatifyInput/BoatifyInput";
 import BoatifyInputProps from "@/utilities/BoatifyInputProps";
 import InputType from "@/utilities/InputType";
 import httpClient from "@/axios/httpClient";
-import IMAGE from "../../../public/links";
-import BoatifyStepIndicator from "@/boatify-components/BoatifyStepper/BoatifyStepper";
 import BoatifyStepper from "@/boatify-components/BoatifyStepper/BoatifyStepper";
 
 const Details = () => {
 	const dispatch = useDispatch();
 	const registerState = useSelector((state: any) => state.forms.register);
+	const orderPage = useSelector((state: any) => state.order.orderPage);
 	const handleSubmit = async (event: React.SyntheticEvent) => {
 		event.preventDefault();
 		setRegisterIsLoading(true);
@@ -83,7 +74,7 @@ const Details = () => {
 	return (
 		<form className="details" onSubmit={handleSubmit}>
 			<section className="details__board">
-				<BoatifyStepper steps={steps} currentPosition={3} />
+				<BoatifyStepper steps={steps} currentPosition={orderPage} />
 			</section>
 		</form>
 	);
