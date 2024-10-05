@@ -83,7 +83,7 @@ const Details = () => {
 	return (
 		<form className="details" onSubmit={handleSubmit}>
 			<section className="details__board">
-				<BoatifyStepper steps={steps} currentPosition={0} />
+				<BoatifyStepper steps={steps} currentPosition={3} />
 			</section>
 		</form>
 	);

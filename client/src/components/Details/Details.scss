@@ -38,6 +38,7 @@
 	align-items: center;
 	background-color: $lightGray;
 	border-radius: 12px;
+	@apply flex flex-col justify-between items-center;
 }
 
 .button-section {
