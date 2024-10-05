@@ -1,7 +1,5 @@
 .header-navigation {
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
+	@apply flex;
 	width: 100%;
 	min-height: 100%;
 }

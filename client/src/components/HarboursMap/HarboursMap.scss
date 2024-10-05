@@ -1,6 +1,4 @@
 .map {
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
+	@apply flex;
 	overflow-x: hidden;
 }

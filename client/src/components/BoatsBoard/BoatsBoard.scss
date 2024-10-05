@@ -1,16 +1,9 @@
 @import "../../styles/theme.scss";
 
 .boats-board {
+	@apply flex flex-wrap justify-between;
 	@include boatify-scroll;
 	max-height: 812px;
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-pack: justify;
-	-ms-flex-pack: justify;
-	justify-content: space-between;
-	-ms-flex-wrap: wrap;
-	flex-wrap: wrap;
 	padding: 8px;
 	overflow-y: scroll;
 	overflow-x: hidden;

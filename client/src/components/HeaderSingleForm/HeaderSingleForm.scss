@@ -3,42 +3,24 @@
 @import "src/styles/theme.scss";
 
 .header {
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-align: center;
-	-ms-flex-align: center;
-	align-items: center;
+	@apply flex justify-between items-center;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
 	padding: 10px;
-	-webkit-box-pack: justify;
-	-ms-flex-pack: justify;
-	justify-content: space-between;
 	font-family: "Lato";
 	font-size: $fontSize14px;
 }
 
 .logo {
 	margin-right: 12px;
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-align: center;
-	-ms-flex-align: center;
-	align-items: center;
+	@apply flex items-center;
 }
 
 .logo__link {
 	text-decoration: none;
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-align: center;
-	-ms-flex-align: center;
-	align-items: center;
+	@apply flex items-center;
 }
 
 .logo__text {
