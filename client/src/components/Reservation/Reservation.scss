@@ -1,0 +1,28 @@
+@import "src/styles/theme.scss";
+
+.reservation {
+	@apply flex flex-col justify-center items-center;
+	min-height: calc(100vh - 353px);
+	padding-top: 27px;
+	width: 100%;
+}
+
+.reservation__board {
+	@apply flex flex-col justify-between items-center;
+	width: 1000px;
+	height: 980px;
+	padding: 48px 128px;
+	background-color: $lightGray;
+	border-radius: 12px;
+}
+
+.button-section {
+	@apply flex flex-col;
+	padding: 12px 16px;
+}
+
+.boatify-button--details,
+.boatify-button--rent {
+	margin-top: 12px;
+	min-width: 200px;
+}
