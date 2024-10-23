@@ -14,8 +14,9 @@ import BoatifyInputProps from "@/utilities/BoatifyInputProps";
 import InputType from "@/utilities/InputType";
 import httpClient from "@/axios/httpClient";
 import BoatifyStepper from "@/boatify-components/BoatifyStepper/BoatifyStepper";
+import RPContainer from "../RPContainer/RPContainer";
 
-const ReservationPage = () => {
+const Reservation = () => {
 	const dispatch = useDispatch();
 	const registerState = useSelector((state: any) => state.forms.register);
 	const orderPage = useSelector((state: any) => state.order.orderPage);
@@ -74,10 +75,12 @@ const ReservationPage = () => {
 	return (
 		<form className="reservation" onSubmit={handleSubmit}>
 			<section className="reservation__board">
-				<BoatifyStepper steps={steps} currentPosition={orderPage} />
+				<BoatifyStepper steps={steps} currentPosition={orderPage}>
+					<RPContainer currentPosition={orderPage} />
+				</BoatifyStepper>
 			</section>
 		</form>
 	);
 };
 
-export default ReservationPage;
+export default Reservation;

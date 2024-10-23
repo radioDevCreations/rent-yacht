@@ -3,13 +3,18 @@ import BoatifyButton from "../BoatifyButton/BoatifyButton";
 import { useDispatch, useSelector } from "react-redux";
 import { setOrderPage } from "@/redux/slices/orderSlice";
 import "./BoatifyStepper.scss";
+import Children from "@/utilities/Children";
 
-interface BoatifyStepperProps {
+interface BoatifyStepperProps extends Children {
 	steps: string[];
 	currentPosition: number;
 }
 
-const BoatifyStepper = ({ steps, currentPosition }: BoatifyStepperProps) => {
+const BoatifyStepper = ({
+	steps,
+	currentPosition,
+	children,
+}: BoatifyStepperProps) => {
 	const dispatch = useDispatch();
 	const orderState = useSelector((state: any) => state.order);
 	const handlePreviousOrderPage = () => {
@@ -39,6 +44,7 @@ const BoatifyStepper = ({ steps, currentPosition }: BoatifyStepperProps) => {
 					);
 				})}
 			</div>
+			{children}
 			<div className="boatify-stepper__buttons">
 				<BoatifyButton
 					value="Previous"
