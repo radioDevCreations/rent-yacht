@@ -1,0 +1,24 @@
+# .NET Core & .NET Standard
+bin/
+obj/
+*.exe
+*.dll
+*.pdb
+*.mdb
+
+# User-specific files
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Auto-generated VS 2019+ files
+.vscode/
+.vs/
+.vscode/
+
+# Resharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+resharper.xml
