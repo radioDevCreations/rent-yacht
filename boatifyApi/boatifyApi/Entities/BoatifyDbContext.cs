@@ -6,18 +6,50 @@ namespace boatifyApi.Entities
     {
         private string _connectionString = "Server=(localdb)\\mssqllocaldb;Database=BoatifyDB;Trusted_Connection=True;";
         public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
         public DbSet<Harbour> Harbours { get; set;}
         public DbSet<Boat> Boats { get; set;}
         public DbSet<Address> Addresses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            //USER
+
             modelBuilder.Entity<User>()
                 .Property(u => u.Email)
                 .IsRequired();
 
             modelBuilder.Entity<User>()
                 .Property(u => u.Username)
+                .IsRequired();
+
+            //ROLE
+
+            modelBuilder.Entity<Role>()
+                .Property(r => r.Name)
+                .IsRequired();
+
+            //HARBOUR
+
+            modelBuilder.Entity<Harbour>()
+                .Property(h => h.Name)
+                .HasMaxLength(50)
+                .IsRequired();
+
+            //BOAT
+
+            modelBuilder.Entity<Boat>()
+                .Property(b => b.Name)
+                .IsRequired();
+            modelBuilder.Entity<Boat>()
+                .Property(b => b.Model)
+                .IsRequired();
+            modelBuilder.Entity<Boat>()
+               .Property(b => b.Type)
+               .IsRequired();
+            modelBuilder.Entity<Boat>()
+                .Property(b => b.PricePerDay)
                 .IsRequired();
         }
 

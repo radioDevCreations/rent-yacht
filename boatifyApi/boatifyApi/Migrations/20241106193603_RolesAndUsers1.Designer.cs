@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using boatifyApi.Entities;
 
@@ -11,9 +12,11 @@ using boatifyApi.Entities;
 namespace boatifyApi.Migrations
 {
     [DbContext(typeof(BoatifyDbContext))]
-    partial class BoatifyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241106193603_RolesAndUsers1")]
+    partial class RolesAndUsers1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -154,10 +157,10 @@ namespace boatifyApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("AddressId")
+                    b.Property<int>("AddressId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("DateOfBirth")
+                    b.Property<DateTime?>("DateOfBirth")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
@@ -173,6 +176,7 @@ namespace boatifyApi.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RoleId")
@@ -185,8 +189,7 @@ namespace boatifyApi.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AddressId")
-                        .IsUnique()
-                        .HasFilter("[AddressId] IS NOT NULL");
+                        .IsUnique();
 
                     b.HasIndex("RoleId");
 
@@ -219,7 +222,9 @@ namespace boatifyApi.Migrations
                 {
                     b.HasOne("boatifyApi.Entities.Address", "Address")
                         .WithOne("User")
-                        .HasForeignKey("boatifyApi.Entities.User", "AddressId");
+                        .HasForeignKey("boatifyApi.Entities.User", "AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("boatifyApi.Entities.Role", "Role")
                         .WithMany()
