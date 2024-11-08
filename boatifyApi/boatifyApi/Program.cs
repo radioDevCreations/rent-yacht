@@ -1,6 +1,7 @@
 
 
 using boatifyApi;
+using boatifyApi.Authorization;
 using boatifyApi.Entities;
 using boatifyApi.Middleware;
 using boatifyApi.Models;
@@ -8,6 +9,7 @@ using boatifyApi.Models.Validators;
 using boatifyApi.Services;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using NLog;
@@ -45,6 +47,11 @@ try
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authenticationSettings.JwtKey))
         };
     });
+    builder.Services.AddAuthorization(options =>
+    {
+        options.AddPolicy("IsAdult", builder => builder.AddRequirements(new MinimumAgeRequirement(18)));
+    });
+    builder.Services.AddScoped<IAuthorizationHandler, MinimumAgeRequirementHandler>();
     builder.Services.AddControllers().AddFluentValidation();
     builder.Services.AddDbContext<BoatifyDbContext>();
     builder.Services.AddScoped<BoatifySeeder>();
@@ -86,11 +93,8 @@ try
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "Boatify API");
     });
-
     app.UseAuthorization();
-
     app.MapControllers();
-
     app.Run();
 }
 catch (Exception exception)

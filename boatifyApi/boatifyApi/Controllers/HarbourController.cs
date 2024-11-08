@@ -2,6 +2,7 @@
 using boatifyApi.Entities;
 using boatifyApi.Models;
 using boatifyApi.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +10,8 @@ namespace boatifyApi.Controllers
 {
     [Route("api/harbour")]
     [ApiController]
+    [Authorize(Roles = "Administrator")]
+    [Authorize(Policy = "IsAdult")]
     public class HarbourController : ControllerBase
     {
         private readonly IHarbourService _harbourService;
@@ -17,6 +20,7 @@ namespace boatifyApi.Controllers
         }
 
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public ActionResult<HarbourDto> GetHarbour([FromRoute]int id)
         {
             var harbourDto = _harbourService.GetById(id);
@@ -25,6 +29,7 @@ namespace boatifyApi.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult<IEnumerable<HarbourDto>> GetAllHarbours()
         {
             var harboursDtos = _harbourService.GetAll();
