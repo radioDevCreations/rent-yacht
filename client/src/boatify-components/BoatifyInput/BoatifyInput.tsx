@@ -1,19 +1,8 @@
+import BoatifyInputProps from "@/utilities/BoatifyInputProps";
 import InputType from "@/utilities/InputType";
 import { ChangeEventHandler } from "react";
 import "./BoatifyInput.scss";
 import BoatifyInputVariant from "./BoatifyInputVariant";
-
-interface BoatifyInputProps {
-	id?: string;
-	value?: string;
-	name?: string;
-	label?: string;
-	type?: InputType;
-	placeholder?: string;
-	isLongInput?: boolean;
-	onChange?: ChangeEventHandler<HTMLInputElement>;
-	variant?: BoatifyInputVariant;
-}
 
 const BoatifyInput = ({
 	id,
