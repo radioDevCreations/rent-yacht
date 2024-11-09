@@ -52,12 +52,14 @@ try
         options.AddPolicy("IsAdult", builder => builder.AddRequirements(new MinimumAgeRequirement(18)));
     });
     builder.Services.AddScoped<IAuthorizationHandler, MinimumAgeRequirementHandler>();
+    builder.Services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementHandler>();
     builder.Services.AddControllers().AddFluentValidation();
     builder.Services.AddDbContext<BoatifyDbContext>();
     builder.Services.AddScoped<BoatifySeeder>();
     builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
     builder.Services.AddScoped<IAccountService, AccountService>();
     builder.Services.AddScoped<IHarbourService, HarbourService>();
+    builder.Services.AddScoped<IBoatHarbourService, BoatHarbourService>();
     builder.Services.AddScoped<IBoatService, BoatService>();
     builder.Services.AddScoped<ExceptionHandlingMiddleware>();
     builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();

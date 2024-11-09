@@ -1,10 +1,11 @@
 ﻿using boatifyApi.Models;
 using boatifyApi.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace boatifyApi.Controllers
 {
-    [Route("api/harbour/{harbourId}/boat")]
+    [Route("api/boat")]
     [ApiController]
     public class BoatController : ControllerBase
     {
@@ -15,32 +16,31 @@ namespace boatifyApi.Controllers
         }
 
         [HttpGet("{boatId}")]
-        public ActionResult<BoatDto> GetBoat([FromRoute]int harbourId, [FromRoute]int boatId)
+        public ActionResult<BoatDto> GetBoat([FromRoute] int boatId)
         {
-            var boat = _boatService.GetById(harbourId, boatId);
+            var boat = _boatService.GetById(boatId);
             return Ok(boat);
         }
 
         [HttpGet]
-        public ActionResult<List<BoatDto>> GetAllBoatsByHarbourId([FromRoute] int harbourId)
+        public ActionResult<List<BoatDto>> GetAllBoats()
         {
-            var boats = _boatService.GetAllByHarbourId(harbourId);
+            var boats = _boatService.GetAll();
             return Ok(boats);
         }
 
-        [HttpPost]
-        public ActionResult CreateBoat([FromRoute]int harbourId, [FromBody]CreateBoatDto dto)
+        [HttpDelete("{boatId}")]
+        public ActionResult DeleteBoat([FromRoute] int boatId)
         {
-            var boatId = _boatService.Create(harbourId, dto);
-
-            return Created($"api/harbour/{harbourId}/boat/{boatId}", null);
+            _boatService.Delete(boatId, User);
+            return NoContent();
         }
 
-        [HttpDelete]
-        public ActionResult DeleteAllBoats([FromRoute]int harbourId) {
-
-            _boatService.DeleteAllBoatsByHarbourId(harbourId);
-            return NoContent(); 
+        [HttpPut("{boatId}")]
+        public ActionResult UpdateBoat([FromBody] UpdateBoatDto dto, [FromRoute] int boatId)
+        {
+            _boatService.Update(boatId, dto, User);
+            return Ok();
         }
     }
 }

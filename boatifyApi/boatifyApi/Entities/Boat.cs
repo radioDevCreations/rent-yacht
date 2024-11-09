@@ -9,6 +9,8 @@
         public required string Type { get; set; }
         public required double PricePerDay { get; set; }
 
+        public int? CreatedById { get; set; }
+        public virtual User CreatedBy { get; set; }
 
         public int HarbourId { get; set; }
         public virtual Harbour? Harbour { get; set; }

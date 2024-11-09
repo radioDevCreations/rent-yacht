@@ -15,6 +15,10 @@ namespace boatifyApi.Middleware
             {
                 await next.Invoke(context);
             }
+            catch (ForbiddenException forbiddenException)
+            {
+                context.Response.StatusCode = 403;
+            }
             catch (BadRequestException badRequestException)
             {
                 context.Response.StatusCode = 400;

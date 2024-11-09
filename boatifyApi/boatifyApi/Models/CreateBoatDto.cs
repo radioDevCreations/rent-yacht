@@ -16,6 +16,6 @@ namespace boatifyApi.Models
         public required double PricePerDay { get; set; }
 
 
-        public virtual int HarbourId { get; set; }
+        public int HarbourId { get; set; }
     }
 }

@@ -19,11 +19,11 @@ namespace boatifyApi.Controllers
             _harbourService = harbourService;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{harbourId}")]
         [AllowAnonymous]
-        public ActionResult<HarbourDto> GetHarbour([FromRoute]int id)
+        public ActionResult<HarbourDto> GetHarbour([FromRoute]int harbourId)
         {
-            var harbourDto = _harbourService.GetById(id);
+            var harbourDto = _harbourService.GetById(harbourId);
 
             return Ok(harbourDto);
         }
@@ -41,22 +41,22 @@ namespace boatifyApi.Controllers
         [HttpPost]
         public ActionResult CreateHarbour([FromBody]CreateHarbourDto dto)
         {
-            var id = _harbourService.Create(dto);
+            var harbourId = _harbourService.Create(dto);
 
-            return Created($"/api/harbour/{id}", null);
+            return Created($"/api/harbour/{harbourId}", null);
         }
 
-        [HttpDelete("{id}")]
-        public ActionResult DeleteHarbour([FromRoute] int id)
+        [HttpDelete("{harbourId}")]
+        public ActionResult DeleteHarbour([FromRoute] int harbourId)
         {
-            _harbourService.Delete(id);
+            _harbourService.Delete(harbourId);
             return NoContent();
         }
 
         [HttpPut("{id}")]
-        public ActionResult UpdateHarbour([FromBody] UpdateHarbourDto dto, [FromRoute]int id)
+        public ActionResult UpdateHarbour([FromBody] UpdateHarbourDto dto, [FromRoute]int harbourId)
         {
-            _harbourService.Update(id, dto);
+            _harbourService.Update(harbourId, dto);
             return Ok();
         }
     }

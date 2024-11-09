@@ -1,87 +1,108 @@
 ﻿using AutoMapper;
+using boatifyApi.Authorization;
 using boatifyApi.Entities;
 using boatifyApi.Exceptions;
+using boatifyApi.Migrations;
 using boatifyApi.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace boatifyApi.Services
 {
     public interface IBoatService
     {
-        int Create(int harbourId, CreateBoatDto dto);
-        BoatDto GetById(int harbourId, int boatId);
-        List<BoatDto> GetAllByHarbourId(int harbourId);
-        void DeleteAllBoatsByHarbourId(int harbourId);
+        BoatDto GetById( int boatId);
+        List<BoatDto> GetAll();
+        void Delete(int boatId, ClaimsPrincipal user);
+        void Update(int boatId, UpdateBoatDto dto, ClaimsPrincipal user);
     }
 
     public class BoatService : IBoatService
     {
         private BoatifyDbContext _dbContext;
         private IMapper _mapper;
-        private ILogger<HarbourService> _logger;
+        private ILogger<BoatService> _logger;
+        private IAuthorizationService _authorizationService;
 
-        public BoatService(BoatifyDbContext dbContext, IMapper mapper, ILogger<HarbourService> logger)
+        public BoatService(BoatifyDbContext dbContext, IMapper mapper, ILogger<BoatService> logger, IAuthorizationService authorizationService)
         {
             _dbContext = dbContext;
             _mapper = mapper;
             _logger = logger;
-        }
-        public int Create(int harbourId, CreateBoatDto dto)
-        {
-            var harbour = GetHarbourById(harbourId);
-
-            var boatEntity = _mapper.Map<Boat>(dto);
-
-            boatEntity.HarbourId = harbourId;
-
-            _dbContext.Boats.Add(boatEntity);
-            _dbContext.SaveChanges();
-
-            return boatEntity.Id;
+            _authorizationService = authorizationService;
         }
 
-        public BoatDto GetById(int harbourId, int boatId)
-        {
-            var harbour = GetHarbourById(harbourId);
 
-            var boat = _dbContext.Boats.FirstOrDefault(b => b.Id == boatId);
-            if(boat is null || boat.HarbourId != harbourId)
-            {
+        public List<BoatDto> GetAll()
+        {
+            var boats = _dbContext
+               .Boats
+               .ToList();
+
+            var boatDtos = _mapper.Map<List<BoatDto>>(boats);
+
+            return boatDtos;
+        }
+
+        public BoatDto GetById(int boatId)
+        {
+            var boat = _dbContext
+               .Boats
+               .FirstOrDefault(b => b.Id == boatId);
+
+            if (boat is null)
                 throw new NotFoundException("Boat not found");
-            }
 
             var boatDto = _mapper.Map<BoatDto>(boat);
 
             return boatDto;
         }
 
-        public List<BoatDto> GetAllByHarbourId(int harbourId)
+        public void Delete(int boatId, ClaimsPrincipal user)
         {
-            var harbour = GetHarbourById(harbourId);
+            _logger.LogWarning($"Boat with id: {boatId} DELETE ACTION invoked.");
 
-            var boatDtos = _mapper.Map<List<BoatDto>>(harbour.Boats);
+            var boat = _dbContext
+               .Boats
+               .FirstOrDefault(b => b.Id == boatId);
 
-            return boatDtos;
-        }
+            if (boat is null)
+                throw new NotFoundException("Boat not found");
 
-        public void DeleteAllBoatsByHarbourId(int harbourId)
-        {
-            var harbour = GetHarbourById(harbourId);
-            _dbContext.RemoveRange(harbour.Boats);
+            var authorizationResult = _authorizationService.AuthorizeAsync(user, boat,
+                new ResourceOperationRequirement(ResourceOperation.Delete)).Result;
+
+            if (!authorizationResult.Succeeded)
+            {
+                throw new ForbiddenException();
+            }
+
+            _dbContext.Boats.Remove(boat);
             _dbContext.SaveChanges();
         }
 
-        private Harbour GetHarbourById(int harbourId)
+        public void Update(int boatId, UpdateBoatDto dto, ClaimsPrincipal user)
         {
-            var harbour = _dbContext
-                .Harbours
-                .Include(h => h.Boats)
-                .FirstOrDefault(h => h.Id == harbourId);
+            var boat = _dbContext
+               .Boats
+               .FirstOrDefault(b => b.Id == boatId);
 
-            if (harbour == null)
-                throw new NotFoundException("Harbour not found");
+            if (boat is null)
+                throw new NotFoundException("Boat not found");
 
-            return harbour;
+            var authorizationResult = _authorizationService.AuthorizeAsync(user, boat, 
+                new ResourceOperationRequirement(ResourceOperation.Update)).Result;
+
+            if (!authorizationResult.Succeeded)
+            {
+                throw new ForbiddenException();
+            }
+
+            boat.PricePerDay = dto.PricePerDay;
+            boat.HarbourId = dto.HarbourId;
+
+            _dbContext.SaveChanges();
         }
     }
 }

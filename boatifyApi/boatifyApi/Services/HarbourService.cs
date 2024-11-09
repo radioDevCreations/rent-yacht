@@ -48,14 +48,13 @@ namespace boatifyApi.Services
             return harboursDtos;
         }
 
-        public HarbourDto GetById(int id)
+        public HarbourDto GetById(int harbourId)
         {
-
             var harbour = _dbContext
                .Harbours
                .Include(h => h.Address)
                .Include(h => h.Boats)
-               .FirstOrDefault(h => h.Id == id);
+               .FirstOrDefault(h => h.Id == harbourId);
 
             if (harbour is null)
                 throw new NotFoundException("Harbour not found");
@@ -65,13 +64,13 @@ namespace boatifyApi.Services
             return harbourDto;
         }
 
-        public void Delete(int id)
+        public void Delete(int harbourId)
         {
-            _logger.LogWarning($"Harbour with id: {id} DELETE ACTION invoked.");
+            _logger.LogWarning($"Harbour with id: {harbourId} DELETE ACTION invoked.");
 
             var harbour = _dbContext
                .Harbours
-               .FirstOrDefault(h => h.Id == id);
+               .FirstOrDefault(h => h.Id == harbourId);
 
             if (harbour is null)
                 throw new NotFoundException("Harbour not found");
@@ -80,11 +79,11 @@ namespace boatifyApi.Services
             _dbContext.SaveChanges();
         }
 
-        public void Update(int id, UpdateHarbourDto dto)
+        public void Update(int harbourId, UpdateHarbourDto dto)
         {
             var harbour = _dbContext
                .Harbours
-               .FirstOrDefault(h => h.Id == id);
+               .FirstOrDefault(h => h.Id == harbourId);
 
             if (harbour is null)
                 throw new NotFoundException("Harbour not found");
