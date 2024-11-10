@@ -66,6 +66,8 @@ try
     builder.Services.AddScoped<IValidator<RegisterUserDto>, RegisterUserDtoValidator>();
 
     builder.Services.AddScoped<RequestTimeMiddleware>();
+    builder.Services.AddScoped<IUserContextService, UserContextService>();
+    builder.Services.AddHttpContextAccessor();
     builder.Services.AddSwaggerGen();
 
     builder.Logging.ClearProviders();

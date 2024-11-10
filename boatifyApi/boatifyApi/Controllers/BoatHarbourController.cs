@@ -35,7 +35,7 @@ namespace boatifyApi.Controllers
         public ActionResult CreateBoat([FromRoute]int harbourId, [FromBody]CreateBoatDto dto)
         {
             var userId = int.Parse(User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier).Value);
-            var boatId = _boatHarbourService.Create(harbourId, dto, userId);
+            var boatId = _boatHarbourService.Create(harbourId, dto);
 
             return Created($"api/harbour/{harbourId}/boat/{boatId}", null);
         }

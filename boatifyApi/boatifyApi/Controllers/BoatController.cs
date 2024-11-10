@@ -32,14 +32,14 @@ namespace boatifyApi.Controllers
         [HttpDelete("{boatId}")]
         public ActionResult DeleteBoat([FromRoute] int boatId)
         {
-            _boatService.Delete(boatId, User);
+            _boatService.Delete(boatId);
             return NoContent();
         }
 
         [HttpPut("{boatId}")]
         public ActionResult UpdateBoat([FromBody] UpdateBoatDto dto, [FromRoute] int boatId)
         {
-            _boatService.Update(boatId, dto, User);
+            _boatService.Update(boatId, dto);
             return Ok();
         }
     }

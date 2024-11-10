@@ -14,8 +14,8 @@ namespace boatifyApi.Services
     {
         BoatDto GetById( int boatId);
         List<BoatDto> GetAll();
-        void Delete(int boatId, ClaimsPrincipal user);
-        void Update(int boatId, UpdateBoatDto dto, ClaimsPrincipal user);
+        void Delete(int boatId);
+        void Update(int boatId, UpdateBoatDto dto);
     }
 
     public class BoatService : IBoatService
@@ -24,13 +24,15 @@ namespace boatifyApi.Services
         private IMapper _mapper;
         private ILogger<BoatService> _logger;
         private IAuthorizationService _authorizationService;
+        private IUserContextService _userContextService;
 
-        public BoatService(BoatifyDbContext dbContext, IMapper mapper, ILogger<BoatService> logger, IAuthorizationService authorizationService)
+        public BoatService(BoatifyDbContext dbContext, IMapper mapper, ILogger<BoatService> logger, IAuthorizationService authorizationService, IUserContextService userContextService)
         {
             _dbContext = dbContext;
             _mapper = mapper;
             _logger = logger;
             _authorizationService = authorizationService;
+            _userContextService = userContextService;
         }
 
 
@@ -59,7 +61,7 @@ namespace boatifyApi.Services
             return boatDto;
         }
 
-        public void Delete(int boatId, ClaimsPrincipal user)
+        public void Delete(int boatId)
         {
             _logger.LogWarning($"Boat with id: {boatId} DELETE ACTION invoked.");
 
@@ -70,7 +72,7 @@ namespace boatifyApi.Services
             if (boat is null)
                 throw new NotFoundException("Boat not found");
 
-            var authorizationResult = _authorizationService.AuthorizeAsync(user, boat,
+            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User, boat,
                 new ResourceOperationRequirement(ResourceOperation.Delete)).Result;
 
             if (!authorizationResult.Succeeded)
@@ -82,7 +84,7 @@ namespace boatifyApi.Services
             _dbContext.SaveChanges();
         }
 
-        public void Update(int boatId, UpdateBoatDto dto, ClaimsPrincipal user)
+        public void Update(int boatId, UpdateBoatDto dto)
         {
             var boat = _dbContext
                .Boats
@@ -91,7 +93,7 @@ namespace boatifyApi.Services
             if (boat is null)
                 throw new NotFoundException("Boat not found");
 
-            var authorizationResult = _authorizationService.AuthorizeAsync(user, boat, 
+            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User, boat, 
                 new ResourceOperationRequirement(ResourceOperation.Update)).Result;
 
             if (!authorizationResult.Succeeded)

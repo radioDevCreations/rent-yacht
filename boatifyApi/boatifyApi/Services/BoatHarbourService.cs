@@ -8,7 +8,7 @@ namespace boatifyApi.Services
 {
     public interface IBoatHarbourService
     {
-        int Create(int harbourId, CreateBoatDto dto, int userId);
+        int Create(int harbourId, CreateBoatDto dto);
         BoatDto GetById(int harbourId, int boatId);
         List<BoatDto> GetAllByHarbourId(int harbourId);
         void DeleteAllBoatsByHarbourId(int harbourId);
@@ -19,19 +19,21 @@ namespace boatifyApi.Services
         private BoatifyDbContext _dbContext;
         private IMapper _mapper;
         private ILogger<BoatHarbourService> _logger;
+        private IUserContextService _userContextService;
 
-        public BoatHarbourService(BoatifyDbContext dbContext, IMapper mapper, ILogger<BoatHarbourService> logger)
+        public BoatHarbourService(BoatifyDbContext dbContext, IMapper mapper, ILogger<BoatHarbourService> logger, IUserContextService userContextService)
         {
             _dbContext = dbContext;
             _mapper = mapper;
             _logger = logger;
+            _userContextService = userContextService;
         }
-        public int Create(int harbourId, CreateBoatDto dto, int userId)
+        public int Create(int harbourId, CreateBoatDto dto)
         {
             var harbour = GetHarbourById(harbourId);
 
             var boatEntity = _mapper.Map<Boat>(dto);
-            boatEntity.CreatedById = userId;
+            boatEntity.CreatedById = _userContextService.GetUserId;
 
             boatEntity.HarbourId = harbourId;
 
