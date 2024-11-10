@@ -13,7 +13,7 @@ namespace boatifyApi.Services
     public interface IBoatService
     {
         BoatDto GetById( int boatId);
-        List<BoatDto> GetAll();
+        List<BoatDto> GetAll(string? searchPhrase);
         void Delete(int boatId);
         void Update(int boatId, UpdateBoatDto dto);
     }
@@ -36,10 +36,14 @@ namespace boatifyApi.Services
         }
 
 
-        public List<BoatDto> GetAll()
+        public List<BoatDto> GetAll(string? searchPhrase)
         {
             var boats = _dbContext
                .Boats
+               .Where(b => searchPhrase == null || 
+               (b.Name.ToLower().Contains(searchPhrase.ToLower()) || 
+               b.Description.ToLower().Contains(searchPhrase.ToLower()) ||
+               b.Model.ToLower().Contains(searchPhrase.ToLower())))
                .ToList();
 
             var boatDtos = _mapper.Map<List<BoatDto>>(boats);

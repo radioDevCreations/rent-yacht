@@ -23,9 +23,9 @@ namespace boatifyApi.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<BoatDto>> GetAllBoats()
+        public ActionResult<List<BoatDto>> GetAllBoats([FromQuery]string? searchPhrase)
         {
-            var boats = _boatService.GetAll();
+            var boats = _boatService.GetAll(searchPhrase);
             return Ok(boats);
         }
 
