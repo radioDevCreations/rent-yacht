@@ -1,15 +1,10 @@
+import BoatifyTextareaProps from "@/utilities/BoatifyTextareaProps";
 import { ChangeEventHandler } from "react";
 import BoatifyTextareaVariant from "../BoatifyTextarea/BoatifyTextareaVariant";
 import "./BoatifyTextarea.scss";
 
-interface BoatifyTextareaProps {
-	label?: string;
-	placeholder?: string;
-	onChange?: ChangeEventHandler<HTMLTextAreaElement>;
-	variant?: BoatifyTextareaVariant;
-}
-
 const BoatifyTextarea = ({
+	name,
 	label,
 	placeholder,
 	onChange,
@@ -25,6 +20,7 @@ const BoatifyTextarea = ({
 				{label}
 			</span>
 			<textarea
+				name={name}
 				className={`textarea__field ${
 					variant === BoatifyTextareaVariant.dark ? "textarea__field--dark" : ""
 				}`}

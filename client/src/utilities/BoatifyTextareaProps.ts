@@ -1,9 +1,12 @@
+import BoatifyTextareaVariant from "@/boatify-components/BoatifyTextarea/BoatifyTextareaVariant";
 import { ChangeEvent } from "react";
 
 interface BoatifyTextareaProps {
 	name?: string;
+	label?: string;
 	placeholder?: string;
-	action?: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+	onChange?: (event: ChangeEvent<HTMLTextAreaElement>) => any;
+	variant?: BoatifyTextareaVariant;
 }
 
 export default BoatifyTextareaProps;

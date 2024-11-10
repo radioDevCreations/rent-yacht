@@ -21,40 +21,54 @@ const ContactForm = () => {
 	const contactState = useSelector((state: any) => state.forms.contact);
 	const firstColumn: Array<BoatifyInputProps> = [
 		{
-			name: "First Name",
+			name: "name",
+			label: "Name",
 			type: InputType.text,
-			placeholder: "First Name",
-			action: (event: ChangeEvent<HTMLInputElement>) =>
+			placeholder: "Name",
+			onChange: (event: ChangeEvent<HTMLInputElement>) =>
 				dispatch(setContactFirstName(event?.target?.value)),
 		},
 		{
-			name: "Surname",
+			name: "subject",
+			label: "Subject",
 			type: InputType.text,
-			placeholder: "Surname",
-			action: (event: ChangeEvent<HTMLInputElement>) =>
+			placeholder: "Subject",
+			onChange: (event: ChangeEvent<HTMLInputElement>) =>
 				dispatch(setContactSurname(event?.target?.value)),
 		},
 	];
 	const secondColumn: Array<BoatifyInputProps> = [
 		{
-			name: "E-mail",
+			name: "email",
+			label: "E-mail",
 			type: InputType.email,
 			placeholder: "E-mail",
-			action: (event: ChangeEvent<HTMLInputElement>) =>
+			onChange: (event: ChangeEvent<HTMLInputElement>) =>
 				dispatch(setContactEmail(event?.target?.value)),
 		},
 	];
 	const thirdColumn: Array<BoatifyTextareaProps> = [
 		{
-			name: "Message",
+			name: "message",
+			label: "Message",
 			placeholder: "Type here",
-			action: (event: ChangeEvent<HTMLTextAreaElement>) =>
+			onChange: (event: ChangeEvent<HTMLTextAreaElement>) =>
 				dispatch(setContactMessage(event?.target?.value)),
 		},
 	];
 
 	return (
-		<form className="contact">
+		<form
+			className="contact"
+			action="https://api.web3forms.com/submit"
+			method="POST"
+		>
+			<input
+				type="hidden"
+				name="access_key"
+				value="90c62b69-349f-49b5-a3e4-e2a1b4c0159f"
+			/>
+
 			<section className="contact__inputs">
 				<div className="contact__inputs-column contact__inputs-column--first">
 					{firstColumn.map((input) => {
@@ -62,11 +76,12 @@ const ContactForm = () => {
 							(!input.type?.length && <div></div>) ||
 							(input.type?.length && (
 								<BoatifyInput
-									label={input.name}
+									name={input.name}
+									label={input.label}
 									key={input.name}
 									placeholder={input.placeholder}
 									type={input.type}
-									onChange={input.action}
+									onChange={input.onChange}
 								/>
 							))
 						);
@@ -78,11 +93,12 @@ const ContactForm = () => {
 							(!input.type?.length && <div></div>) ||
 							(input.type?.length && (
 								<BoatifyInput
-									label={input.name}
+									name={input.name}
+									label={input.label}
 									key={input.name}
 									placeholder={input.placeholder}
 									type={input.type}
-									onChange={input.action}
+									onChange={input.onChange}
 								/>
 							))
 						);
@@ -94,15 +110,21 @@ const ContactForm = () => {
 					{thirdColumn.map((input) => {
 						return (
 							<BoatifyTextarea
-								label={input.name}
+								name={input.name}
+								label={input.label}
 								key={input.name}
 								placeholder={input.placeholder}
-								onChange={input.action}
+								onChange={input.onChange}
 							/>
 						);
 					})}
 				</div>
 			</section>
+			<input
+				type="hidden"
+				name="redirect"
+				value="https://web3forms.com/success"
+			></input>
 			<section className="contact__button-section">
 				<BoatifyButton
 					value="Send Message"
