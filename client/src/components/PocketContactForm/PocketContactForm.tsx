@@ -12,8 +12,8 @@ import {
 } from "@/redux/slices/formsSlice";
 import { ChangeEvent } from "react";
 import BoatifyInput from "@/boatify-components/BoatifyInput/BoatifyInput";
-import BoatifyInputProps from "@/utilities/BoatifyInputProps";
-import BoatifyTextareaProps from "@/utilities/BoatifyTextareaProps";
+import BoatifyInputProps from "@/utilities/IBoatifyInputProps";
+import BoatifyTextareaProps from "@/utilities/IBoatifyTextareaProps";
 import InputType from "@/utilities/InputType";
 import BoatifyTextarea from "@/boatify-components/BoatifyTextarea/BoatifyTextarea";
 import ButtonType from "@/utilities/ButtonType";
@@ -27,34 +27,38 @@ const PocketContactForm = () => {
 	const contactState = useSelector((state: any) => state.forms.contact);
 	const firstColumn: Array<BoatifyInputProps> = [
 		{
-			name: "First Name",
+			name: "name",
+			label: "Name",
 			type: InputType.text,
-			placeholder: "First Name",
-			action: (event: ChangeEvent<HTMLInputElement>) =>
+			placeholder: "Name",
+			onChange: (event: ChangeEvent<HTMLInputElement>) =>
 				dispatch(setContactFirstName(event?.target?.value)),
 		},
 		{
-			name: "Surname",
+			name: "subject",
+			label: "Subject",
 			type: InputType.text,
-			placeholder: "Surname",
-			action: (event: ChangeEvent<HTMLInputElement>) =>
+			placeholder: "Subject",
+			onChange: (event: ChangeEvent<HTMLInputElement>) =>
 				dispatch(setContactSurname(event?.target?.value)),
 		},
 	];
 	const secondColumn: Array<BoatifyInputProps> = [
 		{
-			name: "E-mail",
+			name: "email",
+			label: "E-mail",
 			type: InputType.email,
 			placeholder: "E-mail",
-			action: (event: ChangeEvent<HTMLInputElement>) =>
+			onChange: (event: ChangeEvent<HTMLInputElement>) =>
 				dispatch(setContactEmail(event?.target?.value)),
 		},
 	];
 	const thirdColumn: Array<BoatifyTextareaProps> = [
 		{
-			name: "Message",
+			name: "message",
+			label: "Message",
 			placeholder: "Type here",
-			action: (event: ChangeEvent<HTMLTextAreaElement>) =>
+			onChange: (event: ChangeEvent<HTMLTextAreaElement>) =>
 				dispatch(setContactMessage(event?.target?.value)),
 		},
 	];
@@ -68,11 +72,12 @@ const PocketContactForm = () => {
 							(!input.type?.length && <div></div>) ||
 							(input.type?.length && (
 								<BoatifyInput
-									label={input.name}
+									name={input.name}
+									label={input.label}
 									key={input.name}
 									placeholder={input.placeholder}
 									type={input.type}
-									onChange={input.action}
+									onChange={input.onChange}
 									variant={BoatifyInputVariant.dark}
 								/>
 							))
@@ -85,11 +90,12 @@ const PocketContactForm = () => {
 							(!input.type?.length && <div></div>) ||
 							(input.type?.length && (
 								<BoatifyInput
-									label={input.name}
+									name={input.name}
+									label={input.label}
 									key={input.name}
 									placeholder={input.placeholder}
 									type={input.type}
-									onChange={input.action}
+									onChange={input.onChange}
 									variant={BoatifyInputVariant.dark}
 								/>
 							))
@@ -102,10 +108,11 @@ const PocketContactForm = () => {
 					{thirdColumn.map((input) => {
 						return (
 							<BoatifyTextarea
-								label={input.name}
+								name={input.name}
+								label={input.label}
 								key={input.name}
 								placeholder={input.placeholder}
-								onChange={input.action}
+								onChange={input.onChange}
 								variant={BoatifyTextareaVariant.dark}
 							/>
 						);

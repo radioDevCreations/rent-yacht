@@ -1,4 +1,4 @@
-import BoatifyTextareaProps from "@/utilities/BoatifyTextareaProps";
+import IBoatifyTextareaProps from "@/utilities/IBoatifyTextareaProps";
 import { ChangeEventHandler } from "react";
 import BoatifyTextareaVariant from "../BoatifyTextarea/BoatifyTextareaVariant";
 import "./BoatifyTextarea.scss";
@@ -9,7 +9,7 @@ const BoatifyTextarea = ({
 	placeholder,
 	onChange,
 	variant,
-}: BoatifyTextareaProps) => {
+}: IBoatifyTextareaProps) => {
 	return (
 		<div className="textarea">
 			<span

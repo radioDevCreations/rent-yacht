@@ -1,4 +1,4 @@
-import BoatifyInputProps from "@/utilities/BoatifyInputProps";
+import IBoatifyInputProps from "@/utilities/IBoatifyInputProps";
 import InputType from "@/utilities/InputType";
 import { ChangeEventHandler } from "react";
 import "./BoatifyInput.scss";
@@ -14,7 +14,7 @@ const BoatifyInput = ({
 	isLongInput = false,
 	onChange,
 	variant,
-}: BoatifyInputProps) => {
+}: IBoatifyInputProps) => {
 	const inputClass = isLongInput ? "input-long" : "input";
 	return (
 		<div className={type === "radio" ? `${inputClass} radio` : inputClass}>

@@ -1,12 +1,10 @@
 import BoatifyInputVariant from "@/boatify-components/BoatifyInput/BoatifyInputVariant";
 import { ChangeEvent, ChangeEventHandler } from "react";
+import IBoatifyElement from "./IBoatifyElement";
 import InputType from "./InputType";
 
-interface BoatifyInputProps {
-	id?: string;
+interface IBoatifyInputProps extends IBoatifyElement {
 	value?: string;
-	name?: string;
-	label?: string;
 	type?: InputType;
 	placeholder?: string;
 	isLongInput?: boolean;
@@ -14,4 +12,4 @@ interface BoatifyInputProps {
 	variant?: BoatifyInputVariant;
 }
 
-export default BoatifyInputProps;
+export default IBoatifyInputProps;
