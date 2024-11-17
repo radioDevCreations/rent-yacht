@@ -65,6 +65,12 @@ const PocketContactForm = () => {
 
 	return (
 		<form className="contact">
+			<input
+				type="hidden"
+				name="access_key"
+				value="90c62b69-349f-49b5-a3e4-e2a1b4c0159f"
+			/>
+
 			<section className="contact__inputs">
 				<div className="contact__inputs-column contact__inputs-column--first">
 					{firstColumn.map((input) => {
@@ -119,6 +125,11 @@ const PocketContactForm = () => {
 					})}
 				</div>
 			</section>
+			<input
+				type="hidden"
+				name="redirect"
+				value="https://web3forms.com/success"
+			></input>
 			<section className="contact__button-section">
 				<BoatifyButton
 					value="Send Message"
