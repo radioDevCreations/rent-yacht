@@ -34,6 +34,9 @@ namespace boatifyApi
                 }));
 
             CreateMap<CreateBoatDto, Boat>();
+
+            CreateMap<CreateReservationDto, Reservation>();
+            CreateMap<Reservation, ReservationDto>();
         }
     }
 }

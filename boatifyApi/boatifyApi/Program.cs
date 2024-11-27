@@ -61,14 +61,25 @@ try
     builder.Services.AddScoped<IHarbourService, HarbourService>();
     builder.Services.AddScoped<IBoatHarbourService, BoatHarbourService>();
     builder.Services.AddScoped<IBoatService, BoatService>();
+    builder.Services.AddScoped<IReservationService, ReservationService>();
     builder.Services.AddScoped<ExceptionHandlingMiddleware>();
     builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
     builder.Services.AddScoped<IValidator<RegisterUserDto>, RegisterUserDtoValidator>();
-
+    builder.Services.AddScoped<IValidator<BoatQuery>, BoatQueryValidator>();
     builder.Services.AddScoped<RequestTimeMiddleware>();
     builder.Services.AddScoped<IUserContextService, UserContextService>();
     builder.Services.AddHttpContextAccessor();
     builder.Services.AddSwaggerGen();
+
+    var allowedOrigins = builder.Configuration["AllowedOrigins"];
+
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("Next.js Client", builder =>
+        builder.AllowAnyMethod()
+        .AllowAnyHeader()
+        .WithOrigins(allowedOrigins));
+    });
 
     builder.Logging.ClearProviders();
     builder.Host.UseNLog();
@@ -77,6 +88,8 @@ try
 
     // Configure the HTTP request pipeline.
 
+    app.UseStaticFiles();
+    app.UseCors("Next.js Client");
     using (var harbourSeeder = app.Services.CreateScope())
     {
         var scopedService = harbourSeeder.ServiceProvider.GetRequiredService<BoatifySeeder>();
@@ -92,6 +105,15 @@ try
     app.UseMiddleware<RequestTimeMiddleware>();
     app.UseAuthentication();
     app.UseHttpsRedirection();
+    app.UseExceptionHandler(errorApp =>
+    {
+        errorApp.Run(async context =>
+        {
+            var exceptionFeature = context.Features.Get<Microsoft.AspNetCore.Diagnostics.IExceptionHandlerFeature>();
+            Console.WriteLine($"Exception: {exceptionFeature?.Error}");
+            await context.Response.WriteAsync("An error occurred.");
+        });
+    });
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {

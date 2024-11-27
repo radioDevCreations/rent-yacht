@@ -10,6 +10,9 @@ namespace boatifyApi.Entities
         public DbSet<Harbour> Harbours { get; set;}
         public DbSet<Boat> Boats { get; set;}
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<ReservationStatus> ReservationStatuses { get; set; }
+        public DbSet<ReservationTime> ReservationTimes{ get; set; }
+        public DbSet<Reservation> Reservations{ get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

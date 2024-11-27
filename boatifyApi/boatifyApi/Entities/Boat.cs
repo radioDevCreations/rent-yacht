@@ -14,5 +14,6 @@
 
         public int HarbourId { get; set; }
         public virtual Harbour? Harbour { get; set; }
+        public virtual List<Reservation>? Reservations { get; set; }
     }
 }

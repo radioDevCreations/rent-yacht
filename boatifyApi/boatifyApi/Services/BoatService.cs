@@ -6,6 +6,7 @@ using boatifyApi.Migrations;
 using boatifyApi.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 using System.Security.Claims;
 
 namespace boatifyApi.Services
@@ -13,7 +14,7 @@ namespace boatifyApi.Services
     public interface IBoatService
     {
         BoatDto GetById( int boatId);
-        List<BoatDto> GetAll(string? searchPhrase);
+        PagedResult<BoatDto> GetAll(BoatQuery query);
         void Delete(int boatId);
         void Update(int boatId, UpdateBoatDto dto);
     }
@@ -36,19 +37,44 @@ namespace boatifyApi.Services
         }
 
 
-        public List<BoatDto> GetAll(string? searchPhrase)
+        public PagedResult<BoatDto> GetAll(BoatQuery query)
         {
-            var boats = _dbContext
+
+            var baseQuery = _dbContext
                .Boats
-               .Where(b => searchPhrase == null || 
-               (b.Name.ToLower().Contains(searchPhrase.ToLower()) || 
-               b.Description.ToLower().Contains(searchPhrase.ToLower()) ||
-               b.Model.ToLower().Contains(searchPhrase.ToLower())))
+               .Where(b => query.SearchPhrase == null ||
+               (b.Name.ToLower().Contains(query.SearchPhrase.ToLower()) ||
+               b.Description.ToLower().Contains(query.SearchPhrase.ToLower()) ||
+               b.Model.ToLower().Contains(query.SearchPhrase.ToLower())));
+
+            if (!string.IsNullOrEmpty(query.SortBy))
+            {
+                var columnSelector = new Dictionary<string, Expression<Func<Boat, object>>>{
+                    {nameof(Boat.Name), b=> b.Name},
+                    {nameof(Boat.Description), b=> b.Description},
+                    {nameof(Boat.Model), b=> b.Model},
+                    {nameof(Boat.Type), b=> b.Type},
+                };
+
+                var selecteedColumn = columnSelector[query.SortBy];
+
+                baseQuery = query.SortDirection == SortDirection.ASC ? 
+                    baseQuery.OrderBy(selecteedColumn) : 
+                    baseQuery.OrderByDescending(selecteedColumn);
+            }
+
+            var totalItemsCount = baseQuery.Count();
+
+            var boats = baseQuery
+               .Skip(query.PageSize * (query.PageNumber-1))
+               .Take(query.PageSize)
                .ToList();
 
             var boatDtos = _mapper.Map<List<BoatDto>>(boats);
 
-            return boatDtos;
+            var result = new PagedResult<BoatDto>(boatDtos, totalItemsCount, query.PageSize, query.PageNumber);
+
+            return result;
         }
 
         public BoatDto GetById(int boatId)

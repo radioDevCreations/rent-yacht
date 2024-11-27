@@ -13,18 +13,21 @@ namespace boatifyApi
         {
             if (_dbContext.Database.CanConnect())
             {
-                if (!_dbContext.Roles.Any())
-                {
-                    var roles = GetRoles();
-                    _dbContext.Roles.AddRange(roles);
-                    _dbContext.SaveChanges();
-                }
-                if (!_dbContext.Harbours.Any())
-                {
-                    var harbours = GetHarbours();
-                    _dbContext.Harbours.AddRange(harbours);
-                    _dbContext.SaveChanges();
-                }
+                SeedRoles();
+                SeedHarbours();
+                SeedReservationStatuses();
+            }
+        }
+
+        //ROLES
+
+        private void SeedRoles()
+        {
+            if (!_dbContext.Roles.Any())
+            {
+                var roles = GetRoles();
+                _dbContext.Roles.AddRange(roles);
+                _dbContext.SaveChanges();
             }
         }
 
@@ -40,6 +43,19 @@ namespace boatifyApi
 
             return roles;
         }
+
+        //HARBOURS
+
+        private void SeedHarbours()
+        {
+            if (!_dbContext.Harbours.Any())
+            {
+                var harbours = GetHarbours();
+                _dbContext.Harbours.AddRange(harbours);
+                _dbContext.SaveChanges();
+            }
+        }
+
 
         private IEnumerable<Harbour> GetHarbours()
         {
@@ -105,6 +121,30 @@ namespace boatifyApi
                 }
             };
             return harbours;
+        }
+
+        //RESERVATION STATUSES
+
+        private void SeedReservationStatuses()
+        {
+            if (!_dbContext.ReservationStatuses.Any())
+            {
+                var statuses = GetReservationStatuses();
+                _dbContext.ReservationStatuses.AddRange(statuses);
+                _dbContext.SaveChanges();
+            }
+        }
+
+        private IEnumerable<ReservationStatus> GetReservationStatuses()
+        {
+            return new List<ReservationStatus>
+            {
+                new ReservationStatus { Name = "Pending"},
+                new ReservationStatus { Name = "Confirmed"},
+                new ReservationStatus { Name = "Cancelled"},
+                new ReservationStatus { Name = "Completed"},
+                new ReservationStatus { Name = "Rejected"}
+            };
         }
     }
 }

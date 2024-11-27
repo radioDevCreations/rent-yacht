@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using boatifyApi.Entities;
 
@@ -11,9 +12,11 @@ using boatifyApi.Entities;
 namespace boatifyApi.Migrations
 {
     [DbContext(typeof(BoatifyDbContext))]
-    partial class BoatifyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241124085318_AddResrvationStatuses")]
+    partial class AddResrvationStatuses
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -169,7 +172,7 @@ namespace boatifyApi.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Reservations");
+                    b.ToTable("Reservation");
                 });
 
             modelBuilder.Entity("boatifyApi.Entities.ReservationStatus", b =>
@@ -205,7 +208,7 @@ namespace boatifyApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ReservationTimes");
+                    b.ToTable("ReservationTime");
                 });
 
             modelBuilder.Entity("boatifyApi.Entities.Role", b =>
