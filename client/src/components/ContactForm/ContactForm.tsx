@@ -9,8 +9,8 @@ import {
 } from "@/redux/slices/formsSlice";
 import { ChangeEvent } from "react";
 import BoatifyInput from "@/boatify-components/BoatifyInput/BoatifyInput";
-import BoatifyInputProps from "@/utilities/BoatifyInputProps";
-import BoatifyTextareaProps from "@/utilities/BoatifyTextareaProps";
+import BoatifyInputProps from "@/utilities/IBoatifyInputProps";
+import BoatifyTextareaProps from "@/utilities/IBoatifyTextareaProps";
 import InputType from "@/utilities/InputType";
 import BoatifyTextarea from "@/boatify-components/BoatifyTextarea/BoatifyTextarea";
 import ButtonType from "@/utilities/ButtonType";
