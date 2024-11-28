@@ -1,19 +1,43 @@
+import axiosInstance from "@/axios/httpClient";
+
 abstract class DataLoader {
-	static selectCurrentUser = async (): Promise<any> => {
-		const res = await fetch("http://127.0.0.1/@me");
-		const data = await res.json();
-		return data;
+	static selectAllHarbours = async (): Promise<any> => {
+		return await axiosInstance.get("https://localhost:5000/api/harbour")
+		  .then(response => {
+			return response.data;
+		  })
+		  .catch(error => {
+			throw error;
+		  });
 	};
-	static selectBoats = async (): Promise<any> => {
-		const res = await fetch("http://127.0.0.1/boats");
-		const data = await res.json();
-		return data;
+	static selectHarbour = async (id: number): Promise<any> => {
+		return await axiosInstance.get(`https://localhost:5000/api/harbour/${id}`)
+		  .then(response => {
+			return response.data;
+		  })
+		  .catch(error => {
+			throw error;
+		  });
 	};
-	static selectHarbours = async (): Promise<any> => {
-		const res = await fetch("http://127.0.0.1/harbours");
-		const data = await res.json();
-		return data;
+	static deleteHarbour = async (id: number): Promise<any> => {
+		return await axiosInstance.delete(`https://localhost:5000/api/harbour/${id}`)
+		  .then(response => {
+			return response.data;
+		  })
+		  .catch(error => {
+			throw error;
+		  });
 	};
+	static selectUserReservations = async (userId: number): Promise<any> => {
+		return await axiosInstance.get(`https://localhost:5000/api/reservation/user/${userId}`)
+		  .then(response => {
+			return response.data;
+		  })
+		  .catch(error => {
+			throw error;
+		  });
+	};
+
 }
 
 export default DataLoader;

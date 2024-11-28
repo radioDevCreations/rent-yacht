@@ -8,15 +8,11 @@ import Featured from "@/components/Featured/Featured";
 import MapLink from "@/components/MapLink/MapLink";
 import PocketContactForm from "@/components/PocketContactForm/PocketContactForm";
 import { useEffect } from "react";
+import DataLoader from "@/dataLoaders/DataLoader";
 
 const fetchData = async () => {
-	try {
-	  const response = await fetch('https://localhost:5000/api/boat?searchPhrase=na&pageSize=5&pageNumber=1&sortBy=Name&sortDirection=DESC');
-	  const data = await response.json();
-	  console.log('Fetched data:', data);
-	} catch (error) {
-	  console.error('Error fetching data:', error);
-	}
+	console.log("harbours", await DataLoader.selectAllHarbours());
+	console.log("harbour", await DataLoader.selectHarbour(6));
   };
 
 

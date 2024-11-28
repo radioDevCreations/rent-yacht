@@ -78,6 +78,7 @@ try
         options.AddPolicy("Next.js Client", builder =>
         builder.AllowAnyMethod()
         .AllowAnyHeader()
+        .AllowCredentials()
         .WithOrigins(allowedOrigins));
     });
 
