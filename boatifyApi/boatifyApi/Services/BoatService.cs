@@ -14,7 +14,8 @@ namespace boatifyApi.Services
     public interface IBoatService
     {
         BoatDto GetById( int boatId);
-        PagedResult<BoatDto> GetAll(BoatQuery query);
+        IEnumerable<BoatDto> GetAll();
+        PagedResult<BoatDto> GetAllSpecific(BoatQuery query);
         void Delete(int boatId);
         void Update(int boatId, UpdateBoatDto dto);
     }
@@ -37,7 +38,19 @@ namespace boatifyApi.Services
         }
 
 
-        public PagedResult<BoatDto> GetAll(BoatQuery query)
+        public IEnumerable<BoatDto> GetAll()
+        {
+            var boats = _dbContext
+                .Boats
+                .ToList();
+
+            var boatDtos = _mapper.Map<List<BoatDto>>(boats);
+
+            return boatDtos;
+        }
+
+
+        public PagedResult<BoatDto> GetAllSpecific(BoatQuery query)
         {
 
             var baseQuery = _dbContext

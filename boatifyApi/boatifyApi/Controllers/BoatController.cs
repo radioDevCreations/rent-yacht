@@ -22,10 +22,17 @@ namespace boatifyApi.Controllers
             return Ok(boat);
         }
 
-        [HttpGet]
-        public ActionResult<List<BoatDto>> GetAllBoats([FromQuery] BoatQuery query)
+        [HttpGet("all")]
+        public ActionResult<List<BoatDto>> GetAllBoats()
         {
-            var boats = _boatService.GetAll(query);
+            var boats = _boatService.GetAll();
+            return Ok(boats);
+        }
+
+        [HttpGet]
+        public ActionResult<List<BoatDto>> GetAllSpecificBoats([FromQuery] BoatQuery query)
+        {
+            var boats = _boatService.GetAllSpecific(query);
             return Ok(boats);
         }
 

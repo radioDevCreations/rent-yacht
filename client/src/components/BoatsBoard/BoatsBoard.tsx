@@ -1,19 +1,33 @@
+import { FC } from "react";
 import BoatItem from "../BoatItem/BoatItem";
 import "./BoatsBoard.scss";
 
-const BoatsBoard = () => {
+export interface BoatDto {
+    id: number;
+
+    // Required fields
+    name: string;
+    model: string;
+    type: string;
+    pricePerDay: number;
+
+    // Optional fields
+    description?: string;
+    harbourId: number;
+    harbourName?: string;
+}
+
+interface BoatsBoardProps {
+	boats: BoatDto[];
+  }
+
+const BoatsBoard: FC<BoatsBoardProps> = ({ boats }) => {
 	return (
 		<>
 			<div className="boats-board">
-				<BoatItem />
-				<BoatItem />
-				<BoatItem />
-				<BoatItem />
-				<BoatItem />
-				<BoatItem />
-				<BoatItem />
-				<BoatItem />
-				<BoatItem />
+				{boats.map((boat: BoatDto) => (
+					<BoatItem key={boat.id} boat={boat} />
+				))}
 			</div>
 		</>
 	);

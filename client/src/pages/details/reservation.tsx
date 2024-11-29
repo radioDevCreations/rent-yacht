@@ -1,8 +1,8 @@
-import "./last-minute.scss";
+import "./reservation.scss";
 import MainLayout from "@/layouts/MainLayout/MainLayout";
 import Details from "@/components/Details/Details";
 
-const DetailsPage = () => {
+const ReservationDetailsPage = () => {
 	return (
 		<MainLayout>
 			<Details />
@@ -10,4 +10,4 @@ const DetailsPage = () => {
 	);
 };
 
-export default DetailsPage;
+export default ReservationDetailsPage;
