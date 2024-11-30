@@ -1,13 +1,10 @@
 import "./RP4Page.scss";
 import Image from "next/image";
 import IMAGE from "../../../public/links";
+import PageContainerProps from "../Pages/PageContainerProps";
 
-interface RPContainerProps {
-	isActive: boolean;
-}
-
-const RP4Page = ({ isActive }: RPContainerProps) => {
+const Page4 = ({ isActive }: PageContainerProps) => {
 	return <article className="rp-container">RP4Page: {"" + isActive}</article>;
 };
 
-export default RP4Page;
+export default Page4;

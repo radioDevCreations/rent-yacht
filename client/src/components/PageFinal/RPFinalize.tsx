@@ -1,13 +1,10 @@
 import "./RPFinalize.scss";
 import Image from "next/image";
 import IMAGE from "../../../public/links";
+import PageContainerProps from "../Pages/PageContainerProps";
 
-interface RPContainerProps {
-	isActive: boolean;
-}
-
-const RPFinalize = ({ isActive }: RPContainerProps) => {
+const PageFinalize = ({ isActive }: PageContainerProps) => {
 	return <article className="rp-container">Finalize: {"" + isActive}</article>;
 };
 
-export default RPFinalize;
+export default PageFinalize;

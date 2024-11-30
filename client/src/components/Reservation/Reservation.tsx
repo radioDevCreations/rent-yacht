@@ -14,7 +14,7 @@ import BoatifyInputProps from "@/utilities/IBoatifyInputProps";
 import InputType from "@/utilities/InputType";
 import httpClient from "@/axios/httpClient";
 import BoatifyStepper from "@/boatify-components/BoatifyStepper/BoatifyStepper";
-import RPContainer from "../RPContainer/RPContainer";
+import RPContainer from "../Pages/Pages";
 
 const Reservation = () => {
 	const dispatch = useDispatch();
