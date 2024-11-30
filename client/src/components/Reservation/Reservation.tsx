@@ -1,82 +1,30 @@
 "use client";
 import "./Reservation.scss";
 import { useDispatch, useSelector } from "react-redux";
-import {
-	setRegisterFirstName,
-	setRegisterSurname,
-	setRegisterEmail,
-	setRegisterNewPassword,
-	setRegisterConfirmPassword,
-	setRegisterIsLoading,
-} from "@/redux/slices/formsSlice";
-import { ChangeEvent } from "react";
-import BoatifyInputProps from "@/utilities/IBoatifyInputProps";
-import InputType from "@/utilities/InputType";
-import httpClient from "@/axios/httpClient";
 import BoatifyStepper from "@/boatify-components/BoatifyStepper/BoatifyStepper";
-import RPContainer from "../Pages/Pages";
+import Pages, { Steps } from "../Pages/Pages";
+import Step1__ReservationBoat from "../ReservationSteps/Step1__ReservationBoat/Step1__ReservationBoat";
+import Step2__ReservationTime from "../ReservationSteps/Step2__ReservationTime/Step2__ReservationTime";
+import Step4__ReservationSummary from "../ReservationSteps/Step4__ReservationSummary/Step4__ReservationSummary";
+import Step5__ReservationPayment from "../ReservationSteps/Step5__ReservationPayment/Step5__ReservationPayment";
 
 const Reservation = () => {
 	const dispatch = useDispatch();
 	const registerState = useSelector((state: any) => state.forms.register);
 	const orderPage = useSelector((state: any) => state.order.orderPage);
-	const handleSubmit = async (event: React.SyntheticEvent) => {
-		event.preventDefault();
-		setRegisterIsLoading(true);
-		const response = await httpClient.post("//127.0.0.1:5000/register", {
-			email: registerState.email,
-			password: registerState.newPassword,
-			firstName: registerState.firstName,
-			surname: registerState.surname,
-		});
-		setRegisterIsLoading(false);
-		if ("id" in response?.data) console.log("registered");
-		else console.log("err");
+	
+	const steps = ["Reservation Boat", "Reservation Time", "Order", "Summary", "Payment"];
+	const stepsComponents: Steps = {
+		step1: <Step1__ReservationBoat></Step1__ReservationBoat>,
+		step2: <Step2__ReservationTime></Step2__ReservationTime>,
+		step4: <Step4__ReservationSummary></Step4__ReservationSummary>,
+		stepFinal: <Step5__ReservationPayment></Step5__ReservationPayment>
 	};
-	const inputs: Array<BoatifyInputProps> = [
-		{
-			name: "First Name",
-			type: InputType.text,
-			placeholder: "First Name",
-			onChange: (event: ChangeEvent<HTMLInputElement>) =>
-				dispatch(setRegisterFirstName(event?.target?.value)),
-		},
-		{
-			name: "Surname",
-			type: InputType.text,
-			placeholder: "Surname",
-			onChange: (event: ChangeEvent<HTMLInputElement>) =>
-				dispatch(setRegisterSurname(event?.target?.value)),
-		},
-		{
-			name: "E-mail",
-			type: InputType.email,
-			placeholder: "E-mail",
-			onChange: (event: ChangeEvent<HTMLInputElement>) =>
-				dispatch(setRegisterEmail(event?.target?.value)),
-		},
-		{ name: "", placeholder: "" },
-		{
-			name: "Password",
-			type: InputType.password,
-			placeholder: "Password",
-			onChange: (event: ChangeEvent<HTMLInputElement>) =>
-				dispatch(setRegisterNewPassword(event?.target?.value)),
-		},
-		{
-			name: "Confirm Password",
-			type: InputType.password,
-			placeholder: "Confirm Password",
-			onChange: (event: ChangeEvent<HTMLInputElement>) =>
-				dispatch(setRegisterConfirmPassword(event?.target?.value)),
-		},
-	];
-	const steps = ["Warunki", "Daty", "Order", "Summary", "Payment"];
 	return (
-		<form className="reservation" onSubmit={handleSubmit}>
+		<form className="reservation">
 			<section className="reservation__board">
 				<BoatifyStepper steps={steps} currentPosition={orderPage}>
-					<RPContainer currentPosition={orderPage} />
+					<Pages currentPosition={orderPage} steps={stepsComponents} />
 				</BoatifyStepper>
 			</section>
 		</form>
