@@ -1,15 +1,12 @@
+import { SystemBoolean } from "@/utilities/System";
 import axios from "axios";
-import http from 'http';
-import https from 'https';
 
 const BASE_URL = "https://localhost:5000";
 
 const axiosInstance = axios.create({
-	withCredentials: true,
+	withCredentials: SystemBoolean.True,
 	baseURL: BASE_URL,
-	timeout: 10000,
-	httpAgent: new http.Agent({ keepAlive: true }),
-	httpsAgent: new https.Agent({ keepAlive: true }),
+	timeout: 10000
 });
 
 export default axiosInstance;

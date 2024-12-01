@@ -1,7 +1,8 @@
+import { SystemBoolean } from "@/utilities/System";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState = {
-	isMenuOpen: false,
+	isMenuOpen: SystemBoolean.False,
 	registerPageNumber: 1,
 };
 
@@ -10,10 +11,10 @@ const applicationSlice = createSlice({
 	initialState,
 	reducers: {
 		openMenu: (state) => {
-			return { ...state, isMenuOpen: true };
+			return { ...state, isMenuOpen: SystemBoolean.True };
 		},
 		closeMenu: (state) => {
-			return { ...state, isMenuOpen: false };
+			return { ...state, isMenuOpen: SystemBoolean.False };
 		},
 		setRegisterPage: (state, action: PayloadAction<number>) => {
 			return {

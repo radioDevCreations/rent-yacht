@@ -10,17 +10,8 @@ import PocketContactForm from "@/components/PocketContactForm/PocketContactForm"
 import { useEffect } from "react";
 import DataLoader from "@/dataLoaders/DataLoader";
 
-const fetchData = async () => {
-	console.log("harbours", await DataLoader.selectAllHarbours());
-	console.log("harbour", await DataLoader.selectHarbour(6));
-  };
-
 
 const Home = () => {
-
-	useEffect(() => {
-		fetchData();
-	  }, []); 
 
 	return (
 		<MainLayout>

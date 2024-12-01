@@ -8,6 +8,9 @@ enum Captions {
 	MAP_LINK_TEXT1 = "Wykorzystaj mapę portów aby zaplanować idealne wakacje",
 	MAP_LINK_TEXT2 = "Otwórz mapę",
 	MAP_LINK_IMAGE_ALT = "Map",
+	X = "X",
+	EqualsSign = "=",
+	Type = "Type: ",
 }
 
 export default Captions;

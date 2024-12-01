@@ -1,3 +1,4 @@
+import { SystemBoolean } from "@/utilities/System";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -12,7 +13,7 @@ const initialState = {
 		newPassword: "",
 		confirmPassword: "",
 		pageNumber: 1,
-		isLoading: false,
+		isLoading: SystemBoolean.False,
 	},
 	forgotPassword: {
 		email: "",

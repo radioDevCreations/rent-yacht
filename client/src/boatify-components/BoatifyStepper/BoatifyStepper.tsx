@@ -1,7 +1,7 @@
 import ButtonType from "@/utilities/ButtonType";
 import BoatifyButton from "../BoatifyButton/BoatifyButton";
 import { useDispatch, useSelector } from "react-redux";
-import { setOrderPage } from "@/redux/slices/orderSlice";
+import { setReservationPage } from "@/redux/slices/reservationSlice";
 import "./BoatifyStepper.scss";
 import Children from "@/utilities/Children";
 
@@ -16,14 +16,14 @@ const BoatifyStepper = ({
 	children,
 }: BoatifyStepperProps) => {
 	const dispatch = useDispatch();
-	const orderState = useSelector((state: any) => state.order);
-	const handlePreviousOrderPage = () => {
-		console.log(orderState.orderPage - 1);
-		dispatch(setOrderPage(orderState.orderPage - 1));
+	const reservationState = useSelector((state: any) => state.reservation);
+	const handlePreviousReservationPage = () => {
+		console.log(reservationState.new_ReservationPage - 1);
+		dispatch(setReservationPage(reservationState.new_ReservationPage - 1));
 	};
-	const handleNextOrderPage = () => {
-		console.log(orderState.orderPage + 1);
-		dispatch(setOrderPage(orderState.orderPage + 1));
+	const handleNextReservationPage = () => {
+		console.log(reservationState.new_ReservationPage + 1);
+		dispatch(setReservationPage(reservationState.new_ReservationPage + 1));
 	};
 	return (
 		<div className="boatify-stepper">
@@ -45,22 +45,24 @@ const BoatifyStepper = ({
 				})}
 			</div>
 			{children}
+
+			{currentPosition <= steps.length - 2 ?
 			<div className="boatify-stepper__buttons">
 				<BoatifyButton
 					value="Previous"
 					type={ButtonType.button}
 					classModifier="boatify-button--stepper-prev"
-					onClick={handlePreviousOrderPage}
+					onClick={handlePreviousReservationPage}
 					disabled={currentPosition <= 1}
 				/>
 				<BoatifyButton
 					value="Next"
 					type={ButtonType.button}
 					classModifier="boatify-button--stepper-next"
-					onClick={handleNextOrderPage}
+					onClick={handleNextReservationPage}
 					disabled={currentPosition >= steps.length}
 				/>
-			</div>
+			</div> : <div></div>}
 		</div>
 	);
 };

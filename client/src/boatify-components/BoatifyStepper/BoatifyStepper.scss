@@ -15,6 +15,7 @@
 }
 
 .boatify-stepper__step-number {
+	margin-bottom: 10px;
 	@apply w-10 h-10 flex items-center justify-center z-10 relative bg-slate-700 rounded-full font-semibold text-white;
 }
 

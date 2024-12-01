@@ -2,7 +2,6 @@ import BoatifyButton from "@/boatify-components/BoatifyButton/BoatifyButton";
 import "./MyReservations.scss";
 import {FC} from "react";
 import ButtonType from "@/utilities/ButtonType";
-import BaseURL from "@/utilities/BaseUrl";
 import BoatifyGoTo from "@/utilities/BoatifyGoTo";
 
 const TABLE_BORDER_COLOR = "#122c78";

@@ -9,11 +9,9 @@ import Step4__ReservationSummary from "../ReservationSteps/Step4__ReservationSum
 import Step5__ReservationPayment from "../ReservationSteps/Step5__ReservationPayment/Step5__ReservationPayment";
 
 const Reservation = () => {
-	const dispatch = useDispatch();
-	const registerState = useSelector((state: any) => state.forms.register);
-	const orderPage = useSelector((state: any) => state.order.orderPage);
+	const new_ReservationPage = useSelector((state: any) => state.reservation.new_ReservationPage);
 	
-	const steps = ["Reservation Boat", "Reservation Time", "Order", "Summary", "Payment"];
+	const steps = ["Reservation Boat", "Reservation Time", "reservation", "Summary", "Payment"];
 	const stepsComponents: Steps = {
 		step1: <Step1__ReservationBoat></Step1__ReservationBoat>,
 		step2: <Step2__ReservationTime></Step2__ReservationTime>,
@@ -23,8 +21,8 @@ const Reservation = () => {
 	return (
 		<form className="reservation">
 			<section className="reservation__board">
-				<BoatifyStepper steps={steps} currentPosition={orderPage}>
-					<Pages currentPosition={orderPage} steps={stepsComponents} />
+				<BoatifyStepper steps={steps} currentPosition={new_ReservationPage}>
+					<Pages currentPosition={new_ReservationPage} steps={stepsComponents} />
 				</BoatifyStepper>
 			</section>
 		</form>
