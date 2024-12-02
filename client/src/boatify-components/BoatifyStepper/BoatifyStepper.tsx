@@ -46,7 +46,7 @@ const BoatifyStepper = ({
 			</div>
 			{children}
 
-			{currentPosition <= steps.length - 2 ?
+			{currentPosition <= steps.length - 2 && currentPosition != 2 ?
 			<div className="boatify-stepper__buttons">
 				<BoatifyButton
 					value="Previous"

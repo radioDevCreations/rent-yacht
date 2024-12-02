@@ -4,16 +4,16 @@ import BoatifyButton from '@/boatify-components/BoatifyButton/BoatifyButton';
 import { useEffect, useState } from 'react';
 import SortDirection from '@/utilities/SortDirection';
 import DataLoader from '@/dataLoaders/DataLoader';
-import { ReservationDto } from '@/components/MyReservations/MyReservations';
 import { useDispatch, useSelector } from 'react-redux';
 import Captions from '@/captions/captions';
 import { SystemBoolean } from '@/utilities/System';
 import { setStartDate, setEndDate, setReservationPage } from '@/redux/slices/reservationSlice';
 import BoatifyDateOperations from '@/utilities/BoatifyDateOperations';
 import { FaArrowRight } from "react-icons/fa";
+import Reservation from '@/models/Reservation';
 
 const Step4__ReservationSummary = () => {
-	const [data, setData] = useState<ReservationDto[]>([]);
+	const [data, setData] = useState<Reservation[]>([]);
 	const [loading, setLoading] = useState<boolean>(true);
 	const [error, setError] = useState<string | null>(null);
 
@@ -37,7 +37,7 @@ const Step4__ReservationSummary = () => {
 
 	let reservationState = useSelector((state: any) => state.reservation);
 
-	const handleClick = async () => {
+	const handleClickMakeReservation = async () => {
 		try {
 			setLoading(SystemBoolean.True);
 			setError(null);
@@ -60,6 +60,10 @@ const Step4__ReservationSummary = () => {
 			setLoading(false);
 		  }
 	}
+
+	const handleClickPreviousPage= () => {
+		dispatch(setReservationPage(reservationState.new_ReservationPage - 1));
+	};
 
 	const nextReservationPage = () => {
 		dispatch(setReservationPage(reservationState.new_ReservationPage + 1));
@@ -106,8 +110,14 @@ const Step4__ReservationSummary = () => {
 			<span className="total-price__equals-sign"> {Captions.EqualsSign} </span>
 			<span className="total-price__total">600.00 PLN</span>
 		</div>
+		<BoatifyButton
+					onClick={handleClickPreviousPage}
+					value="Previous"
+					type={ButtonType.button}
+					classModifier="boatify-button--reservation-previous"
+				/>
         <BoatifyButton
-					onClick={handleClick}
+					onClick={handleClickMakeReservation}
 					value="Make Reservation"
 					type={ButtonType.button}
 					classModifier="boatify-button--reservation"

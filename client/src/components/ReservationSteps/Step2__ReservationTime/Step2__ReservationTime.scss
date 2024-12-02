@@ -1,0 +1,16 @@
+@import "../../../styles/theme.scss";
+
+.reservation-time{
+    @apply flex-col;
+}
+
+.reservation-time-indicator{
+    @apply flex;
+    margin-bottom: 32px;
+}
+
+.margin{
+    user-select: none;
+    content: " ";
+    width: 24px;
+}
