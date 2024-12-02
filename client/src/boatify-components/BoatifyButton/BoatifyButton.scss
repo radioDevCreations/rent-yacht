@@ -23,3 +23,14 @@
 .boatify-button--reservation-previous{
     margin-right: 16px;
 }
+
+.boatify-button--contact {
+	height: 42px;
+	padding-left: 50px;
+	padding-right: 50px;
+	&:active,
+	&:focus {
+		padding-left: 50px;
+		padding-right: 50px;
+	}
+}

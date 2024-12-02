@@ -134,7 +134,7 @@ const PocketContactForm = () => {
 				<BoatifyButton
 					value="Send Message"
 					type={ButtonType.submit}
-					classModifier="boatify-button--login"
+					classModifier="boatify-button--contact"
 					variant={BoatifyButtonVariant.orangeSTD}
 				/>
 			</section>

@@ -3,22 +3,12 @@ import "./MyReservations.scss";
 import {FC} from "react";
 import ButtonType from "@/utilities/ButtonType";
 import BoatifyGoTo from "@/utilities/BoatifyGoTo";
+import Reservation from "@/models/Reservation";
 
 const TABLE_BORDER_COLOR = "#122c78";
 
-export interface ReservationDto {
-  id: number;
-  boatId: number;
-  userId: number;
-  totalPrice: number;
-  reservationStatusId: number;
-  startDate: string;
-  endDate: string;
-  reservationStatusName: string;
-}
-
 interface MyReservationsProps {
-  reservations: ReservationDto[];
+  reservations: Reservation[];
 }
 
 const MyReservations: FC<MyReservationsProps> = ({ reservations }) => {
