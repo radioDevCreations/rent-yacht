@@ -1,20 +1,20 @@
-@use "scss-reset/reset";
-@import url("https://fonts.googleapis.com/css2?family=Indie+Flower&family=Lato:ital,wght@0,100;0,300;0,400;0,700;1,100;1,300;1,400;1,700&display=swap");
-@import "../../styles/theme.scss";
+@use 'scss-reset/reset';
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Lato:ital,wght@0,100;0,300;0,400;0,700;1,100;1,300;1,400;1,700&display=swap');
+@import '../../styles/theme.scss';
 
 body {
-	@apply flex justify-center items-center;
-	height: 100%;
+  @apply flex justify-center items-center;
+  height: 100%;
 }
 
 #__next {
-	@apply flex justify-center items-center;
-	height: 100%;
+  @apply flex justify-center items-center;
+  height: 100%;
 }
 
 .single-form-layout {
-	@apply flex flex-col justify-around items-center;
-	font-family: "Lato";
-	font-size: $fontSize14px;
-	margin: 20px 0 32px;
+  @apply flex flex-col justify-around items-center;
+  font-family: 'Lato';
+  font-size: $fontSize14px;
+  margin: 20px 0 32px;
 }

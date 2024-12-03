@@ -1,16 +1,16 @@
 enum WindowOrientation {
-	vertical,
-	horizontal,
+  vertical,
+  horizontal,
 }
 enum WindowSize {
-	mobile,
-	small,
-	medium,
-	large,
+  mobile,
+  small,
+  medium,
+  large,
 }
 enum ThemeMode {
-	darkmode,
-	lightmode,
+  darkmode,
+  lightmode,
 }
 
 export { WindowOrientation, WindowSize, ThemeMode };

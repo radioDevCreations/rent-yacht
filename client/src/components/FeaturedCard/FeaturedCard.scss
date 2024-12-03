@@ -1,38 +1,38 @@
-@import "../../styles/theme.scss";
+@import '../../styles/theme.scss';
 
 .featured-card {
-	@apply flex flex-col justify-between items-center;
-	width: 292px;
-	height: 329px;
-	background-color: $white;
-	border-radius: 20px;
-	padding-bottom: 31px;
-	padding-top: 133px;
-	-webkit-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 1);
-	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 1);
-	border-radius: 20px;
-	-webkit-transform: translateY(0);
-	transform: translateY(0);
-	-webkit-transition: all 0.2s ease-in-out;
-	transition: all 0.2s ease-in-out;
+  @apply flex flex-col justify-between items-center;
+  width: 292px;
+  height: 329px;
+  background-color: $white;
+  border-radius: 20px;
+  padding-bottom: 31px;
+  padding-top: 133px;
+  -webkit-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 1);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 1);
+  border-radius: 20px;
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .featured-card__title {
-	font-family: "Ubuntu", sans-serif;
-	font-size: $fontSize32px;
-	font-weight: $fontWeightMedium;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: $fontSize32px;
+  font-weight: $fontWeightMedium;
 }
 
 .featured-card__link {
-	text-decoration: none;
-	color: $black;
-	margin-right: 30px;
-	&:hover > .featured-card {
-		-webkit-transform: translateY(10px);
-		transform: translateY(-10px);
-	}
+  text-decoration: none;
+  color: $black;
+  margin-right: 30px;
+  &:hover > .featured-card {
+    -webkit-transform: translateY(10px);
+    transform: translateY(-10px);
+  }
 }
 
 .featured-card__link:last-child {
-	margin-right: 0;
+  margin-right: 0;
 }

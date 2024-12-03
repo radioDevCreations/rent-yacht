@@ -1,23 +1,23 @@
-@import "../../../styles/theme.scss";
+@import '../../../styles/theme.scss';
 
-.reservation-time{
-    @apply flex-col;
+.reservation-time {
+  @apply flex-col;
 }
 
-.reservation-time-indicator{
-    @apply flex;
-    margin-bottom: 32px;
+.reservation-time-indicator {
+  @apply flex;
+  margin-bottom: 32px;
 }
 
-.margin{
-    user-select: none;
-    content: " ";
-    width: 24px;
+.margin {
+  user-select: none;
+  content: ' ';
+  width: 24px;
 }
 
-.button-section{
-    padding: 12px 0;
-    display: flex;
-    flex-direction: row;
-    width: 520px;
+.button-section {
+  padding: 12px 0;
+  display: flex;
+  flex-direction: row;
+  width: 520px;
 }

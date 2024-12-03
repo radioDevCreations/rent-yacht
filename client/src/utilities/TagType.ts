@@ -1,5 +1,5 @@
 enum TagType {
-	days,
+  days,
 }
 
 export default TagType;

@@ -1,6 +1,6 @@
-enum SortDirection{
-    ASC = "ASC",
-    DESC = "DESC"
+enum SortDirection {
+  ASC = 'ASC',
+  DESC = 'DESC',
 }
 
 export default SortDirection;

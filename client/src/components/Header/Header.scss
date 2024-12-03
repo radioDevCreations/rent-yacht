@@ -1,40 +1,40 @@
-@import url("https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Indie+Flower&family=Lato:ital,wght@0,100;0,300;0,400;0,700;1,100;1,300;1,400;1,700&display=swap");
-@import "src/styles/theme.scss";
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Lato:ital,wght@0,100;0,300;0,400;0,700;1,100;1,300;1,400;1,700&display=swap');
+@import 'src/styles/theme.scss';
 
 .header {
-	@apply flex justify-between items-center;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	padding: 10px;
-	font-family: "Lato";
-	font-size: $fontSize14px;
+  @apply flex justify-between items-center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding: 10px;
+  font-family: 'Lato';
+  font-size: $fontSize14px;
 }
 
 .logo {
-	@apply flex items-center;
-	margin-right: 12px;
+  @apply flex items-center;
+  margin-right: 12px;
 }
 
 .logo__link {
-	@apply flex items-center;
-	text-decoration: none;
+  @apply flex items-center;
+  text-decoration: none;
 }
 
 .logo__text {
-	font-family: "Indie Flower", cursive;
-	font-size: 32px;
-	color: $oxfordBlue;
-	text-decoration: none;
+  font-family: 'Indie Flower', cursive;
+  font-size: 32px;
+  color: $oxfordBlue;
+  text-decoration: none;
 }
 
 .navigation-wrapper {
-	@apply flex items-center;
+  @apply flex items-center;
 }
 
 .navigation-switch {
-	font-size: 24px;
-	padding: 0 10px;
+  font-size: 24px;
+  padding: 0 10px;
 }

@@ -1,30 +1,29 @@
-import "./boatId.scss";
-import MainLayout from "@/layouts/MainLayout/MainLayout";
-import Reservation from "@/components/Reservation/Reservation";
+import './boatId.scss';
+import MainLayout from '@/layouts/MainLayout/MainLayout';
+import Reservation from '@/components/Reservation/Reservation';
 
 export async function getServerSideProps(context: any) {
-    const { boatId } = context.params;
+  const { boatId } = context.params;
 
-    if (!boatId) {
-        return {
-            notFound: true,
-        };
-    }
-
+  if (!boatId) {
     return {
-        props: { boatId },
+      notFound: true,
     };
+  }
+
+  return {
+    props: { boatId },
+  };
 }
 
-const ReservationPage = ({boatId}: any) => {
+const ReservationPage = ({ boatId }: any) => {
+  console.log(boatId);
 
-	console.log(boatId);
-
-	return (
-		<MainLayout>
-			<Reservation boatId={boatId != undefined ? +boatId : undefined}/>
-		</MainLayout>
-	);
+  return (
+    <MainLayout>
+      <Reservation boatId={boatId != undefined ? +boatId : undefined} />
+    </MainLayout>
+  );
 };
 
 export default ReservationPage;

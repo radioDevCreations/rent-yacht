@@ -1,14 +1,14 @@
-@import "../../styles/theme.scss";
+@import '../../styles/theme.scss';
 
 .search {
-	@apply flex justify-between;
-	width: 256px;
-	padding: 0px;
+  @apply flex justify-between;
+  width: 256px;
+  padding: 0px;
 }
 .search__input {
-	@include app-input;
-	width: 168px;
-	.input__field {
-		margin-bottom: 0px;
-	}
+  @include app-input;
+  width: 168px;
+  .input__field {
+    margin-bottom: 0px;
+  }
 }

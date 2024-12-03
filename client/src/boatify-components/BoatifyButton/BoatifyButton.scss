@@ -1,47 +1,47 @@
-@import "../../styles/theme.scss";
+@import '../../styles/theme.scss';
 
 .boatify-button {
-	@include app-button;
+  @include app-button;
 }
 
 .boatify-button--register,
 .boatify-button--login {
-	padding-left: 50px;
-	padding-right: 50px;
-	margin-bottom: 16px;
-	&:active,
-	&:focus {
-		padding-left: 50px;
-		padding-right: 50px;
-	}
+  padding-left: 50px;
+  padding-right: 50px;
+  margin-bottom: 16px;
+  &:active,
+  &:focus {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
 }
 .boatify-button--forgot-password,
 .boatify-button--reset-password {
-	margin: 6px 0 24px;
+  margin: 6px 0 24px;
 }
 
-.boatify-button--reservation-previous, 
-.boatify-button--reservation-time-prev, 
-.boatify-button--reservation-time-check{
-    margin-right: 16px;
+.boatify-button--reservation-previous,
+.boatify-button--reservation-time-prev,
+.boatify-button--reservation-time-check {
+  margin-right: 16px;
 }
 
 .boatify-button--contact {
-	height: 42px;
-	padding-left: 50px;
-	padding-right: 50px;
-	&:active,
-	&:focus {
-		padding-left: 50px;
-		padding-right: 50px;
-	}
+  height: 42px;
+  padding-left: 50px;
+  padding-right: 50px;
+  &:active,
+  &:focus {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
 }
 
-
-.boatify-button--reservation-time, .boatify-button--reservation-time-prev, .boatify-button--reservation-time-check{
-	width: 200px;
+.boatify-button--reservation-time,
+.boatify-button--reservation-time-prev,
+.boatify-button--reservation-time-check {
+  width: 200px;
 }
 
-.boatify-button--reservation-time-check{
-
+.boatify-button--reservation-time-check {
 }
