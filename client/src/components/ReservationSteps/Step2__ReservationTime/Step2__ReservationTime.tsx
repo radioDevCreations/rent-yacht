@@ -15,6 +15,7 @@ import { SystemBoolean } from '@/utilities/System';
 import BoatifyButton from '@/boatify-components/BoatifyButton/BoatifyButton';
 
 const Step2__ReservationTime = () => {
+	const dispatch = useDispatch();
     const [data, setData] = useState<Reservation[]>([]);
 	const [loading, setLoading] = useState<boolean>(true);
 	const [error, setError] = useState<string | null>(null);
@@ -24,22 +25,33 @@ const Step2__ReservationTime = () => {
 
     let reservationState = useSelector((state: any) => state.reservation);
 
-    const handleClickMakeReservation = async () => {
+    const handleClickCheckTime = async () => {
 		try {
 			setLoading(SystemBoolean.True);
 			setError(null);
+            const isAvailable: boolean = await DataLoader.isBoatAvailable(
+                1023,
+                startDate,
+                endDate
+            );
+        
+            if (isAvailable) {
+                console.log(`The boat ${1023} is available from ${startDate} to ${endDate}.`);
+            } else {
+                console.log(`The boat ${1023} is not available during the specified period.`);
+            }
 
+            const reservedates: any = await DataLoader.getAllReservedDatesForBoat(1023);
+        
+            if (reservedates) {
+                console.log(`Reserved dates for boat ${1023}: ${reservedates.join(', ')}`);
+            } else {
+                console.log(`The boat is free everyday`);
+            }
 
-			const response = await DataLoader.createReservation({
-				boatId: reservationState.new_ReservationData.boatId, 
-				userId: reservationState.new_ReservationData.loggedUserId, 
-				startDate: reservationState.new_ReservationData.startDate, 
-				endDate: reservationState.new_ReservationData.endDate, 
-				totalPrice: reservationState.new_ReservationData.totalPrice, 
-				reservationStatusId: reservationState.new_ReservationData.reservationStatusId});
-			console.log(response)
-			setData(data);
-			nextReservationPage();
+			
+			//setData(data);
+			//nextReservationPage();
 		  } catch (err: any) {
 			setError(err.message || "Failed to create reservation");
 			console.log(error)
@@ -87,30 +99,28 @@ const Step2__ReservationTime = () => {
                 />
             <div className='margin'></div>
             <BoatifyInput
-                label="Start Date"
-                key="start-date"
+                label="End Date"
+                key="end-date"
                 placeholder="2"
                 type={InputType.datetimeLocal}
                 onChange={(event: ChangeEvent<HTMLInputElement>) => setEndDate(event.target.value)}
                 />
         </div>
-        <BoatifyButton
-					onClick={handleClickPreviousPage}
-					value="Previous"
-					type={ButtonType.button}
-					classModifier="boatify-button--reservation-previous"
-				/>
-        <BoatifyButton
-					onClick={handleClickMakeReservation}
-					value="Make Reservation"
-					type={ButtonType.button}
-					classModifier="boatify-button--reservation"
-				/>
+        <div className="button-section">
+            <BoatifyButton
+                        onClick={handleClickPreviousPage}
+                        value="Previous"
+                        type={ButtonType.button}
+                        classModifier="boatify-button--reservation-time-prev"
+                    />
+            <BoatifyButton
+                        onClick={handleClickCheckTime}
+                        value="Check Time"
+                        type={ButtonType.button}
+                        classModifier="boatify-button--reservation-time"
+                    />
+        </div>
     </div>  );
 }
  
 export default Step2__ReservationTime;
-
-function dispatch(arg0: { payload: number; type: "reservation/setReservationPage"; }) {
-    throw new Error('Function not implemented.');
-}

@@ -48,11 +48,11 @@ const MyReservations: FC<MyReservationsProps> = ({ reservations }) => {
               </td>
               <td style={{ border: `1px solid ${TABLE_BORDER_COLOR}`, padding: "8px" }}>
               <BoatifyButton
-					value="Details"
-					type={ButtonType.button}
-					classModifier="boatify-button--details"
-                    onClick={() => BoatifyGoTo(`/details/reservation/${reservation.id}`)}
-				/>
+                value="Details"
+                type={ButtonType.button}
+                classModifier="boatify-button--details"
+                onClick={() => BoatifyGoTo(`/details/reservation/${reservation.id}`)}
+              />
               </td>
             </tr>
           ))}

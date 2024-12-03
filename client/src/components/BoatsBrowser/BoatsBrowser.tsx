@@ -19,7 +19,13 @@ const BoatsBrowser = () => {
 		  try {
 			setLoading(true);
 			setError(null);
-			const response = await DataLoader.selectAllSpecificBoats(1,10,"Model", SortDirection.ASC, "ne");
+			const response = await DataLoader.selectAllSpecificBoats({
+				pageNumber: 1,
+				pageSize: 10,
+				sortBy: "Model",
+				sortDirection: SortDirection.ASC,
+				searchPhrase: "ne",
+			});
 			//const response = await DataLoader.selectAllBoats();
 			const data: any[] = response;
 			console.log(data)

@@ -20,7 +20,7 @@
 	margin: 6px 0 24px;
 }
 
-.boatify-button--reservation-previous{
+.boatify-button--reservation-previous, .boatify-button--reservation-time-prev{
     margin-right: 16px;
 }
 
@@ -33,4 +33,9 @@
 		padding-left: 50px;
 		padding-right: 50px;
 	}
+}
+
+
+.boatify-button--reservation-time, .boatify-button--reservation-time-prev{
+	width: 200px;
 }

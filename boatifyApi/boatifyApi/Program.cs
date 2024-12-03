@@ -62,6 +62,7 @@ try
     builder.Services.AddScoped<IBoatHarbourService, BoatHarbourService>();
     builder.Services.AddScoped<IBoatService, BoatService>();
     builder.Services.AddScoped<IReservationService, ReservationService>();
+    builder.Services.AddScoped<IReservationTimeService, ReservationTimeService>();
     builder.Services.AddScoped<ExceptionHandlingMiddleware>();
     builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
     builder.Services.AddScoped<IValidator<RegisterUserDto>, RegisterUserDtoValidator>();
