@@ -13,15 +13,17 @@ import Reservation from '@/models/Reservation';
 import DataLoader from '@/dataLoaders/DataLoader';
 import { SystemBoolean } from '@/utilities/System';
 import BoatifyButton from '@/boatify-components/BoatifyButton/BoatifyButton';
+import moment from 'moment';
 
 const Step2__ReservationTime = () => {
 	const dispatch = useDispatch();
     const [data, setData] = useState<Reservation[]>([]);
+    const [isAvailable, setIsAvailable] = useState<boolean>(SystemBoolean.False);
 	const [loading, setLoading] = useState<boolean>(true);
 	const [error, setError] = useState<string | null>(null);
 
-    const [startDate, setStartDate] = useState(new Date().toISOString());
-    const [endDate, setEndDate] = useState(new Date().toISOString());
+    const [startDate, setStartDate] = useState(moment(new Date()).format('YYYY-MM-DD'));
+    const [endDate, setEndDate] = useState(moment((new Date())).add(1, 'days').format('YYYY-MM-DD'));
 
     let reservationState = useSelector((state: any) => state.reservation);
 
@@ -29,13 +31,14 @@ const Step2__ReservationTime = () => {
 		try {
 			setLoading(SystemBoolean.True);
 			setError(null);
-            const isAvailable: boolean = await DataLoader.isBoatAvailable(
+            const isAvailableSlot: boolean = await DataLoader.isBoatAvailable(
                 1023,
                 startDate,
                 endDate
             );
         
-            if (isAvailable) {
+            if (isAvailableSlot) {
+                setIsAvailable(true);
                 console.log(`The boat ${1023} is available from ${startDate} to ${endDate}.`);
             } else {
                 console.log(`The boat ${1023} is not available during the specified period.`);
@@ -64,7 +67,7 @@ const Step2__ReservationTime = () => {
 		dispatch(setReservationPage(reservationState.new_ReservationPage - 1));
 	};
 
-    const nextReservationPage = () => {
+    const handleNextReservationPage = () => {
 		dispatch(setReservationPage(reservationState.new_ReservationPage + 1));
 	};
 
@@ -117,8 +120,15 @@ const Step2__ReservationTime = () => {
                         onClick={handleClickCheckTime}
                         value="Check Time"
                         type={ButtonType.button}
-                        classModifier="boatify-button--reservation-time"
+                        classModifier="boatify-button--reservation-time-check"
                     />
+            <BoatifyButton
+                onClick={handleNextReservationPage}
+                value="Show Reservation"
+                type={ButtonType.button}
+                classModifier="boatify-button--reservation-time boatify-button--orange"
+                disabled={!isAvailable}
+            />
         </div>
     </div>  );
 }

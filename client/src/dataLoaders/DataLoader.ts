@@ -106,13 +106,14 @@ abstract class DataLoader {
      * @property {string} [searchPhrase] - (Optional) A keyword or phrase to filter results by a search term.
      * @returns Promise<any> - Paginated list of boats.
      */
-    static selectAllSpecificBoats = async (
+    static selectAllSpecificBoats = async (props: {
 		pageNumber: number, 
 		pageSize: number,
 		sortBy: string,
 		sortDirection: SortDirection,
 		searchPhrase?: string
-	): Promise<any> => {
+	}): Promise<any> => {
+        const { pageNumber, pageSize, sortBy, sortDirection, searchPhrase } = props;
 		return await axiosInstance.get(BoatifyApiURL(`boat?${queryString.stringify(searchPhrase ? {searchPhrase, pageNumber, pageSize, sortBy, sortDirection} : {pageNumber, pageSize, sortBy, sortDirection})}`))
 		  .then(response => {
 			return response.data;
@@ -135,6 +136,22 @@ abstract class DataLoader {
                 throw error;
             });
     };
+
+     /**
+     * Fetch boat by id.
+     * @returns Promise<any> - Boat data.
+     */
+     static selectBoatById = async (boatId: number | undefined): Promise<any> => {
+        if (boatId === undefined) return;
+        return await axiosInstance
+            .get(BoatifyApiURL(`boat/${boatId}`))
+            .then(response => response.data)
+            .catch(error => {
+                console.error(error);
+                throw error;
+            });
+    };
+
 
 	//BOAT AVAILABILITY
 

@@ -2,7 +2,7 @@ import Captions from '@/captions/captions';
 import './Step1__ReservationBoat.scss';
 import Image from "next/image";
 
-const Step1__ReservationBoat = () => {
+const Step1__ReservationBoat = (data: any) => {
     return ( <div className="reservation-summary__boat-data boat-data">
         <Image src="https://iqboatlifts.com/wp-content/uploads/2018/06/Yacht-vs-Boat-Whats-the-Difference-Between-the-Two.jpg"
                 alt="boat"
@@ -11,16 +11,16 @@ const Step1__ReservationBoat = () => {
                 width={500}/>
         <div className="boat-data__margin"></div>
         <h2 className="boat-data__item boat-data__model">
-            Boat Model
+            {data.boat.model}
         </h2>
         <h3 className="boat-data__item boat-data__name">
-            Boat Name
+            {data.boat.name}
         </h3>
         <p className="boat-data__item boat-data__type">
-            {Captions.Type}Boat Type
+            {Captions.Type}{data.boat.type}
         </p>
         <p className="boat-data__item boat-data__description">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            {data.boat.description}
         </p>
     </div> );
 }

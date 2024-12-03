@@ -20,7 +20,9 @@
 	margin: 6px 0 24px;
 }
 
-.boatify-button--reservation-previous, .boatify-button--reservation-time-prev{
+.boatify-button--reservation-previous, 
+.boatify-button--reservation-time-prev, 
+.boatify-button--reservation-time-check{
     margin-right: 16px;
 }
 
@@ -36,6 +38,10 @@
 }
 
 
-.boatify-button--reservation-time, .boatify-button--reservation-time-prev{
+.boatify-button--reservation-time, .boatify-button--reservation-time-prev, .boatify-button--reservation-time-check{
 	width: 200px;
+}
+
+.boatify-button--reservation-time-check{
+
 }
