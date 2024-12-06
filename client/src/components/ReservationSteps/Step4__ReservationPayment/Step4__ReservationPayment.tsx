@@ -1,8 +1,8 @@
 import ButtonType from '@/utilities/ButtonType';
-import './Step5__ReservationPayment.scss';
+import './Step4__ReservationPayment.scss';
 import BoatifyButton from '@/boatify-components/BoatifyButton/BoatifyButton';
 
-const Step5__ReservationPayment = () => {
+const Step4__ReservationPayment = () => {
   return (
     <div className="reservation-summary">
       <BoatifyButton
@@ -14,4 +14,4 @@ const Step5__ReservationPayment = () => {
   );
 };
 
-export default Step5__ReservationPayment;
+export default Step4__ReservationPayment;

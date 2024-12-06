@@ -4,6 +4,7 @@
 
 .boatify-stepper__indicator {
   @apply flex justify-between;
+  padding-bottom: 32px;
 }
 
 .boatify-stepper__step {

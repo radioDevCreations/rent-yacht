@@ -1,7 +1,9 @@
 @import 'src/styles/theme.scss';
 
 .reservation {
-  @apply flex flex-col justify-center items-center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   min-height: calc(100vh - 353px);
   padding-top: 27px;
   width: 100%;
@@ -10,7 +12,7 @@
 .reservation__board {
   @apply flex flex-col justify-between items-center;
   width: 1000px;
-  height: 980px;
+  min-height: 720px;
   padding: 48px 128px;
   background-color: $lightGray;
   border-radius: 12px;

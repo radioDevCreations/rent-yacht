@@ -19,6 +19,10 @@ const Step1__ReservationBoat = (data: any) => {
         {Captions.Type}
         {data.boat.type}
       </p>
+      <p className="boat-data__item boat-data__type">
+        {Captions.PricePerDay}
+        {data.boat.pricePerDay} {Captions.PLN}
+      </p>
       <p className="boat-data__item boat-data__description">
         {data.boat.description}
       </p>

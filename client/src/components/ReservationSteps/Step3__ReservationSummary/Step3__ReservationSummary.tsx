@@ -1,5 +1,5 @@
 import ButtonType from '@/utilities/ButtonType';
-import './Step4__ReservationSummary.scss';
+import './Step3__ReservationSummary.scss';
 import BoatifyButton from '@/boatify-components/BoatifyButton/BoatifyButton';
 import { useEffect, useState } from 'react';
 import SortDirection from '@/utilities/SortDirection';
@@ -16,7 +16,7 @@ import BoatifyDateOperations from '@/utilities/BoatifyDateOperations';
 import { FaArrowRight } from 'react-icons/fa';
 import Reservation from '@/models/Reservation';
 
-const Step4__ReservationSummary = () => {
+const Step3__ReservationSummary = () => {
   const [data, setData] = useState<Reservation[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -91,7 +91,7 @@ const Step4__ReservationSummary = () => {
           including versions of Lorem Ipsum.
         </p>
       </div>
-      <div className="reservation-summary__reservation-time reservation-time">
+      <div className="reservation-summary__reservation-time reservation-time-indicator">
         <div className="reservation-time__from-tile">
           <span className="reservation-time__from-day">
             {BoatifyDateOperations.getDayFromISOString(
@@ -146,4 +146,4 @@ const Step4__ReservationSummary = () => {
   );
 };
 
-export default Step4__ReservationSummary;
+export default Step3__ReservationSummary;

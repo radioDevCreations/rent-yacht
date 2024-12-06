@@ -5,8 +5,8 @@ import BoatifyStepper from '@/boatify-components/BoatifyStepper/BoatifyStepper';
 import Pages, { Steps } from '../Pages/Pages';
 import Step1__ReservationBoat from '../ReservationSteps/Step1__ReservationBoat/Step1__ReservationBoat';
 import Step2__ReservationTime from '../ReservationSteps/Step2__ReservationTime/Step2__ReservationTime';
-import Step4__ReservationSummary from '../ReservationSteps/Step4__ReservationSummary/Step4__ReservationSummary';
-import Step5__ReservationPayment from '../ReservationSteps/Step5__ReservationPayment/Step5__ReservationPayment';
+import Step3__ReservationSummary from '../ReservationSteps/Step3__ReservationSummary/Step3__ReservationSummary';
+import Step4__ReservationPayment from '../ReservationSteps/Step4__ReservationPayment/Step4__ReservationPayment';
 import { FC, useEffect, useState } from 'react';
 import DataLoader from '@/dataLoaders/DataLoader';
 import SortDirection from '@/utilities/SortDirection';
@@ -43,17 +43,16 @@ const Reservation: FC<ReservationProps> = ({ boatId }) => {
   }, []);
 
   const steps = [
-    'Reservation Boat',
-    'Reservation Time',
-    'reservation',
-    'Summary',
+    'Chosen Boat',
+    'Select Time',
+    'Reservation Summary',
     'Payment',
   ];
   const stepsComponents: Steps = {
     step1: <Step1__ReservationBoat boat={data}></Step1__ReservationBoat>,
     step2: <Step2__ReservationTime></Step2__ReservationTime>,
-    step4: <Step4__ReservationSummary></Step4__ReservationSummary>,
-    stepFinal: <Step5__ReservationPayment></Step5__ReservationPayment>,
+    step3: <Step3__ReservationSummary></Step3__ReservationSummary>,
+    step4: <Step4__ReservationPayment></Step4__ReservationPayment>,
   };
   return (
     <form className="reservation">

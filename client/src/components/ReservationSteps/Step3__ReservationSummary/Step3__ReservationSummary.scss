@@ -52,3 +52,9 @@
   padding: 20px 0;
   font-size: $fontSize22px;
 }
+
+.reservation-time-indicator {
+  @apply flex;
+  flex-direction: row;
+  margin-bottom: 32px;
+}

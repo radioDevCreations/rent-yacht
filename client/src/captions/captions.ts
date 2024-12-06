@@ -11,6 +11,8 @@ enum Captions {
   X = 'X',
   EqualsSign = '=',
   Type = 'Type: ',
+  PricePerDay = 'Price per Day: ',
+  PLN = 'PLN',
 }
 
 export default Captions;

@@ -8,12 +8,13 @@ import InputType from '@/utilities/InputType';
 import BoatifyDateOperations from '@/utilities/BoatifyDateOperations';
 import { FaArrowRight } from 'react-icons/fa6';
 import ButtonType from '@/utilities/ButtonType';
-import { setReservationPage } from '@/redux/slices/reservationSlice';
+import { setEndDate, setReservationPage, setStartDate } from '@/redux/slices/reservationSlice';
 import Reservation from '@/models/Reservation';
 import DataLoader from '@/dataLoaders/DataLoader';
 import { SystemBoolean } from '@/utilities/System';
 import BoatifyButton from '@/boatify-components/BoatifyButton/BoatifyButton';
 import moment from 'moment';
+import Captions from '@/captions/captions';
 
 const Step2__ReservationTime = () => {
   const dispatch = useDispatch();
@@ -22,10 +23,10 @@ const Step2__ReservationTime = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const [startDate, setStartDate] = useState(
+  const [startDate, setTemporaryStartDate] = useState(
     moment(new Date()).format('YYYY-MM-DD')
   );
-  const [endDate, setEndDate] = useState(
+  const [endDate, setTemporaryEndDate] = useState(
     moment(new Date()).add(1, 'days').format('YYYY-MM-DD')
   );
 
@@ -78,12 +79,15 @@ const Step2__ReservationTime = () => {
   };
 
   const handleNextReservationPage = () => {
+    dispatch(setStartDate(startDate));
+    dispatch(setEndDate(endDate));
     dispatch(setReservationPage(reservationState.new_ReservationPage + 1));
   };
 
   return (
     <div className="reservation-time">
-      <div className="reservation-time-indicator">
+      <div className="time-and-price">
+      <div className="reservation-time-indicator--time">
         <div className="reservation-time__from-tile">
           <span className="reservation-time__from-day">
             {BoatifyDateOperations.getDayFromISOString(startDate)}
@@ -104,6 +108,17 @@ const Step2__ReservationTime = () => {
           </span>
         </div>
       </div>
+      <div className="reservation-price">
+      <span className="total-price__price-per-day">600.00 PLN</span>
+        <span className="total-price__X"> {Captions.X} </span>
+        <span className="total-price__days-count">7 days</span>
+        <span className="total-price__equals-sign">
+          {' '}
+          {Captions.EqualsSign}{' '}
+        </span>
+        <span className="total-price__total">600.00 PLN</span>
+      </div>
+      </div>
       <div className="input-section">
         <BoatifyInput
           label="Start Date"
@@ -111,7 +126,7 @@ const Step2__ReservationTime = () => {
           placeholder="2"
           type={InputType.datetimeLocal}
           onChange={(event: ChangeEvent<HTMLInputElement>) =>
-            setStartDate(event.target.value)
+            setTemporaryStartDate(event.target.value)
           }
         />
         <div className="margin"></div>
@@ -121,7 +136,7 @@ const Step2__ReservationTime = () => {
           placeholder="2"
           type={InputType.datetimeLocal}
           onChange={(event: ChangeEvent<HTMLInputElement>) =>
-            setEndDate(event.target.value)
+            setTemporaryEndDate(event.target.value)
           }
         />
       </div>
@@ -140,7 +155,7 @@ const Step2__ReservationTime = () => {
         />
         <BoatifyButton
           onClick={handleNextReservationPage}
-          value="Show Reservation"
+          value="Select Time"
           type={ButtonType.button}
           classModifier="boatify-button--reservation-time boatify-button--orange"
           disabled={!isAvailable}
