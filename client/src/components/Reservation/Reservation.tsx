@@ -50,8 +50,8 @@ const Reservation: FC<ReservationProps> = ({ boatId }) => {
   ];
   const stepsComponents: Steps = {
     step1: <Step1__ReservationBoat boat={data}></Step1__ReservationBoat>,
-    step2: <Step2__ReservationTime></Step2__ReservationTime>,
-    step3: <Step3__ReservationSummary></Step3__ReservationSummary>,
+    step2: <Step2__ReservationTime boat={data}></Step2__ReservationTime>,
+    step3: <Step3__ReservationSummary boat={data}></Step3__ReservationSummary>,
     step4: <Step4__ReservationPayment></Step4__ReservationPayment>,
   };
   return (

@@ -16,9 +16,8 @@ import BoatifyButton from '@/boatify-components/BoatifyButton/BoatifyButton';
 import moment from 'moment';
 import Captions from '@/captions/captions';
 
-const Step2__ReservationTime = () => {
+const Step2__ReservationTime = (data: any) => {
   const dispatch = useDispatch();
-  const [data, setData] = useState<Reservation[]>([]);
   const [isAvailable, setIsAvailable] = useState<boolean>(SystemBoolean.False);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -31,6 +30,7 @@ const Step2__ReservationTime = () => {
   );
 
   let reservationState = useSelector((state: any) => state.reservation);
+  let boat = useSelector((state: any) => state.reservation);
 
   const handleClickCheckTime = async () => {
     try {
@@ -111,7 +111,7 @@ const Step2__ReservationTime = () => {
       <div className="reservation-price">
       <span className="total-price__price-per-day">600.00 PLN</span>
         <span className="total-price__X"> {Captions.X} </span>
-        <span className="total-price__days-count">7 days</span>
+        <span className="total-price__days-count">{moment(endDate, 'YYYY-MM-DD').diff(startDate, 'days')} days</span>
         <span className="total-price__equals-sign">
           {' '}
           {Captions.EqualsSign}{' '}

@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import moment from 'moment';
 
 type ReservationState = {
   new_ReservationPage: number;
@@ -7,6 +8,7 @@ type ReservationState = {
     boatId: number;
     startDate: string | null;
     endDate: string | null;
+    days: number;
     totalPrice: number;
     reservationStatusId: number;
   };
@@ -19,6 +21,7 @@ const initialState: ReservationState = {
     boatId: 1049,
     startDate: null,
     endDate: null,
+    days: 0,
     totalPrice: 100,
     reservationStatusId: 1,
   },
@@ -38,11 +41,13 @@ const reservationSlice = createSlice({
       state.new_ReservationData.startDate = new Date(
         action.payload
       ).toISOString();
+      state.new_ReservationData.days = moment(state.new_ReservationData.startDate, 'YYYY-MM-DD').diff(state.new_ReservationData.endDate, 'days');
     },
     setEndDate: (state, action: PayloadAction<string>) => {
       state.new_ReservationData.endDate = new Date(
         action.payload
       ).toISOString();
+      state.new_ReservationData.days = moment(state.new_ReservationData.startDate, 'YYYY-MM-DD').diff(state.new_ReservationData.endDate, 'days');
     },
   },
 });

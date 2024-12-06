@@ -16,7 +16,7 @@ import BoatifyDateOperations from '@/utilities/BoatifyDateOperations';
 import { FaArrowRight } from 'react-icons/fa';
 import Reservation from '@/models/Reservation';
 
-const Step3__ReservationSummary = () => {
+const Step3__ReservationSummary = (boat: any) => {
   const [data, setData] = useState<Reservation[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
