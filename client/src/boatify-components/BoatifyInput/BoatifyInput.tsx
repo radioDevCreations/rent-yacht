@@ -3,6 +3,7 @@ import InputType from '@/utilities/InputType';
 import { ChangeEventHandler } from 'react';
 import './BoatifyInput.scss';
 import BoatifyInputVariant from './BoatifyInputVariant';
+import { SystemBoolean } from '@/utilities/System';
 
 const BoatifyInput = ({
   id,
@@ -11,7 +12,7 @@ const BoatifyInput = ({
   label,
   type,
   placeholder,
-  isLongInput = false,
+  isLongInput = SystemBoolean.False,
   onChange,
   variant,
 }: IBoatifyInputProps) => {

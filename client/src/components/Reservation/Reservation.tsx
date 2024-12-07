@@ -11,6 +11,7 @@ import { FC, useEffect, useState } from 'react';
 import DataLoader from '@/dataLoaders/DataLoader';
 import SortDirection from '@/utilities/SortDirection';
 import Captions from '@/captions/captions';
+import { SystemBoolean } from '@/utilities/System';
 
 interface ReservationProps {
   boatId: number | undefined;
@@ -18,7 +19,7 @@ interface ReservationProps {
 
 const Reservation: FC<ReservationProps> = ({ boatId }) => {
   const [data, setData] = useState<any>({});
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(SystemBoolean.True);
   const [error, setError] = useState<string | null>(null);
   const new_ReservationPage = useSelector(
     (state: any) => state.reservation.new_ReservationPage
@@ -27,7 +28,7 @@ const Reservation: FC<ReservationProps> = ({ boatId }) => {
   useEffect(() => {
     const fetchReservations = async () => {
       try {
-        setLoading(true);
+        setLoading(SystemBoolean.True);
         setError(null);
         const response = await DataLoader.selectBoatById(boatId);
         const data: any[] = response;
@@ -35,7 +36,7 @@ const Reservation: FC<ReservationProps> = ({ boatId }) => {
       } catch (err: any) {
         setError(err.message || 'Failed to fetch reservations');
       } finally {
-        setLoading(false);
+        setLoading(SystemBoolean.False);
       }
     };
 

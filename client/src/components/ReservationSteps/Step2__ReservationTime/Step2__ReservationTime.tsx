@@ -17,7 +17,7 @@ import Captions from '@/captions/captions';
 const Step2__ReservationTime = (data: any) => {
   const dispatch = useDispatch();
   const [isAvailable, setIsAvailable] = useState<boolean>(SystemBoolean.False);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(SystemBoolean.True);
   const [error, setError] = useState<string | null>(null);
 
   const [startDate, setTemporaryStartDate] = useState(
@@ -40,7 +40,7 @@ const Step2__ReservationTime = (data: any) => {
       );
 
       if (isAvailableSlot) {
-        setIsAvailable(true);
+        setIsAvailable(SystemBoolean.True);
       }
 
       const reservedates: any =
@@ -57,7 +57,7 @@ const Step2__ReservationTime = (data: any) => {
       setError(err.message || 'Failed to create reservation');
       console.log(error);
     } finally {
-      setLoading(false);
+      setLoading(SystemBoolean.False);
     }
   };
 

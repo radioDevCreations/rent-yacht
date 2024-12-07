@@ -1,13 +1,14 @@
 import './boatId.scss';
 import MainLayout from '@/layouts/MainLayout/MainLayout';
 import Reservation from '@/components/Reservation/Reservation';
+import { SystemBoolean } from '@/utilities/System';
 
 export async function getServerSideProps(context: any) {
   const { boatId } = context.params;
 
   if (!boatId) {
     return {
-      notFound: true,
+      notFound: SystemBoolean.True,
     };
   }
 

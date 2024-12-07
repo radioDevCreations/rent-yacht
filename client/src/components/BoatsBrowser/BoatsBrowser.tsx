@@ -7,16 +7,17 @@ import { useEffect, useState } from 'react';
 import { BoatDto } from '@/components/BoatsBoard/BoatsBoard';
 import DataLoader from '@/dataLoaders/DataLoader';
 import SortDirection from '@/utilities/SortDirection';
+import { SystemBoolean } from '@/utilities/System';
 
 const BoatsBrowser = () => {
   const [data, setData] = useState<any>({});
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(SystemBoolean.True);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchReservations = async () => {
       try {
-        setLoading(true);
+        setLoading(SystemBoolean.True);
         setError(null);
         const response = await DataLoader.selectAllSpecificBoats({
           pageNumber: 1,
@@ -30,7 +31,7 @@ const BoatsBrowser = () => {
       } catch (err: any) {
         setError(err.message || 'Failed to fetch reservations');
       } finally {
-        setLoading(false);
+        setLoading(SystemBoolean.False);
       }
     };
 
