@@ -1,8 +1,8 @@
 import BoatifyButton from '@/boatify-components/BoatifyButton/BoatifyButton';
 import './MyReservations.scss';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import ButtonType from '@/utilities/ButtonType';
-import BoatifyGoTo from '@/utilities/BoatifyGoTo';
+import { BoatifyGoTo, BoatifyGoToInBlank } from '@/utilities/BoatifyGoTo';
 import Reservation from '@/models/Reservation';
 
 const TABLE_BORDER_COLOR = '#122c78';
@@ -12,6 +12,13 @@ interface MyReservationsProps {
 }
 
 const MyReservations: FC<MyReservationsProps> = ({ reservations }) => {
+
+  useEffect(() => {
+    const jwtToken = sessionStorage.getItem('token');
+    if(!jwtToken?.length) BoatifyGoTo('/');
+  }, [])
+
+
   return (
     <section className="my-reservations">
       <header className="my-reservations__header">
@@ -156,7 +163,7 @@ const MyReservations: FC<MyReservationsProps> = ({ reservations }) => {
                   type={ButtonType.button}
                   classModifier="boatify-button--details"
                   onClick={() =>
-                    BoatifyGoTo(`/details/reservation/${reservation.id}`)
+                    BoatifyGoToInBlank(`/details/reservation/${reservation.id}`)
                   }
                 />
               </td>

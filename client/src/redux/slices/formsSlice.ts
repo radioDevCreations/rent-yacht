@@ -3,8 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const initialState = {
   login: {
-    email: '',
-    password: '',
+    jwtToken: ''
   },
   register: {
     firstName: '',
@@ -35,21 +34,12 @@ const formsSlice = createSlice({
   name: 'forms',
   initialState,
   reducers: {
-    setLoginEmail: (state, action: PayloadAction<string>) => {
+    setJwtToken: (state, action: PayloadAction<string>) => {
       return {
         ...state,
         login: {
           ...state.login,
-          email: action.payload,
-        },
-      };
-    },
-    setLoginPassword: (state, action: PayloadAction<string>) => {
-      return {
-        ...state,
-        login: {
-          ...state.login,
-          password: action.payload,
+          jwtToken: action.payload,
         },
       };
     },
@@ -192,8 +182,7 @@ const formsSlice = createSlice({
 });
 
 export const {
-  setLoginEmail,
-  setLoginPassword,
+  setJwtToken,
   setRegisterPage,
   setRegisterFirstName,
   setRegisterSurname,

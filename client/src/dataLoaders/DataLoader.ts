@@ -203,6 +203,24 @@ abstract class DataLoader {
         throw error;
       });
   };
+
+ //ACCOUNT
+
+  static loginUser = async (data: {
+    email: string;
+    password: string;
+  }): Promise<any> => {
+    return await axiosInstance
+      .post(BoatifyApiURL(`account/login`), data)
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error(error);
+        throw error;
+      });
+  };
+
 }
+
+
 
 export default DataLoader;

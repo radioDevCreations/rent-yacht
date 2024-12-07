@@ -12,6 +12,7 @@ import DataLoader from '@/dataLoaders/DataLoader';
 import SortDirection from '@/utilities/SortDirection';
 import Captions from '@/captions/captions';
 import { SystemBoolean } from '@/utilities/System';
+import { BoatifyGoTo } from '@/utilities/BoatifyGoTo';
 
 interface ReservationProps {
   boatId: number | undefined;
@@ -26,6 +27,10 @@ const Reservation: FC<ReservationProps> = ({ boatId }) => {
   );
 
   useEffect(() => {
+
+    const jwtToken = sessionStorage.getItem('token');
+    if(!jwtToken?.length) BoatifyGoTo('/');
+
     const fetchReservations = async () => {
       try {
         setLoading(SystemBoolean.True);

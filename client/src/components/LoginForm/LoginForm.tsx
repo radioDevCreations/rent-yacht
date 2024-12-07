@@ -1,30 +1,47 @@
+"use client"
 import './LoginForm.scss';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import httpClient from '@/axios/httpClient';
 import ButtonType from '@/utilities/ButtonType';
 import BoatifyButton from '@/boatify-components/BoatifyButton/BoatifyButton';
 import { useDispatch, useSelector } from 'react-redux';
-import { setLoginEmail, setLoginPassword } from '@/redux/slices/formsSlice';
+import { setJwtToken } from '@/redux/slices/formsSlice';
 import IMAGE from '../../../public/links';
+import DataLoader from '@/dataLoaders/DataLoader';
+import {BoatifyGoTo} from '@/utilities/BoatifyGoTo';
 
 const LoginForm = () => {
+  const [email, setEmail]= useState('');
+  const [password, setPassword]= useState('');
   const dispatch = useDispatch();
-  const loginState = useSelector((state: any) => state.forms.login);
-  const handleLoginEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch(setLoginEmail(event?.target?.value));
-  };
-  const handleLoginPasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch(setLoginPassword(event?.target?.value));
-  };
+  
   const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
-    const response = await httpClient.post('//localhost:5000/login', {
-      email: loginState.email,
-      password: loginState.password,
+
+    const response = await DataLoader.loginUser({
+      email: email,
+      password: password,
     });
+
+    
+    sessionStorage.setItem('token', response);
   };
+
+
+  const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setEmail(event?.target?.value);
+  };
+  const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setPassword(event?.target?.value);
+  };
+
+  useEffect(() => {
+    const jwtToken = sessionStorage.getItem('token');
+    if(jwtToken?.length) BoatifyGoTo('/');
+  }, [])
+
   return (
     <form className="login" onSubmit={handleSubmit}>
       <figure className="profile">
@@ -43,8 +60,8 @@ const LoginForm = () => {
           className="input__field"
           type="email"
           placeholder="Login"
-          value={loginState.loginEmail}
-          onChange={handleLoginEmailChange}
+          value={email}
+          onChange={handleEmailChange}
         />
       </div>
       <div className="input">
@@ -53,8 +70,8 @@ const LoginForm = () => {
           className="input__field"
           type="password"
           placeholder="Password"
-          value={loginState.loginPassword}
-          onChange={handleLoginPasswordChange}
+          value={password}
+          onChange={handlePasswordChange}
         />
       </div>
       <section className="login__button-section">
