@@ -21,20 +21,21 @@ import BoatifyInputProps from '@/utilities/IBoatifyInputProps';
 import InputType from '@/utilities/InputType';
 import httpClient from '@/axios/httpClient';
 import IMAGE from '../../../public/links';
+import { SystemBoolean } from '@/utilities/System';
 
 const LastMinuteBoard = () => {
   const dispatch = useDispatch();
   const registerState = useSelector((state: any) => state.forms.register);
   const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
-    setRegisterIsLoading(true);
+    setRegisterIsLoading(SystemBoolean.True);
     const response = await httpClient.post('//127.0.0.1:5000/register', {
       email: registerState.email,
       password: registerState.newPassword,
       firstName: registerState.firstName,
       surname: registerState.surname,
     });
-    setRegisterIsLoading(false);
+    setRegisterIsLoading(SystemBoolean.False);
     if ('id' in response?.data) console.log('registered');
     else console.error('err');
   };

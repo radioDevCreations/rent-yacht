@@ -18,7 +18,7 @@ import Reservation from '@/models/Reservation';
 
 const Step3__ReservationSummary = (boat: any) => {
   const [data, setData] = useState<Reservation[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(SystemBoolean.True);
   const [error, setError] = useState<string | null>(null);
 
   const dispatch = useDispatch();
@@ -54,7 +54,7 @@ const Step3__ReservationSummary = (boat: any) => {
       setError(err.message || 'Failed to create reservation');
       console.log(error);
     } finally {
-      setLoading(false);
+      setLoading(SystemBoolean.False);
     }
   };
 

@@ -21,6 +21,7 @@ import BoatifyInputProps from '@/utilities/IBoatifyInputProps';
 import InputType from '@/utilities/InputType';
 import httpClient from '@/axios/httpClient';
 import IMAGE from '../../../public/links';
+import { SystemBoolean } from '@/utilities/System';
 
 const REGISTER_PAGES_NUMBER = 3;
 const NODES_PER_PAGE = 2;
@@ -40,14 +41,14 @@ const RegisterForm = () => {
   };
   const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
-    setRegisterIsLoading(true);
+    setRegisterIsLoading(SystemBoolean.True);
     const response = await httpClient.post('//127.0.0.1:5000/register', {
       email: registerState.email,
       password: registerState.newPassword,
       firstName: registerState.firstName,
       surname: registerState.surname,
     });
-    setRegisterIsLoading(false);
+    setRegisterIsLoading(SystemBoolean.False);
     if ('id' in response?.data) console.log('registered');
     else console.log('err');
   };
