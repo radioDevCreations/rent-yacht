@@ -10,6 +10,7 @@ import Step4__ReservationPayment from '../ReservationSteps/Step4__ReservationPay
 import { FC, useEffect, useState } from 'react';
 import DataLoader from '@/dataLoaders/DataLoader';
 import SortDirection from '@/utilities/SortDirection';
+import Captions from '@/captions/captions';
 
 interface ReservationProps {
   boatId: number | undefined;
@@ -30,7 +31,6 @@ const Reservation: FC<ReservationProps> = ({ boatId }) => {
         setError(null);
         const response = await DataLoader.selectBoatById(boatId);
         const data: any[] = response;
-        console.log(data);
         setData(data);
       } catch (err: any) {
         setError(err.message || 'Failed to fetch reservations');
@@ -43,11 +43,16 @@ const Reservation: FC<ReservationProps> = ({ boatId }) => {
   }, []);
 
   const steps = [
-    'Chosen Boat',
-    'Select Time',
-    'Reservation Summary',
-    'Payment',
+    Captions.Step1Label,
+    Captions.Step2Label,
+    Captions.Step3Label,
+    Captions.Step4Label,
   ];
+
+  const handleSubmit = () => {
+    console.log('payment successful')
+  }
+
   const stepsComponents: Steps = {
     step1: <Step1__ReservationBoat boat={data}></Step1__ReservationBoat>,
     step2: <Step2__ReservationTime boat={data}></Step2__ReservationTime>,
@@ -55,7 +60,7 @@ const Reservation: FC<ReservationProps> = ({ boatId }) => {
     step4: <Step4__ReservationPayment></Step4__ReservationPayment>,
   };
   return (
-    <form className="reservation">
+    <form className="reservation" onSubmit={handleSubmit}>
       <section className="reservation__board">
         <BoatifyStepper steps={steps} currentPosition={new_ReservationPage}>
           <Pages

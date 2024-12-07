@@ -18,7 +18,7 @@ const initialState: ReservationState = {
   new_ReservationPage: 1,
   new_ReservationData: {
     loggedUserId: 2,
-    boatId: 1049,
+    boatId: null,
     startDate: null,
     endDate: null,
     days: 0,
@@ -49,9 +49,13 @@ const reservationSlice = createSlice({
       ).toISOString();
       state.new_ReservationData.days = moment(state.new_ReservationData.startDate, 'YYYY-MM-DD').diff(state.new_ReservationData.endDate, 'days');
     },
-  },
+    setBoatId: (state, action: PayloadAction<number>) => {
+      state.new_ReservationData.boatId = action.payload },
+    setTotalPrice: (state, action: PayloadAction<number>) => {
+      state.new_ReservationData.totalPrice = action.payload },
+    },
 });
 
-export const { setReservationPage, setStartDate, setEndDate } =
+export const { setReservationPage, setStartDate, setEndDate, setTotalPrice, setBoatId } =
   reservationSlice.actions;
 export default reservationSlice.reducer;

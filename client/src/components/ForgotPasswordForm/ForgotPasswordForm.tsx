@@ -17,7 +17,6 @@ const ForgotPasswordForm = () => {
   };
   const handleSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault();
-    console.log(forgotPasswordState);
   };
   return (
     <form className="forgot-password" onSubmit={handleSubmit}>
@@ -25,10 +24,6 @@ const ForgotPasswordForm = () => {
         Provide your e-mail address to which we will send an e-mail to reset
         your password.
       </span>
-      {/* <span className="forgot-password__read-more">
-					You should receive message up to 5 minutes. If you can't find it try
-					again or contact our support.
-				</span> */}
 
       <div className="input">
         <input

@@ -13,6 +13,10 @@ enum Captions {
   Type = 'Type: ',
   PricePerDay = 'Price per Day: ',
   PLN = 'PLN',
+  Step1Label = 'Chosen Boat',
+  Step2Label = 'Select Time',
+  Step3Label = 'Reservation Summary',
+  Step4Label = 'Payment',
 }
 
 export default Captions;

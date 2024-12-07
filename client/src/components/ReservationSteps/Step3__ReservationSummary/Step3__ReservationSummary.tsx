@@ -23,19 +23,6 @@ const Step3__ReservationSummary = (boat: any) => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    let currentDate = new Date();
-    let futureDate = new Date(currentDate);
-
-    futureDate.setDate(currentDate.getDate() + 7);
-
-    const currentDateString = currentDate.toISOString();
-    const futureDateString = futureDate.toISOString();
-
-    dispatch(setStartDate(currentDateString));
-    dispatch(setEndDate(futureDateString));
-  }, []);
-
   let reservationState = useSelector((state: any) => state.reservation);
 
   const handleClickMakeReservation = async () => {
@@ -43,16 +30,24 @@ const Step3__ReservationSummary = (boat: any) => {
       setLoading(SystemBoolean.True);
       setError(null);
 
-      const response = await DataLoader.createReservation({
-        boatId: reservationState.new_ReservationData.boatId,
-        userId: reservationState.new_ReservationData.loggedUserId,
-        startDate: reservationState.new_ReservationData.startDate,
-        endDate: reservationState.new_ReservationData.endDate,
-        totalPrice: reservationState.new_ReservationData.totalPrice,
-        reservationStatusId:
-          reservationState.new_ReservationData.reservationStatusId,
-      });
-      console.log(response);
+      console.log(`{
+          boatId: ${reservationState.new_ReservationData.boatId},
+          userId: ${reservationState.new_ReservationData.loggedUserId},
+          startDate: ${reservationState.new_ReservationData.startDate},
+          endDate: ${reservationState.new_ReservationData.endDate},
+          totalPrice: ${reservationState.new_ReservationData.totalPrice},
+          reservationStatusId: ${reservationState.new_ReservationData.reservationStatusId},
+        }`)
+
+      // const response = await DataLoader.createReservation({
+      //   boatId: reservationState.new_ReservationData.boatId,
+      //   userId: reservationState.new_ReservationData.loggedUserId,
+      //   startDate: reservationState.new_ReservationData.startDate,
+      //   endDate: reservationState.new_ReservationData.endDate,
+      //   totalPrice: reservationState.new_ReservationData.totalPrice,
+      //   reservationStatusId:
+      //     reservationState.new_ReservationData.reservationStatusId,
+      // });
       setData(data);
       nextReservationPage();
     } catch (err: any) {
@@ -128,7 +123,7 @@ const Step3__ReservationSummary = (boat: any) => {
           {' '}
           {Captions.EqualsSign}{' '}
         </span>
-        <span className="total-price__total">600.00 PLN</span>
+        <span className="total-price__total">{reservationState.new_ReservationData.totalPrice} {Captions.PLN}</span>
       </div>
       <BoatifyButton
         onClick={handleClickPreviousPage}

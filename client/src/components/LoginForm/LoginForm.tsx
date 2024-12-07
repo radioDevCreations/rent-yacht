@@ -24,7 +24,6 @@ const LoginForm = () => {
       email: loginState.email,
       password: loginState.password,
     });
-    console.log(response.data);
   };
   return (
     <form className="login" onSubmit={handleSubmit}>

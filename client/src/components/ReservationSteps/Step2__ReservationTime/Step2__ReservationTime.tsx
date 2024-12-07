@@ -1,6 +1,5 @@
 import { ChangeEvent, useState } from 'react';
 import './Step2__ReservationTime.scss';
-import DatePicker from 'react-datepicker';
 import { useDispatch, useSelector } from 'react-redux';
 import 'react-datepicker/dist/react-datepicker.css';
 import BoatifyInput from '@/boatify-components/BoatifyInput/BoatifyInput';
@@ -8,8 +7,7 @@ import InputType from '@/utilities/InputType';
 import BoatifyDateOperations from '@/utilities/BoatifyDateOperations';
 import { FaArrowRight } from 'react-icons/fa6';
 import ButtonType from '@/utilities/ButtonType';
-import { setEndDate, setReservationPage, setStartDate } from '@/redux/slices/reservationSlice';
-import Reservation from '@/models/Reservation';
+import { setBoatId, setEndDate, setReservationPage, setStartDate, setTotalPrice } from '@/redux/slices/reservationSlice';
 import DataLoader from '@/dataLoaders/DataLoader';
 import { SystemBoolean } from '@/utilities/System';
 import BoatifyButton from '@/boatify-components/BoatifyButton/BoatifyButton';
@@ -30,42 +28,31 @@ const Step2__ReservationTime = (data: any) => {
   );
 
   let reservationState = useSelector((state: any) => state.reservation);
-  let boat = useSelector((state: any) => state.reservation);
 
   const handleClickCheckTime = async () => {
     try {
       setLoading(SystemBoolean.True);
       setError(null);
       const isAvailableSlot: boolean = await DataLoader.isBoatAvailable(
-        1023,
+        data.boat.id,
         startDate,
         endDate
       );
 
       if (isAvailableSlot) {
         setIsAvailable(true);
-        console.log(
-          `The boat ${1023} is available from ${startDate} to ${endDate}.`
-        );
-      } else {
-        console.log(
-          `The boat ${1023} is not available during the specified period.`
-        );
       }
 
       const reservedates: any =
-        await DataLoader.getAllReservedDatesForBoat(1023);
+        await DataLoader.getAllReservedDatesForBoat(data.boat.id);
 
       if (reservedates) {
         console.log(
-          `Reserved dates for boat ${1023}: ${reservedates.join(', ')}`
+          `Reserved dates for boat ${data.boat.id}: ${reservedates.join(', ')}`
         );
       } else {
         console.log(`The boat is free everyday`);
       }
-
-      //setData(data);
-      //nextReservationPage();
     } catch (err: any) {
       setError(err.message || 'Failed to create reservation');
       console.log(error);
@@ -79,6 +66,8 @@ const Step2__ReservationTime = (data: any) => {
   };
 
   const handleNextReservationPage = () => {
+    dispatch(setBoatId(data.boat.id));
+    dispatch(setTotalPrice(+data.boat.pricePerDay*moment(endDate, 'YYYY-MM-DD').diff(startDate, 'days')));
     dispatch(setStartDate(startDate));
     dispatch(setEndDate(endDate));
     dispatch(setReservationPage(reservationState.new_ReservationPage + 1));
@@ -109,14 +98,14 @@ const Step2__ReservationTime = (data: any) => {
         </div>
       </div>
       <div className="reservation-price">
-      <span className="total-price__price-per-day">600.00 PLN</span>
+      <span className="total-price__price-per-day">{data.boat.pricePerDay} {Captions.PLN}</span>
         <span className="total-price__X"> {Captions.X} </span>
         <span className="total-price__days-count">{moment(endDate, 'YYYY-MM-DD').diff(startDate, 'days')} days</span>
         <span className="total-price__equals-sign">
           {' '}
           {Captions.EqualsSign}{' '}
         </span>
-        <span className="total-price__total">600.00 PLN</span>
+        <span className="total-price__total">{+data.boat.pricePerDay*moment(endDate, 'YYYY-MM-DD').diff(startDate, 'days')} {Captions.PLN}</span>
       </div>
       </div>
       <div className="input-section">

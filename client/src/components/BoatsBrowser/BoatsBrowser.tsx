@@ -25,9 +25,7 @@ const BoatsBrowser = () => {
           sortDirection: SortDirection.ASC,
           searchPhrase: 'ne',
         });
-        //const response = await DataLoader.selectAllBoats();
         const data: any[] = response;
-        console.log(data);
         setData(data);
       } catch (err: any) {
         setError(err.message || 'Failed to fetch reservations');

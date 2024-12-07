@@ -36,7 +36,7 @@ const LastMinuteBoard = () => {
     });
     setRegisterIsLoading(false);
     if ('id' in response?.data) console.log('registered');
-    else console.log('err');
+    else console.error('err');
   };
   const inputs: Array<BoatifyInputProps> = [
     {
