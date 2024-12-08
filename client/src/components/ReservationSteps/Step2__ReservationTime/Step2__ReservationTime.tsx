@@ -13,6 +13,7 @@ import { SystemBoolean } from '@/utilities/System';
 import BoatifyButton from '@/boatify-components/BoatifyButton/BoatifyButton';
 import moment from 'moment';
 import Captions from '@/captions/captions';
+import { RootState } from '@/redux/store';
 
 const Step2__ReservationTime = (data: any) => {
   const dispatch = useDispatch();
@@ -27,7 +28,7 @@ const Step2__ReservationTime = (data: any) => {
     moment(new Date()).add(1, 'days').format('YYYY-MM-DD')
   );
 
-  let reservationState = useSelector((state: any) => state.reservation);
+  let reservationState = useSelector((state: RootState) => state.reservation);
 
   const handleClickCheckTime = async () => {
     try {

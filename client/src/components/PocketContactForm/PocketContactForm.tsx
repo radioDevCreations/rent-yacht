@@ -21,10 +21,11 @@ import BoatifyButton from '@/boatify-components/BoatifyButton/BoatifyButton';
 import BoatifyInputVariant from '@/boatify-components/BoatifyInput/BoatifyInputVariant';
 import BoatifyTextareaVariant from '@/boatify-components/BoatifyTextarea/BoatifyTextareaVariant';
 import BoatifyButtonVariant from '@/boatify-components/BoatifyButton/BoatifyButtonVariant';
+import { RootState } from '@/redux/store';
 
 const PocketContactForm = () => {
   const dispatch = useDispatch();
-  const contactState = useSelector((state: any) => state.forms.contact);
+  const contactState = useSelector((state: RootState) => state.forms.contact);
   const firstColumn: Array<BoatifyInputProps> = [
     {
       name: 'name',

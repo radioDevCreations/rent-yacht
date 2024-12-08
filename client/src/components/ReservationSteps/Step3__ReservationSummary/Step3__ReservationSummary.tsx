@@ -15,6 +15,7 @@ import {
 import BoatifyDateOperations from '@/utilities/BoatifyDateOperations';
 import { FaArrowRight } from 'react-icons/fa';
 import Reservation from '@/models/Reservation';
+import { RootState } from '@/redux/store';
 
 const Step3__ReservationSummary = (boat: any) => {
   const [data, setData] = useState<Reservation[]>([]);
@@ -23,7 +24,7 @@ const Step3__ReservationSummary = (boat: any) => {
 
   const dispatch = useDispatch();
 
-  let reservationState = useSelector((state: any) => state.reservation);
+  let reservationState = useSelector((state: RootState) => state.reservation);
 
   const handleClickMakeReservation = async () => {
     try {

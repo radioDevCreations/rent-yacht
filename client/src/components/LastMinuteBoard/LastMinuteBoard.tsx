@@ -22,10 +22,11 @@ import InputType from '@/utilities/InputType';
 import httpClient from '@/axios/httpClient';
 import IMAGE from '../../../public/links';
 import { SystemBoolean } from '@/utilities/System';
+import { RootState } from '@/redux/store';
 
 const LastMinuteBoard = () => {
   const dispatch = useDispatch();
-  const registerState = useSelector((state: any) => state.forms.register);
+  const registerState = useSelector((state: RootState) => state.forms.register);
   const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
     setRegisterIsLoading(SystemBoolean.True);

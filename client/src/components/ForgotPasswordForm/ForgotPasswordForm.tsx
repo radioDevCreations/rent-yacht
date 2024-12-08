@@ -4,11 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setForgotPasswordEmail } from '@/redux/slices/formsSlice';
 import { ChangeEvent } from 'react';
 import ButtonType from '@/utilities/ButtonType';
+import { RootState } from '@/redux/store';
 
 const ForgotPasswordForm = () => {
   const dispatch = useDispatch();
   const forgotPasswordState = useSelector(
-    (state: any) => state.forms.forgotPassword
+    (state: RootState) => state.forms.forgotPassword
   );
   const handleForgotPasswordEmailChange = (
     event: ChangeEvent<HTMLInputElement>

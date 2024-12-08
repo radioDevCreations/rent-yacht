@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setReservationPage } from '@/redux/slices/reservationSlice';
 import './BoatifyStepper.scss';
 import Children from '@/utilities/Children';
+import { RootState } from '@/redux/store';
 
 interface BoatifyStepperProps extends Children {
   steps: string[];
@@ -16,7 +17,7 @@ const BoatifyStepper = ({
   children,
 }: BoatifyStepperProps) => {
   const dispatch = useDispatch();
-  const reservationState = useSelector((state: any) => state.reservation);
+  const reservationState = useSelector((state: RootState) => state.reservation);
   const handlePreviousReservationPage = () => {
     dispatch(setReservationPage(reservationState.new_ReservationPage - 1));
   };

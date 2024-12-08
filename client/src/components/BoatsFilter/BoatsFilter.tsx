@@ -13,10 +13,11 @@ import {
 import BoatifyTag from '@/boatify-components/BoatifyTag/BoatifyTag';
 import TagType from '@/utilities/TagType';
 import { SystemBoolean } from '@/utilities/System';
+import { RootState } from '@/redux/store';
 
 const BoatsFilter = () => {
   const dispatch = useDispatch();
-  const filterState = useSelector((state: any) => state.filters);
+  const filterState = useSelector((state: RootState) => state.filters);
   const handlePassengersNumberChange = (
     event: ChangeEvent<HTMLInputElement>
   ) => {
@@ -24,17 +25,17 @@ const BoatsFilter = () => {
   };
   const handleStartDateChange = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch(setStartDateFilter(+event?.target?.value));
-    console.log(filterState.startDate);
-    console.log(filterState.endDate);
+    console.log(filterState.startRentDate);
+    console.log(filterState.endRentDate);
   };
   const handleEndDateChange = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch(setEndDateFilter(+event?.target?.value));
-    console.log(filterState.startDate);
-    console.log(filterState.endDate);
+    console.log(filterState.startRentDate);
+    console.log(filterState.endRentDate);
   };
   const handleHarbourChange = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log(filterState.startDate);
-    console.log(filterState.endDate);
+    console.log(filterState.startRentDate);
+    console.log(filterState.endRentDate);
   };
 
   return (
@@ -95,7 +96,7 @@ const BoatsFilter = () => {
         />
         <BoatifyTag
           type={TagType.days}
-          label={`${filterState.endDate - filterState.startDate}`}
+          label={`${filterState.endRentDate - filterState.startRentDate}`}
         />
       </div>
       <div className="filter__section filter__section--vertical">
@@ -140,7 +141,7 @@ const BoatsFilter = () => {
         />
         <BoatifyTag
           type={TagType.days}
-          label={`${filterState.endDate - filterState.startDate}`}
+          label={`${filterState.endRentDate - filterState.startRentDate}`}
         />
       </div>
       <div className="filter__section filter__section--vertical"></div>

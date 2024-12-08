@@ -13,6 +13,7 @@ import SortDirection from '@/utilities/SortDirection';
 import Captions from '@/captions/captions';
 import { SystemBoolean } from '@/utilities/System';
 import { BoatifyGoTo } from '@/utilities/BoatifyGoTo';
+import { RootState } from '@/redux/store';
 
 interface ReservationProps {
   boatId: number | undefined;
@@ -23,7 +24,7 @@ const Reservation: FC<ReservationProps> = ({ boatId }) => {
   const [loading, setLoading] = useState<boolean>(SystemBoolean.True);
   const [error, setError] = useState<string | null>(null);
   const new_ReservationPage = useSelector(
-    (state: any) => state.reservation.new_ReservationPage
+    (state: RootState) => state.reservation.new_ReservationPage
   );
 
   useEffect(() => {

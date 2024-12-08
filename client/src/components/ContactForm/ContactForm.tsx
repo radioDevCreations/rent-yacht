@@ -15,10 +15,11 @@ import InputType from '@/utilities/InputType';
 import BoatifyTextarea from '@/boatify-components/BoatifyTextarea/BoatifyTextarea';
 import ButtonType from '@/utilities/ButtonType';
 import BoatifyButton from '@/boatify-components/BoatifyButton/BoatifyButton';
+import { RootState } from '@/redux/store';
 
 const ContactForm = () => {
   const dispatch = useDispatch();
-  const contactState = useSelector((state: any) => state.forms.contact);
+  const contactState = useSelector((state: RootState) => state.forms.contact);
   const firstColumn: Array<BoatifyInputProps> = [
     {
       name: 'name',

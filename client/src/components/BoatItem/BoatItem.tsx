@@ -3,7 +3,7 @@ import ButtonType from '@/utilities/ButtonType';
 import './BoatItem.scss';
 import { BoatDto } from '../BoatsBoard/BoatsBoard';
 import { FC } from 'react';
-import BoatifyGoTo from '@/utilities/BoatifyGoTo';
+import { BoatifyGoToInBlank } from '@/utilities/BoatifyGoTo';
 
 interface BoatItemProps {
   boat: BoatDto;
@@ -22,7 +22,7 @@ const BoatItem: FC<BoatItemProps> = ({ boat }) => {
           value="Details"
           type={ButtonType.button}
           classModifier="boatify-button--boat-item"
-          onClick={() => BoatifyGoTo(`/details/boat/${boat.id}`)}
+          onClick={() => BoatifyGoToInBlank(`/details/boat/${boat.id}`)}
         />
         <BoatifyButton
           value="Rent"

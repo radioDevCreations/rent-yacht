@@ -22,13 +22,14 @@ import InputType from '@/utilities/InputType';
 import httpClient from '@/axios/httpClient';
 import IMAGE from '../../../public/links';
 import { SystemBoolean } from '@/utilities/System';
+import { RootState } from '@/redux/store';
 
 const REGISTER_PAGES_NUMBER = 3;
 const NODES_PER_PAGE = 2;
 
 const RegisterForm = () => {
   const dispatch = useDispatch();
-  const registerState = useSelector((state: any) => state.forms.register);
+  const registerState = useSelector((state: RootState) => state.forms.register);
   const handlePrevPage = () => {
     if (registerState.pageNumber > 1) {
       dispatch(setRegisterPage(registerState.pageNumber - 1));

@@ -9,7 +9,7 @@ import Image from 'next/image';
 import { HiMenu } from 'react-icons/hi';
 import { IoMdCloseCircleOutline } from 'react-icons/io';
 import IMAGE from '../../../public/links';
-import { RootState } from '@/redux/store'; // Assuming RootState is defined in your Redux store setup
+import { RootState } from '@/redux/store';
 
 const Header: React.FC = () => {
   const dispatch = useDispatch();
