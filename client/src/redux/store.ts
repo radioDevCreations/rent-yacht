@@ -12,3 +12,6 @@ export const store = configureStore({
     reservation: reservationSlice,
   },
 });
+
+
+export type RootState = ReturnType<typeof store.getState>;

@@ -1,7 +1,17 @@
 import './HeaderNavigation.scss';
 import Link from 'next/link';
 
-const NAVIGATION_ITEMS = [
+type NavigationItem = {
+  name: string;
+  href: string;
+  customClassName: string;
+};
+
+type HeaderNavigationProps = {
+  isMenuOpen: boolean;
+};
+
+const NAVIGATION_ITEMS: NavigationItem[] = [
   { name: 'Harbours', href: '/harbours', customClassName: '' },
   { name: 'Boats', href: '/boats', customClassName: 'transition-delay1' },
   {
@@ -13,7 +23,7 @@ const NAVIGATION_ITEMS = [
   { name: 'Contact', href: '/contact', customClassName: 'transition-delay4' },
 ];
 
-const HeaderNavigation = ({ isMenuOpen }) => {
+const HeaderNavigation: React.FC<HeaderNavigationProps> = ({ isMenuOpen }) => {
   const itemClass = isMenuOpen
     ? 'header-navigation__item header-navigation__item--in'
     : 'header-navigation__item header-navigation__item--out';
@@ -23,18 +33,16 @@ const HeaderNavigation = ({ isMenuOpen }) => {
   return (
     <nav>
       <ul className="header-navigation">
-        {NAVIGATION_ITEMS.map((item) => {
-          return (
-            <li
-              key={item.name}
-              className={`${item.customClassName} ${itemClass}`}
-            >
-              <Link href={item.href} className={linkClass}>
-                {item.name}
-              </Link>
-            </li>
-          );
-        })}
+        {NAVIGATION_ITEMS.map((item) => (
+          <li
+            key={item.name}
+            className={`${item.customClassName} ${itemClass}`}
+          >
+            <Link href={item.href} className={linkClass}>
+              {item.name}
+            </Link>
+          </li>
+        ))}
       </ul>
     </nav>
   );

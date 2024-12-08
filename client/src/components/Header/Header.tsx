@@ -1,4 +1,5 @@
 'use client';
+
 import './Header.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { openMenu, closeMenu } from '@/redux/slices/applicationSlice';
@@ -8,14 +9,17 @@ import Image from 'next/image';
 import { HiMenu } from 'react-icons/hi';
 import { IoMdCloseCircleOutline } from 'react-icons/io';
 import IMAGE from '../../../public/links';
+import { RootState } from '@/redux/store'; // Assuming RootState is defined in your Redux store setup
 
-const Header = () => {
+const Header: React.FC = () => {
   const dispatch = useDispatch();
-  const applicationState = useSelector((state) => state.application);
+  const applicationState = useSelector((state: RootState) => state.application);
+
   const toggleMenuOpen = () => {
     if (applicationState.isMenuOpen) dispatch(closeMenu());
     else dispatch(openMenu());
   };
+
   return (
     <header className="header">
       <div className="logo">
