@@ -7,7 +7,13 @@ import InputType from '@/utilities/InputType';
 import BoatifyDateOperations from '@/utilities/BoatifyDateOperations';
 import { FaArrowRight } from 'react-icons/fa6';
 import ButtonType from '@/utilities/ButtonType';
-import { setBoatId, setEndDate, setReservationPage, setStartDate, setTotalPrice } from '@/redux/slices/reservationSlice';
+import {
+  setBoatId,
+  setEndDate,
+  setReservationPage,
+  setStartDate,
+  setTotalPrice,
+} from '@/redux/slices/reservationSlice';
 import DataLoader from '@/dataLoaders/DataLoader';
 import { SystemBoolean } from '@/utilities/System';
 import BoatifyButton from '@/boatify-components/BoatifyButton/BoatifyButton';
@@ -44,8 +50,9 @@ const Step2__ReservationTime = (data: any) => {
         setIsAvailable(SystemBoolean.True);
       }
 
-      const reservedates: any =
-        await DataLoader.getAllReservedDatesForBoat(data.boat.id);
+      const reservedates: any = await DataLoader.getAllReservedDatesForBoat(
+        data.boat.id
+      );
 
       if (reservedates) {
         console.log(
@@ -68,7 +75,12 @@ const Step2__ReservationTime = (data: any) => {
 
   const handleNextReservationPage = () => {
     dispatch(setBoatId(data.boat.id));
-    dispatch(setTotalPrice(+data.boat.pricePerDay*moment(endDate, 'YYYY-MM-DD').diff(startDate, 'days')));
+    dispatch(
+      setTotalPrice(
+        +data.boat.pricePerDay *
+          moment(endDate, 'YYYY-MM-DD').diff(startDate, 'days')
+      )
+    );
     dispatch(setStartDate(startDate));
     dispatch(setEndDate(endDate));
     dispatch(setReservationPage(reservationState.new_ReservationPage + 1));
@@ -77,37 +89,47 @@ const Step2__ReservationTime = (data: any) => {
   return (
     <div className="reservation-time">
       <div className="time-and-price">
-      <div className="reservation-time-indicator--time">
-        <div className="reservation-time__from-tile">
-          <span className="reservation-time__from-day">
-            {BoatifyDateOperations.getDayFromISOString(startDate)}
+        <div className="reservation-time-indicator--time">
+          <div className="reservation-time__from-tile">
+            <span className="reservation-time__from-day">
+              {BoatifyDateOperations.getDayFromISOString(startDate)}
+            </span>
+            <span className="reservation-time__from-month">
+              {BoatifyDateOperations.getMonthAbbreviationFromISOString(
+                startDate
+              )}
+            </span>
+          </div>
+          <div className="reservation-time__arrow">
+            <FaArrowRight />
+          </div>
+          <div className="reservation-time__to-tile">
+            <span className="reservation-time__to-day">
+              {BoatifyDateOperations.getDayFromISOString(endDate)}
+            </span>
+            <span className="reservation-time__to-month">
+              {BoatifyDateOperations.getMonthAbbreviationFromISOString(endDate)}
+            </span>
+          </div>
+        </div>
+        <div className="reservation-price">
+          <span className="total-price__price-per-day">
+            {data.boat.pricePerDay} {Captions.PLN}
           </span>
-          <span className="reservation-time__from-month">
-            {BoatifyDateOperations.getMonthAbbreviationFromISOString(startDate)}
+          <span className="total-price__X"> {Captions.X} </span>
+          <span className="total-price__days-count">
+            {moment(endDate, 'YYYY-MM-DD').diff(startDate, 'days')} days
+          </span>
+          <span className="total-price__equals-sign">
+            {' '}
+            {Captions.EqualsSign}{' '}
+          </span>
+          <span className="total-price__total">
+            {+data.boat.pricePerDay *
+              moment(endDate, 'YYYY-MM-DD').diff(startDate, 'days')}{' '}
+            {Captions.PLN}
           </span>
         </div>
-        <div className="reservation-time__arrow">
-          <FaArrowRight />
-        </div>
-        <div className="reservation-time__to-tile">
-          <span className="reservation-time__to-day">
-            {BoatifyDateOperations.getDayFromISOString(endDate)}
-          </span>
-          <span className="reservation-time__to-month">
-            {BoatifyDateOperations.getMonthAbbreviationFromISOString(endDate)}
-          </span>
-        </div>
-      </div>
-      <div className="reservation-price">
-      <span className="total-price__price-per-day">{data.boat.pricePerDay} {Captions.PLN}</span>
-        <span className="total-price__X"> {Captions.X} </span>
-        <span className="total-price__days-count">{moment(endDate, 'YYYY-MM-DD').diff(startDate, 'days')} days</span>
-        <span className="total-price__equals-sign">
-          {' '}
-          {Captions.EqualsSign}{' '}
-        </span>
-        <span className="total-price__total">{+data.boat.pricePerDay*moment(endDate, 'YYYY-MM-DD').diff(startDate, 'days')} {Captions.PLN}</span>
-      </div>
       </div>
       <div className="input-section">
         <BoatifyInput

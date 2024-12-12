@@ -10,4 +10,4 @@ const BoatifyGoToInBlank = (to: string) => {
   else return window.open(`${BaseURL}${to}`, '_blank');
 };
 
-export {BoatifyGoTo, BoatifyGoToInBlank};
+export { BoatifyGoTo, BoatifyGoToInBlank };

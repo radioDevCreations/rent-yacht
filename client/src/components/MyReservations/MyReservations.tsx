@@ -12,12 +12,10 @@ interface MyReservationsProps {
 }
 
 const MyReservations: FC<MyReservationsProps> = ({ reservations }) => {
-
   useEffect(() => {
     const jwtToken = sessionStorage.getItem('token');
-    if(!jwtToken?.length) BoatifyGoTo('/');
-  }, [])
-
+    if (!jwtToken?.length) BoatifyGoTo('/');
+  }, []);
 
   return (
     <section className="my-reservations">

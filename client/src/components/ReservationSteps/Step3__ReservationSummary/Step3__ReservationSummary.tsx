@@ -38,7 +38,7 @@ const Step3__ReservationSummary = (boat: any) => {
           endDate: ${reservationState.new_ReservationData.endDate},
           totalPrice: ${reservationState.new_ReservationData.totalPrice},
           reservationStatusId: ${reservationState.new_ReservationData.reservationStatusId},
-        }`)
+        }`);
 
       // const response = await DataLoader.createReservation({
       //   boatId: reservationState.new_ReservationData.boatId,
@@ -124,7 +124,9 @@ const Step3__ReservationSummary = (boat: any) => {
           {' '}
           {Captions.EqualsSign}{' '}
         </span>
-        <span className="total-price__total">{reservationState.new_ReservationData.totalPrice} {Captions.PLN}</span>
+        <span className="total-price__total">
+          {reservationState.new_ReservationData.totalPrice} {Captions.PLN}
+        </span>
       </div>
       <BoatifyButton
         onClick={handleClickPreviousPage}

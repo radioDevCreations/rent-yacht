@@ -28,9 +28,8 @@ const Reservation: FC<ReservationProps> = ({ boatId }) => {
   );
 
   useEffect(() => {
-
     const jwtToken = sessionStorage.getItem('token');
-    if(!jwtToken?.length) BoatifyGoTo('/');
+    if (!jwtToken?.length) BoatifyGoTo('/');
 
     const fetchReservations = async () => {
       try {
@@ -57,8 +56,8 @@ const Reservation: FC<ReservationProps> = ({ boatId }) => {
   ];
 
   const handleSubmit = () => {
-    console.log('payment successful')
-  }
+    console.log('payment successful');
+  };
 
   const stepsComponents: Steps = {
     step1: <Step1__ReservationBoat boat={data}></Step1__ReservationBoat>,

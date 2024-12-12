@@ -204,7 +204,7 @@ abstract class DataLoader {
       });
   };
 
- //ACCOUNT
+  //ACCOUNT
 
   static loginUser = async (data: {
     email: string;
@@ -218,9 +218,6 @@ abstract class DataLoader {
         throw error;
       });
   };
-
 }
-
-
 
 export default DataLoader;

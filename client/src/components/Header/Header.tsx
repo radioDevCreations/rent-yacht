@@ -2,14 +2,21 @@
 
 import './Header.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { openMenu, closeMenu } from '@/redux/slices/applicationSlice';
+import {
+  openMenu,
+  closeMenu,
+  setIsProfileDropdownOpen,
+} from '@/redux/slices/applicationSlice';
 import HeaderNavigation from '../HeaderNavigation/HeaderNavigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { HiMenu } from 'react-icons/hi';
 import { IoMdCloseCircleOutline } from 'react-icons/io';
+import { IoMdPerson } from 'react-icons/io';
 import IMAGE from '../../../public/links';
 import { RootState } from '@/redux/store';
+import { SystemBoolean } from '@/utilities/System';
+import ProfileDropdown from '../ProfileDropdown/ProfileDropdown';
 
 const Header: React.FC = () => {
   const dispatch = useDispatch();
@@ -18,6 +25,12 @@ const Header: React.FC = () => {
   const toggleMenuOpen = () => {
     if (applicationState.isMenuOpen) dispatch(closeMenu());
     else dispatch(openMenu());
+  };
+
+  const toggleProfileDropdownOpen = () => {
+    if (applicationState.isProfileDropdownOpen)
+      dispatch(setIsProfileDropdownOpen(SystemBoolean.False));
+    else dispatch(setIsProfileDropdownOpen(SystemBoolean.True));
   };
 
   return (
@@ -36,6 +49,9 @@ const Header: React.FC = () => {
       </div>
       <div className="navigation-wrapper">
         <HeaderNavigation isMenuOpen={applicationState.isMenuOpen} />
+        <ProfileDropdown
+          isDropdownOpen={applicationState.isProfileDropdownOpen}
+        />
 
         {applicationState.isMenuOpen ? (
           <button
@@ -52,6 +68,23 @@ const Header: React.FC = () => {
             disabled={applicationState.isMenuOpen}
           >
             <HiMenu />
+          </button>
+        )}
+        {applicationState.isProfileDropdownOpen ? (
+          <button
+            className="profile-switch"
+            onClick={toggleProfileDropdownOpen}
+            disabled={!applicationState.isMenuOpen}
+          >
+            <IoMdCloseCircleOutline />
+          </button>
+        ) : (
+          <button
+            className="profile-switch"
+            onClick={toggleProfileDropdownOpen}
+            disabled={applicationState.isMenuOpen}
+          >
+            <IoMdPerson />
           </button>
         )}
       </div>

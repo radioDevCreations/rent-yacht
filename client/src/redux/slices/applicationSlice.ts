@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const initialState = {
   isMenuOpen: SystemBoolean.False,
+  isProfileDropdownOpen: SystemBoolean.False,
   registerPageNumber: 1,
 };
 
@@ -22,9 +23,16 @@ const applicationSlice = createSlice({
         registerPageNumber: action.payload,
       };
     },
+    setIsProfileDropdownOpen: (state, action: PayloadAction<boolean>) => {
+      return { ...state, isProfileDropdownOpen: action.payload };
+    },
   },
 });
 
-export const { openMenu, closeMenu, setRegisterPage } =
-  applicationSlice.actions;
+export const {
+  openMenu,
+  closeMenu,
+  setRegisterPage,
+  setIsProfileDropdownOpen,
+} = applicationSlice.actions;
 export default applicationSlice.reducer;

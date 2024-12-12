@@ -41,21 +41,34 @@ const reservationSlice = createSlice({
       state.new_ReservationData.startDate = new Date(
         action.payload
       ).toISOString();
-      state.new_ReservationData.days = moment(state.new_ReservationData.startDate, 'YYYY-MM-DD').diff(state.new_ReservationData.endDate, 'days');
+      state.new_ReservationData.days = moment(
+        state.new_ReservationData.startDate,
+        'YYYY-MM-DD'
+      ).diff(state.new_ReservationData.endDate, 'days');
     },
     setEndDate: (state, action: PayloadAction<string>) => {
       state.new_ReservationData.endDate = new Date(
         action.payload
       ).toISOString();
-      state.new_ReservationData.days = moment(state.new_ReservationData.startDate, 'YYYY-MM-DD').diff(state.new_ReservationData.endDate, 'days');
+      state.new_ReservationData.days = moment(
+        state.new_ReservationData.startDate,
+        'YYYY-MM-DD'
+      ).diff(state.new_ReservationData.endDate, 'days');
     },
     setBoatId: (state, action: PayloadAction<number>) => {
-      state.new_ReservationData.boatId = action.payload },
-    setTotalPrice: (state, action: PayloadAction<number>) => {
-      state.new_ReservationData.totalPrice = action.payload },
+      state.new_ReservationData.boatId = action.payload;
     },
+    setTotalPrice: (state, action: PayloadAction<number>) => {
+      state.new_ReservationData.totalPrice = action.payload;
+    },
+  },
 });
 
-export const { setReservationPage, setStartDate, setEndDate, setTotalPrice, setBoatId } =
-  reservationSlice.actions;
+export const {
+  setReservationPage,
+  setStartDate,
+  setEndDate,
+  setTotalPrice,
+  setBoatId,
+} = reservationSlice.actions;
 export default reservationSlice.reducer;

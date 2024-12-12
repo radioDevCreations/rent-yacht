@@ -1,4 +1,4 @@
-"use client"
+'use client';
 import './LoginForm.scss';
 import { ChangeEvent, useEffect, useState } from 'react';
 import Image from 'next/image';
@@ -10,13 +10,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setJwtToken } from '@/redux/slices/formsSlice';
 import IMAGE from '../../../public/links';
 import DataLoader from '@/dataLoaders/DataLoader';
-import {BoatifyGoTo} from '@/utilities/BoatifyGoTo';
+import { BoatifyGoTo } from '@/utilities/BoatifyGoTo';
 
 const LoginForm = () => {
-  const [email, setEmail]= useState('');
-  const [password, setPassword]= useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const dispatch = useDispatch();
-  
+
   const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
 
@@ -25,10 +25,8 @@ const LoginForm = () => {
       password: password,
     });
 
-    
     sessionStorage.setItem('token', response);
   };
-
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event?.target?.value);
@@ -39,8 +37,8 @@ const LoginForm = () => {
 
   useEffect(() => {
     const jwtToken = sessionStorage.getItem('token');
-    if(jwtToken?.length) BoatifyGoTo('/');
-  }, [])
+    if (jwtToken?.length) BoatifyGoTo('/');
+  }, []);
 
   return (
     <form className="login" onSubmit={handleSubmit}>
