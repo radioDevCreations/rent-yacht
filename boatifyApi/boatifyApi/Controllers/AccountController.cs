@@ -1,6 +1,9 @@
 ﻿using boatifyApi.Models;
 using boatifyApi.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace boatifyApi.Controllers
 {
@@ -24,6 +27,21 @@ namespace boatifyApi.Controllers
         {
             string token = _accountService.GenerateJwt(dto);
             return Ok(token);
+        }
+        [Authorize]
+        [HttpGet("me")]
+        public ActionResult GetCurrentUser()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (string.IsNullOrEmpty(userId))
+            {
+                return Unauthorized("User is not authenticated.");
+            }
+
+            var currentUser = _accountService.GetCurrentUser(userId);
+
+            return Ok(currentUser);
         }
     }
 }

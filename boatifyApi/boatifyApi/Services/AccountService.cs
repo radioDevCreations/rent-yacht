@@ -2,6 +2,7 @@
 using boatifyApi.Exceptions;
 using boatifyApi.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -14,6 +15,7 @@ namespace boatifyApi.Services
     {
         string GenerateJwt(LoginUserDto dto);
         void RegisterUser(RegisterUserDto dto);
+        UserDto GetCurrentUser(string userId);
     }
 
     public class AccountService : IAccountService
@@ -41,7 +43,7 @@ namespace boatifyApi.Services
             };
 
             var hashedPassword = _passwordHasher.HashPassword(newUser, dto.Password);
-            
+
             newUser.Password = hashedPassword;
             _dbContext.Users.Add(newUser);
             _dbContext.SaveChanges();
@@ -58,7 +60,7 @@ namespace boatifyApi.Services
             }
 
             var passwordIsValid = _passwordHasher.VerifyHashedPassword(user, user.Password, dto.Password);
-            if(passwordIsValid == PasswordVerificationResult.Failed)
+            if (passwordIsValid == PasswordVerificationResult.Failed)
             {
                 throw new BadRequestException("Incorrect username or password");
             }
@@ -89,6 +91,29 @@ namespace boatifyApi.Services
 
             var tokenString = tokenHandler.WriteToken(token);
             return tokenString;
+        }
+
+        public UserDto GetCurrentUser(string userId)
+        {
+            var user = _dbContext.Users
+                .Include(u => u.Role)
+                .FirstOrDefault(u => u.Id == int.Parse(userId));
+
+            if (user == null)
+            {
+                throw new NotFoundException("User not found.");
+            }
+
+            var currentUser = new UserDto
+            {
+                Id = user.Id,
+                Name = $"{user.FirstName} {user.LastName}",
+                Email = user.Email,
+                Role = user.Role?.Name,
+                DateOfBirth = user.DateOfBirth.ToString("yyyy-MM-dd")
+            };
+
+            return currentUser;
         }
     }
 }
