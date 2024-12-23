@@ -4,7 +4,7 @@ import Details from '@/components/Details/Details';
 
 const ReservationDetailsPage = () => {
   return (
-    <MainLayout>
+    <MainLayout onlyForLogged>
       <Details />
     </MainLayout>
   );

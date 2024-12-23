@@ -74,7 +74,7 @@ const Header: React.FC = () => {
           <button
             className="profile-switch"
             onClick={toggleProfileDropdownOpen}
-            disabled={!applicationState.isMenuOpen}
+            disabled={!applicationState.isProfileDropdownOpen}
           >
             <IoMdCloseCircleOutline />
           </button>
@@ -82,7 +82,7 @@ const Header: React.FC = () => {
           <button
             className="profile-switch"
             onClick={toggleProfileDropdownOpen}
-            disabled={applicationState.isMenuOpen}
+            disabled={applicationState.isProfileDropdownOpen}
           >
             <IoMdPerson />
           </button>

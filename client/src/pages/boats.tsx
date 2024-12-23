@@ -4,7 +4,7 @@ import BoatsBrowser from '@/components/BoatsBrowser/BoatsBrowser';
 
 const BoatsPage = () => {
   return (
-    <MainLayout>
+    <MainLayout onlyForLogged>
       <BoatsBrowser />
     </MainLayout>
   );

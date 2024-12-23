@@ -1,6 +1,6 @@
 import BoatifyButton from '@/boatify-components/BoatifyButton/BoatifyButton';
 import './MyReservations.scss';
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import ButtonType from '@/utilities/ButtonType';
 import { BoatifyGoTo, BoatifyGoToInBlank } from '@/utilities/BoatifyGoTo';
 import Reservation from '@/models/Reservation';
@@ -12,11 +12,6 @@ interface MyReservationsProps {
 }
 
 const MyReservations: FC<MyReservationsProps> = ({ reservations }) => {
-  useEffect(() => {
-    const jwtToken = sessionStorage.getItem('token');
-    if (!jwtToken?.length) BoatifyGoTo('/');
-  }, []);
-
   return (
     <section className="my-reservations">
       <header className="my-reservations__header">

@@ -21,7 +21,7 @@ const ReservationPage = ({ boatId }: any) => {
   console.log(boatId);
 
   return (
-    <MainLayout>
+    <MainLayout onlyForLogged>
       <Reservation boatId={boatId != undefined ? +boatId : undefined} />
     </MainLayout>
   );

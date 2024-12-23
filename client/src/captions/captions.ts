@@ -17,6 +17,7 @@ enum Captions {
   Step2Label = 'Select Time',
   Step3Label = 'Reservation Summary',
   Step4Label = 'Payment',
+  Next = 'Next',
 }
 
 export default Captions;

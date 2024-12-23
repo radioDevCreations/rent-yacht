@@ -41,7 +41,7 @@ const MyOrdersPage = () => {
   }
 
   return (
-    <MainLayout>
+    <MainLayout onlyForLogged>
       <MyReservations reservations={reservations} />
     </MainLayout>
   );
