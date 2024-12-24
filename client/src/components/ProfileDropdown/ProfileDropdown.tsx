@@ -43,7 +43,7 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
     const jwtToken = sessionStorage.getItem('token');
     if (!jwtToken?.length) setIsLogged(false);
     else setIsLogged(true);
-  });
+  }, []);
 
   const itemClass = isDropdownOpen
     ? 'profile-dropdown__item profile-dropdown__item--in'

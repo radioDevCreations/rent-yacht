@@ -4,8 +4,7 @@ import moment from 'moment';
 type ReservationState = {
   new_ReservationPage: number;
   new_ReservationData: {
-    loggedUserId: number;
-    boatId: number;
+    boatId: number | null;
     startDate: string | null;
     endDate: string | null;
     days: number;
@@ -17,7 +16,6 @@ type ReservationState = {
 const initialState: ReservationState = {
   new_ReservationPage: 1,
   new_ReservationData: {
-    loggedUserId: 2,
     boatId: null,
     startDate: null,
     endDate: null,

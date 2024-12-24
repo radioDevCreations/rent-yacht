@@ -24,6 +24,7 @@ const Step3__ReservationSummary = (boat: any) => {
 
   const dispatch = useDispatch();
 
+  let applicationState = useSelector((state: RootState) => state.application);
   let reservationState = useSelector((state: RootState) => state.reservation);
 
   const handleClickMakeReservation = async () => {
@@ -33,7 +34,7 @@ const Step3__ReservationSummary = (boat: any) => {
 
       console.log(`{
           boatId: ${reservationState.new_ReservationData.boatId},
-          userId: ${reservationState.new_ReservationData.loggedUserId},
+          userId: ${applicationState.loggedUserId},
           startDate: ${reservationState.new_ReservationData.startDate},
           endDate: ${reservationState.new_ReservationData.endDate},
           totalPrice: ${reservationState.new_ReservationData.totalPrice},
@@ -77,7 +78,7 @@ const Step3__ReservationSummary = (boat: any) => {
         </p>
         <p className="boat-data__item boat-data__description">
           Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
+          industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever
           since the 1500s, when an unknown printer took a galley of type and
           scrambled it to make a type specimen book. It has survived not only
           five centuries, but also the leap into electronic typesetting,
@@ -91,12 +92,12 @@ const Step3__ReservationSummary = (boat: any) => {
         <div className="reservation-time__from-tile">
           <span className="reservation-time__from-day">
             {BoatifyDateOperations.getDayFromISOString(
-              reservationState.new_ReservationData.startDate
+              reservationState.new_ReservationData.startDate as string
             )}
           </span>
           <span className="reservation-time__from-month">
             {BoatifyDateOperations.getMonthAbbreviationFromISOString(
-              reservationState.new_ReservationData.startDate
+              reservationState.new_ReservationData.startDate as string
             )}
           </span>
         </div>
@@ -106,12 +107,12 @@ const Step3__ReservationSummary = (boat: any) => {
         <div className="reservation-time__to-tile">
           <span className="reservation-time__to-day">
             {BoatifyDateOperations.getDayFromISOString(
-              reservationState.new_ReservationData.endDate
+              reservationState.new_ReservationData.endDate as string
             )}
           </span>
           <span className="reservation-time__to-month">
             {BoatifyDateOperations.getMonthAbbreviationFromISOString(
-              reservationState.new_ReservationData.endDate
+              reservationState.new_ReservationData.endDate as string
             )}
           </span>
         </div>

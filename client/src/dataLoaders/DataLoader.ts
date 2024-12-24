@@ -218,6 +218,16 @@ abstract class DataLoader {
         throw error;
       });
   };
+
+  static getCurrentUserData = async (token: string): Promise<any> => {
+    return await axiosInstance
+      .get(BoatifyApiURL(`account/me`), { headers: { "Authorization": `Bearer ${token}` }})
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error(error);
+        throw error;
+      });
+  };
 }
 
 export default DataLoader;

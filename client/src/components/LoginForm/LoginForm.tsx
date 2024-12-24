@@ -15,17 +15,21 @@ import { BoatifyGoTo } from '@/utilities/BoatifyGoTo';
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [user, setUser] = useState({});
   const dispatch = useDispatch();
 
   const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
 
-    const response = await DataLoader.loginUser({
+    const responseToken = await DataLoader.loginUser({
       email: email,
       password: password,
     });
 
-    sessionStorage.setItem('token', response);
+    const responseUserData = await DataLoader.getCurrentUserData(responseToken);
+
+    sessionStorage.setItem('token', responseToken);
+    BoatifyGoTo('/');
   };
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {

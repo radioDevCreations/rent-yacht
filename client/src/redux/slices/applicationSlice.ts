@@ -1,7 +1,15 @@
 import { SystemBoolean } from '@/utilities/System';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-const initialState = {
+type ApplicationState = {
+  loggedUserId: number;
+  isMenuOpen: boolean,
+  isProfileDropdownOpen: boolean,
+  registerPageNumber: number,
+};
+
+const initialState: ApplicationState = {
+  loggedUserId: 2,
   isMenuOpen: SystemBoolean.False,
   isProfileDropdownOpen: SystemBoolean.False,
   registerPageNumber: 1,
