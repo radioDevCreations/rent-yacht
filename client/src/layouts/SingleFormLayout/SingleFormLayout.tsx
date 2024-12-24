@@ -10,17 +10,19 @@ import Children from '@/utilities/Children';
 interface SingleFormLayoutProps extends Children {
   problem?: string;
   link?: BoatifyLinkProps;
+  noLogo?: boolean;
 }
 
 const SingleFormLayout = ({
   children,
   problem,
   link,
+  noLogo,
 }: SingleFormLayoutProps) => {
   return (
     <Provider>
       <div className="single-form-layout">
-        <HeaderLogin />
+        {!noLogo && <HeaderLogin />}
         <main className="single-form-layout">{children}</main>
         <FooterSingleForm problem={problem} link={link} />
       </div>

@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 import StandardReconnect from '@/components/Reconnect/StandardReconnect/StandardReconnect';
 import SuccessReconnect from '@/components/Reconnect/SuccessReconnect/SuccessReconnect';
 import FailedReconnect from '@/components/Reconnect/FailedReconnect/FailedReconnect';
+import BoatifyScrollUp from '@/boatify-components/BoatifyScrollUp/BoatifyScrollUp';
 
 interface MainLayoutProps extends Children {
   onlyForLogged?: boolean;
@@ -34,6 +35,7 @@ const MainLayout = ({ children, onlyForLogged }: MainLayoutProps) => {
       <Header />
       <main className="main-layout">{children}</main>
       <Footer />
+      <BoatifyScrollUp />
       </>
       }
       {onlyForLogged && !isLogged && isLoginChecked &&
