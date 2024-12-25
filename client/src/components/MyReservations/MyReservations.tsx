@@ -2,7 +2,7 @@ import BoatifyButton from '@/boatify-components/BoatifyButton/BoatifyButton';
 import './MyReservations.scss';
 import { FC, useEffect, useState } from 'react';
 import ButtonType from '@/utilities/ButtonType';
-import { BoatifyGoTo, BoatifyGoToInBlank } from '@/utilities/BoatifyGoTo';
+import { BoatifyGoToInBlank } from '@/utilities/BoatifyGoTo';
 import Reservation from '@/models/Reservation';
 import DataLoader from '@/dataLoaders/DataLoader';
 import { RootState } from '@/redux/store';

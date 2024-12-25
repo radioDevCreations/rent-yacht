@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using System.Security.Claims;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace boatifyApi.Services
 {
@@ -15,6 +16,7 @@ namespace boatifyApi.Services
     {
         BoatDto GetById( int boatId);
         IEnumerable<BoatDto> GetAll();
+        IEnumerable<BoatDto> GetUserBoatsById(int userId);
         PagedResult<BoatDto> GetAllSpecific(BoatQuery query);
         void Delete(int boatId);
         void Update(int boatId, UpdateBoatDto dto);
@@ -42,6 +44,18 @@ namespace boatifyApi.Services
         {
             var boats = _dbContext
                 .Boats
+                .ToList();
+
+            var boatDtos = _mapper.Map<List<BoatDto>>(boats);
+
+            return boatDtos;
+        }
+
+        public IEnumerable<BoatDto> GetUserBoatsById(int userId)
+        {
+            var boats = _dbContext
+                .Boats
+                .Where(b => b.CreatedById == userId)
                 .ToList();
 
             var boatDtos = _mapper.Map<List<BoatDto>>(boats);

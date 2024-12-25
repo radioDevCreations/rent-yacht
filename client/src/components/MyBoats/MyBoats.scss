@@ -1,0 +1,25 @@
+@import '../../styles/theme.scss';
+
+.my-boats {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 100px;
+}
+.my-boats__header {
+  max-width: 1000px;
+  width: 100%;
+  padding: 20px 10px;
+}
+.my-boats__heading-text {
+  font-size: $fontSize18px;
+}
+.my-boats__table {
+  max-width: 1000px;
+  width: 100%;
+}
+
+.boatify-button--details {
+  width: 100%;
+}

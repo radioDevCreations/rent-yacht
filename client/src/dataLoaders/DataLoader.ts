@@ -146,6 +146,20 @@ abstract class DataLoader {
    * Fetch all boats without filters.
    * @returns Promise<any> - List of all boats.
    */
+  static selectUserBoats = async (token: string): Promise<any> => {
+    return await axiosInstance
+      .get(BoatifyApiURL('boat/my-boats'), { headers: { "Authorization": `Bearer ${token}` }})
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error(error);
+        throw error;
+      });
+  };
+
+  /**
+   * Fetch all boats without filters.
+   * @returns Promise<any> - List of all boats.
+   */
   static createBoat = async (token: string, harbourId: number, data: FormData): Promise<any> => {
     const response = await axiosInstance.post(`/api/harbour/${harbourId}/boat`, data, {
       headers: {

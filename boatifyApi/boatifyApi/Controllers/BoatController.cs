@@ -1,5 +1,7 @@
-﻿using boatifyApi.Models;
+﻿using boatifyApi.Exceptions;
+using boatifyApi.Models;
 using boatifyApi.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -26,6 +28,19 @@ namespace boatifyApi.Controllers
         public ActionResult<List<BoatDto>> GetAllBoats()
         {
             var boats = _boatService.GetAll();
+            return Ok(boats);
+        }
+
+        [Authorize]
+        [HttpGet("my-boats")]
+        public ActionResult<List<BoatDto>> GetUserBoats()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (userId == null)
+                throw new BadRequestException("Unauthorized user");
+
+            var boats = _boatService.GetUserBoatsById(int.Parse(userId));
             return Ok(boats);
         }
 
