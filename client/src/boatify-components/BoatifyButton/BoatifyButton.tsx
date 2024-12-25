@@ -1,6 +1,7 @@
 import './BoatifyButton.scss';
 import ButtonType from '@/utilities/ButtonType';
 import BoatifyButtonVariant from './BoatifyButtonVariant';
+import { SystemBoolean } from '@/utilities/System';
 
 interface BoatifyButtonProps {
   value: string;
@@ -9,6 +10,7 @@ interface BoatifyButtonProps {
   disabled?: boolean;
   classModifier?: string;
   variant?: BoatifyButtonVariant;
+  isLongButton?: boolean;
 }
 
 const BoatifyButton = ({
@@ -18,6 +20,7 @@ const BoatifyButton = ({
   disabled,
   classModifier,
   variant,
+  isLongButton = SystemBoolean.False,
 }: BoatifyButtonProps) => {
   let variantClass = '';
   switch (variant) {
@@ -29,7 +32,7 @@ const BoatifyButton = ({
     <button
       type={type}
       className={`boatify-button ${classModifier ? classModifier : ''} 
-			${variantClass ? variantClass : ''}`}
+			${variantClass ? variantClass : ''} ${isLongButton ? 'boatify-button--long' : ''}`}
       disabled={disabled}
       onClick={onClick}
     >

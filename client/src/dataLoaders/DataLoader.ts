@@ -143,6 +143,21 @@ abstract class DataLoader {
   };
 
   /**
+   * Fetch all boats without filters.
+   * @returns Promise<any> - List of all boats.
+   */
+  static createBoat = async (token: string, harbourId: number, data: FormData): Promise<any> => {
+    const response = await axiosInstance.post(`/api/harbour/${harbourId}/boat`, data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        "Authorization": `Bearer ${token}`
+      },
+    });
+    return response;
+  };
+
+
+  /**
    * Fetch boat by id.
    * @returns Promise<any> - Boat data.
    */
