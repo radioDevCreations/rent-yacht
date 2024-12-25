@@ -8,6 +8,7 @@
         public required string Model { get; set; }
         public required string Type { get; set; }
         public required double PricePerDay { get; set; }
+        public string? MainImage { get; set; }
 
         public int? CreatedById { get; set; }
         public virtual User CreatedBy { get; set; }

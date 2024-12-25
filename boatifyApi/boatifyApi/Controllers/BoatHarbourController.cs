@@ -32,7 +32,7 @@ namespace boatifyApi.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult CreateBoat([FromRoute]int harbourId, [FromBody]CreateBoatDto dto)
+        public ActionResult CreateBoat([FromRoute]int harbourId, [FromForm]CreateBoatDto dto)
         {
             var userId = int.Parse(User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier).Value);
             var boatId = _boatHarbourService.Create(harbourId, dto);

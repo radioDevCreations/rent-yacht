@@ -31,11 +31,13 @@ namespace boatifyApi.Services
         public int Create(int harbourId, CreateBoatDto dto)
         {
             var harbour = GetHarbourById(harbourId);
+            string uniqueFileName = SaveMainImage(dto.MainImage);
 
             var boatEntity = _mapper.Map<Boat>(dto);
-            boatEntity.CreatedById = _userContextService.GetUserId;
 
+            boatEntity.CreatedById = _userContextService.GetUserId;
             boatEntity.HarbourId = harbourId;
+            boatEntity.MainImage = uniqueFileName;
 
             _dbContext.Boats.Add(boatEntity);
             _dbContext.SaveChanges();
@@ -86,6 +88,30 @@ namespace boatifyApi.Services
                 throw new NotFoundException("Harbour not found");
 
             return harbour;
+        }
+
+        private string SaveMainImage(IFormFile mainImage)
+        {
+            if (mainImage == null || mainImage.Length == 0)
+            {
+                throw new ArgumentException("Main image is required.");
+            }
+
+            string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
+            if (!Directory.Exists(uploadsFolder))
+            {
+                Directory.CreateDirectory(uploadsFolder);
+            }
+
+            string uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(mainImage.FileName);
+            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                mainImage.CopyTo(fileStream);
+            }
+
+            return $"/uploads/{uniqueFileName}";
         }
     }
 }
