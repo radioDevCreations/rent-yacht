@@ -7,7 +7,9 @@ const Step4__ReservationPayment = () => {
   return (
     <div className="reservation-payment">
       <div className="pay">
-        <BoatifySuccess />
+        <div className="success-wrapper">
+          <BoatifySuccess />
+        </div>
         <BoatifyButton
           value="Pay"
           type={ButtonType.submit}

@@ -2,14 +2,14 @@ import { SystemBoolean } from '@/utilities/System';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type ApplicationState = {
-  loggedUserId: number;
+  loggedUserId: number | null;
   isMenuOpen: boolean,
   isProfileDropdownOpen: boolean,
   registerPageNumber: number,
 };
 
 const initialState: ApplicationState = {
-  loggedUserId: 2,
+  loggedUserId: null,
   isMenuOpen: SystemBoolean.False,
   isProfileDropdownOpen: SystemBoolean.False,
   registerPageNumber: 1,
@@ -34,6 +34,9 @@ const applicationSlice = createSlice({
     setIsProfileDropdownOpen: (state, action: PayloadAction<boolean>) => {
       return { ...state, isProfileDropdownOpen: action.payload };
     },
+    setLoggedUserId: (state, action: PayloadAction<number>) => {
+      return { ...state, loggedUserId: action.payload };
+    },
   },
 });
 
@@ -42,5 +45,6 @@ export const {
   closeMenu,
   setRegisterPage,
   setIsProfileDropdownOpen,
+  setLoggedUserId
 } = applicationSlice.actions;
 export default applicationSlice.reducer;

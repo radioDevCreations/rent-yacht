@@ -23,8 +23,7 @@ const Step3__ReservationSummary = (boat: any) => {
   const [error, setError] = useState<string | null>(null);
 
   const dispatch = useDispatch();
-
-  let applicationState = useSelector((state: RootState) => state.application);
+  const userId = Number(sessionStorage.getItem('userId'));
   let reservationState = useSelector((state: RootState) => state.reservation);
 
   const handleClickMakeReservation = async () => {
@@ -34,22 +33,22 @@ const Step3__ReservationSummary = (boat: any) => {
 
       console.log(`{
           boatId: ${reservationState.new_ReservationData.boatId},
-          userId: ${applicationState.loggedUserId},
+          userId: ${userId},
           startDate: ${reservationState.new_ReservationData.startDate},
           endDate: ${reservationState.new_ReservationData.endDate},
           totalPrice: ${reservationState.new_ReservationData.totalPrice},
           reservationStatusId: ${reservationState.new_ReservationData.reservationStatusId},
         }`);
 
-      // const response = await DataLoader.createReservation({
-      //   boatId: reservationState.new_ReservationData.boatId,
-      //   userId: reservationState.new_ReservationData.loggedUserId,
-      //   startDate: reservationState.new_ReservationData.startDate,
-      //   endDate: reservationState.new_ReservationData.endDate,
-      //   totalPrice: reservationState.new_ReservationData.totalPrice,
-      //   reservationStatusId:
-      //     reservationState.new_ReservationData.reservationStatusId,
-      // });
+      const response = await DataLoader.createReservation({
+        boatId: reservationState.new_ReservationData.boatId,
+        userId: userId,
+        startDate: reservationState.new_ReservationData.startDate,
+        endDate: reservationState.new_ReservationData.endDate,
+        totalPrice: reservationState.new_ReservationData.totalPrice,
+        reservationStatusId:
+          reservationState.new_ReservationData.reservationStatusId,
+      });
       setData(data);
       nextReservationPage();
     } catch (err: any) {

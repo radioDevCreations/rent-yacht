@@ -64,9 +64,9 @@ abstract class DataLoader {
    */
   static createReservation = async (data: {
     userId: number;
-    boatId: number;
-    startDate: string;
-    endDate: string;
+    boatId: number | null;
+    startDate: string | null;
+    endDate: string | null;
     totalPrice: number;
     reservationStatusId: number;
   }): Promise<any> => {
@@ -84,7 +84,8 @@ abstract class DataLoader {
    * @param userId - The ID of the user.
    * @returns Promise<any> - List of reservations for the user.
    */
-  static selectUserReservations = async (userId: number): Promise<any> => {
+  static selectUserReservations = async (userId: number | null): Promise<any> => {
+    if (userId === null) return null;
     return await axiosInstance
       .get(BoatifyApiURL(`reservation/user/${userId}`))
       .then((response) => response.data)

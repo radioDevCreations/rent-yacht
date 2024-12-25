@@ -4,14 +4,47 @@ import { FC, useEffect, useState } from 'react';
 import ButtonType from '@/utilities/ButtonType';
 import { BoatifyGoTo, BoatifyGoToInBlank } from '@/utilities/BoatifyGoTo';
 import Reservation from '@/models/Reservation';
+import DataLoader from '@/dataLoaders/DataLoader';
+import { RootState } from '@/redux/store';
+import { useSelector } from 'react-redux';
+import { SystemBoolean } from '@/utilities/System';
 
 const TABLE_BORDER_COLOR = '#122c78';
 
-interface MyReservationsProps {
-  reservations: Reservation[];
-}
+const MyReservations: FC = () => {
+  const [loading, setLoading] = useState<boolean>(SystemBoolean.True);
+  const [error, setError] = useState<string | null>(null);
+  const [reservations, setReservations] = useState<Reservation[]>([]);
+  
+  let applicationState = useSelector((state: RootState) => state.application);
 
-const MyReservations: FC<MyReservationsProps> = ({ reservations }) => {
+  useEffect(() => {
+    const fetchReservations = async () => {
+      try {
+        setLoading(SystemBoolean.True);
+        setError(null);
+        const userId = Number(sessionStorage.getItem('userId'));
+        const response = await DataLoader.selectUserReservations(userId);
+        const data: Reservation[] = await response;
+        setReservations(data);
+      } catch (err: any) {
+        setError(err.message || 'Failed to fetch reservations');
+      } finally {
+        setLoading(SystemBoolean.False);
+      }
+    };
+
+    fetchReservations();
+  }, [applicationState.loggedUserId]);
+  
+  if (loading) {
+    return <div>Loading reservations...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   return (
     <section className="my-reservations">
       <header className="my-reservations__header">

@@ -3,19 +3,17 @@ import './LoginForm.scss';
 import { ChangeEvent, useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import httpClient from '@/axios/httpClient';
 import ButtonType from '@/utilities/ButtonType';
 import BoatifyButton from '@/boatify-components/BoatifyButton/BoatifyButton';
 import { useDispatch, useSelector } from 'react-redux';
-import { setJwtToken } from '@/redux/slices/formsSlice';
 import IMAGE from '../../../public/links';
 import DataLoader from '@/dataLoaders/DataLoader';
 import { BoatifyGoTo } from '@/utilities/BoatifyGoTo';
+import { setLoggedUserId } from '@/redux/slices/applicationSlice';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [user, setUser] = useState({});
   const dispatch = useDispatch();
 
   const handleSubmit = async (event: React.SyntheticEvent) => {
@@ -29,7 +27,7 @@ const LoginForm = () => {
     const responseUserData = await DataLoader.getCurrentUserData(responseToken);
 
     sessionStorage.setItem('token', responseToken);
-    BoatifyGoTo('/');
+    sessionStorage.setItem('userId', responseUserData.id);
   };
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
