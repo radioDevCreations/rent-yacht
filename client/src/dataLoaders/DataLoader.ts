@@ -1,4 +1,5 @@
 import axiosInstance from '@/axios/httpClient';
+import User from '@/models/User';
 import { ApiURL } from '@/utilities/BaseUrl';
 import SortDirection from '@/utilities/SortDirection';
 import { SystemBoolean } from '@/utilities/System';
@@ -297,6 +298,20 @@ abstract class DataLoader {
         throw error;
       });
   };
+
+  static updateUserData = async (token: string | null, userData: Partial<User>): Promise<any> => {
+    this.isTokenValid(token);
+    return await axiosInstance
+      .post(BoatifyApiURL(`account/edit`), userData, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error(error);
+        throw error;
+      });
+  };
+
 
   //TOKEN VALIDATION
 

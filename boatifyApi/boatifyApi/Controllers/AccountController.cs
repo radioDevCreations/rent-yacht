@@ -28,6 +28,7 @@ namespace boatifyApi.Controllers
             string token = _accountService.GenerateJwt(dto);
             return Ok(token);
         }
+
         [Authorize]
         [HttpGet("me")]
         public ActionResult GetCurrentUser()
@@ -42,6 +43,23 @@ namespace boatifyApi.Controllers
             var currentUser = _accountService.GetCurrentUser(userId);
 
             return Ok(currentUser);
+        }
+
+        [Authorize]
+        [HttpGet("edit")]
+        public ActionResult EditCurrentUser()
+        {
+            throw new NotImplementedException();
+            //var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            //if (string.IsNullOrEmpty(userId))
+            //{
+            //    return Unauthorized("User is not authenticated.");
+            //}
+
+            //var currentUser = _accountService.GetCurrentUser(userId);
+
+            //return Ok(currentUser);
         }
     }
 }

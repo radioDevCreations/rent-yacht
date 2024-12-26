@@ -18,6 +18,9 @@ enum Captions {
   Step3Label = 'Reservation Summary',
   Step4Label = 'Payment',
   Next = 'Next',
+  PROFILE_EMAIL = 'Email: ',
+  PROFILE_ROLE = 'Role: ',
+  DATE_OF_BIRTH = 'Date of Birth: ',
 }
 
 export default Captions;

@@ -1,8 +1,5 @@
-'use client';
 import Children from '@/utilities/Children';
 import './Details.scss';
-
-import { FormEvent } from 'react';
 
 interface DetailsProps extends Children {}
 

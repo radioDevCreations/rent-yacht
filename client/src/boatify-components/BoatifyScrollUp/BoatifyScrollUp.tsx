@@ -1,3 +1,4 @@
+import { SystemBoolean } from '@/utilities/System';
 import './BoatifyScrollUp.scss';
 import React, { useState, useEffect } from 'react';
 import { MdKeyboardArrowUp } from 'react-icons/md';
@@ -8,9 +9,9 @@ const BoatifyScrollUp = () => {
   useEffect(() => {
     const toggleVisibility = () => {
       if (window.scrollY > 300) {
-        setIsVisible(true);
+        setIsVisible(SystemBoolean.True);
       } else {
-        setIsVisible(false);
+        setIsVisible(SystemBoolean.False);
       }
     };
 

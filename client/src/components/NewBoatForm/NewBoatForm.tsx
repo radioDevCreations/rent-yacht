@@ -11,6 +11,7 @@ import ButtonType from '@/utilities/ButtonType';
 import InputType from '@/utilities/InputType';
 import { useState, useEffect } from 'react';
 import SuccessReconnect from '../Reconnect/SuccessReconnect/SuccessReconnect';
+import { SystemBoolean } from '@/utilities/System';
 
 interface HarbourDto {
   id: number;
@@ -103,7 +104,7 @@ const NewBoatWithHarbour: React.FC = () => {
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
+    setIsSubmitting(SystemBoolean.True);
 
     const jwtToken = sessionStorage.getItem('token');
     if (!jwtToken?.length) {
@@ -145,11 +146,11 @@ const NewBoatWithHarbour: React.FC = () => {
         harbourId,
       });
       setSelectedHarbour(null);
-      setIsSuccess(true);
+      setIsSuccess(SystemBoolean.True);
     } catch (error) {
       console.error('Error creating boat:', error);
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(SystemBoolean.False);
     }
   };
 

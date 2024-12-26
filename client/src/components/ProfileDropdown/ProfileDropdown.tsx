@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './ProfileDropdown.scss';
 import Link from 'next/link';
 import { BoatifyGoTo } from '@/utilities/BoatifyGoTo';
+import { SystemBoolean } from '@/utilities/System';
 
 type ProfileDropdownItem = {
   name: string;
@@ -36,12 +37,12 @@ const NAVIGATION_ITEMS_GUEST: ProfileDropdownItem[] = [
 const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
   isDropdownOpen,
 }) => {
-  const [isLogged, setIsLogged] = useState(false);
+  const [isLogged, setIsLogged] = useState(SystemBoolean.False);
 
   useEffect(() => {
     const jwtToken = sessionStorage.getItem('token');
-    if (!jwtToken?.length) setIsLogged(false);
-    else setIsLogged(true);
+    if (!jwtToken?.length) setIsLogged(SystemBoolean.False);
+    else setIsLogged(SystemBoolean.True);
   }, []);
 
   const itemClass = isDropdownOpen
