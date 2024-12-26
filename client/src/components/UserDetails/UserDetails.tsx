@@ -58,7 +58,7 @@ const UserDetails: React.FC = () => {
   };
 
   if (loading) {
-    return <div>Loading reservations...</div>;
+    return <div>Loading user...</div>;
   }
 
   if (error) {

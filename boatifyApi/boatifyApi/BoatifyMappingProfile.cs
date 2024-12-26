@@ -20,6 +20,7 @@ namespace boatifyApi
 
             CreateMap<Boat, BoatDto>()
                 .ForMember(m => m.HarbourName, c => c.MapFrom(s => s.Harbour.Name));
+            CreateMap<BoatDto, Boat>();
 
             CreateMap<CreateHarbourDto, Harbour>()
                 .ForMember(m => m.Address, c => c.MapFrom(dto => new Address() { 

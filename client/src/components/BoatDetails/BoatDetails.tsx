@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import './BoatDetails.scss';
 import { SystemBoolean } from '@/utilities/System';
 import DataLoader from '@/dataLoaders/DataLoader';
-import User from '@/models/User';
 import { FaRegArrowAltCircleLeft } from 'react-icons/fa';
 import { BoatifyGoTo } from '@/utilities/BoatifyGoTo';
 import Captions from '@/captions/captions';
 import Boat from '@/models/Boat';
+import Harbour from '@/models/Harbour';
 
 interface BoatDetailsProps{
     boatId: string;
@@ -16,19 +16,17 @@ const BoatDetails: React.FC<BoatDetailsProps> = ({ boatId }) => {
   const [loading, setLoading] = useState<boolean>(SystemBoolean.True);
   const [error, setError] = useState<string | null>(null);
   const [boat, setBoat] = useState<Boat | null>(null);
-
-  const [editableUser, setEditableUser] = useState<Partial<User>>({});
+  const [harbour, setHarbour] = useState<Harbour | null>(null);
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
         setLoading(SystemBoolean.True);
         setError(null);
-        const response = await DataLoader.selectBoatById(Number(boatId));
-        const data: Boat = await response;
-        console.log(data)
-        setBoat(data);
-        setEditableUser(data);
+        const responseBoat = await DataLoader.selectBoatById(Number(boatId)); 
+        const responseHarbour = await DataLoader.selectHarbour(responseBoat.harbourId); 
+        setBoat(responseBoat);
+        setHarbour(responseHarbour);
       } catch (err: any) {
         setError(err.message || 'Failed to fetch boat data');
       } finally {
@@ -40,7 +38,7 @@ const BoatDetails: React.FC<BoatDetailsProps> = ({ boatId }) => {
   }, []);
 
   if (loading) {
-    return <div>Loading reservations...</div>;
+    return <div>Loading boat...</div>;
   }
 
   if (error) {
@@ -86,7 +84,7 @@ const BoatDetails: React.FC<BoatDetailsProps> = ({ boatId }) => {
       </div>
       <div className="boat-details__field">
         <span className="boat-details__field-name">{Captions.BOAT_CURRENT_LOCATION}</span>
-        <span className="boat-details__field-text">{boat?.harbourName}</span>
+        <span className="boat-details__field-text">{harbour?.name}</span>
       </div>
     </div>
   );
