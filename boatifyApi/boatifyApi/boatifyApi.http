@@ -1,0 +1,6 @@
+@boatifyApi_HostAddress = http://localhost:5045
+
+GET {{boatifyApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

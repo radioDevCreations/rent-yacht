@@ -1,13 +1,13 @@
-import "./boats.scss";
-import MainLayout from "@/layouts/MainLayout/MainLayout";
-import BoatsBrowser from "@/components/BoatsBrowser/BoatsBrowser";
+import './boats.scss';
+import MainLayout from '@/layouts/MainLayout/MainLayout';
+import BoatsBrowser from '@/components/BoatsBrowser/BoatsBrowser';
 
 const BoatsPage = () => {
-	return (
-		<MainLayout>
-			<BoatsBrowser />
-		</MainLayout>
-	);
+  return (
+    <MainLayout onlyForLogged>
+      <BoatsBrowser />
+    </MainLayout>
+  );
 };
 
 export default BoatsPage;

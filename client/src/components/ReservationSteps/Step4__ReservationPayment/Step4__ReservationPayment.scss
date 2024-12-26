@@ -1,0 +1,16 @@
+.reservation-payment {
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.pay {
+  width: 100px;
+  position: relative;
+}
+.success-wrapper{
+  position: absolute;
+  top: 48px;
+  left: 20px;
+}

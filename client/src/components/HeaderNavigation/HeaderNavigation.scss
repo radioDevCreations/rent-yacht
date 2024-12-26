@@ -1,58 +1,62 @@
 .header-navigation {
-	@apply flex;
-	width: 100%;
-	min-height: 100%;
+  @apply flex;
+  width: 100%;
+  min-height: 100%;
 }
 
 .header-navigation__item {
-	display: block;
-	padding: 10px;
+  display: block;
+  padding: 10px;
 }
 
 .header-navigation__item--in {
-	-webkit-transform: translateY(0px);
-	transform: translateY(0px);
-	-webkit-transition: -webkit-transform 0.3s ease-out;
-	transition: -webkit-transform 0.3s ease-out;
-	transition: transform 0.3s ease-out;
-	transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out;
+  -webkit-transform: translateY(0px);
+  transform: translateY(0px);
+  -webkit-transition: -webkit-transform 0.3s ease-out;
+  transition: -webkit-transform 0.3s ease-out;
+  transition: transform 0.3s ease-out;
+  transition:
+    transform 0.3s ease-out,
+    -webkit-transform 0.3s ease-out;
 }
 
 .header-navigation__item--out {
-	-webkit-transform: translateY(-100px);
-	transform: translateY(-100px);
-	-webkit-transition: -webkit-transform 0.3s ease-in;
-	transition: -webkit-transform 0.3s ease-in;
-	transition: transform 0.3s ease-in;
-	transition: transform 0.3s ease-in, -webkit-transform 0.3s ease-in;
+  -webkit-transform: translateY(-100px);
+  transform: translateY(-100px);
+  -webkit-transition: -webkit-transform 0.3s ease-in;
+  transition: -webkit-transform 0.3s ease-in;
+  transition: transform 0.3s ease-in;
+  transition:
+    transform 0.3s ease-in,
+    -webkit-transform 0.3s ease-in;
 }
 
 .header-navigation__item-link {
-	display: block;
-	color: black;
-	text-decoration: none;
+  display: block;
+  color: black;
+  text-decoration: none;
 }
 
 .header-navigation__item-link--inactive {
-	pointer-events: none;
+  pointer-events: none;
 }
 
 .transition-delay1 {
-	-webkit-transition-delay: 0.1s;
-	transition-delay: 0.1s;
+  -webkit-transition-delay: 0.1s;
+  transition-delay: 0.1s;
 }
 
 .transition-delay2 {
-	-webkit-transition-delay: 0.2s;
-	transition-delay: 0.2s;
+  -webkit-transition-delay: 0.2s;
+  transition-delay: 0.2s;
 }
 
 .transition-delay3 {
-	-webkit-transition-delay: 0.3s;
-	transition-delay: 0.3s;
+  -webkit-transition-delay: 0.3s;
+  transition-delay: 0.3s;
 }
 
 .transition-delay4 {
-	-webkit-transition-delay: 0.4s;
-	transition-delay: 0.4s;
+  -webkit-transition-delay: 0.4s;
+  transition-delay: 0.4s;
 }

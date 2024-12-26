@@ -1,6 +1,6 @@
 enum BoatifyInputVariant {
-	light,
-	dark,
+  light,
+  dark,
 }
 
 export default BoatifyInputVariant;

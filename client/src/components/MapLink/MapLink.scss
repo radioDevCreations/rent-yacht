@@ -1,23 +1,23 @@
-@import "src/styles/theme.scss";
+@import 'src/styles/theme.scss';
 
 .map-link {
-	@apply flex flex-col items-center;
-	padding-top: 147px;
+  @apply flex flex-col items-center;
+  padding-top: 147px;
 }
 .map-link__text1,
 .map-link__text2 {
-	font-family: "Ubuntu", sans-serif;
-	font-size: $fontSize40px;
-	font-weight: $fontWeightBold;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: $fontSize40px;
+  font-weight: $fontWeightBold;
 }
 .map-link__text1 {
-	padding-bottom: 123px;
+  padding-bottom: 123px;
 }
 .map-link__text2 {
-	@include app-link;
-	color: $black;
-	cursor: pointer;
+  @include app-link;
+  color: $black;
+  cursor: pointer;
 }
 .map-link__image {
-	padding-bottom: 23px;
+  padding-bottom: 23px;
 }

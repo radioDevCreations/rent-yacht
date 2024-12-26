@@ -1,6 +1,6 @@
 enum PageVariant {
-	light = "light",
-	dark = "dark",
+  light = 'light',
+  dark = 'dark',
 }
 
 export default PageVariant;

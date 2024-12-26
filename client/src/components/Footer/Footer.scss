@@ -1,37 +1,37 @@
-@import url("https://fonts.googleapis.com/css2?family=Indie+Flower&family=Lato:ital,wght@0,100;0,300;0,400;0,700;1,100;1,300;1,400;1,700&display=swap");
-@import "../../styles/theme.scss";
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Lato:ital,wght@0,100;0,300;0,400;0,700;1,100;1,300;1,400;1,700&display=swap');
+@import '../../styles/theme.scss';
 
 .footer {
-	padding: 120px 0;
-	display: block;
-	min-width: 100%;
-	font-family: "Lato";
-	font-size: $fontSize14px;
+  padding: 120px 0;
+  display: block;
+  min-width: 100%;
+  font-family: 'Lato';
+  font-size: $fontSize14px;
 }
 .footer-images {
-	@apply flex justify-center items-center;
-	padding: 32px;
-	padding-bottom: 16px;
+  @apply flex justify-center items-center;
+  padding: 32px;
+  padding-bottom: 16px;
 }
 .footer-images__row {
-	@apply flex justify-center items-center;
+  @apply flex justify-center items-center;
 }
 .footer-links {
-	@apply flex justify-center items-center;
-	padding: 32px;
-	padding-top: 16px;
+  @apply flex justify-center items-center;
+  padding: 32px;
+  padding-top: 16px;
 }
 .footer-links__col1,
 .footer-links__col2 {
-	margin-right: 48px;
+  margin-right: 48px;
 }
 .footer-links__item {
-	padding: 4px;
+  padding: 4px;
 }
 .footer-images__item {
-	padding: 4px;
-	height: 64px;
-	&:first-child {
-		margin-right: 48px;
-	}
+  padding: 4px;
+  height: 64px;
+  &:first-child {
+    margin-right: 48px;
+  }
 }

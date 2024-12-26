@@ -1,13 +1,23 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	async rewrites() {
-		return [
-			{
-				source: "/:slug*",
-				destination: `http://localhost:5000/:slug*`,
-			},
-		];
-	},
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'iqboatlifts.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'http://localhost:5000/:path*',
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

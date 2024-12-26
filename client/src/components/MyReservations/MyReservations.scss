@@ -1,0 +1,25 @@
+@import '../../styles/theme.scss';
+
+.my-reservations {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 100px;
+}
+.my-reservations__header {
+  max-width: 1000px;
+  width: 100%;
+  padding: 20px 10px;
+}
+.my-reservations__heading-text {
+  font-size: $fontSize18px;
+}
+.my-reservations__table {
+  max-width: 1000px;
+  width: 100%;
+}
+
+.boatify-button--details {
+  width: 100%;
+}

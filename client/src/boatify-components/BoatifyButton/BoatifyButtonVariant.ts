@@ -1,6 +1,6 @@
 enum BoatifyButtonVariant {
-	standard,
-	orangeSTD,
+  standard,
+  orangeSTD,
 }
 
 export default BoatifyButtonVariant;

@@ -1,26 +1,26 @@
 .contact {
-	@apply flex flex-col justify-center items-center;
-	margin: 100px 0 200px;
-	padding-top: 76px;
+  @apply flex flex-col justify-center items-center;
+  margin: 100px 0 200px;
+  padding-top: 76px;
 }
 
 .contact__inputs,
 .contact__button-section {
-	@apply flex justify-center;
+  @apply flex justify-center;
 }
 
 .contact__button-section {
-	margin: 20px 0 0;
+  margin: 20px 0 0;
 }
 
 .contact__inputs-column--first {
-	margin-right: 24px;
+  margin-right: 24px;
 }
 
 .contact__inputs-column--last {
-	width: 424px;
+  width: 424px;
 }
 
 .textarea__field {
-	min-height: 136px;
+  min-height: 136px;
 }

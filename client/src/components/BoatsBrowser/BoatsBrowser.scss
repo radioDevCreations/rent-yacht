@@ -1,17 +1,17 @@
-@import "../../styles/theme.scss";
+@import '../../styles/theme.scss';
 
 .browser-container {
-	@apply flex justify-center;
+  @apply flex justify-center;
 }
 .browser {
-	@apply flex justify-center;
-	width: calc(100% - 24px);
-	max-width: 1000px;
-	border-bottom: 1px solid $royalBlue;
+  @apply flex justify-center;
+  width: calc(100% - 24px);
+  max-width: 1000px;
+  border-bottom: 1px solid $royalBlue;
 }
 .aside {
-	@apply flex flex-col;
+  @apply flex flex-col;
 }
 .boats {
-	width: 1000px;
+  width: 1000px;
 }

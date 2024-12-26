@@ -1,0 +1,33 @@
+@import '../../../styles/theme.scss';
+
+.reservation-time {
+  @apply flex-col;
+  margin-top: 32px;
+}
+
+.reservation-time-indicator--time {
+  @apply flex;
+  flex-direction: row;
+}
+
+.margin {
+  user-select: none;
+  content: ' ';
+  width: 24px;
+}
+
+.button-section {
+  padding: 12px 0;
+  display: flex;
+  flex-direction: row;
+  width: 520px;
+}
+.time-and-price {
+  display: flex;
+  align-items: center;
+  margin-bottom: 32px;
+}
+.reservation-price {
+  margin-left: 100px;
+  font-size: $fontSize18px;
+}

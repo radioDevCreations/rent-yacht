@@ -1,38 +1,38 @@
-@import "../../styles/theme.scss";
+@import '../../styles/theme.scss';
 
 .pagination {
-	@apply flex justify-center;
-	width: 200px;
+  @apply flex justify-center;
+  width: 200px;
 }
 .pagination__button-wrapper {
-	width: 20px;
+  width: 20px;
 }
 .pagination__spacing {
-	width: 10px;
+  width: 10px;
 }
 .pagination__numeration {
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	font-size: $fontSize16px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-size: $fontSize16px;
 }
 .pagination__button {
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	-webkit-transition: all 0.6s ease-out;
-	transition: all 0.6s ease-out;
-	&:disabled {
-		-webkit-transform: translateY(6px);
-		transform: translateY(6px);
-		opacity: 0;
-	}
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-transition: all 0.6s ease-out;
+  transition: all 0.6s ease-out;
+  &:disabled {
+    -webkit-transform: translateY(6px);
+    transform: translateY(6px);
+    opacity: 0;
+  }
 }
 
 .button-image {
-	margin: 0;
-	padding: 0;
-	width: 20px;
+  margin: 0;
+  padding: 0;
+  width: 20px;
 }

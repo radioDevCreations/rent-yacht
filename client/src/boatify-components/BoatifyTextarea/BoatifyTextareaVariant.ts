@@ -1,6 +1,6 @@
 enum BoatifyTextareaVariant {
-	light,
-	dark,
+  light,
+  dark,
 }
 
 export default BoatifyTextareaVariant;
