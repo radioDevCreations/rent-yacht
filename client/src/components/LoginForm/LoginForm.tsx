@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import IMAGE from '../../../public/links';
 import DataLoader from '@/dataLoaders/DataLoader';
 import { BoatifyGoTo } from '@/utilities/BoatifyGoTo';
-import { setLoggedUserId } from '@/redux/slices/applicationSlice';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
@@ -28,7 +27,6 @@ const LoginForm = () => {
 
       
       sessionStorage.setItem('token', responseToken);
-      sessionStorage.setItem('userId', responseUserData.id);
 
       BoatifyGoTo('/');
     } catch (error) {

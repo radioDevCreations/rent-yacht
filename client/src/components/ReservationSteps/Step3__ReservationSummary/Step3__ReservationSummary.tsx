@@ -23,7 +23,7 @@ const Step3__ReservationSummary = (boat: any) => {
   const [error, setError] = useState<string | null>(null);
 
   const dispatch = useDispatch();
-  const userId = Number(sessionStorage.getItem('userId'));
+  const token = sessionStorage.getItem('token');
   let reservationState = useSelector((state: RootState) => state.reservation);
 
   const handleClickMakeReservation = async () => {
@@ -31,18 +31,8 @@ const Step3__ReservationSummary = (boat: any) => {
       setLoading(SystemBoolean.True);
       setError(null);
 
-      console.log(`{
-          boatId: ${reservationState.new_ReservationData.boatId},
-          userId: ${userId},
-          startDate: ${reservationState.new_ReservationData.startDate},
-          endDate: ${reservationState.new_ReservationData.endDate},
-          totalPrice: ${reservationState.new_ReservationData.totalPrice},
-          reservationStatusId: ${reservationState.new_ReservationData.reservationStatusId},
-        }`);
-
-      const response = await DataLoader.createReservation({
+      const response = await DataLoader.createReservation(token, {
         boatId: reservationState.new_ReservationData.boatId,
-        userId: userId,
         startDate: reservationState.new_ReservationData.startDate,
         endDate: reservationState.new_ReservationData.endDate,
         totalPrice: reservationState.new_ReservationData.totalPrice,

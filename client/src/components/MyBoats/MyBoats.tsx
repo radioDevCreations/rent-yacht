@@ -35,7 +35,7 @@ const MyBoats: FC = () => {
     };
 
     fetchBoats();
-  }, [applicationState.loggedUserId]);
+  }, []);
   
   if (loading) {
     return <div>Loading boats...</div>;

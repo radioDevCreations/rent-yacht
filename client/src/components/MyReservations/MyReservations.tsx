@@ -24,7 +24,7 @@ const MyReservations: FC = () => {
         setLoading(SystemBoolean.True);
         setError(null);
         const token = sessionStorage.getItem('token');
-        const response = await DataLoader.selectUserReservations(`${token}`);
+        const response = await DataLoader.selectUserReservations(token);
         const data: Reservation[] = await response;
         setReservations(data);
       } catch (err: any) {
@@ -35,7 +35,7 @@ const MyReservations: FC = () => {
     };
 
     fetchReservations();
-  }, [applicationState.loggedUserId]);
+  }, []);
   
   if (loading) {
     return <div>Loading reservations...</div>;

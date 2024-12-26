@@ -36,7 +36,9 @@ namespace boatifyApi
             CreateMap<CreateBoatDto, Boat>();
 
             CreateMap<CreateReservationDto, Reservation>();
-            CreateMap<Reservation, ReservationDto>();
+            CreateMap<Reservation, ReservationDto>()
+                .ForMember(m => m.StartDate, c => c.MapFrom(s => s.ReservationTime.StartTime))
+                .ForMember(m => m.EndDate, c => c.MapFrom(s => s.ReservationTime.EndTime));
         }
     }
 }
