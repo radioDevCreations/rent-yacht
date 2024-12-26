@@ -46,9 +46,17 @@ namespace boatifyApi.Controllers
             return Ok(reservation);
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult Create([FromBody] CreateReservationDto dto)
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (userId == null)
+                throw new BadRequestException("Unauthorized user");
+
+            dto.UserId = int.Parse(userId);
+
             var reservationId = _reservationService.Create(dto);
             return Created($"api/reservation/{reservationId}", null);
         }
