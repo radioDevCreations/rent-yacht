@@ -116,7 +116,7 @@ const UserDetails: React.FC = () => {
         )}
       </div>
       <div className="user-details__field">
-        <span className="user-details__field-name">{Captions.DATE_OF_BIRTH}</span>
+        <span className="user-details__field-name">{Captions.PROFILE_DATE_OF_BIRTH}</span>
         {isEditing ? (
           <input
             type="date"

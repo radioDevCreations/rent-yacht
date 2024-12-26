@@ -1,0 +1,48 @@
+@import '../../styles/theme.scss';
+
+.boat-details{
+    position: relative;
+    width: 100%;
+    padding-top: 24px;
+}
+.boat-details__name{
+    padding: 12px 16px 12px 12px;
+    border-top: 1px solid $oxfordBlue;
+    border-bottom: 1px solid $oxfordBlue;
+    border-left: 1px solid $oxfordBlue;
+    border-right: 1px solid $oxfordBlue;
+    background-color: $uranianBlue;
+    display: flex;
+    justify-content: space-between;
+}
+.boat-details__name-field-text{
+    font-size: $fontSize24px;
+    color: $oxfordBlue;
+}
+.boat-details__edit{
+    font-size: $fontSize24px;
+}
+.boat-details__field{
+    padding: 12px;
+    border-bottom: 1px solid $oxfordBlue;
+    border-left: 1px solid $oxfordBlue;
+    border-right: 1px solid $oxfordBlue;
+    background-color: $white;
+    display: flex;
+}
+.boat-details__field-name{
+    display: block;
+    font-weight: $fontWeightBold;
+    width: 132px;
+}
+.boat-details__field-text{
+    font-size: $fontSize16px;
+    color: $oxfordBlue;
+}
+.boat-details__return{
+    position: absolute;
+    top: -30px;
+    left: -110px;
+    font-size: $fontSize24px;
+    color: $oxfordBlue;
+}

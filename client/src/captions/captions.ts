@@ -20,7 +20,13 @@ enum Captions {
   Next = 'Next',
   PROFILE_EMAIL = 'Email: ',
   PROFILE_ROLE = 'Role: ',
-  DATE_OF_BIRTH = 'Date of Birth: ',
+  PROFILE_DATE_OF_BIRTH = 'Date of Birth: ',
+  BOAT_NAME = 'Name: ',
+  BOAT_DESCRIPTION = 'Description: ',
+  BOAT_MODEL = 'Model: ',
+  BOAT_TYPE = 'Type: ',
+  BOAT_PRICE_PER_DAY = 'Price per day: ',
+  BOAT_CURRENT_LOCATION = 'Current location: ',
 }
 
 export default Captions;

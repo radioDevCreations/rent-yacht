@@ -200,6 +200,7 @@ abstract class DataLoader {
 
   /**
    * Fetch boat by id.
+   * @param boatId - ID of the boat to select.
    * @returns Promise<any> - Boat data.
    */
   static selectBoatById = async (boatId: number | undefined): Promise<any> => {
