@@ -15,7 +15,7 @@ const MyReservations: FC = () => {
   const [loading, setLoading] = useState<boolean>(SystemBoolean.True);
   const [error, setError] = useState<string | null>(null);
   const [reservations, setReservations] = useState<Reservation[]>([]);
-  
+
   let applicationState = useSelector((state: RootState) => state.application);
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const MyReservations: FC = () => {
 
     fetchReservations();
   }, []);
-  
+
   if (loading) {
     return <div>Loading reservations...</div>;
   }

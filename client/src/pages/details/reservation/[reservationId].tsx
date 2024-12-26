@@ -1,4 +1,4 @@
-import './reservation.scss';
+import './reservationId.scss';
 import MainLayout from '@/layouts/MainLayout/MainLayout';
 import Details from '@/components/Details/Details';
 

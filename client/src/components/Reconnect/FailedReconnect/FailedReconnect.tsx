@@ -13,28 +13,29 @@ interface FailedReconnectProps {
   buttonMessage?: string;
 }
 
-const FailedReconnect: React.FC<FailedReconnectProps> = ({message, url, buttonMessage}: FailedReconnectProps) => {
+const FailedReconnect: React.FC<FailedReconnectProps> = ({
+  message,
+  url,
+  buttonMessage,
+}: FailedReconnectProps) => {
   const handleClick = () => {
     BoatifyGoTo(url ? url : '/');
-  }
-  
-  
+  };
+
   return (
     <div className="failed-reconnect">
       <div className="failed-reconnect__icon">
         <BoatifyFailed />
       </div>
       <div className="failed-reconnect__message">
-        <span className="message">
-        {message}
-        </span>
+        <span className="message">{message}</span>
       </div>
-     <BoatifyButton
-            value={buttonMessage ? buttonMessage : Captions.Next}
-            type={ButtonType.button}
-            classModifier="boatify-button--stepper-prev"
-            onClick={handleClick}
-          />
+      <BoatifyButton
+        value={buttonMessage ? buttonMessage : Captions.Next}
+        type={ButtonType.button}
+        classModifier="boatify-button--stepper-prev"
+        onClick={handleClick}
+      />
     </div>
   );
 };

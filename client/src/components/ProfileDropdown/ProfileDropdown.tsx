@@ -33,7 +33,6 @@ const NAVIGATION_ITEMS_GUEST: ProfileDropdownItem[] = [
   { name: 'Register', href: '/register', customClassName: 'transition-delay2' },
 ];
 
-
 const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
   isDropdownOpen,
 }) => {
@@ -54,26 +53,28 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
   return (
     <div className="hide-overflow">
       <ul className="profile-dropdown">
-        {isLogged && NAVIGATION_ITEMS_LOGGED.map((item) => (
-          <li
-            key={item.name}
-            className={`${item.customClassName} ${itemClass}`}
-          >
-            <Link href={item.href} className={linkClass}>
-              {item.name}
-            </Link>
-          </li>
-        ))}
-        {!isLogged && NAVIGATION_ITEMS_GUEST.map((item) => (
-          <li
-            key={item.name}
-            className={`${item.customClassName} ${itemClass}`}
-          >
-            <Link href={item.href} className={linkClass}>
-              {item.name}
-            </Link>
-          </li>
-        ))}
+        {isLogged &&
+          NAVIGATION_ITEMS_LOGGED.map((item) => (
+            <li
+              key={item.name}
+              className={`${item.customClassName} ${itemClass}`}
+            >
+              <Link href={item.href} className={linkClass}>
+                {item.name}
+              </Link>
+            </li>
+          ))}
+        {!isLogged &&
+          NAVIGATION_ITEMS_GUEST.map((item) => (
+            <li
+              key={item.name}
+              className={`${item.customClassName} ${itemClass}`}
+            >
+              <Link href={item.href} className={linkClass}>
+                {item.name}
+              </Link>
+            </li>
+          ))}
       </ul>
     </div>
   );

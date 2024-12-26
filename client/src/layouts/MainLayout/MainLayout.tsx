@@ -19,34 +19,34 @@ interface MainLayoutProps extends Children {
 const MainLayout = ({ children, onlyForLogged }: MainLayoutProps) => {
   const [isLogged, setIsLogged] = useState(false);
   const [isLoginChecked, setIsLoginChecked] = useState(false);
-  
-    useEffect(() => {
-      const jwtToken = sessionStorage.getItem('token');
-      if (!jwtToken?.length) {
-        setIsLogged(false);
-      }
-      else setIsLogged(true);
-      setIsLoginChecked(true);
-    }, []);
+
+  useEffect(() => {
+    const jwtToken = sessionStorage.getItem('token');
+    if (!jwtToken?.length) {
+      setIsLogged(false);
+    } else setIsLogged(true);
+    setIsLoginChecked(true);
+  }, []);
 
   return (
     <Provider>
-      {(!onlyForLogged || isLogged) && isLoginChecked && <>
-      <Header />
-      <main className="main-layout">{children}</main>
-      <Footer />
-      <BoatifyScrollUp />
-      </>
-      }
-      {onlyForLogged && !isLogged && isLoginChecked &&
-      <>
-      <Header />
-      <main className="main-layout">
-        <StandardReconnect />
-      </main>
-      <Footer />
-      </>
-      }
+      {(!onlyForLogged || isLogged) && isLoginChecked && (
+        <>
+          <Header />
+          <main className="main-layout">{children}</main>
+          <Footer />
+          <BoatifyScrollUp />
+        </>
+      )}
+      {onlyForLogged && !isLogged && isLoginChecked && (
+        <>
+          <Header />
+          <main className="main-layout">
+            <StandardReconnect />
+          </main>
+          <Footer />
+        </>
+      )}
     </Provider>
   );
 };

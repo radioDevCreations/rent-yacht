@@ -1,17 +1,16 @@
 'use client';
+import Children from '@/utilities/Children';
 import './Details.scss';
 
 import { FormEvent } from 'react';
 
-const Details: React.FC = () => {
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {};
+interface DetailsProps extends Children {}
 
+const Details: React.FC<DetailsProps> = ({ children }) => {
   return (
-    <form className="details" onSubmit={handleSubmit}>
-      <section className="details__board">
-        {/* Add form elements here */}
-      </section>
-    </form>
+    <section className="details">
+      <div className="details__board">{children}</div>
+    </section>
   );
 };
 

@@ -15,7 +15,7 @@ const MyBoats: FC = () => {
   const [loading, setLoading] = useState<boolean>(SystemBoolean.True);
   const [error, setError] = useState<string | null>(null);
   const [boats, setBoats] = useState<Boat[]>([]);
-  
+
   let applicationState = useSelector((state: RootState) => state.application);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const MyBoats: FC = () => {
         setLoading(SystemBoolean.True);
         setError(null);
         const token = sessionStorage.getItem('token');
-        const response = token && await DataLoader.selectUserBoats(token);
+        const response = token && (await DataLoader.selectUserBoats(token));
         const data: Boat[] = await response;
         setBoats(data);
       } catch (err: any) {
@@ -36,7 +36,7 @@ const MyBoats: FC = () => {
 
     fetchBoats();
   }, []);
-  
+
   if (loading) {
     return <div>Loading boats...</div>;
   }
@@ -53,28 +53,68 @@ const MyBoats: FC = () => {
       <table className="my-boats__table">
         <thead>
           <tr>
-            <th style={{ border: `1px solid ${TABLE_BORDER_COLOR}`, padding: '8px' }}>
+            <th
+              style={{
+                border: `1px solid ${TABLE_BORDER_COLOR}`,
+                padding: '8px',
+              }}
+            >
               ID
             </th>
-            <th style={{ border: `1px solid ${TABLE_BORDER_COLOR}`, padding: '8px' }}>
+            <th
+              style={{
+                border: `1px solid ${TABLE_BORDER_COLOR}`,
+                padding: '8px',
+              }}
+            >
               Name
             </th>
-            <th style={{ border: `1px solid ${TABLE_BORDER_COLOR}`, padding: '8px' }}>
+            <th
+              style={{
+                border: `1px solid ${TABLE_BORDER_COLOR}`,
+                padding: '8px',
+              }}
+            >
               Description
             </th>
-            <th style={{ border: `1px solid ${TABLE_BORDER_COLOR}`, padding: '8px' }}>
+            <th
+              style={{
+                border: `1px solid ${TABLE_BORDER_COLOR}`,
+                padding: '8px',
+              }}
+            >
               Model
             </th>
-            <th style={{ border: `1px solid ${TABLE_BORDER_COLOR}`, padding: '8px' }}>
+            <th
+              style={{
+                border: `1px solid ${TABLE_BORDER_COLOR}`,
+                padding: '8px',
+              }}
+            >
               Type
             </th>
-            <th style={{ border: `1px solid ${TABLE_BORDER_COLOR}`, padding: '8px' }}>
+            <th
+              style={{
+                border: `1px solid ${TABLE_BORDER_COLOR}`,
+                padding: '8px',
+              }}
+            >
               Price Per Day
             </th>
-            <th style={{ border: `1px solid ${TABLE_BORDER_COLOR}`, padding: '8px' }}>
+            <th
+              style={{
+                border: `1px solid ${TABLE_BORDER_COLOR}`,
+                padding: '8px',
+              }}
+            >
               Harbour Name
             </th>
-            <th style={{ border: `1px solid ${TABLE_BORDER_COLOR}`, padding: '8px' }}>
+            <th
+              style={{
+                border: `1px solid ${TABLE_BORDER_COLOR}`,
+                padding: '8px',
+              }}
+            >
               Details
             </th>
           </tr>
@@ -82,28 +122,68 @@ const MyBoats: FC = () => {
         <tbody>
           {boats.map((boat) => (
             <tr key={boat.id}>
-              <td style={{ border: `1px solid ${TABLE_BORDER_COLOR}`, padding: '8px' }}>
+              <td
+                style={{
+                  border: `1px solid ${TABLE_BORDER_COLOR}`,
+                  padding: '8px',
+                }}
+              >
                 {boat.id}
               </td>
-              <td style={{ border: `1px solid ${TABLE_BORDER_COLOR}`, padding: '8px' }}>
+              <td
+                style={{
+                  border: `1px solid ${TABLE_BORDER_COLOR}`,
+                  padding: '8px',
+                }}
+              >
                 {boat.name}
               </td>
-              <td style={{ border: `1px solid ${TABLE_BORDER_COLOR}`, padding: '8px' }}>
+              <td
+                style={{
+                  border: `1px solid ${TABLE_BORDER_COLOR}`,
+                  padding: '8px',
+                }}
+              >
                 {boat.description}
               </td>
-              <td style={{ border: `1px solid ${TABLE_BORDER_COLOR}`, padding: '8px' }}>
+              <td
+                style={{
+                  border: `1px solid ${TABLE_BORDER_COLOR}`,
+                  padding: '8px',
+                }}
+              >
                 {boat.model}
               </td>
-              <td style={{ border: `1px solid ${TABLE_BORDER_COLOR}`, padding: '8px' }}>
+              <td
+                style={{
+                  border: `1px solid ${TABLE_BORDER_COLOR}`,
+                  padding: '8px',
+                }}
+              >
                 {boat.type}
               </td>
-              <td style={{ border: `1px solid ${TABLE_BORDER_COLOR}`, padding: '8px' }}>
+              <td
+                style={{
+                  border: `1px solid ${TABLE_BORDER_COLOR}`,
+                  padding: '8px',
+                }}
+              >
                 ${boat.pricePerDay.toFixed(2)}
               </td>
-              <td style={{ border: `1px solid ${TABLE_BORDER_COLOR}`, padding: '8px' }}>
+              <td
+                style={{
+                  border: `1px solid ${TABLE_BORDER_COLOR}`,
+                  padding: '8px',
+                }}
+              >
                 {boat.harbourName || 'N/A'}
               </td>
-              <td style={{ border: `1px solid ${TABLE_BORDER_COLOR}`, padding: '8px' }}>
+              <td
+                style={{
+                  border: `1px solid ${TABLE_BORDER_COLOR}`,
+                  padding: '8px',
+                }}
+              >
                 <BoatifyButton
                   value="Details"
                   type={ButtonType.button}

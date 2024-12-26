@@ -1,4 +1,4 @@
-import './boat.scss';
+import './boatId.scss';
 import MainLayout from '@/layouts/MainLayout/MainLayout';
 import Details from '@/components/Details/Details';
 

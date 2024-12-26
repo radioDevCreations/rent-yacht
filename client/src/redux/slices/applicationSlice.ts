@@ -2,9 +2,9 @@ import { SystemBoolean } from '@/utilities/System';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type ApplicationState = {
-  isMenuOpen: boolean,
-  isProfileDropdownOpen: boolean,
-  registerPageNumber: number,
+  isMenuOpen: boolean;
+  isProfileDropdownOpen: boolean;
+  registerPageNumber: number;
 };
 
 const initialState: ApplicationState = {
