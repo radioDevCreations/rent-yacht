@@ -62,6 +62,8 @@ abstract class DataLoader {
    * @param data - Reservation data including userId, boatId, startDate, endDate, totalPrice, and reservationStatusId.
    * @returns Promise<any> - Created reservation details.
    */
+
+  //TODO: replace userId with token
   static createReservation = async (data: {
     userId: number;
     boatId: number | null;
@@ -84,10 +86,11 @@ abstract class DataLoader {
    * @param userId - The ID of the user.
    * @returns Promise<any> - List of reservations for the user.
    */
-  static selectUserReservations = async (userId: number | null): Promise<any> => {
-    if (userId === null) return null;
+
+  static selectUserReservations = async (token: string): Promise<any> => {
+    if (token === null) return null;
     return await axiosInstance
-      .get(BoatifyApiURL(`reservation/user/${userId}`))
+      .get(BoatifyApiURL(`reservation/my-reservations`), { headers: { "Authorization": `Bearer ${token}` }})
       .then((response) => response.data)
       .catch((error) => {
         console.error(error);

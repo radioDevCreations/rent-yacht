@@ -1,9 +1,11 @@
 using AutoMapper;
 using boatifyApi.Entities;
+using boatifyApi.Exceptions;
 using boatifyApi.Models;
 using boatifyApi.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace boatifyApi.Controllers
 {
@@ -24,10 +26,16 @@ namespace boatifyApi.Controllers
             return Ok(reservations);
         }
 
-        [HttpGet("user/{userId}")]
-        public ActionResult<IEnumerable<ReservationDto>> GetByUserId(int userId)
+        [Authorize]
+        [HttpGet("my-reservations")]
+        public ActionResult<IEnumerable<ReservationDto>> GetByUserId()
         {
-            var reservations = _reservationService.GetByUserId(userId);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (userId == null)
+                throw new BadRequestException("Unauthorized user");
+
+            var reservations = _reservationService.GetByUserId(int.Parse(userId));
             return Ok(reservations);
         }
 
@@ -42,7 +50,7 @@ namespace boatifyApi.Controllers
         public ActionResult Create([FromBody] CreateReservationDto dto)
         {
             var reservationId = _reservationService.Create(dto);
-            return Created($"api/reservations/{reservationId}", null);
+            return Created($"api/reservation/{reservationId}", null);
         }
 
         [HttpPut("{id}")]

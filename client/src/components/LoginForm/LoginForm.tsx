@@ -18,16 +18,23 @@ const LoginForm = () => {
 
   const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
+    try {
+      const responseToken = await DataLoader.loginUser({
+        email: email,
+        password: password,
+      });
 
-    const responseToken = await DataLoader.loginUser({
-      email: email,
-      password: password,
-    });
+      const responseUserData = await DataLoader.getCurrentUserData(responseToken);
 
-    const responseUserData = await DataLoader.getCurrentUserData(responseToken);
+      
+      sessionStorage.setItem('token', responseToken);
+      sessionStorage.setItem('userId', responseUserData.id);
 
-    sessionStorage.setItem('token', responseToken);
-    sessionStorage.setItem('userId', responseUserData.id);
+      BoatifyGoTo('/');
+    } catch (error) {
+      console.error(error);
+    }
+
   };
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {

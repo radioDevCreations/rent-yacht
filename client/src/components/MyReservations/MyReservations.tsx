@@ -23,8 +23,8 @@ const MyReservations: FC = () => {
       try {
         setLoading(SystemBoolean.True);
         setError(null);
-        const userId = Number(sessionStorage.getItem('userId'));
-        const response = await DataLoader.selectUserReservations(userId);
+        const token = sessionStorage.getItem('token');
+        const response = await DataLoader.selectUserReservations(`${token}`);
         const data: Reservation[] = await response;
         setReservations(data);
       } catch (err: any) {
