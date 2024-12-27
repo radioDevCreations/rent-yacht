@@ -127,7 +127,7 @@ namespace boatifyApi.Services
                 throw new NotFoundException("Reservation not found");
 
             var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User, reservation,
-                new ResourceOperationRequirement(ResourceOperation.Delete)).Result;
+                new BoatOperationRequirement(ResourceOperation.Delete)).Result;
 
             if (!authorizationResult.Succeeded)
             {
@@ -148,14 +148,21 @@ namespace boatifyApi.Services
                 throw new NotFoundException("Reservation not found");
 
             var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User, reservation,
-                new ResourceOperationRequirement(ResourceOperation.Update)).Result;
+                new BoatOperationRequirement(ResourceOperation.Update)).Result;
 
             if (!authorizationResult.Succeeded)
             {
                 throw new ForbiddenException();
             }
 
-            reservation.ReservationStatusId = dto.ReservationStatusId;
+            var reservationStatus = _dbContext
+               .ReservationStatuses
+               .FirstOrDefault(rs => rs.Name == dto.Status);
+
+            if (reservationStatus is null)
+                throw new NotFoundException("Incorrect reservation status");
+
+            reservation.ReservationStatusId = reservationStatus.Id;
 
             _dbContext.SaveChanges();
         }
@@ -188,6 +195,15 @@ namespace boatifyApi.Services
             };
 
             reservation.ReservationTime = reservationTime;
+
+            var reservationStatus = _dbContext
+               .ReservationStatuses
+               .FirstOrDefault(rs => rs.Name == dto.Status);
+
+            if (reservationStatus is null)
+                throw new NotFoundException("Incorrect reservation status");
+
+            reservation.ReservationStatusId = reservationStatus.Id;
 
             _dbContext.Reservations.Add(reservation);
             _dbContext.SaveChanges();

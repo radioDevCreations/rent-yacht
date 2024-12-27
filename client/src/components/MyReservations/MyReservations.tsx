@@ -5,10 +5,9 @@ import ButtonType from '@/utilities/ButtonType';
 import { BoatifyGoToInBlank } from '@/utilities/BoatifyGoTo';
 import Reservation from '@/models/Reservation';
 import DataLoader from '@/dataLoaders/DataLoader';
-import { RootState } from '@/redux/store';
-import { useSelector } from 'react-redux';
 import { SystemBoolean } from '@/utilities/System';
 import Captions from '@/captions/captions';
+import ReservationStatus from '@/utilities/ReservationStatus';
 
 const TABLE_BORDER_COLOR = '#122c78';
 
@@ -16,8 +15,6 @@ const MyReservations: FC = () => {
   const [loading, setLoading] = useState<boolean>(SystemBoolean.True);
   const [error, setError] = useState<string | null>(null);
   const [reservations, setReservations] = useState<Reservation[]>([]);
-
-  let applicationState = useSelector((state: RootState) => state.application);
 
   useEffect(() => {
     const fetchReservations = async () => {
@@ -189,7 +186,8 @@ const MyReservations: FC = () => {
                   value="Details"
                   type={ButtonType.button}
                   classModifier="boatify-button--details"
-                  onClick={() =>
+                  onClick={async () =>
+                    //await DataLoader.updeteReservationStatus(sessionStorage.getItem('token'), {reservationId: reservation.id, reservationStatus: ReservationStatus.Confirmed})
                     BoatifyGoToInBlank(`/details/reservation/${reservation.id}`)
                   }
                 />

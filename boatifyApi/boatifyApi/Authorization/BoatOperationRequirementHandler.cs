@@ -4,9 +4,9 @@ using System.Security.Claims;
 
 namespace boatifyApi.Authorization
 {
-    public class ResourceOperationRequirementHandler : AuthorizationHandler<ResourceOperationRequirement, Boat>
+    public class BoatOperationRequirementHandler : AuthorizationHandler<BoatOperationRequirement, Boat>
     {
-        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, ResourceOperationRequirement requirement, Boat boat)
+        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, BoatOperationRequirement requirement, Boat boat)
         {
             if(requirement._resourceOperation == ResourceOperation.Read ||
                requirement._resourceOperation == ResourceOperation.Create)

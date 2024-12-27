@@ -52,7 +52,8 @@ try
         options.AddPolicy("IsAdult", builder => builder.AddRequirements(new MinimumAgeRequirement(18)));
     });
     builder.Services.AddScoped<IAuthorizationHandler, MinimumAgeRequirementHandler>();
-    builder.Services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementHandler>();
+    builder.Services.AddScoped<IAuthorizationHandler, BoatOperationRequirementHandler>();
+    builder.Services.AddScoped<IAuthorizationHandler, ReservationOperationRequirementHandler>();
     builder.Services.AddControllers().AddFluentValidation();
     builder.Services.AddDbContext<BoatifyDbContext>();
     builder.Services.AddScoped<BoatifySeeder>();
@@ -68,6 +69,7 @@ try
     builder.Services.AddScoped<IValidator<RegisterUserDto>, RegisterUserDtoValidator>();
     builder.Services.AddScoped<IValidator<BoatQuery>, BoatQueryValidator>();
     builder.Services.AddScoped<RequestTimeMiddleware>();
+    builder.Services.AddScoped<IUserContextService, UserContextService>();
     builder.Services.AddScoped<IUserContextService, UserContextService>();
     builder.Services.AddHttpContextAccessor();
     builder.Services.AddSwaggerGen();

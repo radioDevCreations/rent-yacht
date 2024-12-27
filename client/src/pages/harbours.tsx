@@ -13,7 +13,7 @@ import DataLoader from '@/dataLoaders/DataLoader';
 const HarboursPage = ({ harbours }: any) => {
   return (
     <MainLayout>
-      das
+      [Harbours]
       {/* <HarboursMap data={harbours} /> */}
     </MainLayout>
   );

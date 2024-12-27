@@ -61,8 +61,9 @@ namespace boatifyApi.Controllers
             return Created($"api/reservation/{reservationId}", null);
         }
 
+        [Authorize]
         [HttpPut("{id}")]
-        public ActionResult Update(int id, [FromBody] UpdateReservationDto dto)
+        public ActionResult Update([FromRoute] int id, [FromBody] UpdateReservationDto dto)
         {
             _reservationService.Update(id, dto);
             return NoContent();

@@ -130,7 +130,7 @@ namespace boatifyApi.Services
                 throw new NotFoundException("Boat not found");
 
             var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User, boat,
-                new ResourceOperationRequirement(ResourceOperation.Delete)).Result;
+                new BoatOperationRequirement(ResourceOperation.Delete)).Result;
 
             if (!authorizationResult.Succeeded)
             {
@@ -151,7 +151,7 @@ namespace boatifyApi.Services
                 throw new NotFoundException("Boat not found");
 
             var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User, boat, 
-                new ResourceOperationRequirement(ResourceOperation.Update)).Result;
+                new BoatOperationRequirement(ResourceOperation.Update)).Result;
 
             if (!authorizationResult.Succeeded)
             {

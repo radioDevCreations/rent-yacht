@@ -59,6 +59,22 @@ abstract class DataLoader {
 
   //RESERVATIONS
 
+  static updeteReservationStatus = async (token: string | null, requestData: { reservationId: number | undefined, reservationStatus: string }): Promise<any> => {
+    this.isTokenValid(token);
+    if (requestData.reservationId === undefined) return;
+    const data = { status: requestData.reservationStatus };
+    return await axiosInstance
+      .put(BoatifyApiURL(`reservation/${requestData.reservationId}`), data,
+      {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error(error);
+        throw error;
+      });
+  };
+
   static selectReservationById = async (token: string | null, reservationId: number | undefined): Promise<any> => {
     this.isTokenValid(token);
     if (reservationId === undefined) return;
@@ -86,7 +102,7 @@ abstract class DataLoader {
       startDate: string | null;
       endDate: string | null;
       totalPrice: number;
-      reservationStatusId: number;
+      status: string;
     }
   ): Promise<any> => {
     this.isTokenValid(token);

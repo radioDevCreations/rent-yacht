@@ -31,13 +31,15 @@ const Step3__ReservationSummary = (boat: any) => {
       setLoading(SystemBoolean.True);
       setError(null);
 
+      console.log(reservationState.new_ReservationData)
+
       const response = await DataLoader.createReservation(token, {
         boatId: reservationState.new_ReservationData.boatId,
         startDate: reservationState.new_ReservationData.startDate,
         endDate: reservationState.new_ReservationData.endDate,
         totalPrice: reservationState.new_ReservationData.totalPrice,
-        reservationStatusId:
-          reservationState.new_ReservationData.reservationStatusId,
+        status:
+          reservationState.new_ReservationData.reservationStatus,
       });
       setData(data);
       nextReservationPage();

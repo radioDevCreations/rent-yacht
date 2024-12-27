@@ -1,3 +1,4 @@
+import ReservationStatus from '@/utilities/ReservationStatus';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import moment from 'moment';
 
@@ -9,7 +10,7 @@ type ReservationState = {
     endDate: string | null;
     days: number;
     totalPrice: number;
-    reservationStatusId: number;
+    reservationStatus: string;
   };
 };
 
@@ -21,7 +22,7 @@ const initialState: ReservationState = {
     endDate: null,
     days: 0,
     totalPrice: 100,
-    reservationStatusId: 1,
+    reservationStatus: ReservationStatus.Pending,
   },
 };
 

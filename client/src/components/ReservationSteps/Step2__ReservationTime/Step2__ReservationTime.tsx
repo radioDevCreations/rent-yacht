@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react';
 import './Step2__ReservationTime.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import 'react-datepicker/dist/react-datepicker.css';
-import BoatifyInput from '@/boatify-components/BoatifyInput/BoatifyInput';
-import InputType from '@/utilities/InputType';
 import BoatifyDateOperations from '@/utilities/BoatifyDateOperations';
 import { FaArrowRight } from 'react-icons/fa6';
 import ButtonType from '@/utilities/ButtonType';
