@@ -27,6 +27,9 @@ enum Captions {
   BOAT_TYPE = 'Type: ',
   BOAT_PRICE_PER_DAY = 'Price per day: ',
   BOAT_CURRENT_LOCATION = 'Current location: ',
+  RESERVATION_TOTAL_PRICE = 'Total price: ',
+  RESERVATION_START_DATE = 'Start date: ',
+  RESERVATION_END_DATE = 'End date: '
 }
 
 export default Captions;

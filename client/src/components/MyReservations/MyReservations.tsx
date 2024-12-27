@@ -8,6 +8,7 @@ import DataLoader from '@/dataLoaders/DataLoader';
 import { RootState } from '@/redux/store';
 import { useSelector } from 'react-redux';
 import { SystemBoolean } from '@/utilities/System';
+import Captions from '@/captions/captions';
 
 const TABLE_BORDER_COLOR = '#122c78';
 
@@ -152,7 +153,7 @@ const MyReservations: FC = () => {
                   padding: '8px',
                 }}
               >
-                ${reservation.totalPrice.toFixed(2)}
+                {reservation.totalPrice.toFixed(2)} {Captions.PLN}
               </td>
               <td
                 style={{
@@ -168,7 +169,7 @@ const MyReservations: FC = () => {
                   padding: '8px',
                 }}
               >
-                {new Date(reservation.startDate).toLocaleDateString()}
+                {new Date(reservation.startDate).toLocaleDateString("pl-PL", {day: "2-digit", month: '2-digit', year: 'numeric'})}
               </td>
               <td
                 style={{
@@ -176,7 +177,7 @@ const MyReservations: FC = () => {
                   padding: '8px',
                 }}
               >
-                {new Date(reservation.endDate).toLocaleDateString()}
+                {new Date(reservation.endDate).toLocaleDateString("pl-PL", {day: "2-digit", month: '2-digit', year: 'numeric'})}
               </td>
               <td
                 style={{

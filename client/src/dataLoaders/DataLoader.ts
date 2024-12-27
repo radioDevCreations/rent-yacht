@@ -59,6 +59,19 @@ abstract class DataLoader {
 
   //RESERVATIONS
 
+  static selectReservationById = async (token: string | null, reservationId: number | undefined): Promise<any> => {
+    this.isTokenValid(token);
+    if (reservationId === undefined) return;
+    return await axiosInstance
+      .get(BoatifyApiURL(`reservation/${reservationId}`))
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error(error);
+        throw error;
+      });
+  };
+
+
   /**
    * Create a new reservation.
    * @param token - logged user authenticated token.
