@@ -4,7 +4,7 @@ export default interface Boat {
   description: string;
   model: string;
   type: string;
-  pricePerDay: number;
+  pricePerDay?: number;
   harbourId: number;
   harbourName?: string;
 }
