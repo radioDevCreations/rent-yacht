@@ -74,11 +74,30 @@ const Step2__ReservationTime = (data: any) => {
     }
   };
 
+  const checkAvailabilityOnClick = (start: string, end: string) => {
+    if (!reserveddates) return true;
+
+    const startDateObj = new Date(start);
+    const endDateObj = new Date(end);
+
+    if (endDateObj <= startDateObj) {
+      setIsAvailable(SystemBoolean.False);
+    } else {
+      setIsAvailable(!reserveddates.some(
+        (reservedDate) =>
+          reservedDate >= startDateObj && reservedDate <= endDateObj
+      ));
+    }
+  };
+
+
   const handleClickPreviousPage = () => {
     dispatch(setReservationPage(reservationState.new_ReservationPage - 1));
   };
 
-  const handleNextReservationPage = () => {
+  const handleNextReservationPage = async () => {
+    await checkAvailability(startDate, endDate)
+    if(isAvailable){
     dispatch(setBoatId(data.boat.id));
     dispatch(
       setTotalPrice(
@@ -88,8 +107,8 @@ const Step2__ReservationTime = (data: any) => {
     );
     dispatch(setStartDate(startDate));
     dispatch(setEndDate(endDate));
-    dispatch(setReservationPage(reservationState.new_ReservationPage + 1));
-  };
+    dispatch(setReservationPage(reservationState.new_ReservationPage + 1));    
+  }};
 
   return (
     <div className="reservation-time">
@@ -144,7 +163,7 @@ const Step2__ReservationTime = (data: any) => {
             const formattedDate = moment(date).format('YYYY-MM-DD');
             setTemporaryStartDate(formattedDate);
             setIsAvailable(SystemBoolean.False);
-            await checkAvailability(formattedDate, endDate);
+            await checkAvailabilityOnClick(formattedDate, endDate);
           }}
         />
         <div className="margin"></div>
@@ -155,7 +174,7 @@ const Step2__ReservationTime = (data: any) => {
             const formattedDate = moment(date).format('YYYY-MM-DD');
             setTemporaryEndDate(formattedDate);
             setIsAvailable(SystemBoolean.False);
-            await checkAvailability(startDate, formattedDate);
+            await checkAvailabilityOnClick(startDate, formattedDate);
           }}
         />
       </div>
