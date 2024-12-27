@@ -86,14 +86,14 @@ const BoatDetails: React.FC<BoatDetailsProps> = ({ boatId }) => {
                     value="Rent this boat"
                     type={ButtonType.button}
                     onClick={() => BoatifyGoTo(`/reservation/${boatId}`)}
-                    disabled={!!token}
+                    disabled={!token}
                     classModifier='boatify-button__boat-details'
                 />
                 <BoatifyButton
                     value="Log In"
                     type={ButtonType.button}
                     onClick={() => BoatifyGoTo(`/login`)}
-                    disabled={!token}
+                    disabled={!!token}
                     classModifier='boatify-button__boat-details'
                 />
             </div>
