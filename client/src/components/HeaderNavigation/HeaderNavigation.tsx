@@ -19,7 +19,6 @@ const NAVIGATION_ITEMS: NavigationItem[] = [
     href: '/last-minute',
     customClassName: 'transition-delay2',
   },
-  { name: 'Shop', href: '/shop', customClassName: 'transition-delay3' },
   { name: 'Contact', href: '/contact', customClassName: 'transition-delay4' },
 ];
 

@@ -18,6 +18,7 @@
 .user-details__name-field-text{
     font-size: $fontSize24px;
     color: $oxfordBlue;
+    margin-right: 10px;
 }
 .user-details__edit{
     font-size: $fontSize24px;
@@ -34,6 +35,10 @@
     display: block;
     font-weight: $fontWeightBold;
     width: 120px;
+}
+.user-details__field-text--email{
+    display: block;
+    width: 280px
 }
 .user-details__field-text{
     font-size: $fontSize16px;

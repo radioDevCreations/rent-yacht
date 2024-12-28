@@ -1,4 +1,5 @@
 import axiosInstance from '@/axios/httpClient';
+import { UpdateUserDto } from '@/components/UserDetails/UserDetails';
 import User from '@/models/User';
 import { ApiURL } from '@/utilities/BaseUrl';
 import SortDirection from '@/utilities/SortDirection';
@@ -329,10 +330,11 @@ abstract class DataLoader {
       });
   };
 
-  static updateUserData = async (token: string | null, userData: Partial<User>): Promise<any> => {
+  static updateUserData = async (token: string | null, userData: UpdateUserDto | null): Promise<any> => {
     this.isTokenValid(token);
+    if (userData === null) return;
     return await axiosInstance
-      .post(BoatifyApiURL(`account/edit`), userData, {
+      .put(BoatifyApiURL(`account`), userData, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => response.data)

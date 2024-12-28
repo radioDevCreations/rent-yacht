@@ -46,20 +46,18 @@ namespace boatifyApi.Controllers
         }
 
         [Authorize]
-        [HttpGet("edit")]
-        public ActionResult EditCurrentUser()
+        [HttpPut]
+        public ActionResult EditCurrentUser([FromBody] UpdateUserDto dto)
         {
-            throw new NotImplementedException();
-            //var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            //if (string.IsNullOrEmpty(userId))
-            //{
-            //    return Unauthorized("User is not authenticated.");
-            //}
+            if (string.IsNullOrEmpty(userId))
+            {
+                return Unauthorized("User is not authenticated.");
+            }
 
-            //var currentUser = _accountService.GetCurrentUser(userId);
-
-            //return Ok(currentUser);
+            _accountService.UpdateCurrentUser(userId, dto);
+            return Ok();
         }
     }
 }

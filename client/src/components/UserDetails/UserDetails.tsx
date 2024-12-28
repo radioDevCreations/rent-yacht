@@ -8,13 +8,20 @@ import { BoatifyGoTo } from '@/utilities/BoatifyGoTo';
 import Captions from '@/captions/captions';
 import { GiConfirmed } from "react-icons/gi";
 
+export interface UpdateUserDto {
+  firstName?: string | undefined;
+  lastName?: string | undefined;
+  email?: string | undefined;
+  dateOfBirth?: string | undefined;
+}
+
 const UserDetails: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(SystemBoolean.True);
   const [isEditing, setIsEditing] = useState<boolean>(SystemBoolean.False);
   const [error, setError] = useState<string | null>(null);
   const [user, setUser] = useState<User | null>(null);
 
-  const [editableUser, setEditableUser] = useState<Partial<User>>({});
+  const [editableUser, setEditableUser] = useState<UpdateUserDto | null>(null);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -24,8 +31,16 @@ const UserDetails: React.FC = () => {
         const token = sessionStorage.getItem('token');
         const response = await DataLoader.getCurrentUserData(token);
         const data: User = await response;
+
+        const [firstName, lastName] = data.name.split(' ') || ['', ''];
+
         setUser(data);
-        setEditableUser(data);
+        setEditableUser({
+          email: data.email,
+          firstName,
+          lastName,
+          dateOfBirth: data.dateOfBirth,
+        });
       } catch (err: any) {
         setError(err.message || 'Failed to fetch user data');
       } finally {
@@ -36,19 +51,28 @@ const UserDetails: React.FC = () => {
     fetchUser();
   }, []);
 
-  const handleInputChange = (field: keyof User, value: string) => {
-    setEditableUser((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
+  const handleInputChange = (field: keyof UpdateUserDto, value: string) => {
+    setEditableUser((prev) => {
+      if (!prev) return null;
+      return {
+        ...prev,
+        [field]: value,
+      };
+    });
   };
 
   const saveChanges = async () => {
     try {
       setLoading(SystemBoolean.True);
       const token = sessionStorage.getItem('token');
-      await DataLoader.updateUserData(token, editableUser);
-      setUser({ ...user, ...editableUser } as User);
+
+      const updatedUser = {
+        ...editableUser,
+        name: `${editableUser?.firstName} ${editableUser?.lastName}`,
+      };
+
+      await DataLoader.updateUserData(token, updatedUser);
+      setUser({ ...user, ...updatedUser } as User);
       setIsEditing(SystemBoolean.False);
     } catch (err: any) {
       setError(err.message || 'Failed to save changes');
@@ -74,12 +98,22 @@ const UserDetails: React.FC = () => {
       <div className="user-details__name">
         <h2 className="user-details__name-field-text">
           {isEditing ? (
-            <input
-              value={editableUser.name || ''}
-              onChange={(e) => handleInputChange('name', e.target.value)}
-            />
+            <>
+              <input
+                value={editableUser?.firstName || ''}
+                onChange={(e) => handleInputChange('firstName', e.target.value)}
+                className="user-details__name-field-text user-details__name-field-text--first"
+                placeholder="First Name"
+              />
+              <input
+                value={editableUser?.lastName || ''}
+                onChange={(e) => handleInputChange('lastName', e.target.value)}
+                className="user-details__name-field-text user-details__name-field-text--last"
+                placeholder="Last Name"
+              />
+            </>
           ) : (
-            user?.name
+            `${editableUser?.firstName} ${editableUser?.lastName}`
           )}
         </h2>
 
@@ -97,8 +131,9 @@ const UserDetails: React.FC = () => {
         <span className="user-details__field-name">{Captions.PROFILE_EMAIL}</span>
         {isEditing ? (
           <input
-            value={editableUser.email || ''}
+            value={editableUser?.email || ''}
             onChange={(e) => handleInputChange('email', e.target.value)}
+            className="user-details__field-text user-details__field-text--email"
           />
         ) : (
           <span className="user-details__field-text">{user?.email}</span>
@@ -106,22 +141,16 @@ const UserDetails: React.FC = () => {
       </div>
       <div className="user-details__field">
         <span className="user-details__field-name">{Captions.PROFILE_ROLE}</span>
-        {isEditing ? (
-          <input
-            value={editableUser.role || ''}
-            onChange={(e) => handleInputChange('role', e.target.value)}
-          />
-        ) : (
-          <span className="user-details__field-text">{user?.role}</span>
-        )}
+        <span className="user-details__field-text">{user?.role}</span>
       </div>
       <div className="user-details__field">
         <span className="user-details__field-name">{Captions.PROFILE_DATE_OF_BIRTH}</span>
         {isEditing ? (
           <input
             type="date"
-            value={editableUser.dateOfBirth || ''}
+            value={editableUser?.dateOfBirth || ''}
             onChange={(e) => handleInputChange('dateOfBirth', e.target.value)}
+            className="user-details__field-text"
           />
         ) : (
           <span className="user-details__field-text">{user?.dateOfBirth}</span>

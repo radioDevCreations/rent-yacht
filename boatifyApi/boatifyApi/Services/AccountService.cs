@@ -16,6 +16,7 @@ namespace boatifyApi.Services
         string GenerateJwt(LoginUserDto dto);
         void RegisterUser(RegisterUserDto dto);
         UserDto GetCurrentUser(string userId);
+        public void UpdateCurrentUser(string userId, UpdateUserDto dto);
     }
 
     public class AccountService : IAccountService
@@ -114,6 +115,24 @@ namespace boatifyApi.Services
             };
 
             return currentUser;
+        }
+
+        public void UpdateCurrentUser(string userId, UpdateUserDto dto)
+        {
+            var user = _dbContext.Users
+                .FirstOrDefault(u => u.Id == int.Parse(userId));
+
+            if (user == null)
+            {
+                throw new NotFoundException("User not found.");
+            }
+
+            user.Email = dto.Email;
+            user.FirstName = dto.FirstName;
+            user.LastName = dto.LastName;
+            user.DateOfBirth = dto.DateOfBirth;
+
+            _dbContext.SaveChanges();
         }
     }
 }

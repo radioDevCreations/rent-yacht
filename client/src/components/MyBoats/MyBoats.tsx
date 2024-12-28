@@ -8,6 +8,7 @@ import DataLoader from '@/dataLoaders/DataLoader';
 import { RootState } from '@/redux/store';
 import { useSelector } from 'react-redux';
 import { SystemBoolean } from '@/utilities/System';
+import BoatifyButtonVariant from '@/boatify-components/BoatifyButton/BoatifyButtonVariant';
 
 const TABLE_BORDER_COLOR = '#122c78';
 
@@ -15,8 +16,6 @@ const MyBoats: FC = () => {
   const [loading, setLoading] = useState<boolean>(SystemBoolean.True);
   const [error, setError] = useState<string | null>(null);
   const [boats, setBoats] = useState<Boat[]>([]);
-
-  let applicationState = useSelector((state: RootState) => state.application);
 
   useEffect(() => {
     const fetchBoats = async () => {
@@ -49,6 +48,13 @@ const MyBoats: FC = () => {
     <section className="my-boats">
       <header className="my-boats__header">
         <h2 className="my-boats__heading-text">My Boats</h2>
+        <BoatifyButton
+            value="Add Boat"
+            type={ButtonType.button}
+            classModifier="boatify-button--stepper-next"
+            onClick={() => BoatifyGoTo('/new-boat')}
+            variant={BoatifyButtonVariant.orangeSTD}
+          />
       </header>
       <table className="my-boats__table">
         <thead>
