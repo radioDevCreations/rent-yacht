@@ -3,7 +3,7 @@ import './ReservationDetails.scss';
 import { SystemBoolean } from '@/utilities/System';
 import DataLoader from '@/dataLoaders/DataLoader';
 import { FaRegArrowAltCircleLeft } from 'react-icons/fa';
-import { BoatifyGoTo } from '@/utilities/BoatifyGoTo';
+import { BoatifyGoTo, BoatifyWindowReload } from '@/utilities/BoatifyGoTo';
 import Captions from '@/captions/captions';
 import Reservation from '@/models/Reservation';
 import Image from 'next/image'
@@ -11,6 +11,7 @@ import ButtonType from '@/utilities/ButtonType';
 import BoatifyButton from '@/boatify-components/BoatifyButton/BoatifyButton';
 import Boat from '@/models/Boat';
 import Harbour from '@/models/Harbour';
+import ReservationStatus from '@/utilities/ReservationStatus';
 
 interface ReservationDetailsProps{
     reservationId: string;
@@ -60,12 +61,16 @@ const ReservationDetails: React.FC<ReservationDetailsProps> = ({ reservationId }
         <div className="reservation-details__info">
             <div className="reservation-details__name">
                 <h2 className="reservation-details__name-field-text">
-                    {boat?.name}
+                    {Captions.RESERVATION}
                 </h2>
             </div>
-            <div className="reservation-details__field">
+            {/* <div className="reservation-details__field">
                 <span className="reservation-details__field-descrition">{Captions.BOAT_DESCRIPTION}</span>
                 <span className="reservation-details__field-descrition-text">{boat?.description}</span>
+            </div> */}
+            <div className="reservation-details__field">
+                <span className="reservation-details__field-name">{Captions.BOAT_NAME}</span>
+                <span className="reservation-details__field-text">{boat?.name}</span>
             </div>
             <div className="reservation-details__field">
                 <span className="reservation-details__field-name">{Captions.BOAT_MODEL}</span>
@@ -80,6 +85,10 @@ const ReservationDetails: React.FC<ReservationDetailsProps> = ({ reservationId }
                 <span className="reservation-details__field-text">{reservation?.totalPrice.toFixed(2)} {Captions.PLN}</span>
             </div>
             <div className="reservation-details__field">
+                <span className="reservation-details__field-name">{Captions.RESERVATION_STATUS}</span>
+                <span className="reservation-details__field-text">{reservation?.reservationStatusName}</span>
+            </div>
+            <div className="reservation-details__field">
                 <span className="reservation-details__field-name">{Captions.RESERVATION_START_DATE}</span>
                 <span className="reservation-details__field-text">{new Date(`${reservation?.startDate}`).toLocaleDateString("pl-PL", {day: "2-digit", month: '2-digit', year: 'numeric'})}</span>
             </div>
@@ -92,13 +101,16 @@ const ReservationDetails: React.FC<ReservationDetailsProps> = ({ reservationId }
                     value="Pay"
                     type={ButtonType.button}
                     onClick={() => BoatifyGoTo(`/reservation/${reservationId}`)}
-                    disabled={!!token}
+                    disabled={!token}
                     classModifier='boatify-button__reservation-details'
                 />
                 <BoatifyButton
                     value="Cancel"
                     type={ButtonType.button}
-                    onClick={() => BoatifyGoTo(`/login`)}
+                    onClick={async () =>  {
+                      await DataLoader.updeteReservationStatus(sessionStorage.getItem('token'), {reservationId: reservation?.id, reservationStatus: ReservationStatus.Cancelled});
+                      BoatifyWindowReload();
+                    }}
                     disabled={!token}
                     classModifier='boatify-button__reservation-details'
                 />

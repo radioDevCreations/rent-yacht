@@ -313,6 +313,30 @@ abstract class DataLoader {
   };
 
   /**
+ * Registers a new user with their details.
+ * @param data - Object containing user registration details.
+ * @returns Promise<any> - Registration response or error.
+ */
+static registerUser = async (data: {
+  email: string;
+  password: string;
+  confirmedPassword: string;
+  firstName: string;
+  lastName: string;
+  roleName: string | null;
+  dateOfBirth: string | null;
+}): Promise<any> => {
+  if(data.roleName === null) return;
+  return await axiosInstance
+    .post(BoatifyApiURL(`account/register`), data)
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error(error);
+      throw error;
+    });
+};
+
+  /**
    * Fetches the current user's data based on the provided token.
    * @param token - Bearer token for authorization.
    * @returns Promise<any> - Current user data.

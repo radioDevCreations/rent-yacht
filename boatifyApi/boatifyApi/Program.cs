@@ -54,6 +54,7 @@ try
     builder.Services.AddScoped<IAuthorizationHandler, MinimumAgeRequirementHandler>();
     builder.Services.AddScoped<IAuthorizationHandler, BoatOperationRequirementHandler>();
     builder.Services.AddScoped<IAuthorizationHandler, ReservationOperationRequirementHandler>();
+    builder.Services.AddScoped<IAuthorizationHandler, SelfReservationOperationRequirementHandler>();
     builder.Services.AddControllers().AddFluentValidation();
     builder.Services.AddDbContext<BoatifyDbContext>();
     builder.Services.AddScoped<BoatifySeeder>();
@@ -63,6 +64,7 @@ try
     builder.Services.AddScoped<IBoatHarbourService, BoatHarbourService>();
     builder.Services.AddScoped<IBoatService, BoatService>();
     builder.Services.AddScoped<IReservationService, ReservationService>();
+    builder.Services.AddScoped<ISelfReservationService, SelfReservationService>();
     builder.Services.AddScoped<IReservationTimeService, ReservationTimeService>();
     builder.Services.AddScoped<ExceptionHandlingMiddleware>();
     builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();

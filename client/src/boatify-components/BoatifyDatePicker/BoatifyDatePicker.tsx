@@ -1,6 +1,9 @@
 import React from "react";
+import './BoatifyDatePicker.scss';
 import DatePicker from "react-datepicker";
+import { FaAngleLeft, FaAngleRight, FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa";
 import "react-datepicker/dist/react-datepicker.css";
+import ButtonType from "@/utilities/ButtonType";
 
 interface BoatifyDatePickerProps {
   busyDates: Date[] | null;
@@ -25,8 +28,8 @@ const BoatifyDatePicker: React.FC<BoatifyDatePickerProps> = ({
         selected={selectedDate}
         onChange={(date) => onDateChange(date)}
         inline
-        dayClassName={(date) => (isDateBusy(date) ? "busy-day" : '')}
-        filterDate={(date) => !isDateBusy(date)} // Optional: Prevent selecting busy dates
+        dayClassName={(date) => (isDateBusy(date) ? "busy-day" : "")}
+        filterDate={(date) => !isDateBusy(date)}
         renderDayContents={(day, date) =>
           isDateBusy(date) ? (
             <div title="Busy date" className="busy-indicator">
@@ -36,24 +39,31 @@ const BoatifyDatePicker: React.FC<BoatifyDatePickerProps> = ({
             <div>{day}</div>
           )
         }
+        renderCustomHeader={({
+          date,
+          decreaseMonth,
+          increaseMonth,
+          changeYear,
+        }) => (
+          <div className="custom-header">
+            <button type={ButtonType.button} onClick={() => changeYear(date.getFullYear() - 1)}>
+              <FaAngleDoubleLeft />
+            </button>
+            <button type={ButtonType.button} onClick={decreaseMonth}>
+              <FaAngleLeft />
+            </button>
+            <span>
+              {date.toLocaleString("default", { month: "long" })} {date.getFullYear()}
+            </span>
+            <button type={ButtonType.button} onClick={increaseMonth}>
+              <FaAngleRight />
+            </button>
+            <button type={ButtonType.button} onClick={() => changeYear(date.getFullYear() + 1)}>
+              <FaAngleDoubleRight />
+            </button>
+          </div>
+        )}
       />
-      <style>{`
-        .busy-day {
-          background-color: #f8d7da;
-          color: #721c24;
-        }
-        .busy-indicator {
-          position: relative;
-        }
-        .busy-indicator:after {
-          content: '*';
-          color: red;
-          font-size: 10px;
-          position: absolute;
-          top: 0;
-          right: 0;
-        }
-      `}</style>
     </div>
   );
 };

@@ -10,4 +10,9 @@ const BoatifyGoToInBlank = (to: string) => {
   else return window.open(`${BaseURL}${to}`, '_blank');
 };
 
-export { BoatifyGoTo, BoatifyGoToInBlank };
+const BoatifyWindowReload = () => {
+  window.location.reload();
+};
+
+
+export { BoatifyGoTo, BoatifyGoToInBlank, BoatifyWindowReload };

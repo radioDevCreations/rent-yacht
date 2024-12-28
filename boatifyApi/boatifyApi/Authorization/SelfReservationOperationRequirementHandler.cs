@@ -4,9 +4,9 @@ using System.Security.Claims;
 
 namespace boatifyApi.Authorization
 {
-    public class ReservationOperationRequirementHandler : AuthorizationHandler<ReservationOperationRequirement, Reservation>
+    public class SelfReservationOperationRequirementHandler : AuthorizationHandler<SelfReservationOperationRequirement, SelfReservation>
     {
-        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, ReservationOperationRequirement requirement, Reservation reservation)
+        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, SelfReservationOperationRequirement requirement, SelfReservation selfReservation)
         {
             if (requirement._resourceOperation == ResourceOperation.Read ||
                requirement._resourceOperation == ResourceOperation.Create)
@@ -15,7 +15,7 @@ namespace boatifyApi.Authorization
             }
 
             var userId = context.User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier).Value;
-            if (reservation.UserId == int.Parse(userId))
+            if (selfReservation.UserId == int.Parse(userId))
             {
                 context.Succeed(requirement);
             }

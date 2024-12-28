@@ -33,6 +33,13 @@ namespace boatifyApi.Services
 
         public void RegisterUser(RegisterUserDto dto)
         {
+            var role = _dbContext
+               .Roles
+               .FirstOrDefault(r => r.Name == dto.RoleName);
+
+            if (role is null)
+                throw new NotFoundException("Incorrect role");
+
             var newUser = new User()
             {
                 Email = dto.Email,
@@ -40,7 +47,7 @@ namespace boatifyApi.Services
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,
                 DateOfBirth = dto.DateOfBirth,
-                RoleId = dto.RoleId
+                RoleId = role.Id
             };
 
             var hashedPassword = _passwordHasher.HashPassword(newUser, dto.Password);
