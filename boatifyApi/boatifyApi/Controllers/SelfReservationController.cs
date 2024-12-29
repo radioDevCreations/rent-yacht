@@ -9,7 +9,7 @@ using System.Security.Claims;
 
 namespace boatifyApi.Controllers
 {
-    [Route("api/boat/{boatId}/self-reservation")]
+    [Route("api/self-reservation")]
     [ApiController]
     public class SelfReservationController : ControllerBase
     {
@@ -20,7 +20,21 @@ namespace boatifyApi.Controllers
         }
 
         [Authorize]
-        [HttpGet]
+        [HttpGet("my-reservations")]
+        public ActionResult<IEnumerable<ReservationDto>> GetByUserId()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (userId == null)
+                throw new BadRequestException("Unauthorized user");
+
+            var reservations = _selfReservationService.GetByUserId(int.Parse(userId));
+            return Ok(reservations);
+        }
+
+
+        [Authorize]
+        [HttpGet("boat/{boatId}")]
         public ActionResult<PagedResult<SelfReservationDto>> GetAllBoatSelfReservations([FromRoute] int boatId)
         {
             var reservations = _selfReservationService.GetAllByBoatId(boatId);
@@ -28,7 +42,7 @@ namespace boatifyApi.Controllers
         }
 
         [Authorize]
-        [HttpPost]
+        [HttpPost("boat/{boatId}")]
         public ActionResult Create([FromRoute] int boatId, [FromBody] CreateSelfReservationDto dto)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -44,7 +58,7 @@ namespace boatifyApi.Controllers
 
         [Authorize]
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public ActionResult Delete([FromRoute] int id)
         {
             _selfReservationService.Delete(id);
             return NoContent();

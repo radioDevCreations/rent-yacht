@@ -11,6 +11,7 @@ namespace boatifyApi.Services
 {
     public interface ISelfReservationService
     {
+        IEnumerable<SelfReservationDto> GetByUserId(int userId);
         IEnumerable<SelfReservationDto> GetAllByBoatId(int boatId);
         int Create(int boatId, CreateSelfReservationDto dto);
         void Delete(int id);
@@ -32,6 +33,25 @@ namespace boatifyApi.Services
                 _userContextService = userContextService;
             }
         }
+
+        public IEnumerable<SelfReservationDto> GetByUserId(int userId)
+        {
+            var selfReservations = _dbContext
+               .SelfReservations
+               .Include(r => r.User)
+               .Include(r => r.Boat)
+               .Include(r => r.ReservationTime)
+               .ToList()
+               .FindAll(r => r.UserId == userId);
+
+            if (selfReservations is null)
+                throw new NotFoundException("Reservations not found");
+
+            var selfReservationDtos = _mapper.Map<List<SelfReservationDto>>(selfReservations);
+
+            return selfReservationDtos;
+        }
+
         public IEnumerable<SelfReservationDto> GetAllByBoatId(int boatId)
         {
 

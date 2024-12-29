@@ -151,7 +151,38 @@ abstract class DataLoader {
   ): Promise<any> => {
     this.isTokenValid(token);
     return await axiosInstance
-      .post(BoatifyApiURL(`boat/${data.boatId}/self-reservation`), { startDate: data.startDate, endDate: data.endDate }, {
+      .post(BoatifyApiURL(`self-reservation/boat/${data.boatId}`), { startDate: data.startDate, endDate: data.endDate }, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error(error);
+        throw error;
+      });
+  };
+
+  static deleteSelfReservation = async (
+    token: string | null,
+    id: number | null | undefined
+  ): Promise<any> => {
+    this.isTokenValid(token);
+    return await axiosInstance
+      .delete(BoatifyApiURL(`self-reservation/${id}`), {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error(error);
+        throw error;
+      });
+  };
+
+  static selectUserSelfReservations = async (
+    token: string | null
+  ): Promise<any> => {
+    this.isTokenValid(token);
+    return await axiosInstance
+      .get(BoatifyApiURL(`self-reservation/my-reservations`), {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => response.data)
