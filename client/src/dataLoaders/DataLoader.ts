@@ -139,6 +139,28 @@ abstract class DataLoader {
       });
   };
 
+  //SELF RESERVATIONS
+
+  static createSelfReservation = async (
+    token: string | null,
+    data: {
+      boatId: number | null | undefined;
+      startDate: string | null;
+      endDate: string | null;
+    }
+  ): Promise<any> => {
+    this.isTokenValid(token);
+    return await axiosInstance
+      .post(BoatifyApiURL(`boat/${data.boatId}/self-reservation`), { startDate: data.startDate, endDate: data.endDate }, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error(error);
+        throw error;
+      });
+  };
+
   //BOATS
 
   /**
@@ -254,10 +276,11 @@ abstract class DataLoader {
    * @returns Promise<boolean> - True if available, false otherwise.
    */
   static isBoatAvailable = async (
-    boatId: number,
+    boatId: number | undefined,
     checkedStartDate: string,
     checkedEndDate: string
-  ): Promise<boolean> => {
+  ): Promise<boolean | undefined> => {
+    if(boatId === undefined) return;
     return await axiosInstance
       .get(
         BoatifyApiURL(
@@ -279,8 +302,9 @@ abstract class DataLoader {
    * @returns Promise<string[]> - List of reserved dates (ISO strings).
    */
   static getAllReservedDatesForBoat = async (
-    boatId: number
-  ): Promise<string[]> => {
+    boatId: number | undefined
+  ): Promise<string[] | undefined> => {
+    if(boatId === undefined) return;
     return await axiosInstance
       .get(BoatifyApiURL(`available/${boatId}/dates`))
       .then((response) => {

@@ -1,31 +1,29 @@
-import { useEffect, useState } from 'react';
-import './Step2__ReservationTime.scss';
-import { useDispatch, useSelector } from 'react-redux';
-import 'react-datepicker/dist/react-datepicker.css';
-import BoatifyDateOperations from '@/utilities/BoatifyDateOperations';
-import { FaArrowRight } from 'react-icons/fa6';
-import ButtonType from '@/utilities/ButtonType';
-import {
-  setBoatId,
-  setEndDate,
-  setReservationPage,
-  setStartDate,
-  setTotalPrice,
-} from '@/redux/slices/reservationSlice';
+'use client';
+import './SelfReservation.scss';
+import { FC, useEffect, useState } from 'react';
 import DataLoader from '@/dataLoaders/DataLoader';
 import { SystemBoolean } from '@/utilities/System';
 import BoatifyButton from '@/boatify-components/BoatifyButton/BoatifyButton';
+import BoatifyDatePicker from '@/boatify-components/BoatifyDatePicker/BoatifyDatePicker';
+import { FaArrowRight } from 'react-icons/fa';
+import BoatifyDateOperations from '@/utilities/BoatifyDateOperations';
+import ButtonType from '@/utilities/ButtonType';
 import moment from 'moment';
 import Captions from '@/captions/captions';
-import { RootState } from '@/redux/store';
-import BoatifyDatePicker from '@/boatify-components/BoatifyDatePicker/BoatifyDatePicker';
+import SuccessReconnect from '../Reconnect/SuccessReconnect/SuccessReconnect';
 
-const Step2__ReservationTime = (data: any) => {
-  const dispatch = useDispatch();
+interface SelfReservationProps {
+  boatId: number | undefined;
+}
+
+const SelfReservationForm: FC<SelfReservationProps> = ({ boatId }) => {
   const [isAvailable, setIsAvailable] = useState<boolean | undefined>(SystemBoolean.False);
+  const [isSuccess, setIsSuccess] = useState<boolean>(SystemBoolean.False);
   const [loading, setLoading] = useState<boolean>(SystemBoolean.True);
   const [error, setError] = useState<string | null>(null);
   const [reserveddates, setReservedDates] = useState<Date[] | null>(null);
+
+  const token = sessionStorage.getItem('token');
 
   const [startDate, setTemporaryStartDate] = useState(
     moment(new Date()).format('YYYY-MM-DD')
@@ -34,13 +32,12 @@ const Step2__ReservationTime = (data: any) => {
     moment(new Date()).add(1, 'days').format('YYYY-MM-DD')
   );
 
-  let reservationState = useSelector((state: RootState) => state.reservation);
-
   useEffect(() => {
     const fetchReservedDates = async () => {
       try {
+        setLoading(SystemBoolean.True);
         const datesResponse: any = await DataLoader.getAllReservedDatesForBoat(
-          data.boat.id
+          boatId
         );
         const datesFormatted: Date[] = datesResponse.map((date: any) => new Date(date));
         setReservedDates(datesFormatted);
@@ -52,25 +49,7 @@ const Step2__ReservationTime = (data: any) => {
     };
 
     fetchReservedDates();
-  }, [data.boat.id]);
-
-  const checkAvailability = async (start: string, end: string) => {
-    try {
-      setLoading(SystemBoolean.True);
-      setError(null);
-      const isAvailableSlot: boolean | undefined = await DataLoader.isBoatAvailable(
-        data.boat.id,
-        start,
-        end
-      );
-
-      setIsAvailable(isAvailableSlot);
-    } catch (err: any) {
-      setError(err.message || 'Failed to check availability');
-    } finally {
-      setLoading(SystemBoolean.False);
-    }
-  };
+  }, [boatId]);
 
   const checkAvailabilityOnClick = (start: string, end: string) => {
     if (!reserveddates) return true;
@@ -88,29 +67,42 @@ const Step2__ReservationTime = (data: any) => {
     }
   };
 
-
-  const handleClickPreviousPage = () => {
-    dispatch(setReservationPage(reservationState.new_ReservationPage - 1));
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+  
+    try {
+      setLoading(SystemBoolean.True);
+      setError(null);
+  
+      await DataLoader.createSelfReservation(token, {
+        boatId: boatId,
+        startDate: startDate,
+        endDate: endDate,
+      });
+      setLoading(SystemBoolean.False);
+      setIsSuccess(SystemBoolean.True);
+    } catch (err: any) {
+      setError(err.message || 'Failed to create reservation');
+      console.error(err);
+    } finally {
+      setLoading(SystemBoolean.False);
+    }
   };
 
-  const handleNextReservationPage = async () => {
-    await checkAvailability(startDate, endDate)
-    if(isAvailable){
-    dispatch(setBoatId(data.boat.id));
-    dispatch(
-      setTotalPrice(
-        +data.boat.pricePerDay *
-          moment(endDate, 'YYYY-MM-DD').diff(startDate, 'days')
-      )
-    );
-    dispatch(setStartDate(startDate));
-    dispatch(setEndDate(endDate));
-    dispatch(setReservationPage(reservationState.new_ReservationPage + 1));    
-  }};
+  if (loading) {
+    return <div>Loading boat...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
 
   return (
-    <div className="reservation-time">
+    <>
+    {!isSuccess &&<form className="reservation" onSubmit={handleSubmit}>
       <div className="time-and-price">
+        <h2 className="self-reservation">{Captions.SELF_RESERVATION}</h2>
         <div className="reservation-time-indicator--time">
           <div className="reservation-time__from-tile">
             <span className="reservation-time__from-day">
@@ -133,24 +125,6 @@ const Step2__ReservationTime = (data: any) => {
               {BoatifyDateOperations.getMonthAbbreviationFromISOString(endDate)}
             </span>
           </div>
-        </div>
-        <div className="reservation-price">
-          <span className="total-price__price-per-day">
-            {data.boat.pricePerDay} {Captions.PLN}
-          </span>
-          <span className="total-price__X"> {Captions.X} </span>
-          <span className="total-price__days-count">
-            {moment(endDate, 'YYYY-MM-DD').diff(startDate, 'days')} days
-          </span>
-          <span className="total-price__equals-sign">
-            {' '}
-            {Captions.EqualsSign}{' '}
-          </span>
-          <span className="total-price__total">
-            {+data.boat.pricePerDay *
-              moment(endDate, 'YYYY-MM-DD').diff(startDate, 'days')}{' '}
-            {Captions.PLN}
-          </span>
         </div>
       </div>
       <div className="input-section">
@@ -178,21 +152,16 @@ const Step2__ReservationTime = (data: any) => {
       </div>
       <div className="button-section">
         <BoatifyButton
-          onClick={handleClickPreviousPage}
-          value="Previous"
-          type={ButtonType.button}
-          classModifier="boatify-button--reservation-time-prev"
-        />
-        <BoatifyButton
-          onClick={handleNextReservationPage}
           value="Select Time"
-          type={ButtonType.button}
+          type={ButtonType.submit}
           classModifier="boatify-button--reservation-time boatify-button--orange"
           disabled={!isAvailable}
         />
       </div>
-    </div>
+    </form>}
+    {isSuccess && <SuccessReconnect message="Successfully added self-reservation" url={`details/boat/${boatId}`} />}
+    </>
   );
 };
 
-export default Step2__ReservationTime;
+export default SelfReservationForm;

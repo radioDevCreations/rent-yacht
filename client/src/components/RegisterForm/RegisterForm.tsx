@@ -7,7 +7,6 @@ import { useState, ChangeEvent } from 'react';
 import ButtonType from '@/utilities/ButtonType';
 import BoatifyInput from '@/boatify-components/BoatifyInput/BoatifyInput';
 import InputType from '@/utilities/InputType';
-import httpClient from '@/axios/httpClient';
 import IMAGE from '../../../public/links';
 import Role from '@/utilities/Role';
 import BoatifyPicklist from '@/boatify-components/BoatifyPicklist/BoatifyPicklist';

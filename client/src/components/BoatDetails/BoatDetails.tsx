@@ -92,6 +92,16 @@ const BoatDetails: React.FC<BoatDetailsProps> = ({ boatId }) => {
                     classModifier='boatify-button__boat-details'
                     isLongButton
                 />
+                <BoatifyButton
+                    value="Self reserve"
+                    type={ButtonType.button}
+                    onClick={() => {
+                      if(!!token) BoatifyGoTo(`/reservation/self/${boatId}`);
+                      else BoatifyGoTo(`/login`);
+                    }}
+                    classModifier='boatify-button__boat-details'
+                    isLongButton
+                />
             </div>
         </div>
         <div className="boat-details__image">
