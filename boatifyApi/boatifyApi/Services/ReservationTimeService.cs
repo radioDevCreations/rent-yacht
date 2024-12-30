@@ -32,11 +32,19 @@ namespace boatifyApi.Services
 
         public IEnumerable<DateTime> GetAllReservedDates(int boatId)
         {
+            var selfReservationTimes = _dbContext.SelfReservations
+                .Where(r => r.BoatId == boatId)
+                .Include(r => r.ReservationTime)
+                .Select(r => r.ReservationTime)
+                .ToList();
+
             var reservationTimes = _dbContext.Reservations
                 .Where(r => r.BoatId == boatId)
                 .Include(r => r.ReservationTime)
                 .Select(r => r.ReservationTime) 
                 .ToList();
+
+            reservationTimes.AddRange(selfReservationTimes);
 
             var allDates = reservationTimes
                 .SelectMany(rt => Enumerable.Range(0, (rt.EndTime.Date - rt.StartTime.Date).Days + 1)
@@ -61,12 +69,17 @@ namespace boatifyApi.Services
                 throw new ArgumentException("Checked start date must be earlier than checked end date.");
             }
 
-            var hasOverlap = _dbContext.Reservations
+            var hasOverlapReservations = _dbContext.Reservations
                 .Where(r => r.BoatId == boatId)
                 .Include(r => r.ReservationTime)
                 .Any(r => (startDate < r.ReservationTime.EndTime && endDate > r.ReservationTime.StartTime));
 
-            return !hasOverlap;
+            var hasOverlapSelfReservations = _dbContext.SelfReservations
+                .Where(r => r.BoatId == boatId)
+                .Include(r => r.ReservationTime)
+                .Any(r => (startDate < r.ReservationTime.EndTime && endDate > r.ReservationTime.StartTime));
+
+            return !hasOverlapReservations && !hasOverlapSelfReservations;
         }
     }
 }

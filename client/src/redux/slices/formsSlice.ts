@@ -1,18 +1,8 @@
-import { SystemBoolean } from '@/utilities/System';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const initialState = {
   login: {
     jwtToken: '',
-  },
-  register: {
-    firstName: '',
-    surname: '',
-    email: '',
-    newPassword: '',
-    confirmPassword: '',
-    pageNumber: 1,
-    isLoading: SystemBoolean.False,
   },
   forgotPassword: {
     email: '',
@@ -40,69 +30,6 @@ const formsSlice = createSlice({
         login: {
           ...state.login,
           jwtToken: action.payload,
-        },
-      };
-    },
-    setRegisterFirstName: (state, action: PayloadAction<string>) => {
-      return {
-        ...state,
-        register: {
-          ...state.register,
-          firstName: action.payload,
-        },
-      };
-    },
-    setRegisterSurname: (state, action: PayloadAction<string>) => {
-      return {
-        ...state,
-        register: {
-          ...state.register,
-          surname: action.payload,
-        },
-      };
-    },
-    setRegisterEmail: (state, action: PayloadAction<string>) => {
-      return {
-        ...state,
-        register: {
-          ...state.register,
-          email: action.payload,
-        },
-      };
-    },
-    setRegisterNewPassword: (state, action: PayloadAction<string>) => {
-      return {
-        ...state,
-        register: {
-          ...state.register,
-          newPassword: action.payload,
-        },
-      };
-    },
-    setRegisterConfirmPassword: (state, action: PayloadAction<string>) => {
-      return {
-        ...state,
-        register: {
-          ...state.register,
-          confirmPassword: action.payload,
-        },
-      };
-    },
-    setRegisterPage: (state, action: PayloadAction<number>) => {
-      return {
-        ...state,
-        register: {
-          ...state.register,
-          pageNumber: action.payload,
-        },
-      };
-    },
-    setRegisterIsLoading: (state, action: PayloadAction<boolean>) => {
-      return {
-        ...state,
-        register: {
-          ...state.register,
-          isLoading: action.payload,
         },
       };
     },
@@ -183,13 +110,6 @@ const formsSlice = createSlice({
 
 export const {
   setJwtToken,
-  setRegisterPage,
-  setRegisterFirstName,
-  setRegisterSurname,
-  setRegisterEmail,
-  setRegisterNewPassword,
-  setRegisterConfirmPassword,
-  setRegisterIsLoading,
   setForgotPasswordEmail,
   setContactFirstName,
   setContactSurname,

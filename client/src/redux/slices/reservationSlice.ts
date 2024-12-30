@@ -1,3 +1,4 @@
+import ReservationStatus from '@/utilities/ReservationStatus';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import moment from 'moment';
 
@@ -9,7 +10,12 @@ type ReservationState = {
     endDate: string | null;
     days: number;
     totalPrice: number;
-    reservationStatusId: number;
+    reservationStatus: string;
+  };
+  new_SelfReservationData: {
+    boatId: number | null;
+    startDate: string | null;
+    endDate: string | null;
   };
 };
 
@@ -21,7 +27,12 @@ const initialState: ReservationState = {
     endDate: null,
     days: 0,
     totalPrice: 100,
-    reservationStatusId: 1,
+    reservationStatus: ReservationStatus.Pending,
+  },
+  new_SelfReservationData: {
+    boatId: null,
+    startDate: null,
+    endDate: null,
   },
 };
 
@@ -59,6 +70,20 @@ const reservationSlice = createSlice({
     setTotalPrice: (state, action: PayloadAction<number>) => {
       state.new_ReservationData.totalPrice = action.payload;
     },
+
+    setSelfReservationStartDate: (state, action: PayloadAction<string>) => {
+      state.new_SelfReservationData.startDate = new Date(
+        action.payload
+      ).toISOString();
+    },
+    setSelfReservationEndDate: (state, action: PayloadAction<string>) => {
+      state.new_SelfReservationData.endDate = new Date(
+        action.payload
+      ).toISOString();
+    },
+    setSelfReservationBoatId: (state, action: PayloadAction<number>) => {
+      state.new_SelfReservationData.boatId = action.payload;
+    },
   },
 });
 
@@ -68,5 +93,9 @@ export const {
   setEndDate,
   setTotalPrice,
   setBoatId,
+
+  setSelfReservationStartDate,
+  setSelfReservationEndDate,
+  setSelfReservationBoatId,
 } = reservationSlice.actions;
 export default reservationSlice.reducer;

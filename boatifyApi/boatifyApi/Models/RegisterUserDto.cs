@@ -12,6 +12,6 @@ namespace boatifyApi.Models
 
         public DateTime DateOfBirth { get; set; }
 
-        public int RoleId { get; set; } = 1;
+        public string RoleName { get; set; } = "Client";
     }
 }

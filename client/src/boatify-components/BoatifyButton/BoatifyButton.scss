@@ -43,9 +43,6 @@
   width: 200px;
 }
 
-.boatify-button--reservation-time-check {
-}
-
 .boatify-button--reservation-payment {
   width: 100px;
   position: absolute;
@@ -56,3 +53,13 @@
 .boatify-button--long {
   width: 100%;
 }
+
+.boatify-button__boat-details{
+  width: 150px;
+  margin: 0px 5px;
+}
+.boatify-button__reservation-details{
+  width: 150px;
+  margin: 0px 5px;
+}
+

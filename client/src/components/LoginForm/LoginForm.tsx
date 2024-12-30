@@ -23,16 +23,15 @@ const LoginForm = () => {
         password: password,
       });
 
-      const responseUserData = await DataLoader.getCurrentUserData(responseToken);
+      const responseUserData =
+        await DataLoader.getCurrentUserData(responseToken);
 
-      
       sessionStorage.setItem('token', responseToken);
 
       BoatifyGoTo('/');
     } catch (error) {
       console.error(error);
     }
-
   };
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {

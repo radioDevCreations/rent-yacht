@@ -31,7 +31,7 @@ $circle-size: 60px;
   position: absolute;
   transform: scale(1.1);
   animation: circle-anim 400ms ease;
-  background: $color-red;	
+  background: $color-red;
 }
 
 @keyframes success-anim {
@@ -57,7 +57,7 @@ $circle-size: 60px;
 
 .error::before,
 .error::after {
-  content: "";
+  content: '';
   display: block;
   height: 4px;
   background: $color-red;

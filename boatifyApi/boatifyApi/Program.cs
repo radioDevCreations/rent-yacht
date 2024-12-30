@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using NLog;
 using NLog.Web;
-using System;
+using DotNetEnv;
 using System.Reflection;
 using System.Text;
 
@@ -24,6 +24,8 @@ logger.Debug("init main");
 
 try
 {
+    DotNetEnv.Env.Load();
+
     var builder = WebApplication.CreateBuilder(args);
 
     var authenticationSettings = new AuthenticationSettings();
@@ -52,7 +54,9 @@ try
         options.AddPolicy("IsAdult", builder => builder.AddRequirements(new MinimumAgeRequirement(18)));
     });
     builder.Services.AddScoped<IAuthorizationHandler, MinimumAgeRequirementHandler>();
-    builder.Services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementHandler>();
+    builder.Services.AddScoped<IAuthorizationHandler, BoatOperationRequirementHandler>();
+    builder.Services.AddScoped<IAuthorizationHandler, ReservationOperationRequirementHandler>();
+    builder.Services.AddScoped<IAuthorizationHandler, SelfReservationOperationRequirementHandler>();
     builder.Services.AddControllers().AddFluentValidation();
     builder.Services.AddDbContext<BoatifyDbContext>();
     builder.Services.AddScoped<BoatifySeeder>();
@@ -62,6 +66,7 @@ try
     builder.Services.AddScoped<IBoatHarbourService, BoatHarbourService>();
     builder.Services.AddScoped<IBoatService, BoatService>();
     builder.Services.AddScoped<IReservationService, ReservationService>();
+    builder.Services.AddScoped<ISelfReservationService, SelfReservationService>();
     builder.Services.AddScoped<IReservationTimeService, ReservationTimeService>();
     builder.Services.AddScoped<ExceptionHandlingMiddleware>();
     builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
@@ -69,8 +74,22 @@ try
     builder.Services.AddScoped<IValidator<BoatQuery>, BoatQueryValidator>();
     builder.Services.AddScoped<RequestTimeMiddleware>();
     builder.Services.AddScoped<IUserContextService, UserContextService>();
+    builder.Services.AddScoped<IUserContextService, UserContextService>();
     builder.Services.AddHttpContextAccessor();
     builder.Services.AddSwaggerGen();
+
+    var configuration = builder.Configuration;
+
+    var paypalClientId = Environment.GetEnvironmentVariable("PAYPAL_CLIENT_ID");
+    var paypalClientSecret = Environment.GetEnvironmentVariable("PAYPAL_CLIENT_SECRET");
+
+    builder.Services.AddHttpClient();
+    builder.Services.Configure<PayPalConfig>(options =>
+    {
+        options.ClientId = paypalClientId;
+        options.ClientSecret = paypalClientSecret;
+        options.Environment = configuration["PayPal:Environment"] ?? "sandbox";
+    });
 
     var allowedOrigins = builder.Configuration["AllowedOrigins"];
 

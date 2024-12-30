@@ -228,6 +228,34 @@ namespace boatifyApi.Migrations
                     b.ToTable("Roles");
                 });
 
+            modelBuilder.Entity("boatifyApi.Entities.SelfReservation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BoatId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReservationTimeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BoatId");
+
+                    b.HasIndex("ReservationTimeId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("SelfReservations");
+                });
+
             modelBuilder.Entity("boatifyApi.Entities.User", b =>
                 {
                     b.Property<int>("Id")
@@ -332,6 +360,33 @@ namespace boatifyApi.Migrations
                     b.Navigation("Boat");
 
                     b.Navigation("ReservationStatus");
+
+                    b.Navigation("ReservationTime");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("boatifyApi.Entities.SelfReservation", b =>
+                {
+                    b.HasOne("boatifyApi.Entities.Boat", "Boat")
+                        .WithMany()
+                        .HasForeignKey("BoatId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("boatifyApi.Entities.ReservationTime", "ReservationTime")
+                        .WithMany()
+                        .HasForeignKey("ReservationTimeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("boatifyApi.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Boat");
 
                     b.Navigation("ReservationTime");
 

@@ -16,7 +16,7 @@ namespace boatifyApi.Services
         PagedResult<ReservationDto> GetAll(ReservationQuery query);
         int Create(CreateReservationDto dto);
         void Update(int id, UpdateReservationDto dto);
-        void Delete(int id);
+        void Delete(int reservationId);
     }
     public class ReservationService : IReservationService
     {
@@ -127,7 +127,7 @@ namespace boatifyApi.Services
                 throw new NotFoundException("Reservation not found");
 
             var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User, reservation,
-                new ResourceOperationRequirement(ResourceOperation.Delete)).Result;
+                new ReservationOperationRequirement(ResourceOperation.Delete)).Result;
 
             if (!authorizationResult.Succeeded)
             {
@@ -148,14 +148,21 @@ namespace boatifyApi.Services
                 throw new NotFoundException("Reservation not found");
 
             var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User, reservation,
-                new ResourceOperationRequirement(ResourceOperation.Update)).Result;
+                new ReservationOperationRequirement(ResourceOperation.Update)).Result;
 
             if (!authorizationResult.Succeeded)
             {
                 throw new ForbiddenException();
             }
 
-            reservation.ReservationStatusId = dto.ReservationStatusId;
+            var reservationStatus = _dbContext
+               .ReservationStatuses
+               .FirstOrDefault(rs => rs.Name == dto.Status);
+
+            if (reservationStatus is null)
+                throw new NotFoundException("Incorrect reservation status");
+
+            reservation.ReservationStatusId = reservationStatus.Id;
 
             _dbContext.SaveChanges();
         }
@@ -167,12 +174,23 @@ namespace boatifyApi.Services
                 throw new ArgumentException("End date must be later than start date.");
             }
 
+            List<int> activeStatuses = _dbContext.ReservationStatuses
+                .Where(s => s.Name == "Pending" || s.Name == "Confirmed" || s.Name == "Payed")
+                .Select(s => s.Id)
+                .ToList();
+
             var isBoatAvailable = !_dbContext.Reservations
                 .Include(r => r.ReservationTime)
-                .Any(r => r.BoatId == dto.BoatId &&
+                .Any(r => r.BoatId == dto.BoatId && activeStatuses.Contains(r.ReservationStatusId) &&
                           ((dto.StartDate >= r.ReservationTime.StartTime && dto.StartDate < r.ReservationTime.EndTime) ||
                            (dto.EndDate > r.ReservationTime.StartTime && dto.EndDate <= r.ReservationTime.EndTime) ||
-                           (dto.StartDate <= r.ReservationTime.StartTime && dto.EndDate >= r.ReservationTime.EndTime)));
+                           (dto.StartDate <= r.ReservationTime.StartTime && dto.EndDate >= r.ReservationTime.EndTime))) &&
+                !_dbContext.SelfReservations
+                .Include(sr => sr.ReservationTime)
+                .Any(sr => sr.BoatId == dto.BoatId &&
+                          ((dto.StartDate >= sr.ReservationTime.StartTime && dto.StartDate < sr.ReservationTime.EndTime) ||
+                           (dto.EndDate > sr.ReservationTime.StartTime && dto.EndDate <= sr.ReservationTime.EndTime) ||
+                           (dto.StartDate <= sr.ReservationTime.StartTime && dto.EndDate >= sr.ReservationTime.EndTime)));
 
             if (!isBoatAvailable)
             {
@@ -188,6 +206,15 @@ namespace boatifyApi.Services
             };
 
             reservation.ReservationTime = reservationTime;
+
+            var reservationStatus = _dbContext
+               .ReservationStatuses
+               .FirstOrDefault(rs => rs.Name == dto.Status);
+
+            if (reservationStatus is null)
+                throw new NotFoundException("Incorrect reservation status");
+
+            reservation.ReservationStatusId = reservationStatus.Id;
 
             _dbContext.Reservations.Add(reservation);
             _dbContext.SaveChanges();

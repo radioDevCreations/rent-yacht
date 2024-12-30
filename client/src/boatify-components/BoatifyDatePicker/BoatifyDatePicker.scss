@@ -1,0 +1,41 @@
+    .date-pickers-wrapper{
+        width: 240px;
+        display: flex;
+        justify-content: center;
+    }
+    .busy-day {
+        background-color: #f8d7da;
+        color: #721c24;
+    }
+  .busy-indicator {
+    position: relative;
+  }
+  .busy-indicator:after {
+    content: '*';
+    color: red;
+    font-size: 10px;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  .custom-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 0 12px;
+  }
+  .custom-header button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 16px;
+    color: #007bff;
+  }
+  .custom-header button:hover {
+    text-decoration: underline;
+  }
+  .custom-header span {
+    font-weight: bold;
+  }

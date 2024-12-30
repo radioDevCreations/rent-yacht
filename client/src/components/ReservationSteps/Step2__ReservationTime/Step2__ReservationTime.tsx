@@ -1,9 +1,7 @@
-import { ChangeEvent, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Step2__ReservationTime.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import 'react-datepicker/dist/react-datepicker.css';
-import BoatifyInput from '@/boatify-components/BoatifyInput/BoatifyInput';
-import InputType from '@/utilities/InputType';
 import BoatifyDateOperations from '@/utilities/BoatifyDateOperations';
 import { FaArrowRight } from 'react-icons/fa6';
 import ButtonType from '@/utilities/ButtonType';
@@ -20,12 +18,14 @@ import BoatifyButton from '@/boatify-components/BoatifyButton/BoatifyButton';
 import moment from 'moment';
 import Captions from '@/captions/captions';
 import { RootState } from '@/redux/store';
+import BoatifyDatePicker from '@/boatify-components/BoatifyDatePicker/BoatifyDatePicker';
 
 const Step2__ReservationTime = (data: any) => {
   const dispatch = useDispatch();
-  const [isAvailable, setIsAvailable] = useState<boolean>(SystemBoolean.False);
+  const [isAvailable, setIsAvailable] = useState<boolean | undefined>(SystemBoolean.False);
   const [loading, setLoading] = useState<boolean>(SystemBoolean.True);
   const [error, setError] = useState<string | null>(null);
+  const [reserveddates, setReservedDates] = useState<Date[] | null>(null);
 
   const [startDate, setTemporaryStartDate] = useState(
     moment(new Date()).format('YYYY-MM-DD')
@@ -36,44 +36,66 @@ const Step2__ReservationTime = (data: any) => {
 
   let reservationState = useSelector((state: RootState) => state.reservation);
 
-  const handleClickCheckTime = async () => {
+  useEffect(() => {
+    const fetchReservedDates = async () => {
+      try {
+        const datesResponse: any = await DataLoader.getAllReservedDatesForBoat(
+          data.boat.id
+        );
+        const datesFormatted: Date[] = datesResponse.map((date: any) => new Date(date));
+        setReservedDates(datesFormatted);
+        setLoading(SystemBoolean.False);
+      } catch (err: any) {
+        setError(err.message || 'Failed to load reserved dates');
+        setLoading(SystemBoolean.False);
+      }
+    };
+
+    fetchReservedDates();
+  }, [data.boat.id]);
+
+  const checkAvailability = async (start: string, end: string) => {
     try {
       setLoading(SystemBoolean.True);
       setError(null);
-      const isAvailableSlot: boolean = await DataLoader.isBoatAvailable(
+      const isAvailableSlot: boolean | undefined = await DataLoader.isBoatAvailable(
         data.boat.id,
-        startDate,
-        endDate
+        start,
+        end
       );
 
-      if (isAvailableSlot) {
-        setIsAvailable(SystemBoolean.True);
-      }
-
-      const reservedates: any = await DataLoader.getAllReservedDatesForBoat(
-        data.boat.id
-      );
-
-      if (reservedates) {
-        console.log(
-          `Reserved dates for boat ${data.boat.id}: ${reservedates.join(', ')}`
-        );
-      } else {
-        console.log(`The boat is free everyday`);
-      }
+      setIsAvailable(isAvailableSlot);
     } catch (err: any) {
-      setError(err.message || 'Failed to create reservation');
-      console.log(error);
+      setError(err.message || 'Failed to check availability');
     } finally {
       setLoading(SystemBoolean.False);
     }
   };
 
+  const checkAvailabilityOnClick = (start: string, end: string) => {
+    if (!reserveddates) return true;
+
+    const startDateObj = new Date(start);
+    const endDateObj = new Date(end);
+
+    if (endDateObj <= startDateObj) {
+      setIsAvailable(SystemBoolean.False);
+    } else {
+      setIsAvailable(!reserveddates.some(
+        (reservedDate) =>
+          reservedDate >= startDateObj && reservedDate <= endDateObj
+      ));
+    }
+  };
+
+
   const handleClickPreviousPage = () => {
     dispatch(setReservationPage(reservationState.new_ReservationPage - 1));
   };
 
-  const handleNextReservationPage = () => {
+  const handleNextReservationPage = async () => {
+    await checkAvailability(startDate, endDate)
+    if(isAvailable){
     dispatch(setBoatId(data.boat.id));
     dispatch(
       setTotalPrice(
@@ -83,8 +105,8 @@ const Step2__ReservationTime = (data: any) => {
     );
     dispatch(setStartDate(startDate));
     dispatch(setEndDate(endDate));
-    dispatch(setReservationPage(reservationState.new_ReservationPage + 1));
-  };
+    dispatch(setReservationPage(reservationState.new_ReservationPage + 1));    
+  }};
 
   return (
     <div className="reservation-time">
@@ -132,24 +154,26 @@ const Step2__ReservationTime = (data: any) => {
         </div>
       </div>
       <div className="input-section">
-        <BoatifyInput
-          label="Start Date"
-          key="start-date"
-          placeholder="2"
-          type={InputType.datetimeLocal}
-          onChange={(event: ChangeEvent<HTMLInputElement>) =>
-            setTemporaryStartDate(event.target.value)
-          }
+        <BoatifyDatePicker
+          busyDates={reserveddates}
+          selectedDate={new Date(startDate)}
+          onDateChange={async (date: Date | null) => {
+            const formattedDate = moment(date).format('YYYY-MM-DD');
+            setTemporaryStartDate(formattedDate);
+            setIsAvailable(SystemBoolean.False);
+            await checkAvailabilityOnClick(formattedDate, endDate);
+          }}
         />
         <div className="margin"></div>
-        <BoatifyInput
-          label="End Date"
-          key="end-date"
-          placeholder="2"
-          type={InputType.datetimeLocal}
-          onChange={(event: ChangeEvent<HTMLInputElement>) =>
-            setTemporaryEndDate(event.target.value)
-          }
+        <BoatifyDatePicker
+          busyDates={reserveddates}
+          selectedDate={new Date(endDate)}
+          onDateChange={async (date: Date | null) => {
+            const formattedDate = moment(date).format('YYYY-MM-DD');
+            setTemporaryEndDate(formattedDate);
+            setIsAvailable(SystemBoolean.False);
+            await checkAvailabilityOnClick(startDate, formattedDate);
+          }}
         />
       </div>
       <div className="button-section">
@@ -158,12 +182,6 @@ const Step2__ReservationTime = (data: any) => {
           value="Previous"
           type={ButtonType.button}
           classModifier="boatify-button--reservation-time-prev"
-        />
-        <BoatifyButton
-          onClick={handleClickCheckTime}
-          value="Check Time"
-          type={ButtonType.button}
-          classModifier="boatify-button--reservation-time-check"
         />
         <BoatifyButton
           onClick={handleNextReservationPage}

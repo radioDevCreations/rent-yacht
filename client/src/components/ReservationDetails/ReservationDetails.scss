@@ -1,0 +1,74 @@
+@import '../../styles/theme.scss';
+
+.reservation-details{
+    position: relative;
+    display: flex;
+    width: 100%;
+    padding-top: 24px;
+}
+.reservation-details__image, .reservation-details__info{
+    width: 50%;
+    padding: 10px;
+}
+.reservation-details__name{
+    padding: 12px 16px 12px 12px;
+    border-bottom: 1px solid $oxfordBlue;
+    display: flex;
+    justify-content: space-between;
+}
+.reservation-details__name-field-text{
+    font-size: $fontSize24px;
+    color: $oxfordBlue;
+}
+.reservation-details__edit{
+    font-size: $fontSize24px;
+}
+.reservation-details__field{
+    padding: 8px 12px;
+    border-bottom: 1px solid $oxfordBlue;
+    display: flex;
+}
+.reservation-details__field-name{
+    display: block;
+    font-weight: $fontWeightBold;
+    width: 132px;
+}
+.reservation-details__field-text{
+    font-size: $fontSize16px;
+    color: $oxfordBlue;
+    width: 196px;
+}
+.reservation-details__return{
+    position: absolute;
+    top: -30px;
+    left: -110px;
+    font-size: $fontSize24px;
+    color: $oxfordBlue;
+}
+.reservation-details__field-descrition{
+    display: block;
+    font-weight: $fontWeightBold;
+    width: 132px;
+    height: 5rem;
+    overflow: hidden;
+}
+.reservation-details__field-descrition-text{
+    font-size: $fontSize16px;
+    color: $oxfordBlue;
+    width: 196px;
+    max-height: 5rem;
+    text-overflow: '...';
+    overflow: hidden;
+}
+.reservation-details__buttons{
+    padding-top: 12px;
+    display: flex;
+    justify-content: center;
+}
+.payment{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}

@@ -7,7 +7,7 @@
   border-radius: 16px;
   -webkit-box-shadow: 0px 0px 6px -2px rgba(16, 25, 53, 1);
   box-shadow: 0px 0px 6px -2px rgba(16, 25, 53, 1);
-  height: 405px;
+  min-height: 405px;
 }
 
 .register__inputs {
@@ -29,4 +29,16 @@
   :disabled {
     @include form-button-section--hidden;
   }
+}
+.register__button-section--hidden {
+  display: none;
+}
+.errors-section{
+  padding-bottom: 10px;
+}
+.error{
+  color: red;
+}
+.page--long{
+  height: 300px;
 }

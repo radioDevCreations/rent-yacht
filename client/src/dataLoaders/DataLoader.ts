@@ -1,4 +1,6 @@
 import axiosInstance from '@/axios/httpClient';
+import { UpdateUserDto } from '@/components/UserDetails/UserDetails';
+import User from '@/models/User';
 import { ApiURL } from '@/utilities/BaseUrl';
 import SortDirection from '@/utilities/SortDirection';
 import { SystemBoolean } from '@/utilities/System';
@@ -58,6 +60,35 @@ abstract class DataLoader {
 
   //RESERVATIONS
 
+  static updeteReservationStatus = async (token: string | null, requestData: { reservationId: number | undefined, reservationStatus: string }): Promise<any> => {
+    this.isTokenValid(token);
+    if (requestData.reservationId === undefined) return;
+    const data = { status: requestData.reservationStatus };
+    return await axiosInstance
+      .put(BoatifyApiURL(`reservation/${requestData.reservationId}`), data,
+      {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error(error);
+        throw error;
+      });
+  };
+
+  static selectReservationById = async (token: string | null, reservationId: number | undefined): Promise<any> => {
+    this.isTokenValid(token);
+    if (reservationId === undefined) return;
+    return await axiosInstance
+      .get(BoatifyApiURL(`reservation/${reservationId}`))
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error(error);
+        throw error;
+      });
+  };
+
+
   /**
    * Create a new reservation.
    * @param token - logged user authenticated token.
@@ -65,16 +96,21 @@ abstract class DataLoader {
    * @returns Promise<any> - Created reservation details.
    */
 
-  static createReservation = async (token: string | null, data: {
-    boatId: number | null;
-    startDate: string | null;
-    endDate: string | null;
-    totalPrice: number;
-    reservationStatusId: number;
-  }): Promise<any> => {
+  static createReservation = async (
+    token: string | null,
+    data: {
+      boatId: number | null;
+      startDate: string | null;
+      endDate: string | null;
+      totalPrice: number;
+      status: string;
+    }
+  ): Promise<any> => {
     this.isTokenValid(token);
     return await axiosInstance
-      .post(BoatifyApiURL(`reservation`), data, { headers: { "Authorization": `Bearer ${token}` }} )
+      .post(BoatifyApiURL(`reservation`), data, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((response) => response.data)
       .catch((error) => {
         console.error(error);
@@ -88,10 +124,67 @@ abstract class DataLoader {
    * @returns Promise<any> - List of reservations for the user.
    */
 
-  static selectUserReservations = async (token: string | null): Promise<any> => {
+  static selectUserReservations = async (
+    token: string | null
+  ): Promise<any> => {
     this.isTokenValid(token);
     return await axiosInstance
-      .get(BoatifyApiURL(`reservation/my-reservations`), { headers: { "Authorization": `Bearer ${token}` }})
+      .get(BoatifyApiURL(`reservation/my-reservations`), {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error(error);
+        throw error;
+      });
+  };
+
+  //SELF RESERVATIONS
+
+  static createSelfReservation = async (
+    token: string | null,
+    data: {
+      boatId: number | null | undefined;
+      startDate: string | null;
+      endDate: string | null;
+    }
+  ): Promise<any> => {
+    this.isTokenValid(token);
+    return await axiosInstance
+      .post(BoatifyApiURL(`self-reservation/boat/${data.boatId}`), { startDate: data.startDate, endDate: data.endDate }, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error(error);
+        throw error;
+      });
+  };
+
+  static deleteSelfReservation = async (
+    token: string | null,
+    id: number | null | undefined
+  ): Promise<any> => {
+    this.isTokenValid(token);
+    return await axiosInstance
+      .delete(BoatifyApiURL(`self-reservation/${id}`), {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error(error);
+        throw error;
+      });
+  };
+
+  static selectUserSelfReservations = async (
+    token: string | null
+  ): Promise<any> => {
+    this.isTokenValid(token);
+    return await axiosInstance
+      .get(BoatifyApiURL(`self-reservation/my-reservations`), {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((response) => response.data)
       .catch((error) => {
         console.error(error);
@@ -154,7 +247,9 @@ abstract class DataLoader {
   static selectUserBoats = async (token: string | null): Promise<any> => {
     this.isTokenValid(token);
     return await axiosInstance
-      .get(BoatifyApiURL('boat/my-boats'), { headers: { "Authorization": `Bearer ${token}` }})
+      .get(BoatifyApiURL('boat/my-boats'), {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((response) => response.data)
       .catch((error) => {
         console.error(error);
@@ -167,20 +262,28 @@ abstract class DataLoader {
    * @param token - logged user authenticated token.
    * @returns Promise<any> - List of all boats.
    */
-  static createBoat = async (token: string | null, harbourId: number, data: FormData): Promise<any> => {
+  static createBoat = async (
+    token: string | null,
+    harbourId: number,
+    data: FormData
+  ): Promise<any> => {
     this.isTokenValid(token);
-    const response = await axiosInstance.post(`/api/harbour/${harbourId}/boat`, data, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        "Authorization": `Bearer ${token}`
-      },
-    });
+    const response = await axiosInstance.post(
+      `/api/harbour/${harbourId}/boat`,
+      data,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     return response;
   };
 
-
   /**
    * Fetch boat by id.
+   * @param boatId - ID of the boat to select.
    * @returns Promise<any> - Boat data.
    */
   static selectBoatById = async (boatId: number | undefined): Promise<any> => {
@@ -204,10 +307,11 @@ abstract class DataLoader {
    * @returns Promise<boolean> - True if available, false otherwise.
    */
   static isBoatAvailable = async (
-    boatId: number,
+    boatId: number | undefined,
     checkedStartDate: string,
     checkedEndDate: string
-  ): Promise<boolean> => {
+  ): Promise<boolean | undefined> => {
+    if(boatId === undefined) return;
     return await axiosInstance
       .get(
         BoatifyApiURL(
@@ -229,8 +333,9 @@ abstract class DataLoader {
    * @returns Promise<string[]> - List of reserved dates (ISO strings).
    */
   static getAllReservedDatesForBoat = async (
-    boatId: number
-  ): Promise<string[]> => {
+    boatId: number | undefined
+  ): Promise<string[] | undefined> => {
+    if(boatId === undefined) return;
     return await axiosInstance
       .get(BoatifyApiURL(`available/${boatId}/dates`))
       .then((response) => {
@@ -244,7 +349,7 @@ abstract class DataLoader {
 
   //ACCOUNT
 
-   /**
+  /**
    * Logs in a user with their email and password.
    * @param data - Object containing email and password.
    * @returns Promise<any> - User token upon successful login.
@@ -263,14 +368,40 @@ abstract class DataLoader {
   };
 
   /**
+ * Registers a new user with their details.
+ * @param data - Object containing user registration details.
+ * @returns Promise<any> - Registration response or error.
+ */
+static registerUser = async (data: {
+  email: string;
+  password: string;
+  confirmedPassword: string;
+  firstName: string;
+  lastName: string;
+  roleName: string | null;
+  dateOfBirth: string | null;
+}): Promise<any> => {
+  if(data.roleName === null) return;
+  return await axiosInstance
+    .post(BoatifyApiURL(`account/register`), data)
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error(error);
+      throw error;
+    });
+};
+
+  /**
    * Fetches the current user's data based on the provided token.
    * @param token - Bearer token for authorization.
    * @returns Promise<any> - Current user data.
    */
-  static getCurrentUserData = async (token: string| null): Promise<any> => {
+  static getCurrentUserData = async (token: string | null): Promise<any> => {
     this.isTokenValid(token);
     return await axiosInstance
-      .get(BoatifyApiURL(`account/me`), { headers: { "Authorization": `Bearer ${token}` }})
+      .get(BoatifyApiURL(`account/me`), {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((response) => response.data)
       .catch((error) => {
         console.error(error);
@@ -278,26 +409,41 @@ abstract class DataLoader {
       });
   };
 
+  static updateUserData = async (token: string | null, userData: UpdateUserDto | null): Promise<any> => {
+    this.isTokenValid(token);
+    if (userData === null) return;
+    return await axiosInstance
+      .put(BoatifyApiURL(`account`), userData, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error(error);
+        throw error;
+      });
+  };
+
+
   //TOKEN VALIDATION
 
-
-/**
+  /**
    * Validates a given token to ensure it is not null, undefined, or empty.
    * @param token - Token to validate.
    * @throws TokenException - If the token is invalid.
    * @returns boolean - True if the token is valid.
    */
   static isTokenValid = (token: string | null): boolean => {
-    if( token == null || token == undefined || token?.length == 0 ) throw new TokenException('Unauthorized user');
+    if (token == null || token == undefined || token?.length == 0)
+      throw new TokenException('Unauthorized user');
     return SystemBoolean.True;
   };
 }
 
 /**
-   * Creates a new TokenException instance.
-   * @param message - Error message.
-   * @param statusCode - HTTP status code (default is 401).
-*/
+ * Creates a new TokenException instance.
+ * @param message - Error message.
+ * @param statusCode - HTTP status code (default is 401).
+ */
 class TokenException extends Error {
   statusCode;
 

@@ -4,10 +4,10 @@ import BoatsBoard from '../BoatsBoard/BoatsBoard';
 import BoatsFilter from '../BoatsFilter/BoatsFilter';
 import './BoatsBrowser.scss';
 import { useEffect, useState } from 'react';
-import { BoatDto } from '@/components/BoatsBoard/BoatsBoard';
 import DataLoader from '@/dataLoaders/DataLoader';
 import SortDirection from '@/utilities/SortDirection';
 import { SystemBoolean } from '@/utilities/System';
+import Boat from '@/models/Boat';
 
 const BoatsBrowser = () => {
   const [data, setData] = useState<any>({});
@@ -29,7 +29,7 @@ const BoatsBrowser = () => {
         const data: any[] = response;
         setData(data);
       } catch (err: any) {
-        setError(err.message || 'Failed to fetch reservations');
+        setError(err.message || 'Failed to fetch boats');
       } finally {
         setLoading(SystemBoolean.False);
       }
@@ -39,7 +39,7 @@ const BoatsBrowser = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading reservations...</div>;
+    return <div>Loading boats...</div>;
   }
 
   if (error) {
@@ -54,7 +54,7 @@ const BoatsBrowser = () => {
           <BoatsFilter />
         </aside>
         <section className="boats">
-          <BoatsBoard boats={data.items as BoatDto[]} />
+          <BoatsBoard boats={data.items as Boat[]} />
         </section>
       </div>
     </div>

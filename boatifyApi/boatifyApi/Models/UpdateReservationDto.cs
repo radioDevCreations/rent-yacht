@@ -2,6 +2,6 @@
 {
     public class UpdateReservationDto
     {
-        public int ReservationStatusId { get; set; }
+        public string Status { get; set; }
     }
 }

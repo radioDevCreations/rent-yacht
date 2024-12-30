@@ -18,6 +18,21 @@ enum Captions {
   Step3Label = 'Reservation Summary',
   Step4Label = 'Payment',
   Next = 'Next',
+  PROFILE_EMAIL = 'Email: ',
+  PROFILE_ROLE = 'Role: ',
+  PROFILE_DATE_OF_BIRTH = 'Date of Birth: ',
+  BOAT_NAME = 'Name: ',
+  BOAT_DESCRIPTION = 'Description: ',
+  BOAT_MODEL = 'Model: ',
+  BOAT_TYPE = 'Type: ',
+  BOAT_PRICE_PER_DAY = 'Price per day: ',
+  BOAT_CURRENT_LOCATION = 'Current location: ',
+  RESERVATION = 'Reservation',
+  RESERVATION_TOTAL_PRICE = 'Total price: ',
+  RESERVATION_START_DATE = 'Start date: ',
+  RESERVATION_END_DATE = 'End date: ',
+  RESERVATION_STATUS = 'Status: ',
+  SELF_RESERVATION = 'Self reserve for these days: ',
 }
 
 export default Captions;

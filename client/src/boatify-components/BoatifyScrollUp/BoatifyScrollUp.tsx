@@ -1,16 +1,17 @@
+import { SystemBoolean } from '@/utilities/System';
 import './BoatifyScrollUp.scss';
 import React, { useState, useEffect } from 'react';
-import { MdKeyboardArrowUp } from "react-icons/md";
+import { MdKeyboardArrowUp } from 'react-icons/md';
 
 const BoatifyScrollUp = () => {
-    const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const toggleVisibility = () => {
       if (window.scrollY > 300) {
-        setIsVisible(true);
+        setIsVisible(SystemBoolean.True);
       } else {
-        setIsVisible(false);
+        setIsVisible(SystemBoolean.False);
       }
     };
 
@@ -27,18 +28,15 @@ const BoatifyScrollUp = () => {
       behavior: 'smooth',
     });
   };
-    return ( 
+  return (
     <>
-        {isVisible && (
-            <button
-            onClick={scrollToTop}
-            className='boatify-scroll-up'
-            >
-            <MdKeyboardArrowUp />
-            </button>
-        )}
+      {isVisible && (
+        <button onClick={scrollToTop} className="boatify-scroll-up">
+          <MdKeyboardArrowUp />
+        </button>
+      )}
     </>
-     );
-}
- 
+  );
+};
+
 export default BoatifyScrollUp;

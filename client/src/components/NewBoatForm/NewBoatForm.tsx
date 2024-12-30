@@ -1,16 +1,17 @@
 import './NewBoatForm.scss';
-import BoatifyButton from "@/boatify-components/BoatifyButton/BoatifyButton";
-import BoatifyButtonVariant from "@/boatify-components/BoatifyButton/BoatifyButtonVariant";
-import BoatifyInput from "@/boatify-components/BoatifyInput/BoatifyInput";
-import BoatifyInputVariant from "@/boatify-components/BoatifyInput/BoatifyInputVariant";
-import BoatifyTextarea from "@/boatify-components/BoatifyTextarea/BoatifyTextarea";
-import BoatifyTextareaVariant from "@/boatify-components/BoatifyTextarea/BoatifyTextareaVariant";
-import DataLoader from "@/dataLoaders/DataLoader";
+import BoatifyButton from '@/boatify-components/BoatifyButton/BoatifyButton';
+import BoatifyButtonVariant from '@/boatify-components/BoatifyButton/BoatifyButtonVariant';
+import BoatifyInput from '@/boatify-components/BoatifyInput/BoatifyInput';
+import BoatifyInputVariant from '@/boatify-components/BoatifyInput/BoatifyInputVariant';
+import BoatifyTextarea from '@/boatify-components/BoatifyTextarea/BoatifyTextarea';
+import BoatifyTextareaVariant from '@/boatify-components/BoatifyTextarea/BoatifyTextareaVariant';
+import DataLoader from '@/dataLoaders/DataLoader';
 import { BoatifyGoTo } from '@/utilities/BoatifyGoTo';
 import ButtonType from '@/utilities/ButtonType';
 import InputType from '@/utilities/InputType';
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import SuccessReconnect from '../Reconnect/SuccessReconnect/SuccessReconnect';
+import { SystemBoolean } from '@/utilities/System';
 
 interface HarbourDto {
   id: number;
@@ -41,15 +42,17 @@ interface CreateBoatDto {
 const NewBoatWithHarbour: React.FC = () => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [harbours, setHarbours] = useState<HarbourDto[]>([]);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedHarbour, setSelectedHarbour] = useState<HarbourDto | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedHarbour, setSelectedHarbour] = useState<HarbourDto | null>(
+    null
+  );
 
   const [formData, setFormData] = useState<CreateBoatDto>({
     id: 0,
-    name: "",
-    description: "",
-    model: "",
-    type: "",
+    name: '',
+    description: '',
+    model: '',
+    type: '',
     pricePerDay: 0,
     mainImage: null,
     harbourId: 0,
@@ -63,7 +66,7 @@ const NewBoatWithHarbour: React.FC = () => {
         const harboursData = await DataLoader.selectAllHarbours();
         setHarbours(harboursData);
       } catch (error) {
-        console.error("Failed to load harbours", error);
+        console.error('Failed to load harbours', error);
       }
     };
     fetchHarbours();
@@ -82,11 +85,13 @@ const NewBoatWithHarbour: React.FC = () => {
     setSelectedHarbour(null);
   };
 
-  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleFormChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: name === "pricePerDay" ? parseFloat(value) : value,
+      [name]: name === 'pricePerDay' ? parseFloat(value) : value,
     }));
   };
 
@@ -99,45 +104,53 @@ const NewBoatWithHarbour: React.FC = () => {
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
+    setIsSubmitting(SystemBoolean.True);
 
-    const jwtToken = sessionStorage.getItem("token");
+    const jwtToken = sessionStorage.getItem('token');
     if (!jwtToken?.length) {
-      BoatifyGoTo("/");
+      BoatifyGoTo('/');
       return;
     }
 
-    const { id, name, description, model, type, pricePerDay, mainImage, harbourId } = formData;
+    const {
+      id,
+      name,
+      description,
+      model,
+      type,
+      pricePerDay,
+      mainImage,
+      harbourId,
+    } = formData;
 
     const data = new FormData();
-    data.append("id", id.toString());
-    data.append("name", name);
-    data.append("description", description);
-    data.append("model", model);
-    data.append("type", type);
-    data.append("pricePerDay", pricePerDay.toString());
-    data.append("harbourId", harbourId.toString());
-    if (mainImage) data.append("mainImage", mainImage);
+    data.append('id', id.toString());
+    data.append('name', name);
+    data.append('description', description);
+    data.append('model', model);
+    data.append('type', type);
+    data.append('pricePerDay', pricePerDay.toString());
+    data.append('harbourId', harbourId.toString());
+    if (mainImage) data.append('mainImage', mainImage);
 
     try {
       await DataLoader.createBoat(jwtToken, harbourId, data);
       setFormData({
         id: 0,
-        name: "",
-        description: "",
-        model: "",
-        type: "",
+        name: '',
+        description: '',
+        model: '',
+        type: '',
         pricePerDay: 0,
         mainImage: null,
         harbourId,
       });
       setSelectedHarbour(null);
-      setIsSuccess(true);
-
+      setIsSuccess(SystemBoolean.True);
     } catch (error) {
-      console.error("Error creating boat:", error);
+      console.error('Error creating boat:', error);
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(SystemBoolean.False);
     }
   };
 
@@ -145,45 +158,54 @@ const NewBoatWithHarbour: React.FC = () => {
     (harbour) =>
       harbour.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       harbour.city.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (harbour.street && harbour.street.toLowerCase().includes(searchQuery.toLowerCase()))
+      (harbour.street &&
+        harbour.street.toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
   return (
     <div className="new-boat-wrapper">
-    {isSuccess ? <SuccessReconnect message='Successfully added Boat' url='my-boats' /> : (
-      !selectedHarbour ? (
+      {isSuccess ? (
+        <SuccessReconnect message="Successfully added Boat" url="my-boats" />
+      ) : !selectedHarbour ? (
         <div className="harbour-picker">
           <h2 className="harbout-picker__title">Select a Harbour</h2>
           <BoatifyInput
-              id="search"
-              name="search"
-              label="Search"
-              type={InputType.text}
-              value={searchQuery}
-              placeholder="Search by name, city, or street"
-              onChange={handleSearchChange}
-              variant={BoatifyInputVariant.light}
-              isLongInput
-            />
+            id="search"
+            name="search"
+            label="Search"
+            type={InputType.text}
+            value={searchQuery}
+            placeholder="Search by name, city, or street"
+            onChange={handleSearchChange}
+            variant={BoatifyInputVariant.light}
+            isLongInput
+          />
           <ul className="harbour-list">
             {filteredHarbours.map((harbour) => (
-              <li key={harbour.id} onClick={() => handleHarbourSelect(harbour)} className='harbour-list__item'>
-                {harbour.name} - {harbour.city} {harbour.street && `(${harbour.street})`}
+              <li
+                key={harbour.id}
+                onClick={() => handleHarbourSelect(harbour)}
+                className="harbour-list__item"
+              >
+                {harbour.name} - {harbour.city}{' '}
+                {harbour.street && `(${harbour.street})`}
               </li>
             ))}
           </ul>
         </div>
       ) : (
         <div className="new-boat-wrapper">
-            <div className="harbour-selected">
-                <h2 className='harbout-selected__title'>Selected Harbour: {selectedHarbour.name}</h2>
-                <BoatifyButton
-                    value="Go Back to Harbour Selection"
-                    type={ButtonType.button}
-                    variant={BoatifyButtonVariant.standard}
-                    onClick={handleGoBack}
-                />
-            </div>
+          <div className="harbour-selected">
+            <h2 className="harbout-selected__title">
+              Selected Harbour: {selectedHarbour.name}
+            </h2>
+            <BoatifyButton
+              value="Go Back to Harbour Selection"
+              type={ButtonType.button}
+              variant={BoatifyButtonVariant.standard}
+              onClick={handleGoBack}
+            />
+          </div>
           <form onSubmit={handleFormSubmit} className="new-boat">
             <BoatifyInput
               id="name"
@@ -242,14 +264,14 @@ const NewBoatWithHarbour: React.FC = () => {
             />
             <div className="spacer"></div>
             <BoatifyButton
-              value={isSubmitting ? "Submitting..." : "Create Boat"}
+              value={isSubmitting ? 'Submitting...' : 'Create Boat'}
               type={ButtonType.submit}
               disabled={isSubmitting}
               variant={BoatifyButtonVariant.standard}
             />
           </form>
         </div>
-      ))}
+      )}
     </div>
   );
 };

@@ -13,6 +13,7 @@ namespace boatifyApi.Entities
         public DbSet<ReservationStatus> ReservationStatuses { get; set; }
         public DbSet<ReservationTime> ReservationTimes{ get; set; }
         public DbSet<Reservation> Reservations{ get; set; }
+        public DbSet<SelfReservation> SelfReservations{ get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

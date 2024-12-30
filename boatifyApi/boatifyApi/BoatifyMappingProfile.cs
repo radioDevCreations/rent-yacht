@@ -20,6 +20,7 @@ namespace boatifyApi
 
             CreateMap<Boat, BoatDto>()
                 .ForMember(m => m.HarbourName, c => c.MapFrom(s => s.Harbour.Name));
+            CreateMap<BoatDto, Boat>();
 
             CreateMap<CreateHarbourDto, Harbour>()
                 .ForMember(m => m.Address, c => c.MapFrom(dto => new Address() { 
@@ -37,6 +38,11 @@ namespace boatifyApi
 
             CreateMap<CreateReservationDto, Reservation>();
             CreateMap<Reservation, ReservationDto>()
+                .ForMember(m => m.StartDate, c => c.MapFrom(s => s.ReservationTime.StartTime))
+                .ForMember(m => m.EndDate, c => c.MapFrom(s => s.ReservationTime.EndTime));
+
+            CreateMap<CreateSelfReservationDto, SelfReservation>();
+            CreateMap<SelfReservation, SelfReservationDto>()
                 .ForMember(m => m.StartDate, c => c.MapFrom(s => s.ReservationTime.StartTime))
                 .ForMember(m => m.EndDate, c => c.MapFrom(s => s.ReservationTime.EndTime));
         }

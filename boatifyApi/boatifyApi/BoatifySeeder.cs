@@ -141,9 +141,9 @@ namespace boatifyApi
             {
                 new ReservationStatus { Name = "Pending"},
                 new ReservationStatus { Name = "Confirmed"},
+                new ReservationStatus { Name = "Payed"},
                 new ReservationStatus { Name = "Cancelled"},
-                new ReservationStatus { Name = "Completed"},
-                new ReservationStatus { Name = "Rejected"}
+                new ReservationStatus { Name = "Completed"}
             };
         }
     }
