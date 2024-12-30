@@ -14,6 +14,7 @@ import Harbour from '@/models/Harbour';
 import ReservationStatus from '@/utilities/ReservationStatus';
 import PayPalButton from '@/payment-components/PayPalButton/PayPalButton';
 import { IoMdCloseCircleOutline } from 'react-icons/io';
+import BoatifyPopUp from '@/boatify-components/BoatifyPopUp/BoatifyPopUp';
 
 interface ReservationDetailsProps{
     reservationId: string;
@@ -26,6 +27,7 @@ const ReservationDetails: React.FC<ReservationDetailsProps> = ({ reservationId }
   const [boat, setBoat] = useState<Boat | null>(null);
   const [harbour, setHarbour] = useState<Harbour | null>(null);
   const [paymentStarted, setPaymentStarted] = useState<boolean>(SystemBoolean.False);
+  const [isCancelPopupOpen, setIsCancelPopUpOpen] = useState<boolean>(SystemBoolean.False);
   
   const token = sessionStorage.getItem('token');
 
@@ -108,8 +110,7 @@ const ReservationDetails: React.FC<ReservationDetailsProps> = ({ reservationId }
                     value="Cancel"
                     type={ButtonType.button}
                     onClick={async () =>  {
-                      await DataLoader.updeteReservationStatus(sessionStorage.getItem('token'), {reservationId: reservation?.id, reservationStatus: ReservationStatus.Cancelled});
-                      BoatifyWindowReload();
+                      setIsCancelPopUpOpen(SystemBoolean.True);
                     }}
                     disabled={!token}
                     classModifier='boatify-button__reservation-details'
@@ -147,6 +148,15 @@ const ReservationDetails: React.FC<ReservationDetailsProps> = ({ reservationId }
         <PayPalButton />
       </div>
     </div>}
+    <BoatifyPopUp 
+    message='Are you sure that you want to cancel this reservation?'
+    isOpen={isCancelPopupOpen} 
+    onConfirm={async () => {
+      await DataLoader.updeteReservationStatus(sessionStorage.getItem('token'), {reservationId: reservation?.id, reservationStatus: ReservationStatus.Cancelled});
+      BoatifyWindowReload();
+    }} 
+    onCancel={() => setIsCancelPopUpOpen(SystemBoolean.False)}
+    />
     </>
   );
 };
