@@ -152,7 +152,7 @@ const ReservationDetails: React.FC<ReservationDetailsProps> = ({ reservationId }
     message='Are you sure that you want to cancel this reservation?'
     isOpen={isCancelPopupOpen} 
     onConfirm={async () => {
-      await DataLoader.updeteReservationStatus(sessionStorage.getItem('token'), {reservationId: reservation?.id, reservationStatus: ReservationStatus.Cancelled});
+      await DataLoader.updateReservationStatus(sessionStorage.getItem('token'), {reservationId: reservation?.id, reservationStatus: ReservationStatus.Cancelled});
       BoatifyWindowReload();
     }} 
     onCancel={() => setIsCancelPopUpOpen(SystemBoolean.False)}

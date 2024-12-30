@@ -41,7 +41,6 @@ const Step3__ReservationSummary = (boat: any) => {
         status:
           reservationState.new_ReservationData.reservationStatus,
       });
-      setData(data);
       nextReservationPage();
     } catch (err: any) {
       setError(err.message || 'Failed to create reservation');

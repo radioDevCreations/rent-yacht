@@ -1,6 +1,5 @@
 import axiosInstance from '@/axios/httpClient';
 import { UpdateUserDto } from '@/components/UserDetails/UserDetails';
-import User from '@/models/User';
 import { ApiURL } from '@/utilities/BaseUrl';
 import SortDirection from '@/utilities/SortDirection';
 import { SystemBoolean } from '@/utilities/System';
@@ -60,7 +59,7 @@ abstract class DataLoader {
 
   //RESERVATIONS
 
-  static updeteReservationStatus = async (token: string | null, requestData: { reservationId: number | undefined, reservationStatus: string }): Promise<any> => {
+  static updateReservationStatus = async (token: string | null, requestData: { reservationId: number | undefined, reservationStatus: string }): Promise<any> => {
     this.isTokenValid(token);
     if (requestData.reservationId === undefined) return;
     const data = { status: requestData.reservationStatus };
