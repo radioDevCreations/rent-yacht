@@ -12,6 +12,7 @@ import BoatifyButton from '@/boatify-components/BoatifyButton/BoatifyButton';
 import Boat from '@/models/Boat';
 import Harbour from '@/models/Harbour';
 import ReservationStatus from '@/utilities/ReservationStatus';
+import PayPalButton from '@/payment-components/PayPalButton/PayPalButton';
 
 interface ReservationDetailsProps{
     reservationId: string;
@@ -23,6 +24,7 @@ const ReservationDetails: React.FC<ReservationDetailsProps> = ({ reservationId }
   const [reservation, setReservation] = useState<Reservation | null>(null);
   const [boat, setBoat] = useState<Boat | null>(null);
   const [harbour, setHarbour] = useState<Harbour | null>(null);
+  const [paymentStarted, setPaymentStarted] = useState<boolean>(SystemBoolean.False);
   
   const token = sessionStorage.getItem('token');
 
@@ -55,6 +57,7 @@ const ReservationDetails: React.FC<ReservationDetailsProps> = ({ reservationId }
 
   return (
     <div className="reservation-details">
+      {!paymentStarted && <>
         <button className="reservation-details__return" onClick={() => BoatifyGoTo(`/my-reservations`)}>
             <FaRegArrowAltCircleLeft />
         </button>
@@ -100,7 +103,7 @@ const ReservationDetails: React.FC<ReservationDetailsProps> = ({ reservationId }
                 <BoatifyButton
                     value="Pay"
                     type={ButtonType.button}
-                    onClick={() => BoatifyGoTo(`/reservation/${reservationId}`)}
+                    onClick={() => {setPaymentStarted(SystemBoolean.True)}}
                     disabled={!token}
                     classModifier='boatify-button__reservation-details'
                 />
@@ -124,6 +127,10 @@ const ReservationDetails: React.FC<ReservationDetailsProps> = ({ reservationId }
                 alt="Picture of the reservation"
             />
         </div>
+      </>}
+      <div className="payment">
+      {paymentStarted && <PayPalButton />}
+      </div>
     </div>
   );
 };

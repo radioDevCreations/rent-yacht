@@ -10,7 +10,7 @@
 .details__board {
   @apply flex flex-col justify-between items-center;
   width: 1000px;
-  height: 540px;
+  min-height: 540px;
   padding: 48px 128px;
   background-color: $lightGray;
   border-radius: 12px;

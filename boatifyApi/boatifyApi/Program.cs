@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using NLog;
 using NLog.Web;
-using System;
+using DotNetEnv;
 using System.Reflection;
 using System.Text;
 
@@ -24,6 +24,8 @@ logger.Debug("init main");
 
 try
 {
+    DotNetEnv.Env.Load();
+
     var builder = WebApplication.CreateBuilder(args);
 
     var authenticationSettings = new AuthenticationSettings();
@@ -75,6 +77,19 @@ try
     builder.Services.AddScoped<IUserContextService, UserContextService>();
     builder.Services.AddHttpContextAccessor();
     builder.Services.AddSwaggerGen();
+
+    var configuration = builder.Configuration;
+
+    var paypalClientId = Environment.GetEnvironmentVariable("PAYPAL_CLIENT_ID");
+    var paypalClientSecret = Environment.GetEnvironmentVariable("PAYPAL_CLIENT_SECRET");
+
+    builder.Services.AddHttpClient();
+    builder.Services.Configure<PayPalConfig>(options =>
+    {
+        options.ClientId = paypalClientId;
+        options.ClientSecret = paypalClientSecret;
+        options.Environment = configuration["PayPal:Environment"] ?? "sandbox";
+    });
 
     var allowedOrigins = builder.Configuration["AllowedOrigins"];
 
