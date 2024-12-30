@@ -1,14 +1,12 @@
 ﻿using AutoMapper;
+using Azure.Core;
 using boatifyApi.Authorization;
 using boatifyApi.Entities;
 using boatifyApi.Exceptions;
-using boatifyApi.Migrations;
 using boatifyApi.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 using System.Linq.Expressions;
-using System.Security.Claims;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace boatifyApi.Services
 {
@@ -29,14 +27,16 @@ namespace boatifyApi.Services
         private ILogger<BoatService> _logger;
         private IAuthorizationService _authorizationService;
         private IUserContextService _userContextService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public BoatService(BoatifyDbContext dbContext, IMapper mapper, ILogger<BoatService> logger, IAuthorizationService authorizationService, IUserContextService userContextService)
+        public BoatService(BoatifyDbContext dbContext, IMapper mapper, ILogger<BoatService> logger, IAuthorizationService authorizationService, IUserContextService userContextService, IHttpContextAccessor httpContextAccessor)
         {
             _dbContext = dbContext;
             _mapper = mapper;
             _logger = logger;
             _authorizationService = authorizationService;
             _userContextService = userContextService;
+            _httpContextAccessor = httpContextAccessor;
         }
 
 
@@ -66,43 +66,53 @@ namespace boatifyApi.Services
 
         public PagedResult<BoatDto> GetAllSpecific(BoatQuery query)
         {
-
             var baseQuery = _dbContext
-               .Boats
-               .Where(b => query.SearchPhrase == null ||
-               (b.Name.ToLower().Contains(query.SearchPhrase.ToLower()) ||
-               b.Description.ToLower().Contains(query.SearchPhrase.ToLower()) ||
-               b.Model.ToLower().Contains(query.SearchPhrase.ToLower())));
+                .Boats
+                .Where(b => query.SearchPhrase == null ||
+                    (b.Name.ToLower().Contains(query.SearchPhrase.ToLower()) ||
+                    b.Description.ToLower().Contains(query.SearchPhrase.ToLower()) ||
+                    b.Model.ToLower().Contains(query.SearchPhrase.ToLower())));
 
             if (!string.IsNullOrEmpty(query.SortBy))
             {
                 var columnSelector = new Dictionary<string, Expression<Func<Boat, object>>>{
-                    {nameof(Boat.Name), b=> b.Name},
-                    {nameof(Boat.Description), b=> b.Description},
-                    {nameof(Boat.Model), b=> b.Model},
-                    {nameof(Boat.Type), b=> b.Type},
-                };
+            {nameof(Boat.Name), b => b.Name},
+            {nameof(Boat.Description), b => b.Description},
+            {nameof(Boat.Model), b => b.Model},
+            {nameof(Boat.Type), b => b.Type},
+        };
 
-                var selecteedColumn = columnSelector[query.SortBy];
+                var selectedColumn = columnSelector[query.SortBy];
 
-                baseQuery = query.SortDirection == SortDirection.ASC ? 
-                    baseQuery.OrderBy(selecteedColumn) : 
-                    baseQuery.OrderByDescending(selecteedColumn);
+                baseQuery = query.SortDirection == SortDirection.ASC
+                    ? baseQuery.OrderBy(selectedColumn)
+                    : baseQuery.OrderByDescending(selectedColumn);
             }
 
             var totalItemsCount = baseQuery.Count();
 
             var boats = baseQuery
-               .Skip(query.PageSize * (query.PageNumber-1))
-               .Take(query.PageSize)
-               .ToList();
+                .Skip(query.PageSize * (query.PageNumber - 1))
+                .Take(query.PageSize)
+                .ToList();
 
-            var boatDtos = _mapper.Map<List<BoatDto>>(boats);
+            var boatDtos = boats.Select(boat => new BoatDto
+            {
+                Id = boat.Id,
+                Name = boat.Name,
+                Description = boat.Description,
+                Model = boat.Model,
+                Type = boat.Type,
+                PricePerDay = boat.PricePerDay,
+                MainImageUrl = GetMainImageUrl(boat.MainImage)
+            }).ToList();
 
             var result = new PagedResult<BoatDto>(boatDtos, totalItemsCount, query.PageSize, query.PageNumber);
 
             return result;
         }
+
+
 
         public BoatDto GetById(int boatId)
         {
@@ -115,6 +125,7 @@ namespace boatifyApi.Services
 
             var boatDto = _mapper.Map<BoatDto>(boat);
 
+            boatDto.MainImageUrl = GetMainImageUrl(boat.MainImage);
             return boatDto;
         }
 
@@ -162,6 +173,17 @@ namespace boatifyApi.Services
             boat.HarbourId = dto.HarbourId;
 
             _dbContext.SaveChanges();
+        }
+
+        public string GetMainImageUrl(string relativePath)
+        {
+            var request = _httpContextAccessor.HttpContext?.Request;
+
+            if (request == null)
+                throw new InvalidOperationException("No HTTP context available.");
+
+            var baseUrl = $"{request.Scheme}://{request.Host}{request.PathBase}";
+            return $"{baseUrl}{relativePath}";
         }
     }
 }

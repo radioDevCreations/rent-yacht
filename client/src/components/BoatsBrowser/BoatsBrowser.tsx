@@ -24,9 +24,10 @@ const BoatsBrowser = () => {
           pageSize: 10,
           sortBy: 'Model',
           sortDirection: SortDirection.ASC,
-          searchPhrase: 'ne',
+          searchPhrase: 'test',
         });
-        const data: any[] = response;
+        const data: Boat[] = response;
+        console.log(data)
         setData(data);
       } catch (err: any) {
         setError(err.message || 'Failed to fetch boats');

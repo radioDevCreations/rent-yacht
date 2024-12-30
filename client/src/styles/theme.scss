@@ -4,6 +4,7 @@ $UTOrange: #ff8600;
 $oxfordBlue: #101935;
 $uranianBlue: #a3d9ff;
 $gray: #7c7c7c;
+$middleGray: #b9b9b9;
 $darkGray: #303030;
 $lightGray: #f5f5f5;
 $royalBlue: #122c78;
@@ -270,10 +271,11 @@ $paddingSize32px: 32px;
     background: $royalBlue;
     border-radius: 200px;
     border: 2px solid $lightGray;
+    cursor: pointer;
   }
 
   &::-webkit-scrollbar-track {
-    background: $lightGray;
+    background: $middleGray;
     border-radius: 200px;
   }
 
@@ -282,3 +284,4 @@ $paddingSize32px: 32px;
     scrollbar-track-color: $lightGray;
   }
 }
+

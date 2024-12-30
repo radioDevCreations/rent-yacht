@@ -13,6 +13,7 @@ import Boat from '@/models/Boat';
 import Harbour from '@/models/Harbour';
 import ReservationStatus from '@/utilities/ReservationStatus';
 import PayPalButton from '@/payment-components/PayPalButton/PayPalButton';
+import { IoMdCloseCircleOutline } from 'react-icons/io';
 
 interface ReservationDetailsProps{
     reservationId: string;
@@ -56,8 +57,8 @@ const ReservationDetails: React.FC<ReservationDetailsProps> = ({ reservationId }
   }
 
   return (
-    <div className="reservation-details">
-      {!paymentStarted && <>
+    <>
+    {!paymentStarted &&<div className="reservation-details">
         <button className="reservation-details__return" onClick={() => BoatifyGoTo(`/my-reservations`)}>
             <FaRegArrowAltCircleLeft />
         </button>
@@ -67,10 +68,6 @@ const ReservationDetails: React.FC<ReservationDetailsProps> = ({ reservationId }
                     {Captions.RESERVATION}
                 </h2>
             </div>
-            {/* <div className="reservation-details__field">
-                <span className="reservation-details__field-descrition">{Captions.BOAT_DESCRIPTION}</span>
-                <span className="reservation-details__field-descrition-text">{boat?.description}</span>
-            </div> */}
             <div className="reservation-details__field">
                 <span className="reservation-details__field-name">{Captions.BOAT_NAME}</span>
                 <span className="reservation-details__field-text">{boat?.name}</span>
@@ -120,18 +117,37 @@ const ReservationDetails: React.FC<ReservationDetailsProps> = ({ reservationId }
             </div>
         </div>
         <div className="reservation-details__image">
+          {boat?.mainImageUrl && (
+          <>
             <Image
-                src="/profile.png"
-                width={352}
-                height={352}
-                alt="Picture of the reservation"
+              src={boat.mainImageUrl}
+              width={352}
+              height={352}
+              alt={`${boat.name} image`}
+              unoptimized={process.env.NEXT_PUBLIC_UNOPTIMIZED === 'true'}
+              priority 
+              style={{
+                borderRadius: "8px",
+              }}
             />
+          </>
+          )}
         </div>
-      </>}
-      <div className="payment">
-      {paymentStarted && <PayPalButton />}
+      
+      
+    </div>}
+    {paymentStarted &&<div className="payment" onClick={(e: React.MouseEvent) => {e.stopPropagation(); BoatifyWindowReload(); }}>
+      <div className="payment-tab" onClick={(e: React.MouseEvent) => e.stopPropagation()}>
+        <button
+          className="reservation-details__navigation-switch"
+          onClick={() => BoatifyWindowReload()}
+        >
+          <IoMdCloseCircleOutline />
+        </button>
+        <PayPalButton />
       </div>
-    </div>
+    </div>}
+    </>
   );
 };
 

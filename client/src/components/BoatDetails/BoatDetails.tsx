@@ -7,7 +7,7 @@ import { BoatifyGoTo } from '@/utilities/BoatifyGoTo';
 import Captions from '@/captions/captions';
 import Boat from '@/models/Boat';
 import Harbour from '@/models/Harbour';
-import Image from 'next/image'
+import Image from 'next/image';
 import ButtonType from '@/utilities/ButtonType';
 import BoatifyButton from '@/boatify-components/BoatifyButton/BoatifyButton';
 
@@ -105,12 +105,21 @@ const BoatDetails: React.FC<BoatDetailsProps> = ({ boatId }) => {
             </div>
         </div>
         <div className="boat-details__image">
-            <Image
-                src="/profile.png"
+            {boat?.mainImageUrl && (
+            <>
+              <Image
+                src={boat.mainImageUrl}
                 width={352}
                 height={352}
-                alt="Picture of the boat"
-            />
+                alt={`${boat.name} image`}
+                unoptimized={process.env.NEXT_PUBLIC_UNOPTIMIZED === 'true'}
+                priority 
+                style={{
+                  borderRadius: "8px",
+                }}
+              />
+            </>
+            )}
         </div>
     </div>
   );

@@ -7,4 +7,5 @@ export default interface Boat {
   pricePerDay?: number;
   harbourId: number;
   harbourName?: string;
+  mainImageUrl?: string;
 }
