@@ -145,7 +145,7 @@ const ReservationDetails: React.FC<ReservationDetailsProps> = ({ reservationId }
         >
           <IoMdCloseCircleOutline />
         </button>
-        <PayPalButton />
+        <PayPalButton reservationId={reservation?.id} />
       </div>
     </div>}
     <BoatifyPopUp 

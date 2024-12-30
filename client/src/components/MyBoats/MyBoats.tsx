@@ -2,11 +2,9 @@ import BoatifyButton from '@/boatify-components/BoatifyButton/BoatifyButton';
 import './MyBoats.scss';
 import { FC, useEffect, useState } from 'react';
 import ButtonType from '@/utilities/ButtonType';
-import { BoatifyGoTo, BoatifyGoToInBlank } from '@/utilities/BoatifyGoTo';
+import { BoatifyGoTo } from '@/utilities/BoatifyGoTo';
 import Boat from '@/models/Boat';
 import DataLoader from '@/dataLoaders/DataLoader';
-import { RootState } from '@/redux/store';
-import { useSelector } from 'react-redux';
 import { SystemBoolean } from '@/utilities/System';
 import BoatifyButtonVariant from '@/boatify-components/BoatifyButton/BoatifyButtonVariant';
 
@@ -174,7 +172,7 @@ const MyBoats: FC = () => {
                   padding: '8px',
                 }}
               >
-                ${boat.pricePerDay.toFixed(2)}
+                ${boat?.pricePerDay?.toFixed(2)}
               </td>
               <td
                 style={{
@@ -194,7 +192,7 @@ const MyBoats: FC = () => {
                   value="Details"
                   type={ButtonType.button}
                   classModifier="boatify-button--details"
-                  onClick={() => BoatifyGoToInBlank(`/details/boat/${boat.id}`)}
+                  onClick={() => BoatifyGoTo(`/details/boat/${boat.id}`)}
                 />
               </td>
             </tr>

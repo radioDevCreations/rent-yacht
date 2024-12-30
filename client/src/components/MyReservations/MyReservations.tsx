@@ -2,7 +2,7 @@ import BoatifyButton from '@/boatify-components/BoatifyButton/BoatifyButton';
 import './MyReservations.scss';
 import { FC, useEffect, useState } from 'react';
 import ButtonType from '@/utilities/ButtonType';
-import { BoatifyGoToInBlank, BoatifyWindowReload } from '@/utilities/BoatifyGoTo';
+import { BoatifyGoTo, BoatifyWindowReload } from '@/utilities/BoatifyGoTo';
 import Reservation from '@/models/Reservation';
 import DataLoader from '@/dataLoaders/DataLoader';
 import { SystemBoolean } from '@/utilities/System';
@@ -205,7 +205,7 @@ const MyReservations: FC = () => {
                   type={ButtonType.button}
                   classModifier="boatify-button--details"
                   onClick={async () =>
-                     BoatifyGoToInBlank(`/details/reservation/${reservation.id}`)
+                    BoatifyGoTo(`/details/reservation/${reservation.id}`)
                   }
                 />
               </td>

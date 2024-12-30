@@ -2,7 +2,7 @@ import BoatifyButton from '@/boatify-components/BoatifyButton/BoatifyButton';
 import ButtonType from '@/utilities/ButtonType';
 import './BoatItem.scss';
 import { FC } from 'react';
-import { BoatifyGoToInBlank } from '@/utilities/BoatifyGoTo';
+import { BoatifyGoTo } from '@/utilities/BoatifyGoTo';
 import Boat from '@/models/Boat';
 import Image from 'next/image';
 import Captions from '@/captions/captions';
@@ -37,13 +37,13 @@ const BoatItem: FC<BoatItemProps> = ({ boat }) => {
           value="Details"
           type={ButtonType.button}
           classModifier="boatify-button--boat-item"
-          onClick={() => BoatifyGoToInBlank(`/details/boat/${boat.id}`)}
+          onClick={() => BoatifyGoTo(`/details/boat/${boat.id}`)}
         />
         <BoatifyButton
           value="Rent"
           type={ButtonType.button}
           classModifier="boatify-button--boat-item"
-          onClick={() => BoatifyGoToInBlank(`/reservation/${boat.id}`)}
+          onClick={() => BoatifyGoTo(`/reservation/${boat.id}`)}
         />
       </div>
     </div>
