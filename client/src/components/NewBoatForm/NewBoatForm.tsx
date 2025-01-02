@@ -35,6 +35,7 @@ interface CreateBoatDto {
   model: string;
   type: string;
   pricePerDay: number;
+  passengers: number;
   mainImage: File | null;
   harbourId: number;
 }
@@ -54,6 +55,7 @@ const NewBoatWithHarbour: React.FC = () => {
     model: '',
     type: '',
     pricePerDay: 0,
+    passengers: 0,
     mainImage: null,
     harbourId: 0,
   });
@@ -119,6 +121,7 @@ const NewBoatWithHarbour: React.FC = () => {
       model,
       type,
       pricePerDay,
+      passengers,
       mainImage,
       harbourId,
     } = formData;
@@ -130,6 +133,7 @@ const NewBoatWithHarbour: React.FC = () => {
     data.append('model', model);
     data.append('type', type);
     data.append('pricePerDay', pricePerDay.toString());
+    data.append('passengers', passengers.toString());
     data.append('harbourId', harbourId.toString());
     if (mainImage) data.append('mainImage', mainImage);
 
@@ -142,6 +146,7 @@ const NewBoatWithHarbour: React.FC = () => {
         model: '',
         type: '',
         pricePerDay: 0,
+        passengers: 0,
         mainImage: null,
         harbourId,
       });
@@ -250,6 +255,16 @@ const NewBoatWithHarbour: React.FC = () => {
               label="Price Per Day"
               type={InputType.number}
               value={formData.pricePerDay.toString()}
+              placeholder="Enter price per day"
+              onChange={handleFormChange}
+              variant={BoatifyInputVariant.light}
+            />
+            <BoatifyInput
+              id="passengers"
+              name="passengers"
+              label="Passengers"
+              type={InputType.number}
+              value={formData.passengers.toString()}
               placeholder="Enter price per day"
               onChange={handleFormChange}
               variant={BoatifyInputVariant.light}

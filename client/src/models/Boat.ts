@@ -5,6 +5,7 @@ export default interface Boat {
   model: string;
   type: string;
   pricePerDay?: number;
+  passengers?: number;
   harbourId: number;
   harbourName?: string;
   mainImageUrl?: string;

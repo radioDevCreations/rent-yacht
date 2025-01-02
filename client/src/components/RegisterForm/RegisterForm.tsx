@@ -13,6 +13,7 @@ import BoatifyPicklist from '@/boatify-components/BoatifyPicklist/BoatifyPicklis
 import BoatifyDatePicker from '@/boatify-components/BoatifyDatePicker/BoatifyDatePicker';
 import moment from 'moment';
 import DataLoader from '@/dataLoaders/DataLoader';
+import { BoatifyGoTo } from '@/utilities/BoatifyGoTo';
 
 const REGISTER_PAGES_NUMBER = 4;
 
@@ -79,7 +80,7 @@ const RegisterForm = () => {
         dateOfBirth: dateOfBirth ? moment(dateOfBirth).toISOString() : null,
         roleName: role
       });
-      console.log('Registration successful:', response.data);
+      BoatifyGoTo('/login');
     } catch (error) {
       console.error('Registration error:', error);
     } finally {

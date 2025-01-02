@@ -78,6 +78,10 @@ const BoatDetails: React.FC<BoatDetailsProps> = ({ boatId }) => {
                 <span className="boat-details__field-text">{boat?.pricePerDay} {Captions.PLN}</span>
             </div>
             <div className="boat-details__field">
+                <span className="boat-details__field-name">{Captions.BOAT_PASSENGERS_NUMBER}</span>
+                <span className="boat-details__field-text">{boat?.passengers}</span>
+            </div>
+            <div className="boat-details__field">
                 <span className="boat-details__field-name">{Captions.BOAT_CURRENT_LOCATION}</span>
                 <span className="boat-details__field-text">{harbour?.name}</span>
             </div>
