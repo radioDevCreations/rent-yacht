@@ -7,8 +7,8 @@ import Reservation from '@/models/Reservation';
 import DataLoader from '@/dataLoaders/DataLoader';
 import { SystemBoolean } from '@/utilities/System';
 import Captions from '@/captions/captions';
-import ReservationStatus from '@/utilities/ReservationStatus';
 import SelfReservation from '@/models/SelfReservation';
+
 
 const TABLE_BORDER_COLOR = '#122c78';
 
@@ -64,7 +64,7 @@ const MyReservations: FC = () => {
     <>
     <section className="my-reservations">
       <header className="my-reservations__header">
-        <h2 className="my-reservations__heading-text">Reservations</h2>
+        <h2 className="my-reservations__heading-text">{Captions.MY_RESERVATIONS}</h2>
       </header>
       <table className="my-reservations__table">
         <thead>
@@ -85,14 +85,14 @@ const MyReservations: FC = () => {
             >
               Boat ID
             </th>
-            <th
+            {/* <th
               style={{
                 border: `1px solid ${TABLE_BORDER_COLOR}`,
                 padding: '8px',
               }}
             >
               User ID
-            </th>
+            </th> */}
             <th
               style={{
                 border: `1px solid ${TABLE_BORDER_COLOR}`,
@@ -154,14 +154,14 @@ const MyReservations: FC = () => {
               >
                 {reservation.boatId}
               </td>
-              <td
+              {/* <td
                 style={{
                   border: `1px solid ${TABLE_BORDER_COLOR}`,
                   padding: '8px',
                 }}
               >
                 {reservation.userId}
-              </td>
+              </td> */}
               <td
                 style={{
                   border: `1px solid ${TABLE_BORDER_COLOR}`,

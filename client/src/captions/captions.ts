@@ -33,6 +33,7 @@ enum Captions {
   RESERVATION_END_DATE = 'End date: ',
   RESERVATION_STATUS = 'Status: ',
   SELF_RESERVATION = 'Self reserve for these days: ',
+  MY_RESERVATIONS = 'My Reservations',
 }
 
 export default Captions;
