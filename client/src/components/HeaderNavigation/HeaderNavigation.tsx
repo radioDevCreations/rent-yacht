@@ -1,3 +1,4 @@
+import Captions from '@/captions/captions';
 import './HeaderNavigation.scss';
 import Link from 'next/link';
 
@@ -12,14 +13,14 @@ type HeaderNavigationProps = {
 };
 
 const NAVIGATION_ITEMS: NavigationItem[] = [
-  { name: 'Harbours', href: '/harbours', customClassName: '' },
-  { name: 'Boats', href: '/boats', customClassName: 'transition-delay1' },
+  { name: Captions.PAGE_NAME_HARBOURS, href: '/harbours', customClassName: '' },
+  { name: Captions.PAGE_NAME_BOATS, href: '/boats', customClassName: 'transition-delay1' },
   {
-    name: 'Last Minute',
+    name: Captions.PAGE_NAME_LAST_MINUTE,
     href: '/last-minute',
     customClassName: 'transition-delay2',
   },
-  { name: 'Contact', href: '/contact', customClassName: 'transition-delay4' },
+  { name: Captions.PAGE_NAME_CONTACT, href: '/contact', customClassName: 'transition-delay4' },
 ];
 
 const HeaderNavigation: React.FC<HeaderNavigationProps> = ({ isMenuOpen }) => {

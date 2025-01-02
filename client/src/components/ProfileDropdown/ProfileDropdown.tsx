@@ -3,6 +3,7 @@ import './ProfileDropdown.scss';
 import Link from 'next/link';
 import { BoatifyGoTo } from '@/utilities/BoatifyGoTo';
 import { SystemBoolean } from '@/utilities/System';
+import Captions from '@/captions/captions';
 
 type ProfileDropdownItem = {
   name: string;
@@ -15,18 +16,18 @@ type ProfileDropdownProps = {
 };
 
 const NAVIGATION_ITEMS_LOGGED: ProfileDropdownItem[] = [
-  { name: 'My Profile', href: '/profile', customClassName: '' },
+  { name: Captions.PAGE_NAME_MY_PROFILE, href: '/profile', customClassName: '' },
   {
-    name: 'My Reservations',
+    name: Captions.PAGE_NAME_MY_RESERVATIONS,
     href: '/my-reservations',
     customClassName: 'transition-delay1',
   },
   {
-    name: 'My Boats',
+    name: Captions.PAGE_NAME_MY_BOATS,
     href: '/my-boats',
     customClassName: 'transition-delay3',
   },
-  { name: 'Logout', href: '/logout', customClassName: 'transition-delay4' },
+  { name: Captions.LOGOUT, href: '/logout', customClassName: 'transition-delay4' },
 ];
 
 const NAVIGATION_ITEMS_GUEST: ProfileDropdownItem[] = [

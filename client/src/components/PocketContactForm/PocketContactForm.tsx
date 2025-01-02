@@ -29,17 +29,17 @@ const PocketContactForm = () => {
   const firstColumn: Array<BoatifyInputProps> = [
     {
       name: 'name',
-      label: 'Name',
+      label: Captions.CONTACT_NAME,
       type: InputType.text,
-      placeholder: 'Name',
+      placeholder: Captions.CONTACT_NAME,
       onChange: (event: ChangeEvent<HTMLInputElement>) =>
         dispatch(setContactFirstName(event?.target?.value)),
     },
     {
       name: 'subject',
-      label: 'Subject',
+      label: Captions.CONTACT_SUBJECT,
       type: InputType.text,
-      placeholder: 'Subject',
+      placeholder: Captions.CONTACT_SUBJECT,
       onChange: (event: ChangeEvent<HTMLInputElement>) =>
         dispatch(setContactSurname(event?.target?.value)),
     },
@@ -47,9 +47,9 @@ const PocketContactForm = () => {
   const secondColumn: Array<BoatifyInputProps> = [
     {
       name: 'email',
-      label: 'E-mail',
+      label: Captions.CONTACT_EMAIL,
       type: InputType.email,
-      placeholder: 'E-mail',
+      placeholder: Captions.CONTACT_EMAIL,
       onChange: (event: ChangeEvent<HTMLInputElement>) =>
         dispatch(setContactEmail(event?.target?.value)),
     },
@@ -57,8 +57,8 @@ const PocketContactForm = () => {
   const thirdColumn: Array<BoatifyTextareaProps> = [
     {
       name: 'message',
-      label: 'Message',
-      placeholder: 'Type here',
+      label: Captions.CONTACT_MESSAGE,
+      placeholder: Captions.CONTACT_MESSAGE_TYPE_HERE,
       onChange: (event: ChangeEvent<HTMLTextAreaElement>) =>
         dispatch(setContactMessage(event?.target?.value)),
     },
@@ -69,7 +69,7 @@ const PocketContactForm = () => {
       <input
         type="hidden"
         name="access_key"
-        value="90c62b69-349f-49b5-a3e4-e2a1b4c0159f"
+        value={process.env.CONTACT_KEY}
       />
 
       <section className="contact__inputs">
@@ -133,7 +133,7 @@ const PocketContactForm = () => {
       ></input>
       <section className="contact__button-section">
         <BoatifyButton
-          value="Send Message"
+          value={Captions.CONTACT_SEND_MESSAGE}
           type={ButtonType.submit}
           classModifier="boatify-button--contact"
           variant={BoatifyButtonVariant.orangeSTD}

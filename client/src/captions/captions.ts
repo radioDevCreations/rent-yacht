@@ -1,9 +1,16 @@
 enum Captions {
   APP_NAME = 'Boatify',
+
   PAGE_NAME_HARBOURS = 'Porty',
-  PAGE_NAME_BOATS = 'Łodie',
+  PAGE_NAME_BOATS = 'Łodzie',
   PAGE_NAME_LAST_MINUTE = 'Gorące Okazje',
   PAGE_NAME_CONTACT = 'Kontakt',
+
+  PAGE_NAME_MY_PROFILE = 'Mój Profil',
+  PAGE_NAME_MY_RESERVATIONS = 'Moje Rezerwacje',
+  PAGE_NAME_MY_BOATS = 'Moje Łodzie',
+  LOGOUT = 'Wyloguj',
+
   MAP_LINK_TEXT1 = 'Wykorzystaj mapę portów aby zaplanować idealne wakacje',
   MAP_LINK_TEXT2 = 'Otwórz mapę',
   MAP_LINK_IMAGE_ALT = 'Mapa',
@@ -36,6 +43,15 @@ enum Captions {
   MY_RESERVATIONS = 'Moje rezerwacje',
   HERO_HEADER = 'Żegluj z nami',
   HERO_HEADER_DESCRIPTION = 'Znajdź swoją wymarzoną lódź na rejs',
+  FEATURED1 = 'Zaloguj się',
+  FEATURED2 = 'Zarejestruj się',
+  FEATURED3 = 'Przeglądaj',
+  CONTACT_NAME = 'Imię',
+  CONTACT_SUBJECT = 'Temat',
+  CONTACT_EMAIL = 'E-mail',
+  CONTACT_MESSAGE = 'Wiadomość',
+  CONTACT_MESSAGE_TYPE_HERE = 'Pisz...',
+  CONTACT_SEND_MESSAGE = 'Wyślij',
 }
 
 export default Captions;

@@ -3,28 +3,29 @@ import Image from 'next/image';
 import IMAGE from '../../../public/links';
 import FeaturedCard from '../FeaturedCard/FeaturedCard';
 import FeaturedCardsProps from '../FeaturedCard/FeaturedCardsProps';
+import Captions from '@/captions/captions';
 
 const FEATURED_CARDS: FeaturedCardsProps[] = [
   {
-    name: 'Login',
+    name: Captions.FEATURED1,
     icon: {
-      alt: 'Login',
+      alt: Captions.FEATURED1,
       src: IMAGE.svg.login,
     },
     href: '/login',
   },
   {
-    name: 'Register',
+    name: Captions.FEATURED2,
     icon: {
-      alt: 'Register',
+      alt: Captions.FEATURED2,
       src: IMAGE.svg.register,
     },
     href: '/register',
   },
   {
-    name: 'Browse',
+    name: Captions.FEATURED3,
     icon: {
-      alt: 'Browse',
+      alt: Captions.FEATURED3,
       src: IMAGE.svg.browse,
     },
     href: '/boats',
