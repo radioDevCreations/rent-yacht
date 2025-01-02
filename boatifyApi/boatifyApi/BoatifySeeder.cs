@@ -79,14 +79,16 @@ namespace boatifyApi
                             Name = "Karolina",
                             Model = "Antila 27",
                             Type = "SailBoat",
-                            PricePerDay = 550
+                            PricePerDay = 550,
+                            Passengers = 5
                         },
                         new Boat()
                         {
                             Name = "Nefryt",
                             Model = "Nefryt",
                             Type = "SailBoat",
-                            PricePerDay = 300
+                            PricePerDay = 300,
+                            Passengers = 6
                         },
                     }
                 },
@@ -108,14 +110,16 @@ namespace boatifyApi
                             Name = "Łysek",
                             Model = "Antila 34",
                             Type = "SailBoat",
-                            PricePerDay = 700
+                            PricePerDay = 700,
+                            Passengers = 5
                         },
                         new Boat()
                         {
                             Name = "Skorpion",
                             Model = "Skorpion",
                             Type = "SailBoat",
-                            PricePerDay = 200
+                            PricePerDay = 200,
+                            Passengers = 6
                         },
                     }
                 }

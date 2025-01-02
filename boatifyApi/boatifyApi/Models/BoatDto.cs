@@ -17,6 +17,9 @@ namespace boatifyApi.Models
         public required string Type { get; set; }
         [Required]
         public required double PricePerDay { get; set; }
+        [Required]
+        public required int Passengers { get; set; }
+
         public required string MainImageUrl { get; set; }
 
 

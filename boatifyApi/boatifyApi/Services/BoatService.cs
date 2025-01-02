@@ -104,6 +104,7 @@ namespace boatifyApi.Services
                 Model = boat.Model,
                 Type = boat.Type,
                 PricePerDay = boat.PricePerDay,
+                Passengers = boat.Passengers,
                 MainImageUrl = GetMainImageUrl(boat.MainImage)
             }).ToList();
 
