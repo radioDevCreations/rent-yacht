@@ -8,6 +8,8 @@ import DataLoader from '@/dataLoaders/DataLoader';
 import { SystemBoolean } from '@/utilities/System';
 import Captions from '@/captions/captions';
 import SelfReservation from '@/models/SelfReservation';
+import Role from '@/utilities/Role';
+import User from '@/models/User';
 
 
 const TABLE_BORDER_COLOR = '#122c78';
@@ -18,8 +20,23 @@ const MyReservations: FC = () => {
   const [reservations, setReservations] = useState<Reservation[]>([]);
   const [selfReservations, setSelfReservations] = useState<SelfReservation[]>([]);
   const [myBoatsReservations, setMyBoatsReservations] = useState<Reservation[]>([]);
+  const [currentUserRole, setCurrentUserRole] = useState<Role | null>(null);
 
   useEffect(() => {
+    const fetchCurrentUserRole = async () => {
+      try {
+        setLoading(SystemBoolean.True);
+        setError(null);
+        const token = sessionStorage.getItem('token');
+        const response = await DataLoader.getCurrentUserData(token);
+        const data: User = await response;
+        setCurrentUserRole(data.role as Role);
+      } catch (err: any) {
+        setError(err.message || 'Failed to fetch user role.');
+      } finally {
+        setLoading(SystemBoolean.False);
+      }
+    };
     const fetchSelfReservations = async () => {
       try {
         setLoading(SystemBoolean.True);
@@ -63,8 +80,10 @@ const MyReservations: FC = () => {
       }
     };
 
+    fetchCurrentUserRole();
     fetchSelfReservations();
     fetchReservations();
+    fetchMyBoatsReservations();
   }, []);
 
   if (loading) {
@@ -77,7 +96,7 @@ const MyReservations: FC = () => {
 
   return (
     <>
-    <section className="my-boats-reservations">
+    {currentUserRole === Role.Shipowner && <section className="my-boats-reservations">
       <header className="my-boats-reservations__header">
         <h2 className="my-boats-reservations__heading-text">{Captions.MY_BOATS_RESERVATIONS}</h2>
       </header>
@@ -228,8 +247,8 @@ const MyReservations: FC = () => {
           ))}
         </tbody>
       </table>
-    </section>
-    <section className="my-reservations">
+    </section>}
+    {currentUserRole === Role.Client && <section className="my-reservations">
       <header className="my-reservations__header">
         <h2 className="my-reservations__heading-text">{Captions.MY_RESERVATIONS}</h2>
       </header>
@@ -380,10 +399,10 @@ const MyReservations: FC = () => {
           ))}
         </tbody>
       </table>
-    </section>
-    <section className="my-self-reservations">
+    </section>}
+    {currentUserRole === Role.Shipowner && selfReservations.length && <section className="my-self-reservations">
     <header className="my-self-reservations__header">
-      <h2 className="my-self-reservations__heading-text">Self-reservations</h2>
+      <h2 className="my-self-reservations__heading-text">{Captions.SELF_RESERVATIONS}</h2>
     </header>
     <table className="my-self-reservations__table">
       <thead>
@@ -487,7 +506,7 @@ const MyReservations: FC = () => {
         ))}
       </tbody>
     </table>
-  </section>
+  </section>}
   </>
   );
 };

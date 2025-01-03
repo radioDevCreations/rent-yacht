@@ -10,6 +10,8 @@ import Harbour from '@/models/Harbour';
 import Image from 'next/image';
 import ButtonType from '@/utilities/ButtonType';
 import BoatifyButton from '@/boatify-components/BoatifyButton/BoatifyButton';
+import User from '@/models/User';
+import Role from '@/utilities/Role';
 
 interface BoatDetailsProps{
     boatId: string;
@@ -20,10 +22,26 @@ const BoatDetails: React.FC<BoatDetailsProps> = ({ boatId }) => {
   const [error, setError] = useState<string | null>(null);
   const [boat, setBoat] = useState<Boat | null>(null);
   const [harbour, setHarbour] = useState<Harbour | null>(null);
+  const [currentUserRole, setCurrentUserRole] = useState<Role | null>(null);
   
   const token = sessionStorage.getItem('token');
 
   useEffect(() => {
+    const fetchCurrentUserRole = async () => {
+      try {
+        setLoading(SystemBoolean.True);
+        setError(null);
+        const token = sessionStorage.getItem('token');
+        const response = await DataLoader.getCurrentUserData(token);
+        const data: User = await response;
+        setCurrentUserRole(data.role as Role);
+      } catch (err: any) {
+        setError(err.message || 'Failed to fetch user role.');
+      } finally {
+        setLoading(SystemBoolean.False);
+      }
+    };
+
     const fetchUser = async () => {
       try {
         setLoading(SystemBoolean.True);
@@ -39,6 +57,7 @@ const BoatDetails: React.FC<BoatDetailsProps> = ({ boatId }) => {
       }
     };
 
+    fetchCurrentUserRole();
     fetchUser();
   }, [boatId]);
 
@@ -86,7 +105,7 @@ const BoatDetails: React.FC<BoatDetailsProps> = ({ boatId }) => {
                 <span className="boat-details__field-text">{harbour?.name}</span>
             </div>
             <div className="boat-details__buttons">
-                <BoatifyButton
+                {currentUserRole === Role.Client &&<BoatifyButton
                     value="Rent this boat"
                     type={ButtonType.button}
                     onClick={() => {
@@ -95,8 +114,8 @@ const BoatDetails: React.FC<BoatDetailsProps> = ({ boatId }) => {
                     }}
                     classModifier='boatify-button__boat-details'
                     isLongButton
-                />
-                <BoatifyButton
+                />}
+                {currentUserRole === Role.Shipowner && <BoatifyButton
                     value="Self reserve"
                     type={ButtonType.button}
                     onClick={() => {
@@ -105,7 +124,7 @@ const BoatDetails: React.FC<BoatDetailsProps> = ({ boatId }) => {
                     }}
                     classModifier='boatify-button__boat-details'
                     isLongButton
-                />
+                />}
             </div>
         </div>
         <div className="boat-details__image">

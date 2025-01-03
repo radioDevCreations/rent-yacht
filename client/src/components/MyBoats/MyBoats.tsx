@@ -7,6 +7,7 @@ import Boat from '@/models/Boat';
 import DataLoader from '@/dataLoaders/DataLoader';
 import { SystemBoolean } from '@/utilities/System';
 import BoatifyButtonVariant from '@/boatify-components/BoatifyButton/BoatifyButtonVariant';
+import Captions from '@/captions/captions';
 
 const TABLE_BORDER_COLOR = '#122c78';
 
@@ -45,7 +46,7 @@ const MyBoats: FC = () => {
   return (
     <section className="my-boats">
       <header className="my-boats__header">
-        <h2 className="my-boats__heading-text">My Boats</h2>
+        <h2 className="my-boats__heading-text">{Captions.MY_BOATS}</h2>
         <BoatifyButton
             value="Add Boat"
             type={ButtonType.button}
@@ -57,14 +58,6 @@ const MyBoats: FC = () => {
       <table className="my-boats__table">
         <thead>
           <tr>
-            <th
-              style={{
-                border: `1px solid ${TABLE_BORDER_COLOR}`,
-                padding: '8px',
-              }}
-            >
-              ID
-            </th>
             <th
               style={{
                 border: `1px solid ${TABLE_BORDER_COLOR}`,
@@ -126,14 +119,6 @@ const MyBoats: FC = () => {
         <tbody>
           {boats.map((boat) => (
             <tr key={boat.id}>
-              <td
-                style={{
-                  border: `1px solid ${TABLE_BORDER_COLOR}`,
-                  padding: '8px',
-                }}
-              >
-                {boat.id}
-              </td>
               <td
                 style={{
                   border: `1px solid ${TABLE_BORDER_COLOR}`,

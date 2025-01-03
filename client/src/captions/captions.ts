@@ -41,6 +41,8 @@ enum Captions {
   RESERVATION_STATUS = 'Status: ',
   SELF_RESERVATION = 'Rezerwacja własna na wybrane dni: ',
   MY_RESERVATIONS = 'Moje rezerwacje',
+  SELF_RESERVATIONS = 'Rezerwacje własne',
+  MY_BOATS = 'Moje łodzie',
   MY_BOATS_RESERVATIONS = 'Rezerwacje moich łodzi',
   HERO_HEADER = 'Żegluj z nami',
   HERO_HEADER_DESCRIPTION = 'Znajdź swoją wymarzoną lódź na rejs',

@@ -15,6 +15,8 @@ import ReservationStatus from '@/utilities/ReservationStatus';
 import PayPalButton from '@/payment-components/PayPalButton/PayPalButton';
 import { IoMdCloseCircleOutline } from 'react-icons/io';
 import BoatifyPopUp from '@/boatify-components/BoatifyPopUp/BoatifyPopUp';
+import Role from '@/utilities/Role';
+import User from '@/models/User';
 
 interface ReservationDetailsProps{
     reservationId: string;
@@ -28,10 +30,26 @@ const ReservationDetails: React.FC<ReservationDetailsProps> = ({ reservationId }
   const [harbour, setHarbour] = useState<Harbour | null>(null);
   const [paymentStarted, setPaymentStarted] = useState<boolean>(SystemBoolean.False);
   const [isCancelPopupOpen, setIsCancelPopUpOpen] = useState<boolean>(SystemBoolean.False);
+  const [currentUserRole, setCurrentUserRole] = useState<Role | null>(null);
   
+
   const token = sessionStorage.getItem('token');
 
   useEffect(() => {
+    const fetchCurrentUserRole = async () => {
+      try {
+        setLoading(SystemBoolean.True);
+        setError(null);
+        const token = sessionStorage.getItem('token');
+        const response = await DataLoader.getCurrentUserData(token);
+        const data: User = await response;
+        setCurrentUserRole(data.role as Role);
+      } catch (err: any) {
+        setError(err.message || 'Failed to fetch user role.');
+      } finally {
+        setLoading(SystemBoolean.False);
+      }
+    };
     const fetchUser = async () => {
       try {
         setLoading(SystemBoolean.True);
@@ -48,6 +66,7 @@ const ReservationDetails: React.FC<ReservationDetailsProps> = ({ reservationId }
     };
 
     fetchUser();
+    fetchCurrentUserRole();
   }, [reservationId]);
 
   if (loading) {
@@ -99,13 +118,13 @@ const ReservationDetails: React.FC<ReservationDetailsProps> = ({ reservationId }
                 <span className="reservation-details__field-text">{new Date(`${reservation?.endDate}`).toLocaleDateString("pl-PL", {day: "2-digit", month: '2-digit', year: 'numeric'})}</span>
             </div>
             <div className="reservation-details__buttons">
-                <BoatifyButton
+                {(currentUserRole === Role.Administrator || currentUserRole === Role.Client) && <BoatifyButton
                     value="Pay"
                     type={ButtonType.button}
                     onClick={() => {setPaymentStarted(SystemBoolean.True)}}
                     disabled={!token}
                     classModifier='boatify-button__reservation-details'
-                />
+                />}
                 <BoatifyButton
                     value="Cancel"
                     type={ButtonType.button}
