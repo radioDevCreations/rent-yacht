@@ -14,20 +14,21 @@ const BoatsBrowser = () => {
   const [loading, setLoading] = useState<boolean>(SystemBoolean.True);
   const [error, setError] = useState<string | null>(null);
 
+
   useEffect(() => {
     const fetchReservations = async () => {
       try {
         setLoading(SystemBoolean.True);
         setError(null);
-        const response = await DataLoader.selectAllSpecificBoats({
-          pageNumber: 1,
-          pageSize: 10,
-          sortBy: 'Model',
-          sortDirection: SortDirection.ASC,
-          searchPhrase: 'test',
-        });
+        // const response = await DataLoader.selectAllSpecificBoats({
+        //   pageNumber: 1,
+        //   pageSize: 10,
+        //   sortBy: 'Model',
+        //   sortDirection: SortDirection.ASC,
+        //   searchPhrase: 'test',
+        // });
+        const response = await DataLoader.selectAllBoats();
         const data: Boat[] = response;
-        console.log(data)
         setData(data);
       } catch (err: any) {
         setError(err.message || 'Failed to fetch boats');
@@ -55,7 +56,7 @@ const BoatsBrowser = () => {
           <BoatsFilter />
         </aside>
         <section className="boats">
-          <BoatsBoard boats={data.items as Boat[]} />
+          <BoatsBoard boats={data as Boat[]} />
         </section>
       </div>
     </div>

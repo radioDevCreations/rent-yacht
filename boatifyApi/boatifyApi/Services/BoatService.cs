@@ -46,7 +46,17 @@ namespace boatifyApi.Services
                 .Boats
                 .ToList();
 
-            var boatDtos = _mapper.Map<List<BoatDto>>(boats);
+            var boatDtos = boats.Select(boat => new BoatDto
+            {
+                Id = boat.Id,
+                Name = boat.Name,
+                Description = boat.Description,
+                Model = boat.Model,
+                Type = boat.Type,
+                PricePerDay = boat.PricePerDay,
+                Passengers = boat.Passengers,
+                MainImageUrl = GetMainImageUrl(boat.MainImage)
+            }).ToList();
 
             return boatDtos;
         }

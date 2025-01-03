@@ -7,13 +7,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ChangeEvent } from 'react';
 import {
   setPassengersFilter,
-  setStartDateFilter,
-  setEndDateFilter,
+  setPriceFrom,
+  setPriceTo,
+  setHarbourName,
 } from '@/redux/slices/filterSlice';
 import BoatifyTag from '@/boatify-components/BoatifyTag/BoatifyTag';
 import TagType from '@/utilities/TagType';
 import { SystemBoolean } from '@/utilities/System';
 import { RootState } from '@/redux/store';
+import Captions from '@/captions/captions';
 
 const BoatsFilter = () => {
   const dispatch = useDispatch();
@@ -23,19 +25,14 @@ const BoatsFilter = () => {
   ) => {
     dispatch(setPassengersFilter(+event?.target?.value));
   };
-  const handleStartDateChange = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch(setStartDateFilter(+event?.target?.value));
-    console.log(filterState.startRentDate);
-    console.log(filterState.endRentDate);
+  const handlePriceFromChange = (event: ChangeEvent<HTMLInputElement>) => {
+    dispatch(setPriceFrom(+event?.target?.value));
   };
-  const handleEndDateChange = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch(setEndDateFilter(+event?.target?.value));
-    console.log(filterState.startRentDate);
-    console.log(filterState.endRentDate);
+  const handlePriceToChange = (event: ChangeEvent<HTMLInputElement>) => {
+    dispatch(setPriceTo(+event?.target?.value));
   };
   const handleHarbourChange = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log(filterState.startRentDate);
-    console.log(filterState.endRentDate);
+    dispatch(setHarbourName(event?.target?.value));
   };
 
   return (
@@ -73,7 +70,7 @@ const BoatsFilter = () => {
           isLongInput={SystemBoolean.True}
         />
       </div>
-      <div className="filter__section filter__section--vertical">
+      {/* <div className="filter__section filter__section--vertical">
         <h3 className="filter__section-title">
           <span>Period of Rent</span>
         </h3>
@@ -98,37 +95,18 @@ const BoatsFilter = () => {
           type={TagType.days}
           label={`${filterState.endRentDate - filterState.startRentDate}`}
         />
-      </div>
+      </div> */}
       <div className="filter__section filter__section--vertical">
         <h3 className="filter__section-title">
           <span>Price</span>
         </h3>
         <span className="spacer"></span>
         <BoatifyInput
-          value="Per Day"
-          name="priceper"
-          label="Per Day"
-          id="perday"
-          type={InputType.radio}
-          onChange={handleStartDateChange}
-          isLongInput={SystemBoolean.True}
-        />
-        <BoatifyInput
-          value="Per Hour"
-          name="priceper"
-          label="Per Hour"
-          id="perhour"
-          type={InputType.radio}
-          onChange={handleEndDateChange}
-          isLongInput={SystemBoolean.True}
-        />
-        <span className="spacer"></span>
-        <BoatifyInput
           label="Price From"
           key="pricefrom"
           placeholder="2"
           type={InputType.currency}
-          onChange={handleStartDateChange}
+          onChange={handlePriceFromChange}
           isLongInput={SystemBoolean.True}
         />
         <BoatifyInput
@@ -136,12 +114,12 @@ const BoatsFilter = () => {
           key="priceto"
           placeholder="2"
           type={InputType.currency}
-          onChange={handleEndDateChange}
+          onChange={handlePriceToChange}
           isLongInput={SystemBoolean.True}
         />
         <BoatifyTag
           type={TagType.days}
-          label={`${filterState.endRentDate - filterState.startRentDate}`}
+          label={`Searching: ${filterState.priceFrom} ${Captions.PLN} - ${filterState.priceTo} ${Captions.PLN}`}
         />
       </div>
       <div className="filter__section filter__section--vertical"></div>

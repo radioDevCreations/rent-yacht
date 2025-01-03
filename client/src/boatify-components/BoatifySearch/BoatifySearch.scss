@@ -1,9 +1,16 @@
 @import '../../styles/theme.scss';
 
 .search {
-  @apply flex justify-between;
+  display: flex;
+  justify-content:  space-between;
+  flex-direction: column;
   width: 256px;
   padding: 0px;
+}
+.search__main{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 .search__input {
   @include app-input;
@@ -11,4 +18,12 @@
   .input__field {
     margin-bottom: 0px;
   }
+}
+
+.search__info{
+  padding: 8px;
+}
+
+strong{
+  font-weight: $fontWeightBold;
 }
