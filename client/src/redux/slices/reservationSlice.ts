@@ -5,6 +5,7 @@ import moment from 'moment';
 type ReservationState = {
   new_ReservationPage: number;
   new_ReservationData: {
+    reservationId: number | null;
     boatId: number | null;
     startDate: string | null;
     endDate: string | null;
@@ -22,6 +23,7 @@ type ReservationState = {
 const initialState: ReservationState = {
   new_ReservationPage: 1,
   new_ReservationData: {
+    reservationId: null,
     boatId: null,
     startDate: null,
     endDate: null,
@@ -84,6 +86,9 @@ const reservationSlice = createSlice({
     setSelfReservationBoatId: (state, action: PayloadAction<number>) => {
       state.new_SelfReservationData.boatId = action.payload;
     },
+    setNewReservationId: (state, action: PayloadAction<number>) => {
+      state.new_ReservationData.reservationId = action.payload;
+    },
   },
 });
 
@@ -93,6 +98,7 @@ export const {
   setEndDate,
   setTotalPrice,
   setBoatId,
+  setNewReservationId,
 
   setSelfReservationStartDate,
   setSelfReservationEndDate,

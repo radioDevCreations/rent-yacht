@@ -4,22 +4,27 @@ import { IoMdBoat } from 'react-icons/io';
 import BoatifyInput from '@/boatify-components/BoatifyInput/BoatifyInput';
 import InputType from '@/utilities/InputType';
 import { useDispatch, useSelector } from 'react-redux';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useState } from 'react';
 import {
   setPassengersFilter,
   setPriceFrom,
   setPriceTo,
   setHarbourName,
+  setType,
 } from '@/redux/slices/filterSlice';
 import BoatifyTag from '@/boatify-components/BoatifyTag/BoatifyTag';
 import TagType from '@/utilities/TagType';
 import { SystemBoolean } from '@/utilities/System';
 import { RootState } from '@/redux/store';
 import Captions from '@/captions/captions';
+import BoatType from '@/utilities/BoatTypes';
 
 const BoatsFilter = () => {
   const dispatch = useDispatch();
   const filterState = useSelector((state: RootState) => state.filters);
+  
+  const [selectedType, setSelectedType] = useState<BoatType>(BoatType.All);
+
   const handlePassengersNumberChange = (
     event: ChangeEvent<HTMLInputElement>
   ) => {
@@ -35,18 +40,32 @@ const BoatsFilter = () => {
     dispatch(setHarbourName(event?.target?.value));
   };
 
+  const handleTypeClick = (type: BoatType) => {
+    setSelectedType(type);
+    dispatch(setType(type));
+  };
+
   return (
     <section className="filter">
       <div className="filter__section">
-        <div className="filter__type-option">
+        <div
+          className={`filter__type-option ${selectedType === BoatType.All ? 'selected' : ''}`}
+          onClick={() => handleTypeClick(BoatType.All)}
+        >
           <span>ALL</span>
         </div>
-        <div className="filter__type-option">
+        <div
+          className={`filter__type-option ${selectedType === BoatType.Sailboat ? 'selected' : ''}`}
+          onClick={() => handleTypeClick(BoatType.Sailboat)}
+        >
           <span className="filter__type-icon">
             <FaSailboat />
           </span>
         </div>
-        <div className="filter__type-option">
+        <div
+          className={`filter__type-option ${selectedType === BoatType.Motorboat ? 'selected' : ''}`}
+          onClick={() => handleTypeClick(BoatType.Motorboat)}
+        >
           <span className="filter__type-icon">
             <IoMdBoat />
           </span>
@@ -70,32 +89,6 @@ const BoatsFilter = () => {
           isLongInput={SystemBoolean.True}
         />
       </div>
-      {/* <div className="filter__section filter__section--vertical">
-        <h3 className="filter__section-title">
-          <span>Period of Rent</span>
-        </h3>
-        <span className="spacer"></span>
-        <BoatifyInput
-          label="Start Date"
-          key="startdate"
-          placeholder="2"
-          type={InputType.date}
-          onChange={handleStartDateChange}
-          isLongInput={SystemBoolean.True}
-        />
-        <BoatifyInput
-          label="End Date"
-          key="enddate"
-          placeholder="2"
-          type={InputType.date}
-          onChange={handleEndDateChange}
-          isLongInput={SystemBoolean.True}
-        />
-        <BoatifyTag
-          type={TagType.days}
-          label={`${filterState.endRentDate - filterState.startRentDate}`}
-        />
-      </div> */}
       <div className="filter__section filter__section--vertical">
         <h3 className="filter__section-title">
           <span>Price</span>
@@ -122,7 +115,6 @@ const BoatsFilter = () => {
           label={`Searching: ${filterState.priceFrom} ${Captions.PLN} - ${filterState.priceTo} ${Captions.PLN}`}
         />
       </div>
-      <div className="filter__section filter__section--vertical"></div>
     </section>
   );
 };

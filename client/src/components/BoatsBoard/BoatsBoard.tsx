@@ -4,6 +4,8 @@ import './BoatsBoard.scss';
 import Boat from '@/models/Boat';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
+import BoatType from '@/utilities/BoatTypes';
+import NoBoatsFound from '../NoBoatsFound/NoBoatsFound';
 
 interface BoatsBoardProps {
   boats: Boat[];
@@ -37,12 +39,19 @@ const BoatsBoard: FC<BoatsBoardProps> = ({ boats }) => {
       }
     }
 
+    if (filterState.type && filterState.type !== BoatType.All) {
+      if (!boat.type || boat.type.toUpperCase() !== filterState.type.toUpperCase()) {
+        return false;
+      }
+    }
+
     return true;
   });
 
   return (
     <div className="boats-board">
-      {filteredBoats?.map((boat: Boat) => (
+      {!filteredBoats && <NoBoatsFound/>}
+      {filteredBoats && filteredBoats?.map((boat: Boat) => (
         <BoatItem key={boat.id} boat={boat} />
       ))}
     </div>

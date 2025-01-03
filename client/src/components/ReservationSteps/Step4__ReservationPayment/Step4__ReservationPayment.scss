@@ -1,3 +1,5 @@
+@import '../../../styles/theme.scss';
+
 .reservation-payment {
   height: 300px;
   display: flex;
@@ -13,4 +15,39 @@
   position: absolute;
   top: 48px;
   left: 20px;
+}
+.payment{
+  position: fixed;
+  top: 0;
+  width: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  z-index: 2147483646;
+  transform: translate3d(0, 0, 0);
+  background-color: black;
+  background-color: rgba(0, 0, 0, 0.8);
+  background: radial-gradient(50% 50%, ellipse closest-corner, rgba(0, 0, 0, 0.6) 1%, rgba(0, 0, 0, 0.8) 100%);
+  color: #fff;
+}
+.payment-tab{
+  box-shadow: 0 2px 10px 10px rgba(#000, 0.05);
+  background-color: $lightGray;
+  z-index: 2147483647;
+  padding: 42px 24px 24px 24px;
+  border-radius: 12px;
+  position: relative;
+  user-select: none;
+}
+.reservation-details__navigation-switch{
+  position: absolute;
+  right: 0;
+  top: 8px;
+  color: $black;
+  font-size: $fontSize24px;
+  padding: 0 10px;
 }

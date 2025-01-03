@@ -17,6 +17,7 @@ const MyReservations: FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [reservations, setReservations] = useState<Reservation[]>([]);
   const [selfReservations, setSelfReservations] = useState<SelfReservation[]>([]);
+  const [myBoatsReservations, setMyBoatsReservations] = useState<Reservation[]>([]);
 
   useEffect(() => {
     const fetchSelfReservations = async () => {
@@ -47,6 +48,20 @@ const MyReservations: FC = () => {
         setLoading(SystemBoolean.False);
       }
     };
+    const fetchMyBoatsReservations = async () => {
+      try {
+        setLoading(SystemBoolean.True);
+        setError(null);
+        const token = sessionStorage.getItem('token');
+        const response = await DataLoader.selectMyBoatsReservations(token);
+        const data: Reservation[] = await response;
+        setMyBoatsReservations(data);
+      } catch (err: any) {
+        setError(err.message || 'Failed to fetch reservations');
+      } finally {
+        setLoading(SystemBoolean.False);
+      }
+    };
 
     fetchSelfReservations();
     fetchReservations();
@@ -62,6 +77,158 @@ const MyReservations: FC = () => {
 
   return (
     <>
+    <section className="my-boats-reservations">
+      <header className="my-boats-reservations__header">
+        <h2 className="my-boats-reservations__heading-text">{Captions.MY_BOATS_RESERVATIONS}</h2>
+      </header>
+      <table className="my-boats-reservations__table">
+        <thead>
+          <tr>
+            <th
+              style={{
+                border: `1px solid ${TABLE_BORDER_COLOR}`,
+                padding: '8px',
+              }}
+            >
+              ID
+            </th>
+            <th
+              style={{
+                border: `1px solid ${TABLE_BORDER_COLOR}`,
+                padding: '8px',
+              }}
+            >
+              Boat ID
+            </th>
+            {/* <th
+              style={{
+                border: `1px solid ${TABLE_BORDER_COLOR}`,
+                padding: '8px',
+              }}
+            >
+              User ID
+            </th> */}
+            <th
+              style={{
+                border: `1px solid ${TABLE_BORDER_COLOR}`,
+                padding: '8px',
+              }}
+            >
+              Total Price
+            </th>
+            <th
+              style={{
+                border: `1px solid ${TABLE_BORDER_COLOR}`,
+                padding: '8px',
+              }}
+            >
+              Reservation Status
+            </th>
+            <th
+              style={{
+                border: `1px solid ${TABLE_BORDER_COLOR}`,
+                padding: '8px',
+              }}
+            >
+              Start Date
+            </th>
+            <th
+              style={{
+                border: `1px solid ${TABLE_BORDER_COLOR}`,
+                padding: '8px',
+              }}
+            >
+              End Date
+            </th>
+            <th
+              style={{
+                border: `1px solid ${TABLE_BORDER_COLOR}`,
+                padding: '8px',
+              }}
+            >
+              Details
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {myBoatsReservations.map((reservation) => (
+            <tr key={reservation.id}>
+              <td
+                style={{
+                  border: `1px solid ${TABLE_BORDER_COLOR}`,
+                  padding: '8px',
+                }}
+              >
+                {reservation.id}
+              </td>
+              <td
+                style={{
+                  border: `1px solid ${TABLE_BORDER_COLOR}`,
+                  padding: '8px',
+                }}
+              >
+                {reservation.boatId}
+              </td>
+              {/* <td
+                style={{
+                  border: `1px solid ${TABLE_BORDER_COLOR}`,
+                  padding: '8px',
+                }}
+              >
+                {reservation.userId}
+              </td> */}
+              <td
+                style={{
+                  border: `1px solid ${TABLE_BORDER_COLOR}`,
+                  padding: '8px',
+                }}
+              >
+                {reservation.totalPrice.toFixed(2)} {Captions.PLN}
+              </td>
+              <td
+                style={{
+                  border: `1px solid ${TABLE_BORDER_COLOR}`,
+                  padding: '8px',
+                }}
+              >
+                {reservation.reservationStatusName}
+              </td>
+              <td
+                style={{
+                  border: `1px solid ${TABLE_BORDER_COLOR}`,
+                  padding: '8px',
+                }}
+              >
+                {new Date(reservation.startDate).toLocaleDateString("pl-PL", {day: "2-digit", month: '2-digit', year: 'numeric'})}
+              </td>
+              <td
+                style={{
+                  border: `1px solid ${TABLE_BORDER_COLOR}`,
+                  padding: '8px',
+                }}
+              >
+                {new Date(reservation.endDate).toLocaleDateString("pl-PL", {day: "2-digit", month: '2-digit', year: 'numeric'})}
+              </td>
+              <td
+                style={{
+                  border: `1px solid ${TABLE_BORDER_COLOR}`,
+                  padding: '8px',
+                }}
+              >
+                <BoatifyButton
+                  value="Details"
+                  type={ButtonType.button}
+                  classModifier="boatify-button--details"
+                  onClick={async () =>
+                    BoatifyGoTo(`/details/reservation/${reservation.id}`)
+                  }
+                />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </section>
     <section className="my-reservations">
       <header className="my-reservations__header">
         <h2 className="my-reservations__heading-text">{Captions.MY_RESERVATIONS}</h2>

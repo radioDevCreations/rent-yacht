@@ -40,6 +40,26 @@
   width: 100%;
 }
 
+.my-boats-reservations {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 100px;
+}
+.my-boats-reservations__header {
+  max-width: 1000px;
+  width: 100%;
+  padding: 20px 10px;
+}
+.my-boats-reservations__heading-text {
+  font-size: $fontSize18px;
+}
+.my-boats-reservations__table {
+  max-width: 1000px;
+  width: 100%;
+}
+
 
 .boatify-button--details {
   width: 100%;

@@ -13,6 +13,7 @@ namespace boatifyApi.Services
     {
         ReservationDto GetById(int id);
         IEnumerable<ReservationDto> GetByUserId(int userId);
+        IEnumerable<ReservationDto> GetByUserIdAllBoatsReservations(int userId);
         PagedResult<ReservationDto> GetAll(ReservationQuery query);
         int Create(CreateReservationDto dto);
         void Update(int id, UpdateReservationDto dto);
@@ -88,6 +89,25 @@ namespace boatifyApi.Services
                .Include(r => r.ReservationStatus)
                .ToList()
                .FindAll(r => r.UserId == userId);
+
+            if (reservations is null)
+                throw new NotFoundException("Reservations not found");
+
+            var reservationDtos = _mapper.Map<List<ReservationDto>>(reservations);
+
+            return reservationDtos;
+        }
+
+        public IEnumerable<ReservationDto> GetByUserIdAllBoatsReservations(int userId)
+        {
+            var reservations = _dbContext
+               .Reservations
+               .Include(r => r.User)
+               .Include(r => r.Boat)
+               .Include(r => r.ReservationTime)
+               .Include(r => r.ReservationStatus)
+               .ToList()
+               .FindAll(r => r.Boat.CreatedById == userId);
 
             if (reservations is null)
                 throw new NotFoundException("Reservations not found");

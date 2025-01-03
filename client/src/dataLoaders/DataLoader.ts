@@ -110,7 +110,7 @@ abstract class DataLoader {
       .post(BoatifyApiURL(`reservation`), data, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then((response) => response.data)
+      .then((response) => response.data.reservationId)
       .catch((error) => {
         console.error(error);
         throw error;
@@ -129,6 +129,21 @@ abstract class DataLoader {
     this.isTokenValid(token);
     return await axiosInstance
       .get(BoatifyApiURL(`reservation/my-reservations`), {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error(error);
+        throw error;
+      });
+  };
+
+  static selectMyBoatsReservations = async (
+    token: string | null
+  ): Promise<any> => {
+    this.isTokenValid(token);
+    return await axiosInstance
+      .get(BoatifyApiURL(`reservation/my-boats-reservations`), {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => response.data)

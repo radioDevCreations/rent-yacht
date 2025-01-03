@@ -39,6 +39,19 @@ namespace boatifyApi.Controllers
             return Ok(reservations);
         }
 
+        [Authorize]
+        [HttpGet("my-boats-reservations")]
+        public ActionResult<IEnumerable<ReservationDto>> GetByUserIdAllBoatsReservations()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (userId == null)
+                throw new BadRequestException("Unauthorized user");
+
+            var reservations = _reservationService.GetByUserIdAllBoatsReservations(int.Parse(userId));
+            return Ok(reservations);
+        }
+
         [HttpGet("{id}")]
         public ActionResult<ReservationDto> GetById(int id)
         {
@@ -58,7 +71,7 @@ namespace boatifyApi.Controllers
             dto.UserId = int.Parse(userId);
 
             var reservationId = _reservationService.Create(dto);
-            return Created($"api/reservation/{reservationId}", null);
+            return Created($"api/reservation/{reservationId}", new { ReservationId = reservationId });
         }
 
         [Authorize]

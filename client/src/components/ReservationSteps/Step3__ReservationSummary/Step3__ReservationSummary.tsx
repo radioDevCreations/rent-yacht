@@ -1,16 +1,14 @@
 import ButtonType from '@/utilities/ButtonType';
 import './Step3__ReservationSummary.scss';
 import BoatifyButton from '@/boatify-components/BoatifyButton/BoatifyButton';
-import { useEffect, useState } from 'react';
-import SortDirection from '@/utilities/SortDirection';
+import { useState } from 'react';
 import DataLoader from '@/dataLoaders/DataLoader';
 import { useDispatch, useSelector } from 'react-redux';
 import Captions from '@/captions/captions';
 import { SystemBoolean } from '@/utilities/System';
 import {
-  setStartDate,
-  setEndDate,
   setReservationPage,
+  setNewReservationId,
 } from '@/redux/slices/reservationSlice';
 import BoatifyDateOperations from '@/utilities/BoatifyDateOperations';
 import { FaArrowRight } from 'react-icons/fa';
@@ -31,8 +29,6 @@ const Step3__ReservationSummary = (boat: any) => {
       setLoading(SystemBoolean.True);
       setError(null);
 
-      console.log(reservationState.new_ReservationData)
-
       const response = await DataLoader.createReservation(token, {
         boatId: reservationState.new_ReservationData.boatId,
         startDate: reservationState.new_ReservationData.startDate,
@@ -41,6 +37,11 @@ const Step3__ReservationSummary = (boat: any) => {
         status:
           reservationState.new_ReservationData.reservationStatus,
       });
+
+      console.log('reservation id: ' + response)
+      dispatch(setNewReservationId(response));
+      console.log('new reservation id: ' + reservationState.new_ReservationData.reservationId,)
+
       nextReservationPage();
     } catch (err: any) {
       setError(err.message || 'Failed to create reservation');

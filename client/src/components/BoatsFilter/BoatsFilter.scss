@@ -22,6 +22,12 @@
   font-weight: 700;
   font-size: $fontSize18px;
   color: $royalBlue;
+  cursor: pointer;
+  &.selected {
+    border-color: $royalBlue;
+    background-color: $royalBlue;
+    color: $white;
+  }
 }
 .filter__type-icon {
   font-size: $fontSize26px;

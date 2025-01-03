@@ -1,3 +1,4 @@
+import BoatType from '@/utilities/BoatTypes';
 import { SystemBoolean } from '@/utilities/System';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
@@ -8,6 +9,7 @@ const initialState = {
   priceFrom: 0,
   priceTo: 0,
   harbourName: "",
+  type: BoatType.All,
 };
 
 const filterSlice = createSlice({
@@ -50,9 +52,15 @@ const filterSlice = createSlice({
         isLoading: action.payload,
       };
     },
+    setType: (state, action: PayloadAction<BoatType>) => {
+      return {
+        ...state,
+        type: action.payload,
+      };
+    },
   },
 });
 
-export const { setIsLoading, setSearchedPhrase, setPassengersFilter, setPriceFrom, setPriceTo, setHarbourName } =
+export const { setIsLoading, setSearchedPhrase, setPassengersFilter, setPriceFrom, setPriceTo, setHarbourName, setType } =
   filterSlice.actions;
 export default filterSlice.reducer;

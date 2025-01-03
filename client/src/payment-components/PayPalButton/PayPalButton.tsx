@@ -8,7 +8,7 @@ import Reservation from '@/models/Reservation';
 import Captions from '@/captions/captions';
 
 interface PayPalButtonProps {
-  reservationId?: number;
+  reservationId?: number | null;
 }
 
 const PayPalButton: React.FC<PayPalButtonProps> = ({ reservationId }) => {

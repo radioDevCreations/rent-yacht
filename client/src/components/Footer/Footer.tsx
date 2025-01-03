@@ -1,8 +1,21 @@
 import LinkType from '@/utilities/LinkType';
 import './Footer.scss';
 import IMAGE from '../../../public/links';
+import Image from 'next/image';
 
-const FOOTER_ITEMS = {
+interface FooterItem {
+  name: string;
+  type: LinkType;
+  src?: string;
+  alt?: string;
+  href?: string;
+}
+
+const FOOTER_ITEMS: {
+  column1: FooterItem[];
+  column2: FooterItem[];
+  column3: FooterItem[];
+} = {
   column1: [
     {
       name: 'Footer Item 1',
@@ -33,37 +46,46 @@ const FOOTER_ITEMS = {
   ],
 };
 
-const Footer = () => {
+const Footer: React.FC = () => {
   const footerItemClass = 'footer-links__item';
   const footerImageClass = 'footer-images__item';
+
   return (
     <footer className="footer">
       <div className="footer-images">
         <ul className="footer-images__row">
-          {FOOTER_ITEMS.column1.map((item) => (
-            <img
-              key={item.name}
-              className={footerImageClass}
-              src={item.src}
-              alt={item.alts}
-            />
-          ))}
+          {FOOTER_ITEMS.column1.map((item) =>
+            item.type === LinkType.image && item.src ? (
+              <Image
+                width={64}
+                height={64}
+                key={item.name}
+                className={footerImageClass}
+                src={item.src}
+                alt={item.alt || 'Footer Image'}
+              />
+            ) : null
+          )}
         </ul>
       </div>
       <div className="footer-links">
         <ul className="footer-links__col footer-links__col2">
-          {FOOTER_ITEMS.column2.map((item) => (
-            <li key={item.name} className={footerItemClass}>
-              {item.name}
-            </li>
-          ))}
+          {FOOTER_ITEMS.column2.map((item) =>
+            item.type === LinkType.link && item.href ? (
+              <li key={item.name} className={footerItemClass}>
+                <a href={item.href}>{item.name}</a>
+              </li>
+            ) : null
+          )}
         </ul>
         <ul className="footer-links__col footer-links__col3">
-          {FOOTER_ITEMS.column3.map((item) => (
-            <li key={item.name} className={footerItemClass}>
-              {item.name}
-            </li>
-          ))}
+          {FOOTER_ITEMS.column3.map((item) =>
+            item.type === LinkType.link && item.href ? (
+              <li key={item.name} className={footerItemClass}>
+                <a href={item.href}>{item.name}</a>
+              </li>
+            ) : null
+          )}
         </ul>
       </div>
     </footer>
