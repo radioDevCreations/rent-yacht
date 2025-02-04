@@ -14,6 +14,7 @@ import BoatifyDatePicker from '@/boatify-components/BoatifyDatePicker/BoatifyDat
 import moment from 'moment';
 import DataLoader from '@/dataLoaders/DataLoader';
 import { BoatifyGoTo } from '@/utilities/BoatifyGoTo';
+import BoatifyInputVariant from '@/boatify-components/BoatifyInput/BoatifyInputVariant';
 
 const REGISTER_PAGES_NUMBER = 4;
 
@@ -98,6 +99,29 @@ const RegisterForm = () => {
     Role.Shipowner
   ];
 
+  const RoleTranslation: Record<Role, Record<string, string>> = {
+    [Role.Client]: {
+      en: "Client",
+      pl: "Klient"
+    },
+    [Role.Shipowner]: {
+      en: "Shipowner",
+      pl: "Armator"
+    },
+    [Role.Administrator]: {
+      en: "Administrator",
+      pl: "Administrator"
+    },
+    [Role.Friend]: {
+      en: "Friend",
+      pl: "Wsparcie"
+    }
+  };
+
+  function translateRole(role: Role, lang: string): string {
+    return RoleTranslation[role][lang] || RoleTranslation[role]["en"];
+  }
+
   return (
     <form className="register" onSubmit={handleSubmit}>
       <figure className="profile">
@@ -114,16 +138,16 @@ const RegisterForm = () => {
         {pageNumber === 1 &&
         <div className="page">
           <BoatifyInput
-            label="First Name"
-            placeholder="First Name"
+            label="Imię"
+            placeholder="Imię"
             type={InputType.text}
             onChange={(event: ChangeEvent<HTMLInputElement>) =>
               setFirstName(event.target.value)
             }
           />
           <BoatifyInput
-            label="Surname"
-            placeholder="Surname"
+            label="Nazwisko"
+            placeholder="Nazwisko"
             type={InputType.text}
             onChange={(event: ChangeEvent<HTMLInputElement>) =>
               setSurname(event.target.value)
@@ -141,14 +165,19 @@ const RegisterForm = () => {
             }
           />
           <BoatifyPicklist 
-            label={'Role'} 
-            options={roleOptions.map((role: Role) => ({ label: role, value: role }))} 
-            value={role || ''}
+            label={'Rola'} 
+            options={roleOptions.map((role: Role) => ({ label: translateRole(role, 'pl'), value: role }))} 
+            value={translateRole(role as Role, 'pl') || ''}
             onChange={handleRoleChange}
           />
         </div>}
         {pageNumber === 3 &&
         <div className="page page--long">
+          <label
+          className="input__tag"
+          >
+            Data urodzenia
+          </label>
           <BoatifyDatePicker
               selectedDate={dateOfBirth}
               onDateChange={(date: Date | null) => {
@@ -158,16 +187,16 @@ const RegisterForm = () => {
         {pageNumber === 4 &&
         <div className="page">
           <BoatifyInput
-            label="Password"
-            placeholder="Password"
+            label="Hasło"
+            placeholder="Hasło"
             type={InputType.password}
             onChange={(event: ChangeEvent<HTMLInputElement>) =>
               setNewPassword(event.target.value)
             }
           />
           <BoatifyInput
-            label="Confirm Password"
-            placeholder="Confirm Password"
+            label="Potwierdź hasło"
+            placeholder="Potwierdź hasło"
             type={InputType.password}
             onChange={(event: ChangeEvent<HTMLInputElement>) =>
               setConfirmPassword(event.target.value)
@@ -177,7 +206,7 @@ const RegisterForm = () => {
       </section>
       <section className={buttonSectionClass}>
         <BoatifyButton
-          value="Register"
+          value="Zarejestruj"
           type={ButtonType.submit}
           classModifier="boatify-button--register"
           disabled={pageNumber !== 4}

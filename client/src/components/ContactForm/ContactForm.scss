@@ -1,4 +1,18 @@
+@import '../../styles/theme.scss';
+
+.contact__heading{
+  font-size: $fontSize32px;
+  font-weight: $fontWeightBold;
+  color: $oxfordBlue;
+  padding-bottom: 20px;
+}
+
+
 .contact {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   margin: 100px 0 200px;
 }
 

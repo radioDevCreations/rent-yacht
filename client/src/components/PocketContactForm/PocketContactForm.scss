@@ -1,8 +1,18 @@
+@import '../../styles/theme.scss';
+
 .contact {
   @apply flex flex-col justify-center items-center;
   margin: 100px 0 200px;
   padding-top: 76px;
 }
+
+.contact__heading{
+  font-size: $fontSize32px;
+  font-weight: $fontWeightBold;
+  color: $white;
+  padding-bottom: 20px;
+}
+
 
 .contact__inputs,
 .contact__button-section {

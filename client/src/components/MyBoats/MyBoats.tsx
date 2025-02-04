@@ -48,7 +48,7 @@ const MyBoats: FC = () => {
       <header className="my-boats__header">
         <h2 className="my-boats__heading-text">{Captions.MY_BOATS}</h2>
         <BoatifyButton
-            value="Add Boat"
+            value="Dodaj łódź"
             type={ButtonType.button}
             classModifier="boatify-button--stepper-next"
             onClick={() => BoatifyGoTo('/new-boat')}
@@ -64,7 +64,7 @@ const MyBoats: FC = () => {
                 padding: '8px',
               }}
             >
-              Name
+              Nazwa
             </th>
             <th
               style={{
@@ -72,7 +72,7 @@ const MyBoats: FC = () => {
                 padding: '8px',
               }}
             >
-              Description
+              Opis
             </th>
             <th
               style={{
@@ -88,7 +88,7 @@ const MyBoats: FC = () => {
                 padding: '8px',
               }}
             >
-              Type
+              Typ
             </th>
             <th
               style={{
@@ -96,7 +96,7 @@ const MyBoats: FC = () => {
                 padding: '8px',
               }}
             >
-              Price Per Day
+              Cena za dzień
             </th>
             <th
               style={{
@@ -104,7 +104,7 @@ const MyBoats: FC = () => {
                 padding: '8px',
               }}
             >
-              Harbour Name
+              Nazwa portu
             </th>
             <th
               style={{
@@ -112,7 +112,7 @@ const MyBoats: FC = () => {
                 padding: '8px',
               }}
             >
-              Details
+              Szczegóły
             </th>
           </tr>
         </thead>
@@ -174,7 +174,7 @@ const MyBoats: FC = () => {
                 }}
               >
                 <BoatifyButton
-                  value="Details"
+                  value="Szczegóły"
                   type={ButtonType.button}
                   classModifier="boatify-button--details"
                   onClick={() => BoatifyGoTo(`/details/boat/${boat.id}`)}

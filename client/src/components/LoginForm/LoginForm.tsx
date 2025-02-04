@@ -63,30 +63,30 @@ const LoginForm = () => {
         <input
           className="input__field"
           type="email"
-          placeholder="Login"
+          placeholder="Email"
           value={email}
           onChange={handleEmailChange}
         />
       </div>
       <div className="input">
-        <span className="input__label">Password</span>
+        <span className="input__label">Hasło</span>
         <input
           className="input__field"
           type="password"
-          placeholder="Password"
+          placeholder="Hasło"
           value={password}
           onChange={handlePasswordChange}
         />
       </div>
       <section className="login__button-section">
         <BoatifyButton
-          value="Log In"
+          value="Zaloguj się"
           type={ButtonType.submit}
           classModifier="boatify-button--login"
         />
       </section>
       <Link className="login__forgot-password" href="/forgot-password">
-        Forgot password?
+        Zapomniałeś/aś hasła?
       </Link>
     </form>
   );

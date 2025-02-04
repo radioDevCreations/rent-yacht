@@ -248,7 +248,7 @@ const MyReservations: FC = () => {
         </tbody>
       </table>
     </section>}
-    {currentUserRole === Role.Client && <section className="my-reservations">
+    <section className="my-reservations">
       <header className="my-reservations__header">
         <h2 className="my-reservations__heading-text">{Captions.MY_RESERVATIONS}</h2>
       </header>
@@ -399,7 +399,7 @@ const MyReservations: FC = () => {
           ))}
         </tbody>
       </table>
-    </section>}
+    </section>
     {currentUserRole === Role.Shipowner && selfReservations.length && <section className="my-self-reservations">
     <header className="my-self-reservations__header">
       <h2 className="my-self-reservations__heading-text">{Captions.SELF_RESERVATIONS}</h2>

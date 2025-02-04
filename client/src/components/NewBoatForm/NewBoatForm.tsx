@@ -173,14 +173,14 @@ const NewBoatWithHarbour: React.FC = () => {
         <SuccessReconnect message="Successfully added Boat" url="my-boats" />
       ) : !selectedHarbour ? (
         <div className="harbour-picker">
-          <h2 className="harbout-picker__title">Select a Harbour</h2>
+          <h2 className="harbout-picker__title">Wybierz port</h2>
           <BoatifyInput
             id="search"
             name="search"
-            label="Search"
+            label="Szukaj"
             type={InputType.text}
             value={searchQuery}
-            placeholder="Search by name, city, or street"
+            placeholder="Szukaj po nazwie, miejscowości, ulicy"
             onChange={handleSearchChange}
             variant={BoatifyInputVariant.light}
             isLongInput
@@ -202,10 +202,10 @@ const NewBoatWithHarbour: React.FC = () => {
         <div className="new-boat-wrapper">
           <div className="harbour-selected">
             <h2 className="harbout-selected__title">
-              Selected Harbour: {selectedHarbour.name}
+              Wybrany port: {selectedHarbour.name}
             </h2>
             <BoatifyButton
-              value="Go Back to Harbour Selection"
+              value="Wróć do wyboru Portu"
               type={ButtonType.button}
               variant={BoatifyButtonVariant.standard}
               onClick={handleGoBack}
@@ -215,17 +215,17 @@ const NewBoatWithHarbour: React.FC = () => {
             <BoatifyInput
               id="name"
               name="name"
-              label="Name"
+              label="Nazwa"
               type={InputType.text}
               value={formData.name}
-              placeholder="Enter boat name"
+              placeholder="Wprowadź nazwę łodzi"
               onChange={handleFormChange}
               variant={BoatifyInputVariant.light}
             />
             <BoatifyTextarea
               name="description"
-              label="Description"
-              placeholder="Enter description"
+              label="Opis"
+              placeholder="Wprowadź opis"
               onChange={handleFormChange}
               variant={BoatifyTextareaVariant.light}
             />
@@ -235,51 +235,51 @@ const NewBoatWithHarbour: React.FC = () => {
               label="Model"
               type={InputType.text}
               value={formData.model}
-              placeholder="Enter boat model"
+              placeholder="Wprowadź model"
               onChange={handleFormChange}
               variant={BoatifyInputVariant.light}
             />
             <BoatifyInput
               id="type"
               name="type"
-              label="Type"
+              label="Typ"
               type={InputType.text}
               value={formData.type}
-              placeholder="Enter boat type"
+              placeholder="Wprowadź typ łodzi"
               onChange={handleFormChange}
               variant={BoatifyInputVariant.light}
             />
             <BoatifyInput
               id="pricePerDay"
               name="pricePerDay"
-              label="Price Per Day"
+              label="Cena za dzień"
               type={InputType.number}
               value={formData.pricePerDay.toString()}
-              placeholder="Enter price per day"
+              placeholder="Wprowadź cenę za dzień"
               onChange={handleFormChange}
               variant={BoatifyInputVariant.light}
             />
             <BoatifyInput
               id="passengers"
               name="passengers"
-              label="Passengers"
+              label="Liczba pasażerów"
               type={InputType.number}
               value={formData.passengers.toString()}
-              placeholder="Enter price per day"
+              placeholder="Wprowadź liczbę pasażerów"
               onChange={handleFormChange}
               variant={BoatifyInputVariant.light}
             />
             <BoatifyInput
               id="mainImage"
               name="mainImage"
-              label="Main Image"
+              label="Zdjęcie"
               type={InputType.file}
               onChange={handleFileChange}
               variant={BoatifyInputVariant.light}
             />
             <div className="spacer"></div>
             <BoatifyButton
-              value={isSubmitting ? 'Submitting...' : 'Create Boat'}
+              value={isSubmitting ? 'Dodawanie...' : 'Dodaj łódź'}
               type={ButtonType.submit}
               disabled={isSubmitting}
               variant={BoatifyButtonVariant.standard}

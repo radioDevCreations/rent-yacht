@@ -31,8 +31,8 @@ const NAVIGATION_ITEMS_LOGGED: ProfileDropdownItem[] = [
 ];
 
 const NAVIGATION_ITEMS_GUEST: ProfileDropdownItem[] = [
-  { name: 'Login', href: '/login', customClassName: 'transition-delay1' },
-  { name: 'Register', href: '/register', customClassName: 'transition-delay2' },
+  { name: Captions.LOGIN, href: '/login', customClassName: 'transition-delay1' },
+  { name: Captions.REGISTER, href: '/register', customClassName: 'transition-delay2' },
 ];
 
 const ProfileDropdown: React.FC<ProfileDropdownProps> = ({

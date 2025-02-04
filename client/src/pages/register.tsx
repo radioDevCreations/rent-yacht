@@ -4,8 +4,8 @@ import RegisterForm from '../components/RegisterForm/RegisterForm';
 import BoatifyLinkProps from '@/utilities/BoatifyLinkProps';
 
 const RegisterPage = ({ data }: any) => {
-  const problem = 'Already have an account? ';
-  const linkProps: BoatifyLinkProps = { href: '/login', linkText: 'Login' };
+  const problem = 'Masz już konto? ';
+  const linkProps: BoatifyLinkProps = { href: '/login', linkText: 'Zaloguj się' };
   return (
     <SingleFormLayout problem={problem} link={linkProps}>
       <section className="register-page">

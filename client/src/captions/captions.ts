@@ -10,6 +10,8 @@ enum Captions {
   PAGE_NAME_MY_RESERVATIONS = 'Moje Rezerwacje',
   PAGE_NAME_MY_BOATS = 'Moje Łodzie',
   LOGOUT = 'Wyloguj',
+  LOGIN = 'Zaloguj się',
+  REGISTER = 'Zarejestruj się',
 
   MAP_LINK_TEXT1 = 'Wykorzystaj mapę portów aby zaplanować idealne wakacje',
   MAP_LINK_TEXT2 = 'Otwórz mapę',
@@ -21,7 +23,7 @@ enum Captions {
   PLN = 'PLN',
   Step1Label = 'Wybrana łódź',
   Step2Label = 'Wybierz okres',
-  Step3Label = 'Podsumowanie rezerwacji',
+  Step3Label = 'Podsumowanie',
   Step4Label = 'Płatność',
   Next = 'Dalej',
   PROFILE_EMAIL = 'Email: ',

@@ -109,9 +109,9 @@ const Step3__ReservationSummary = (boat: any) => {
         </div>
       </div>
       <div className="reservation-summary__total-price total-price">
-        <span className="total-price__price-per-day">600.00 PLN</span>
+        <span className="total-price__price-per-day">300.00 PLN</span>
         <span className="total-price__X"> {Captions.X} </span>
-        <span className="total-price__days-count">7 days</span>
+        <span className="total-price__days-count">3 days</span>
         <span className="total-price__equals-sign">
           {' '}
           {Captions.EqualsSign}{' '}

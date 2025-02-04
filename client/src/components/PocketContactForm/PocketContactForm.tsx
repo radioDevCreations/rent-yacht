@@ -72,6 +72,8 @@ const PocketContactForm = () => {
         value={process.env.CONTACT_KEY}
       />
 
+      <h1 className='contact__heading'>Skontaktuj się z nami</h1>
+
       <section className="contact__inputs">
         <div className="contact__inputs-column contact__inputs-column--first">
           {firstColumn.map((input) => {

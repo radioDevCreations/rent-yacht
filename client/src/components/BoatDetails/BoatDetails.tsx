@@ -105,8 +105,8 @@ const BoatDetails: React.FC<BoatDetailsProps> = ({ boatId }) => {
                 <span className="boat-details__field-text">{harbour?.name}</span>
             </div>
             <div className="boat-details__buttons">
-                {currentUserRole === Role.Client &&<BoatifyButton
-                    value="Rent this boat"
+                <BoatifyButton
+                    value="Zarezerwuj"
                     type={ButtonType.button}
                     onClick={() => {
                       if(!!token) BoatifyGoTo(`/reservation/${boatId}`);
@@ -114,9 +114,9 @@ const BoatDetails: React.FC<BoatDetailsProps> = ({ boatId }) => {
                     }}
                     classModifier='boatify-button__boat-details'
                     isLongButton
-                />}
+                />
                 {currentUserRole === Role.Shipowner && <BoatifyButton
-                    value="Self reserve"
+                    value="Wyłącz dni"
                     type={ButtonType.button}
                     onClick={() => {
                       if(!!token) BoatifyGoTo(`/reservation/self/${boatId}`);
