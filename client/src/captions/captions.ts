@@ -57,6 +57,16 @@ enum Captions {
   CONTACT_MESSAGE = 'Wiadomość',
   CONTACT_MESSAGE_TYPE_HERE = 'Pisz...',
   CONTACT_SEND_MESSAGE = 'Wyślij',
+  RESERVATION_STATUS_HEADING = 'Status Rezerwacji',
+  START_DATE_HEADING = 'Data Rozpoczęcia',
+  END_DATE_HEADING = 'Data Zakończenia',
+  DETAILS_HEADING = 'Szczegóły',
+  DETAILS_BUTTON = 'Szczegóły',
+  TOTAL_PRICE_HEADING = 'Cena Całkowita',
+  BOAT_ID_HEADING = 'ID Łodzi',
+  DELETE_HEADING = 'Anuluj',
+  DELETE_BUTTON = 'Anuluj',
+  RENT_BUTTON = 'Zarezerwuj',
 }
 
 export default Captions;

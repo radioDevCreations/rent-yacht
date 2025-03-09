@@ -17,6 +17,9 @@ import { IoMdCloseCircleOutline } from 'react-icons/io';
 import BoatifyPopUp from '@/boatify-components/BoatifyPopUp/BoatifyPopUp';
 import Role from '@/utilities/Role';
 import User from '@/models/User';
+import { BoatifyPopupCommand__Cancel } from '@/boatify-components/BoatifyPopUp/Commands/BoatifyPopupCommand__Cancel';
+import { BoatifyPopupCommand__Confirm } from '@/boatify-components/BoatifyPopUp/Commands/BoatifyPopupCommand__Confirm';
+import { IBoatifyPopupCommand } from '@/boatify-components/BoatifyPopUp/Commands/IBoatifyPopupCommand';
 
 interface ReservationDetailsProps{
     reservationId: string;
@@ -32,6 +35,17 @@ const ReservationDetails: React.FC<ReservationDetailsProps> = ({ reservationId }
   const [isCancelPopupOpen, setIsCancelPopUpOpen] = useState<boolean>(SystemBoolean.False);
   const [currentUserRole, setCurrentUserRole] = useState<Role | null>(null);
   
+  const confirmCommand: IBoatifyPopupCommand = new BoatifyPopupCommand__Confirm(async () => {
+    await DataLoader.updateReservationStatus(sessionStorage.getItem("token"), {
+      reservationId: reservation?.id,
+      reservationStatus: ReservationStatus.Cancelled,
+    });
+    BoatifyWindowReload();
+  });
+  
+  const cancelCommand: IBoatifyPopupCommand = new BoatifyPopupCommand__Cancel(() => {
+    setIsCancelPopUpOpen(SystemBoolean.False);
+  });
 
   const token = sessionStorage.getItem('token');
 
@@ -170,11 +184,8 @@ const ReservationDetails: React.FC<ReservationDetailsProps> = ({ reservationId }
     <BoatifyPopUp 
     message='Are you sure that you want to cancel this reservation?'
     isOpen={isCancelPopupOpen} 
-    onConfirm={async () => {
-      await DataLoader.updateReservationStatus(sessionStorage.getItem('token'), {reservationId: reservation?.id, reservationStatus: ReservationStatus.Cancelled});
-      BoatifyWindowReload();
-    }} 
-    onCancel={() => setIsCancelPopUpOpen(SystemBoolean.False)}
+    confirmCommand={confirmCommand} 
+    cancelCommand={cancelCommand}
     />
     </>
   );

@@ -117,7 +117,7 @@ const MyReservations: FC = () => {
                 padding: '8px',
               }}
             >
-              Boat ID
+               {Captions.BOAT_ID_HEADING}
             </th>
             {/* <th
               style={{
@@ -133,7 +133,7 @@ const MyReservations: FC = () => {
                 padding: '8px',
               }}
             >
-              Total Price
+               {Captions.TOTAL_PRICE_HEADING}
             </th>
             <th
               style={{
@@ -141,7 +141,7 @@ const MyReservations: FC = () => {
                 padding: '8px',
               }}
             >
-              Reservation Status
+              {Captions.RESERVATION_STATUS_HEADING}
             </th>
             <th
               style={{
@@ -149,7 +149,7 @@ const MyReservations: FC = () => {
                 padding: '8px',
               }}
             >
-              Start Date
+               {Captions.START_DATE_HEADING}
             </th>
             <th
               style={{
@@ -157,7 +157,7 @@ const MyReservations: FC = () => {
                 padding: '8px',
               }}
             >
-              End Date
+               {Captions.END_DATE_HEADING}
             </th>
             <th
               style={{
@@ -165,7 +165,7 @@ const MyReservations: FC = () => {
                 padding: '8px',
               }}
             >
-              Details
+               {Captions.DETAILS_HEADING}
             </th>
           </tr>
         </thead>
@@ -235,7 +235,7 @@ const MyReservations: FC = () => {
                 }}
               >
                 <BoatifyButton
-                  value="Details"
+                  value={Captions.DETAILS_BUTTON}
                   type={ButtonType.button}
                   classModifier="boatify-button--details"
                   onClick={async () =>
@@ -269,7 +269,7 @@ const MyReservations: FC = () => {
                 padding: '8px',
               }}
             >
-              Boat ID
+               {Captions.BOAT_ID_HEADING}
             </th>
             {/* <th
               style={{
@@ -285,7 +285,7 @@ const MyReservations: FC = () => {
                 padding: '8px',
               }}
             >
-              Total Price
+               {Captions.TOTAL_PRICE_HEADING}
             </th>
             <th
               style={{
@@ -293,7 +293,7 @@ const MyReservations: FC = () => {
                 padding: '8px',
               }}
             >
-              Reservation Status
+               {Captions.RESERVATION_STATUS_HEADING}
             </th>
             <th
               style={{
@@ -301,7 +301,7 @@ const MyReservations: FC = () => {
                 padding: '8px',
               }}
             >
-              Start Date
+               {Captions.START_DATE_HEADING}
             </th>
             <th
               style={{
@@ -309,7 +309,7 @@ const MyReservations: FC = () => {
                 padding: '8px',
               }}
             >
-              End Date
+               {Captions.END_DATE_HEADING}
             </th>
             <th
               style={{
@@ -317,7 +317,7 @@ const MyReservations: FC = () => {
                 padding: '8px',
               }}
             >
-              Details
+               {Captions.DETAILS_HEADING}
             </th>
           </tr>
         </thead>
@@ -387,7 +387,7 @@ const MyReservations: FC = () => {
                 }}
               >
                 <BoatifyButton
-                  value="Details"
+                  value={Captions.DETAILS_BUTTON}
                   type={ButtonType.button}
                   classModifier="boatify-button--details"
                   onClick={async () =>
@@ -421,7 +421,7 @@ const MyReservations: FC = () => {
               padding: '8px',
             }}
           >
-            Boat ID
+             {Captions.BOAT_ID_HEADING}
           </th>
           <th
             style={{
@@ -429,7 +429,7 @@ const MyReservations: FC = () => {
               padding: '8px',
             }}
           >
-            Start Date
+             {Captions.START_DATE_HEADING}
           </th>
           <th
             style={{
@@ -437,7 +437,7 @@ const MyReservations: FC = () => {
               padding: '8px',
             }}
           >
-            End Date
+             {Captions.END_DATE_HEADING}
           </th>
           <th
             style={{
@@ -445,7 +445,7 @@ const MyReservations: FC = () => {
               padding: '8px',
             }}
           >
-            Delete
+             {Captions.DELETE_HEADING}
           </th>
         </tr>
       </thead>
@@ -491,7 +491,7 @@ const MyReservations: FC = () => {
               }}
             >
               <BoatifyButton
-                value="Delete"
+                value={Captions.DELETE_BUTTON}
                 type={ButtonType.button}
                 classModifier="boatify-button--details"
                 onClick={async () => {

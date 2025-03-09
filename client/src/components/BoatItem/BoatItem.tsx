@@ -34,13 +34,13 @@ const BoatItem: FC<BoatItemProps> = ({ boat }) => {
       <div className="boat-item__featured-details"></div>
       <div className="boat-item__button-section">
         <BoatifyButton
-          value="Details"
+          value={Captions.DETAILS_BUTTON}
           type={ButtonType.button}
           classModifier="boatify-button--boat-item"
           onClick={() => BoatifyGoTo(`/details/boat/${boat.id}`)}
         />
         <BoatifyButton
-          value="Rent"
+          value={Captions.RENT_BUTTON}
           type={ButtonType.button}
           classModifier="boatify-button--boat-item"
           onClick={() => BoatifyGoTo(`/reservation/${boat.id}`)}

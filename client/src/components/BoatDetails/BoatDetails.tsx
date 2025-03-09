@@ -105,6 +105,7 @@ const BoatDetails: React.FC<BoatDetailsProps> = ({ boatId }) => {
                 <span className="boat-details__field-text">{harbour?.name}</span>
             </div>
             <div className="boat-details__buttons">
+              {currentUserRole === Role.Client &&
                 <BoatifyButton
                     value="Zarezerwuj"
                     type={ButtonType.button}
@@ -114,7 +115,7 @@ const BoatDetails: React.FC<BoatDetailsProps> = ({ boatId }) => {
                     }}
                     classModifier='boatify-button__boat-details'
                     isLongButton
-                />
+                />}
                 {currentUserRole === Role.Shipowner && <BoatifyButton
                     value="Wyłącz dni"
                     type={ButtonType.button}

@@ -1,27 +1,28 @@
-import React from 'react';
+import React from "react";
 import "./BoatifyPopUp.scss";
-import { IoMdCloseCircleOutline } from 'react-icons/io';
-import { BoatifyWindowReload } from '@/utilities/BoatifyGoTo';
-import ButtonType from '@/utilities/ButtonType';
-import BoatifyButton from '../BoatifyButton/BoatifyButton';
+import { IoMdCloseCircleOutline } from "react-icons/io";
+import { BoatifyWindowReload } from "@/utilities/BoatifyGoTo";
+import ButtonType from "@/utilities/ButtonType";
+import BoatifyButton from "../BoatifyButton/BoatifyButton";
+import { IBoatifyPopupCommand } from "./Commands/IBoatifyPopupCommand";
 
 interface BoatifyPopUpProps {
   message: string;
-  onConfirm: () => void;
-  onCancel: () => void;
+  confirmCommand: IBoatifyPopupCommand;
+  cancelCommand: IBoatifyPopupCommand;
   isOpen: boolean;
 }
 
 const BoatifyPopUp: React.FC<BoatifyPopUpProps> = ({
   message,
-  onConfirm,
-  onCancel,
+  confirmCommand,
+  cancelCommand,
   isOpen,
 }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="boatify-popup-overlay" onClick={onCancel}>
+    <div className="boatify-popup-overlay" onClick={() => cancelCommand.execute()}>
       <div
         className="boatify-popup-content"
         onClick={(e: React.MouseEvent) => e.stopPropagation()}
@@ -34,16 +35,8 @@ const BoatifyPopUp: React.FC<BoatifyPopUpProps> = ({
         </button>
         <p className="boatify-popup-message">{message}</p>
         <div className="boatify-popup-actions">
-        <BoatifyButton
-            value="Confirm"
-            type={ButtonType.button}
-            onClick={onConfirm}
-                />
-        <BoatifyButton
-            value="Cancel"
-            type={ButtonType.button}
-            onClick={onCancel}
-        />
+          <BoatifyButton value="Confirm" type={ButtonType.button} onClick={() => confirmCommand.execute()} />
+          <BoatifyButton value="Cancel" type={ButtonType.button} onClick={() => cancelCommand.execute()} />
         </div>
       </div>
     </div>
