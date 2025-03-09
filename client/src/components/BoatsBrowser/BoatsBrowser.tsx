@@ -20,13 +20,6 @@ const BoatsBrowser = () => {
       try {
         setLoading(SystemBoolean.True);
         setError(null);
-        // const response = await DataLoader.selectAllSpecificBoats({
-        //   pageNumber: 1,
-        //   pageSize: 10,
-        //   sortBy: 'Model',
-        //   sortDirection: SortDirection.ASC,
-        //   searchPhrase: 'test',
-        // });
         const response = await DataLoader.selectAllBoats();
         const data: Boat[] = response;
         setData(data);
