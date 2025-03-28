@@ -1,0 +1,21 @@
+@import 'src/styles/theme.scss';
+
+.details {
+  @apply flex flex-col justify-center items-center;
+  min-height: calc(100vh - 653px);
+  padding-top: 27px;
+  width: 100%;
+}
+
+.details__board {
+  @apply flex flex-col justify-between items-center;
+  width: 1000px;
+  min-height: 540px;
+  padding: 48px 128px;
+  background-color: $lightGray;
+  border-radius: 12px;
+}
+
+.button-section {
+  @apply flex flex-col;
+}

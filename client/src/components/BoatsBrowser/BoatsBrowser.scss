@@ -1,0 +1,19 @@
+@import '../../styles/theme.scss';
+
+.browser-container {
+  @apply flex justify-center;
+  margin-top: 20px;
+}
+.browser {
+  @apply flex justify-center;
+  width: calc(100% - 24px);
+  max-width: 1016px;
+  border-bottom: 1px solid $royalBlue;
+}
+.aside {
+  @apply flex flex-col;
+  padding: 8px;
+}
+.boats {
+  width: 1000px;
+}

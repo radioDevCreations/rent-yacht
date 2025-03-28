@@ -1,0 +1,15 @@
+@import '../../styles/styles.scss';
+@import '../../styles/theme.scss';
+
+.input {
+  @include app-input;
+  width: 200px;
+}
+
+.input-long {
+  @include app-input;
+}
+
+.radio {
+  @apply flex flex-row-reverse justify-start;
+}

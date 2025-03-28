@@ -1,0 +1,191 @@
+import BoatifyButton from '@/boatify-components/BoatifyButton/BoatifyButton';
+import './MyBoats.scss';
+import { FC, useEffect, useState } from 'react';
+import ButtonType from '@/utilities/ButtonType';
+import { BoatifyGoTo } from '@/utilities/BoatifyGoTo';
+import Boat from '@/models/Boat';
+import DataLoader from '@/dataLoaders/DataLoader';
+import { SystemBoolean } from '@/utilities/System';
+import BoatifyButtonVariant from '@/boatify-components/BoatifyButton/BoatifyButtonVariant';
+import Captions from '@/captions/captions';
+
+const TABLE_BORDER_COLOR = '#122c78';
+
+const MyBoats: FC = () => {
+  const [loading, setLoading] = useState<boolean>(SystemBoolean.True);
+  const [error, setError] = useState<string | null>(null);
+  const [boats, setBoats] = useState<Boat[]>([]);
+
+  useEffect(() => {
+    const fetchBoats = async () => {
+      try {
+        setLoading(SystemBoolean.True);
+        setError(null);
+        const token = sessionStorage.getItem('token');
+        const response = token && (await DataLoader.selectUserBoats(token));
+        const data: Boat[] = await response;
+        setBoats(data);
+      } catch (err: any) {
+        setError(err.message || 'Failed to fetch boats');
+      } finally {
+        setLoading(SystemBoolean.False);
+      }
+    };
+
+    fetchBoats();
+  }, []);
+
+  if (loading) {
+    return <div>Loading boats...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  return (
+    <section className="my-boats">
+      <header className="my-boats__header">
+        <h2 className="my-boats__heading-text">{Captions.MY_BOATS}</h2>
+        <BoatifyButton
+            value="Dodaj łódź"
+            type={ButtonType.button}
+            classModifier="boatify-button--stepper-next"
+            onClick={() => BoatifyGoTo('/new-boat')}
+            variant={BoatifyButtonVariant.orangeSTD}
+          />
+      </header>
+      <table className="my-boats__table">
+        <thead>
+          <tr>
+            <th
+              style={{
+                border: `1px solid ${TABLE_BORDER_COLOR}`,
+                padding: '8px',
+              }}
+            >
+              Nazwa
+            </th>
+            <th
+              style={{
+                border: `1px solid ${TABLE_BORDER_COLOR}`,
+                padding: '8px',
+              }}
+            >
+              Opis
+            </th>
+            <th
+              style={{
+                border: `1px solid ${TABLE_BORDER_COLOR}`,
+                padding: '8px',
+              }}
+            >
+              Model
+            </th>
+            <th
+              style={{
+                border: `1px solid ${TABLE_BORDER_COLOR}`,
+                padding: '8px',
+              }}
+            >
+              Typ
+            </th>
+            <th
+              style={{
+                border: `1px solid ${TABLE_BORDER_COLOR}`,
+                padding: '8px',
+              }}
+            >
+              Cena za dzień
+            </th>
+            <th
+              style={{
+                border: `1px solid ${TABLE_BORDER_COLOR}`,
+                padding: '8px',
+              }}
+            >
+              Nazwa portu
+            </th>
+            <th
+              style={{
+                border: `1px solid ${TABLE_BORDER_COLOR}`,
+                padding: '8px',
+              }}
+            >
+              Szczegóły
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {boats.map((boat) => (
+            <tr key={boat.id}>
+              <td
+                style={{
+                  border: `1px solid ${TABLE_BORDER_COLOR}`,
+                  padding: '8px',
+                }}
+              >
+                {boat.name}
+              </td>
+              <td
+                style={{
+                  border: `1px solid ${TABLE_BORDER_COLOR}`,
+                  padding: '8px',
+                }}
+              >
+                {boat.description}
+              </td>
+              <td
+                style={{
+                  border: `1px solid ${TABLE_BORDER_COLOR}`,
+                  padding: '8px',
+                }}
+              >
+                {boat.model}
+              </td>
+              <td
+                style={{
+                  border: `1px solid ${TABLE_BORDER_COLOR}`,
+                  padding: '8px',
+                }}
+              >
+                {boat.type}
+              </td>
+              <td
+                style={{
+                  border: `1px solid ${TABLE_BORDER_COLOR}`,
+                  padding: '8px',
+                }}
+              >
+                ${boat?.pricePerDay?.toFixed(2)}
+              </td>
+              <td
+                style={{
+                  border: `1px solid ${TABLE_BORDER_COLOR}`,
+                  padding: '8px',
+                }}
+              >
+                {boat.harbourName || 'N/A'}
+              </td>
+              <td
+                style={{
+                  border: `1px solid ${TABLE_BORDER_COLOR}`,
+                  padding: '8px',
+                }}
+              >
+                <BoatifyButton
+                  value="Szczegóły"
+                  type={ButtonType.button}
+                  classModifier="boatify-button--details"
+                  onClick={() => BoatifyGoTo(`/details/boat/${boat.id}`)}
+                />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </section>
+  );
+};
+
+export default MyBoats;

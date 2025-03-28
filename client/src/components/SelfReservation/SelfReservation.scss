@@ -1,0 +1,57 @@
+@import '../../styles/theme.scss';
+
+.reservation {
+  display: flex;
+  flex-direction: column;
+}
+
+.time-and-price {
+  display: flex;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.self-reservation {
+  font-size: $fontSize22px;
+  padding-right: 20px;
+  color: $oxfordBlue;
+}
+
+.reservation-time-indicator--time {
+  @apply flex;
+  flex-direction: row;
+}
+
+.reservation-time__from-tile,
+.reservation-time__to-tile {
+  width: 48px;
+  height: 64px;
+  border: 1px solid $oxfordBlue;
+  border-radius: 5px;
+  box-shadow: 0px 2px 2px 0px rgb(112, 112, 112);
+  @apply flex flex-col justify-center items-center;
+  user-select: none;
+}
+
+.reservation-time__arrow {
+  width: 48px;
+  height: 64px;
+  @apply flex flex-col justify-center items-center;
+}
+
+.input-section {
+  display: flex;
+}
+
+.margin {
+  user-select: none;
+  content: ' ';
+  width: 24px;
+}
+
+.button-section {
+  padding: 12px 0;
+  display: flex;
+  flex-direction: row;
+  width: 520px;
+}

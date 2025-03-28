@@ -4,16 +4,29 @@ $UTOrange: #ff8600;
 $oxfordBlue: #101935;
 $uranianBlue: #a3d9ff;
 $gray: #7c7c7c;
+$middleGray: #b9b9b9;
+$darkGray: #303030;
 $lightGray: #f5f5f5;
 $royalBlue: #122c78;
 $russianViolet: #260b45;
+$white: #fff;
 //font sizes
 $fontSize12px: 12px;
 $fontSize14px: 14px;
 $fontSize16px: 16px;
+$fontSize18px: 18px;
 $fontSize22px: 22px;
 $fontSize24px: 24px;
 $fontSize26px: 26px;
+$fontSize32px: 32px;
+$fontSize40px: 40px;
+$fontSize64px: 64px;
+
+//font weights
+$fontWeightLight: 300;
+$fontWeightRegular: 400;
+$fontWeightMedium: 500;
+$fontWeightBold: 700;
 //margins
 $marginSize24px: 24px;
 $marginSize32px: 32px;
@@ -22,88 +35,253 @@ $paddingSize24px: 24px;
 $paddingSize32px: 32px;
 
 @mixin app-link {
-	color: $royalBlue;
-	text-decoration: none;
-	background: -webkit-gradient(
-			linear,
-			left top, right top,
-			from(rgba(100, 200, 200, 0)),
-			to(rgba(100, 200, 200, 0))
-		),
-		-webkit-gradient(linear, left top, right top, from($uranianBlue), to($oxfordBlue));
-	background: linear-gradient(
-			to right,
-			rgba(100, 200, 200, 0),
-			rgba(100, 200, 200, 0)
-		),
-		linear-gradient(to right, $uranianBlue, $oxfordBlue);
-	background-size: 100% 2px, 0 2px;
-	background-position: 100% 100%, 0 100%;
-	background-repeat: no-repeat;
-	-webkit-transition: background-size 0.3s;
-	transition: background-size 0.3s;
-	padding-bottom: 5px;
-	&:hover {
-		background-size: 0 3px, 100% 3px;
-	}
+  color: $royalBlue;
+  text-decoration: none;
+  background:
+    -webkit-gradient(
+      linear,
+      left top,
+      right top,
+      from(rgba(100, 200, 200, 0)),
+      to(rgba(100, 200, 200, 0))
+    ),
+    -webkit-gradient(
+        linear,
+        left top,
+        right top,
+        from($uranianBlue),
+        to($oxfordBlue)
+      );
+  background: linear-gradient(
+      to right,
+      rgba(100, 200, 200, 0),
+      rgba(100, 200, 200, 0)
+    ),
+    linear-gradient(to right, $uranianBlue, $oxfordBlue);
+  background-size:
+    100% 2px,
+    0 2px;
+  background-position:
+    100% 100%,
+    0 100%;
+  background-repeat: no-repeat;
+  -webkit-transition: background-size 0.3s;
+  transition: background-size 0.3s;
+  padding-bottom: 5px;
+  &:hover {
+    background-size:
+      0 3px,
+      100% 3px;
+  }
 }
 
 @mixin app-button {
-	color: $lightGray;
-	font-weight: 700;
-	background-color: $royalBlue;
-	padding: 10px 18px;
-	border-radius: 16px;
-	border: 1px solid $oxfordBlue;
-	&:active {
-		background-color: $russianViolet;
-	}
-	&:focus {
-		padding: 9px 18px;
-		border: 2px solid $uranianBlue;
-	}
+  height: 37px;
+  color: $lightGray;
+  font-weight: 700;
+  background-color: $royalBlue;
+  padding: 10px 18px;
+  border-radius: 16px;
+  border: 1px solid $oxfordBlue;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  &:active {
+    background-color: $russianViolet;
+  }
+  &:focus {
+    padding: 9px 17px;
+    border: 2px solid $uranianBlue;
+  }
+  &.boatify-button--orange {
+    background-color: $UTOrange;
+  }
+  &:disabled {
+    background-color: $gray;
+    color: $darkGray;
+    border: none;
+  }
+}
+
+@mixin app-file {
+  @apply flex flex-col;
+  width: 200px;
+  position: relative;
+  ::file-selector-button {
+    display: none;
+  }
+  .input__icon {
+    position: absolute;
+    top: 35px;
+    left: 12px;
+  }
+  .input__label {
+    font-weight: 700;
+    margin-bottom: 6px;
+    margin-left: 10px;
+  }
+  .input__field {
+    display: none;
+    cursor: pointer;
+  }
+  .input__text {
+    height: 39px;
+    color: $black;
+    margin-bottom: 16px;
+    padding: 9px 16px 9px 32px;
+    border: 1px solid $gray;
+    border-radius: 12px;
+    -webkit-box-shadow: 0px 0px 4px -2px rgba(16, 25, 53, 1);
+    box-shadow: 0px 0px 4px -2px rgba(16, 25, 53, 1);
+    overflow: hidden;
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+    &:active,
+    &:focus {
+      border: 2px solid $royalBlue;
+      padding: 9px 16px 9px 32px;
+    }
+    &::-webkit-input-placeholder {
+      color: $gray;
+    }
+    &::-moz-placeholder {
+      color: $gray;
+    }
+    &:-ms-input-placeholder {
+      color: $gray;
+    }
+    &::-ms-input-placeholder {
+      color: $gray;
+    }
+    &::placeholder {
+      color: $gray;
+    }
+  }
+}
+
+@mixin app-textarea {
+  @apply flex flex-col;
+  .textarea__label {
+    font-weight: 700;
+    margin-bottom: 6px;
+    margin-left: 10px;
+  }
+  .textarea__label--dark {
+    color: $white;
+  }
+  .textarea__field {
+    min-height: 200px;
+    color: $black;
+    margin-bottom: 16px;
+    padding: 10px 18px;
+    border: 1px solid $gray;
+    border-radius: 12px;
+    -webkit-box-shadow: 0px 0px 4px -2px rgba(16, 25, 53, 1);
+    box-shadow: 0px 0px 4px -2px rgba(16, 25, 53, 1);
+    &:active,
+    &:focus {
+      border: 2px solid $royalBlue;
+      padding: 9px 17px;
+    }
+    &::-webkit-input-placeholder {
+      color: $gray;
+    }
+    &::-moz-placeholder {
+      color: $gray;
+    }
+    &:-ms-input-placeholder {
+      color: $gray;
+    }
+    &::-ms-input-placeholder {
+      color: $gray;
+    }
+    &::placeholder {
+      color: $gray;
+    }
+  }
+  .textarea__field--dark {
+    min-height: 136px;
+  }
 }
 
 @mixin app-input {
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-orient: vertical;
-	-webkit-box-direction: normal;
-	-ms-flex-direction: column;
-	flex-direction: column;
-	.input__label {
-		font-weight: 700;
-		margin-bottom: 6px;
-		margin-left: 10px;
-	}
-	.input__field {
-		color: $black;
-		margin-bottom: 16px;
-		padding: 10px 18px;
-		border: 1px solid $gray;
-		border-radius: 12px;
-		-webkit-box-shadow: 0px 0px 4px -2px rgba(16, 25, 53, 1);
-		box-shadow: 0px 0px 4px -2px rgba(16, 25, 53, 1);
-		&:active,
-		&:focus {
-			border: 2px solid $royalBlue;
-			padding: 9px 18px;
-		}
-		&::-webkit-input-placeholder {
-			color: $gray;
-		}
-		&::-moz-placeholder {
-			color: $gray;
-		}
-		&:-ms-input-placeholder {
-			color: $gray;
-		}
-		&::-ms-input-placeholder {
-			color: $gray;
-		}
-		&::placeholder {
-			color: $gray;
-		}
-	}
+  @apply flex flex-col;
+  .input__label {
+    font-weight: 700;
+    margin-bottom: 6px;
+    margin-left: 10px;
+  }
+  .input__label--dark {
+    color: $white;
+  }
+  .input__field {
+    color: $black;
+    margin-bottom: 16px;
+    padding: 9px 18px;
+    border: 1px solid $gray;
+    border-radius: 12px;
+    -webkit-box-shadow: 0px 0px 4px -2px rgba(16, 25, 53, 1);
+    box-shadow: 0px 0px 4px -2px rgba(16, 25, 53, 1);
+    &:active,
+    &:focus {
+      border: 2px solid $royalBlue;
+      padding: 8px 17px;
+    }
+    &::-webkit-input-placeholder {
+      color: $gray;
+    }
+    &::-moz-placeholder {
+      color: $gray;
+    }
+    &:-ms-input-placeholder {
+      color: $gray;
+    }
+    &::-ms-input-placeholder {
+      color: $gray;
+    }
+    &::placeholder {
+      color: $gray;
+    }
+  }
 }
+
+@mixin form-button-section {
+  z-index: 2;
+  -webkit-transition: transform 0.6s ease-out;
+  -webkit-transition: -webkit-transform 0.6s ease-out;
+  transition: -webkit-transform 0.6s ease-out;
+  transition: transform 0.6s ease-out;
+  transition:
+    transform 0.6s ease-out,
+    -webkit-transform 0.6s ease-out;
+  overflow: visible;
+}
+
+@mixin form-button-section--hidden {
+  visibility: hidden;
+}
+
+@mixin boatify-scroll {
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $royalBlue;
+    border-radius: 200px;
+    border: 2px solid $lightGray;
+    cursor: pointer;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $middleGray;
+    border-radius: 200px;
+  }
+
+  & {
+    scrollbar-face-color: $royalBlue;
+    scrollbar-track-color: $lightGray;
+  }
+}
+

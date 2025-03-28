@@ -1,3 +1,4 @@
 {
-	"eslint.workingDirectories": ["./client", "./flask-server"]
+	"eslint.workingDirectories": ["./client", "./flask-server"],
+	"css.customData": [".vscode/tailwind.json"]
 }

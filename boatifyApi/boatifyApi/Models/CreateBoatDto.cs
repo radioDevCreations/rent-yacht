@@ -1,0 +1,23 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace boatifyApi.Models
+{
+    public class CreateBoatDto
+    {
+        [Required]
+        public required string Name { get; set; }
+        public string Description { get; set; } = "";
+        [Required]
+        public required string Model { get; set; }
+        [Required]
+        public required string Type { get; set; }
+        [Required]
+        public required double PricePerDay { get; set; }
+        public required int Passengers { get; set; }
+        [Required]
+        public required IFormFile MainImage { get; set; }
+
+
+        public int HarbourId { get; set; }
+    }
+}
